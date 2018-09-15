@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> - Articles</title>
+    <description>A blog by Robert Jacobson.</description>
+    <link>
+    </link>
+    
+      
+      <item>
+        <title>Defining the Wolfram Language Part 2: Operator Properties</title>
+        
+          <description>&lt;p&gt;In this third installment of our &lt;em&gt;n&lt;/em&gt; part series, “Defining the Wolfram Language,” we begin to study the properties, namely the arity, affix, associativity, and precedence, of the Mathematica operators we found in Part 1. If we ended Part 1 proud of our accomplishment—perhaps even a little smug—then we will get reacquainted with our humility in this article.&lt;!--more--&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 04 Sep 2018 20:26:00 -0400</pubDate>
+        <link>
+        /defining-the-wolfram-language-part-2-operator-properties</link>
+        <guid isPermaLink="true">/defining-the-wolfram-language-part-2-operator-properties</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Generalizing PEMDAS: What is an operator?</title>
+        
+          <description>&lt;p&gt;In programming languages, an &lt;em&gt;operator&lt;/em&gt; is a symbol used to represent a specific operation such as subtraction of integers or dereferencing a pointer. The symbols &lt;code&gt;+&lt;/code&gt;, &lt;code&gt;*&lt;/code&gt;, and &lt;code&gt;!&lt;/code&gt; are commonly used as operators in many programming languages, for example. In this article we define some basic programming language terminology that allows us to categorize operators according to their different properties.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 03 Sep 2018 11:30:00 -0400</pubDate>
+        <link>
+        /generalizing-pemdas-what-is-an-operator</link>
+        <guid isPermaLink="true">/generalizing-pemdas-what-is-an-operator</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Defining the Wolfram Language Part 1: Finding Operators</title>
+        
+          <description>&lt;h1 id=&quot;finding-all-wolfram-language-operators&quot;&gt;Finding All Wolfram Language Operators&lt;/h1&gt;
+
+</description>
+        
+        <pubDate>Thu, 16 Aug 2018 15:26:00 -0400</pubDate>
+        <link>
+        /defining-the-wolfram-language-part-1-finding-operators</link>
+        <guid isPermaLink="true">/defining-the-wolfram-language-part-1-finding-operators</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Defining the Wolfram Language Part 0: The Challenge</title>
+        
+          <description>&lt;p&gt;&lt;em&gt;What is the definition of the Wolfram Language?&lt;/em&gt; This is the first in a series of articles attempting to answer this question.&lt;!--more--&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 02 Jul 2018 20:14:00 -0400</pubDate>
+        <link>
+        /defining-the-wolfram-language-part-0-the-challenge</link>
+        <guid isPermaLink="true">/defining-the-wolfram-language-part-0-the-challenge</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>The grammar of mathematical expressions</title>
+        
+          <description>&lt;p&gt;Using computers to do automatic translation has a long and rich history in computer science. A course in compiler construction is a veritable survey of topics in computer science running the gamut from formal languages to data structures and algorithms to Hopfcroft’s algorithm to minimize deterministic automata. One of the first things a student learns in a compiler construction course is how to formally describe the grammar of a language using (extended) Backus–Naur form (EBNF).&lt;!--more--&gt; This article will assume a passing familiarity with EBNF notation.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 28 Jan 2015 22:31:00 -0500</pubDate>
+        <link>
+        /the-grammar-of-mathematical-expressions</link>
+        <guid isPermaLink="true">/the-grammar-of-mathematical-expressions</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Using Mathematica From Python</title>
+        
+          <description>&lt;p&gt;In which I show you how to programmatically interface with a Mathematica kernel from Python.&lt;!--more--&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 10 Dec 2014 22:27:00 -0500</pubDate>
+        <link>
+        /using-mathematica-from-python</link>
+        <guid isPermaLink="true">/using-mathematica-from-python</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Platonic Solids and the School of Athens</title>
+        
+          <description>&lt;h2 id=&quot;euclid-in-the-school-of-athens&quot;&gt;Euclid in The School of Athens&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://lh4.googleusercontent.com/-UC44EGZXUfQ/U9LVe6BOFeI/AAAAAAAATQ4/Z3iy0xM4NVc/w723-h542-no/IMG_0537+2.JPG&quot; alt=&quot;Me in front of The School of Athens&quot; /&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 25 Jul 2014 22:57:00 -0400</pubDate>
+        <link>
+        /platonic-solids-and-the-school-of-athens</link>
+        <guid isPermaLink="true">/platonic-solids-and-the-school-of-athens</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>How Springer sent me to collections for adopting their textbook.</title>
+        
+          <description>&lt;p&gt;The story begins with one of those little mundane activities that fill every professor’s day. Right before the spring semester began I was evaluating various textbook options for the next time I teach undergraduate real analysis. Stephen Abbott’s &lt;em&gt;Understanding Analysis&lt;/em&gt; published by Springer seemed to be exactly the kind of book I was looking for.&lt;!--more--&gt; It is standard practice with many academic publishers to send faculty evaluation copies of textbooks upon request (and frequently without request, too!). I asked my department secretary to request an evaluation copy of Abbott’s book for me.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 17 Apr 2014 20:52:00 -0400</pubDate>
+        <link>
+        /how-springer-sent-me-to-collections-for-adopting-their-textbook</link>
+        <guid isPermaLink="true">/how-springer-sent-me-to-collections-for-adopting-their-textbook</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>How To Ask Your Professor For Something</title>
+        
+          <description>&lt;p&gt;Do you need to ask your professor for an extension on a due date or to reschedule a quiz? A little thought before you click send on that email can make a big difference. Here is some advice.&lt;!--more--&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 12 Apr 2014 16:33:00 -0400</pubDate>
+        <link>
+        /how-to-ask-your-professor-for-something</link>
+        <guid isPermaLink="true">/how-to-ask-your-professor-for-something</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Hangout On Air - Math: A Love Story</title>
+        
+          <description>&lt;p&gt;The &lt;a href=&quot;https://plus.google.com/communities/100568607954673744130&quot;&gt;Mathematics Community on Google+&lt;/a&gt; had our second ever Hangout On Air last week. I was joined by &lt;a href=&quot;https://plus.google.com/+LuisGuzmanJr/posts&quot;&gt;Luis Guzman&lt;/a&gt;, &lt;a href=&quot;https://plus.google.com/+JasonDavison/posts&quot;&gt;Jason Davison&lt;/a&gt;, and &lt;a href=&quot;https://plus.google.com/+AmyRobinson/posts&quot;&gt;Amy Robinson&lt;/a&gt; in a conversation that ranged from fluid dynamics to applying the mathematics of networks to map our ideas to JPEG image compression. &lt;!--more--&gt; (We shared links live to the &lt;a href=&quot;https://plus.google.com/events/cofdgqcm9c2gcjr414qj3pn40f8&quot;&gt;Event Page for the Hangout&lt;/a&gt; during our conversation.)&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 19 Feb 2014 19:15:00 -0500</pubDate>
+        <link>
+        /hangout-on-air-math-a-love-story</link>
+        <guid isPermaLink="true">/hangout-on-air-math-a-love-story</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Does a 1929 market chart predict a market crash?</title>
+        
+          <description>&lt;p&gt;No. No it does not. Not even a little bit.&lt;!--more--&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 15 Feb 2014 21:49:00 -0500</pubDate>
+        <link>
+        /does-a-1929-market-chart-predict-a-market-crash</link>
+        <guid isPermaLink="true">/does-a-1929-market-chart-predict-a-market-crash</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Sneaky Continuous Functions</title>
+        
+          <description>&lt;script src=&quot;https://sagecell.sagemath.org/static/jquery.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;https://sagecell.sagemath.org/static/embedded_sagecell.js&quot;&gt;&lt;/script&gt;
+
+&lt;script&gt;
+// Make any div with class 'sage' a &quot;minimal&quot; Sage cell with &quot;Plot it!&quot; button.
+sagecell.makeSagecell({inputLocation:  'div.sage',
+                       evalButtonText: 'Plot it!'});
+// Make *any* div with class 'compute' a Sage cell.
+sagecell.makeSagecell({inputLocation: 'div.compute',
+                       evalButtonText: 'Evaluate'});
+&lt;/script&gt;
+
+</description>
+        
+        <pubDate>Tue, 28 Jan 2014 21:41:00 -0500</pubDate>
+        <link>
+        /sneaky-continuous-functions</link>
+        <guid isPermaLink="true">/sneaky-continuous-functions</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Susan Meisenhelder's 'MOOC Mania'</title>
+        
+          <description>&lt;p&gt;Susan Meisenhelder offers a scathing critique of MOOCs in her article “MOOC Mania” published in the latest issue of &lt;a href=&quot;http://www.nea.org/home/1821.htm&quot;&gt;Thought &amp;amp; Action&lt;/a&gt;. (&lt;a href=&quot;http://goo.gl/JY47sV&quot;&gt;Here is a link to a ~5mb pdf of her article.&lt;/a&gt;)&lt;!--More--&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 28 Jan 2014 16:28:00 -0500</pubDate>
+        <link>
+        /susan-meisenhelders-mooc-mania</link>
+        <guid isPermaLink="true">/susan-meisenhelders-mooc-mania</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Blogging the JMM: Saying Goodbye</title>
+        
+          <description>&lt;p&gt;It’s over. Getting my internet fix in the hotel lobby at midnight, walking 18 miles a day through the convention center, sitting in uncomfortable chairs for hours, getting dinner in a local restaurant and realizing halfway through the meal that every single person dining there is also a mathematician, randomly bumping into an old friend or mentor or student–it ended today at around lunchtime when I made the trek back to the hotel lobby one last time.&lt;!--more--&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 18 Jan 2014 15:40:00 -0500</pubDate>
+        <link>
+        /blogging-the-jmm-saying-goodbye</link>
+        <guid isPermaLink="true">/blogging-the-jmm-saying-goodbye</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Blogging the JMM: Friday</title>
+        
+          <description>&lt;p&gt;I love the exhibit hall. I love books, and the exhibit hall is full of some of my favorite kinds of books. I spend hours picking through the texts, flipping through their pages. The AMS sold me on a great book directed at undergraduates on Fourier analysis and an advanced text on Riemannian manifolds. In fact, &lt;a href=&quot;https://plus.google.com/111299122922781685506/posts/jcXLNdoUcYc&quot;&gt;they managed to photograph me mid-purchase&lt;/a&gt;! I also learned they are selling &lt;a href=&quot;https://plus.google.com/111299122922781685506/posts/Apf42MJvpGx&quot;&gt;their first ever children’s book this spring&lt;/a&gt;.&lt;!--more--&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 17 Jan 2014 22:41:00 -0500</pubDate>
+        <link>
+        /blogging-the-jmm-friday</link>
+        <guid isPermaLink="true">/blogging-the-jmm-friday</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Blogging the JMM: Thursday</title>
+        
+          <description>&lt;p&gt;The best part of the Joint Meetings is networking with like-minded people. I ran into many old friends and colleagues. Today (Thursday) several math bloggers and Google+’ers organized an impromptu meeting for lunch. I stuck a sign on the message board inviting other math bloggers to join us, and a cohort of tumblr bloggers discovered it and joined us. Such is the power of the JMM message board.&lt;!--more--&gt; These are the people who could make it.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 16 Jan 2014 17:02:00 -0500</pubDate>
+        <link>
+        /blogging-the-jmm-thursday</link>
+        <guid isPermaLink="true">/blogging-the-jmm-thursday</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Blogging The JMM: Wednesday</title>
+        
+          <description>&lt;p&gt;Today I learned about connections between musical rhythm and knot theory, abstract algebra and dance, a Navy ship from the mid 1800s called the U.S.S. Constellation, and some great undergraduate real analysis pedagogy. In today’s post, I’ll share with you some of the most interesting mathematical ideas I heard today.&lt;!--more--&gt;&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 15 Jan 2014 20:53:00 -0500</pubDate>
+        <link>
+        /blogging-the-jmm-wednesday</link>
+        <guid isPermaLink="true">/blogging-the-jmm-wednesday</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Blogging the largest math conference in the world</title>
+        
+          <description>&lt;p&gt;I am in Baltimore to attend the &lt;a href=&quot;http://jointmathematicsmeetings.org/jmm&quot;&gt;2014 Joint Mathematics Meetings&lt;/a&gt;, the largest gathering of mathematicians in the world involving the &lt;a href=&quot;http://ams.org&quot;&gt;American Mathematical Society&lt;/a&gt;, the &lt;a href=&quot;http://maa.org&quot;&gt;Mathematics Association of America&lt;/a&gt;, and many other professional societies related to the mathematics profession. There will be over 2500 talks given on topics ranging from the mathematics of pop-up books (#489) to the density of Henig efficient points in locally convex topological vector spaces (#2341) to rational numbers and the common core (#903). Thousands of mathematicians, teachers, and students will be rubbing elbows and talking shop. There will be a mathematical art gallery and film screenings. Last year there were even performances of a mathematical play! This will be my third time attending the Joint Meetings. The previous two times were a total blast.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 14 Jan 2014 17:05:00 -0500</pubDate>
+        <link>
+        /blogging-the-largest-math-conference-in-the-world</link>
+        <guid isPermaLink="true">/blogging-the-largest-math-conference-in-the-world</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>When Students Die</title>
+        
+          <description>&lt;p&gt;A colleague who had been worried about one of her star students who had been missing from class for a couple of weeks came into my office. “She committed suicide yesterday.” She needed to talk through it. She told me that she and two other professors had gone to the Student Services people a few days earlier—on a weekend—concerned about the student. She told me about all the ways they had tried to get to the bottom of what was going on in the days leading up to it. Any reasonable person would describe their efforts as far above and beyond the call of duty, as not just responsible but compassionate. “If I had seen her before it happened, I would have tackled her to the ground,” she said with the sincerity and desperation of someone struggling to find how after all of that effort things still went wrong. But you can’t. No tackle could wrest this student from the grip of tragedy. You try to be there for the students, to be supportive and available. But now and then a student will die.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 18 Dec 2013 21:05:00 -0500</pubDate>
+        <link>
+        /when-students-die</link>
+        <guid isPermaLink="true">/when-students-die</guid>
+      </item>
+      
+    
+  </channel>
+</rss>
