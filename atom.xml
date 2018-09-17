@@ -10,7 +10,7 @@
       <item>
         <title>Defining the Wolfram Language Part 2: Operator Properties</title>
         
-          <description>&lt;p&gt;In this third installment of our &lt;em&gt;n&lt;/em&gt; part series, “Defining the Wolfram Language,” we begin to study the properties, namely the arity, affix, associativity, and precedence, of the Mathematica operators we found in Part 1. If we ended Part 1 proud of our accomplishment—perhaps even a little smug—then we will get reacquainted with our humility in this article.&lt;!--more--&gt;&lt;/p&gt;
+          <description>&lt;p&gt;In this third installment of our &lt;em&gt;n&lt;/em&gt; part series, “Defining the Wolfram Language,” we begin to study the properties, namely the arity, affix, associativity, and precedence, of the Mathematica operators we found in &lt;a href=&quot;defining-the-wolfram-language-part-1-finding-operators&quot;&gt;Part 1&lt;/a&gt;. If we ended Part 1 proud of our accomplishment—perhaps even a little smug—then we will get reacquainted with our humility in this article.&lt;!--more--&gt;&lt;/p&gt;
 
 </description>
         
