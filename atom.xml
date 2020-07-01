@@ -8,6 +8,39 @@
     
       
       <item>
+        <title>Bayes' Theorem and the Deathly Hallows</title>
+        
+          <description>&lt;p&gt;This article is an expanded version of the math part of &lt;a href=&quot;https://medium.com/@arhyne/covid-19-population-testing-vs-thoughts-and-prayers-454e64946dde&quot;&gt;an article I
+   cowrote with marine biologist Dr. Andrew Rhyne about how &lt;strong&gt;many well-meaning public health professionals have misinterpreted the math
+    behind test
+    efficiency, Bayes’ Theorem. This misinterpretation has lead to dangerous public policy positions.&lt;/strong&gt;&lt;/a&gt; Anyone with a math allergy is invited to read that article instead.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 01 Jul 2020 11:00:00 -0400</pubDate>
+        <link>
+        /Bayes-Theorem</link>
+        <guid isPermaLink="true">/Bayes-Theorem</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>What is the IELR(1) Parsing Algorithm?</title>
+        
+          <description>&lt;p&gt;This short article is for those students, programmers, and computer scientists who already have a basic idea of what a parser is and does but who want to know what that mysterious reference to “IELR(1)” means in the &lt;a href=&quot;https://www.gnu.org/software/bison/&quot;&gt;Bison parser generator manual&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 20 Oct 2018 05:13:00 -0400</pubDate>
+        <link>
+        /what-is-the-ielr1-parsing-algorithm</link>
+        <guid isPermaLink="true">/what-is-the-ielr1-parsing-algorithm</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Defining the Wolfram Language Part 2: Operator Properties</title>
         
           <description>&lt;p&gt;In this third installment of our &lt;em&gt;n&lt;/em&gt; part series, “Defining the Wolfram Language,” we begin to study the properties, namely the arity, affix, associativity, and precedence, of the Mathematica operators we found in &lt;a href=&quot;defining-the-wolfram-language-part-1-finding-operators&quot;&gt;Part 1&lt;/a&gt;. If we ended Part 1 proud of our accomplishment—perhaps even a little smug—then we will get reacquainted with our humility in this article.&lt;!--more--&gt;&lt;/p&gt;
@@ -25,7 +58,7 @@
       <item>
         <title>Generalizing PEMDAS: What is an operator?</title>
         
-          <description>&lt;p&gt;In programming languages, an &lt;em&gt;operator&lt;/em&gt; is a symbol used to represent a specific operation such as subtraction of integers or dereferencing a pointer. The symbols &lt;code&gt;+&lt;/code&gt;, &lt;code&gt;*&lt;/code&gt;, and &lt;code&gt;!&lt;/code&gt; are commonly used as operators in many programming languages, for example. In this article we define some basic programming language terminology that allows us to categorize operators according to their different properties.&lt;/p&gt;
+          <description>&lt;p&gt;In programming languages, an &lt;em&gt;operator&lt;/em&gt; is a symbol used to represent a specific operation such as subtraction of integers or dereferencing a pointer. The symbols &lt;code class=&quot;highlighter-rouge&quot;&gt;+&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;!&lt;/code&gt; are commonly used as operators in many programming languages, for example. In this article we define some basic programming language terminology that allows us to categorize operators according to their different properties.&lt;/p&gt;
 
 </description>
         

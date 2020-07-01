@@ -191,11 +191,11 @@ into the {body} of the default.hbs template -->
   <li>It is labor-intensive. We shall see in Part 1 that Wolfram Language has about 400 different operators, all of which need to be rigorously described.</li>
 </ul>
 
-<p>Most importantly, it is not clear that this “definition” is even self-consistent. (<em>Spoiler alert: It isn’t.</em>) In other words, what Mathematica does on the command line may differ from what it does in the notebook, which may differ from the behavior of <code>ToExpression</code> and related functions, all of which may differ from the official documentation, which itself may be inconsistent—and all of this in just a single version of Mathematica running on a single platform.</p>
+<p>Most importantly, it is not clear that this “definition” is even self-consistent. (<em>Spoiler alert: It isn’t.</em>) In other words, what Mathematica does on the command line may differ from what it does in the notebook, which may differ from the behavior of <code class="highlighter-rouge">ToExpression</code> and related functions, all of which may differ from the official documentation, which may itself be internally inconsistent—and all of this in just a single version of Mathematica running on a single platform.</p>
 
-<p>We are also faced with a demarcation problem: Where does the <em>language</em> of Wolfram Language end and the various non-essential libraries and APIs that ship with Mathematica begin? Surely, control structures like <a href="https://reference.wolfram.com/language/ref/If.html"><code>If</code></a> and <a href="https://reference.wolfram.com/language/ref/While.html"><code>While</code></a> belong to the language, while functions like <a href="https://reference.wolfram.com/language/ref/WordCloud.html"><code>WordCloud</code></a> and <a href="https://reference.wolfram.com/language/ref/WikipediaSearch.html"><code>WikipediaSearch</code></a> are clearly not essential language features. But what about <a href="https://reference.wolfram.com/language/ref/Plot.html"><code>Plot</code></a> or <a href="https://reference.wolfram.com/language/ref/HistogramTransform.html"><code>HistogramTransform</code></a> or <a href="https://reference.wolfram.com/language/ref/TimeValue.html"><code>TimeValue</code></a>? Are the mathematical functions like <code>Sin</code> and <code>Integrate</code> essential features of the language? Some languages include a standard library of functions that is considered part of the language standard. Should there be a standard library for Wolfram Language, and if so, which functions should belong to it?</p>
+<p>We are also faced with a demarcation problem: Where does the <em>language</em> of Wolfram Language end and the various non-essential libraries and APIs that ship with Mathematica begin? Surely, control structures like <a href="https://reference.wolfram.com/language/ref/If.html"><code class="highlighter-rouge">If</code></a> and <a href="https://reference.wolfram.com/language/ref/While.html"><code class="highlighter-rouge">While</code></a> belong to the language, while functions like <a href="https://reference.wolfram.com/language/ref/WordCloud.html"><code class="highlighter-rouge">WordCloud</code></a> and <a href="https://reference.wolfram.com/language/ref/WikipediaSearch.html"><code class="highlighter-rouge">WikipediaSearch</code></a> are clearly not essential language features. But what about <a href="https://reference.wolfram.com/language/ref/Plot.html"><code class="highlighter-rouge">Plot</code></a> or <a href="https://reference.wolfram.com/language/ref/HistogramTransform.html"><code class="highlighter-rouge">HistogramTransform</code></a> or <a href="https://reference.wolfram.com/language/ref/TimeValue.html"><code class="highlighter-rouge">TimeValue</code></a>? Are the mathematical functions like <code class="highlighter-rouge">Sin</code> and <code class="highlighter-rouge">Integrate</code> essential features of the language? Some languages include a standard library of functions that is considered part of the language standard. Should there be a standard library for Wolfram Language, and if so, which functions should belong to it?</p>
 
-<p>The demarcation problem extends to what might be considered implementation details. For example, <a href="https://reference.wolfram.com/language/tutorial/VariablesInPureFunctionsAndRules.html">Mathematica renames “local” variables</a> within an inner scope to unique names to avoid potential name collisions. There presumably needs to be some kind of mechanism to maintain λ calculus semantics for pure functions, but maybe that is an implementation detail rather than part of the hypothetical language spec.</p>
+<p>The demarcation problem extends to what might be considered implementation details. For example, <a href="https://reference.wolfram.com/language/tutorial/VariablesInPureFunctionsAndRules.html">Mathematica renames “local” variables</a> within an inner scope to unique names to avoid potential name collisions. There presumably needs to be some kind of mechanism to maintain λ calculus semantics for pure functions, but maybe which mechanism is employed is an implementation detail rather than part of the hypothetical language spec.</p>
 
 <p>We will have more to say about the technological and philosophical implications of these questions later in this series.</p>
 
@@ -289,6 +289,17 @@ A great example of this is the <a href="http://wlplugin.halirutan.de/">Mathemati
                                 
                                 
                                   
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/what-is-the-ielr1-parsing-algorithm">What is the IELR(1) Parsing Algorithm?</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
                                     
                                         
                                         
@@ -309,8 +320,6 @@ A great example of this is the <a href="http://wlplugin.halirutan.de/">Mathemati
                                   
                                     
                                         
-                                        
-                                            <li><a href="/defining-the-wolfram-language-part-1-finding-operators">Defining the Wolfram Language Part 1: Finding Operators</a></li>
                                         
                                     
                                   
@@ -364,7 +373,7 @@ A great example of this is the <a href="http://wlplugin.halirutan.de/">Mathemati
                         <footer class="read-next-card-footer">
                             <a href="/tag/computer-science/">
                                 
-                                    See all 5 posts  →
+                                    See all 6 posts  →
                                 
                             </a>
                         </footer>
@@ -521,7 +530,7 @@ A great example of this is the <a href="http://wlplugin.halirutan.de/">Mathemati
         <!-- The footer at the very bottom of the screen -->
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
-                <section class="copyright"><a href="/">Robert Jacobson</a> &copy; 2018</section>
+                <section class="copyright"><a href="/">Robert Jacobson</a> &copy; 2020</section>
                 <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
                     <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
                     <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
@@ -530,7 +539,7 @@ A great example of this is the <a href="http://wlplugin.halirutan.de/">Mathemati
                     
                     
                     <a href="https://github.com/rljacobson" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://plus.google.com/+RobertJacobson" target="_blank" rel="noopener">Google+</a>
+                    
                     <a href="https://www.linkedin.com/in/robert-jacobson-7149986" target="_blank" rel="noopener">LinkedIn</a>
                 </nav>
             </div>

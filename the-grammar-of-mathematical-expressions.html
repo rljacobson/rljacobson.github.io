@@ -174,17 +174,17 @@ into the {body} of the default.hbs template -->
 
 <p>An exercise every compiler construction student is given is to construct a grammar for simple mathematical expressions. This exercise is particularly easy with <a href="http://www.antlr.org">ANTLR 4</a>, a lexer and parser generator that can accept grammars than many other compiler tools would reject. Here is an ANTLR 4 grammar for simple math expressions.</p>
 
-<figure class="highlight"><pre><code class="language-antlr" data-lang="antlr"><span></span><span class="nl">expr</span><span class="w"></span>
-<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="no">INT</span><span class="w"> </span><span class="c">//numbers</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="no">ID</span><span class="w">  </span><span class="c">//variables</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="s">&#39;(&#39;</span><span class="w"> </span><span class="nv">expr</span><span class="w"> </span><span class="s">&#39;)&#39;</span><span class="w">  </span><span class="c">//grouping with parentheses</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="err">&lt;</span><span class="nv">assoc</span><span class="o">=</span><span class="nv">right</span><span class="err">&gt;</span><span class="w"> </span><span class="nv">expr</span><span class="w"> </span><span class="s">&#39;^&#39;</span><span class="w"> </span><span class="nv">expr</span><span class="w"> </span><span class="c">//exponentiation</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="o">(</span><span class="s">&#39;+&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;-&#39;</span><span class="o">)</span><span class="w"> </span><span class="nv">expr</span><span class="w">	</span><span class="c">//unary plus/minus</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">expr</span><span class="w"> </span><span class="o">(</span><span class="s">&#39;/&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;*&#39;</span><span class="o">)</span><span class="w"> </span><span class="nv">expr</span><span class="w">	</span><span class="c">//explicit division/multiplication</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">expr</span><span class="w"> </span><span class="o">(</span><span class="s">&#39;+&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;-&#39;</span><span class="o">)</span><span class="w"> </span><span class="nv">expr</span><span class="w">	</span><span class="c">//addition/subtraction</span><span class="w"></span>
-<span class="w">	</span><span class="p">;</span><span class="w"></span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-antlr" data-lang="antlr">expr
+	:	INT //numbers
+	|	ID  //variables
+	|	'(' expr ')'  //grouping with parentheses
+	|	&lt;assoc=right&gt; expr '^' expr //exponentiation
+	|	('+' | '-') expr	//unary plus/minus
+	|	expr ('/' | '*') expr	//explicit division/multiplication
+	|	expr ('+' | '-') expr	//addition/subtraction
+	;</code></pre></figure>
 
-<p>For the input <code>4*x^2 - 3*x + -2</code> this grammar gives the following parse tree.</p>
+<p>For the input <code class="highlighter-rouge">4*x^2 - 3*x + -2</code> this grammar gives the following parse tree.</p>
 
 <p><img style="width:auto;" src="assets/images/posts/MathGrammar/simple_parse_tree.png" width="300" height="241" /></p>
 
@@ -192,34 +192,34 @@ into the {body} of the default.hbs template -->
 
 <h2 id="the-grammatical-challenge-of-implicit-multiplication">The grammatical challenge of implicit multiplication</h2>
 
-<p>Mathematicians don’t like to write an explicit symbol for multiplication unless they’re compelled to. We prefer to write <code>4x^2 - 3x + -2</code> instead of <code>4*x^2 - 3*x + -2</code>. We might naively modify our grammar as follows.</p>
+<p>Mathematicians don’t like to write an explicit symbol for multiplication unless we’re compelled to. We prefer to write <code class="highlighter-rouge">4x^2 - 3x + -2</code> instead of <code class="highlighter-rouge">4*x^2 - 3*x + -2</code>. We might naively modify our grammar as follows.</p>
 
-<figure class="highlight"><pre><code class="language-antlr" data-lang="antlr"><span></span><span class="nl">expr</span><span class="w"></span>
-<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="no">INT</span><span class="w"> </span><span class="c">//numbers</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="no">ID</span><span class="w">  </span><span class="c">//variables</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="s">&#39;(&#39;</span><span class="w"> </span><span class="nv">expr</span><span class="w"> </span><span class="s">&#39;)&#39;</span><span class="w"> 	</span><span class="c">//grouping with parentheses</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="err">&lt;</span><span class="nv">assoc</span><span class="o">=</span><span class="nv">right</span><span class="err">&gt;</span><span class="w"> </span><span class="nv">expr</span><span class="w"> </span><span class="s">&#39;^&#39;</span><span class="w"> </span><span class="nv">expr</span><span class="w"> 	</span><span class="c">//exponentiation</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="o">(</span><span class="s">&#39;+&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;-&#39;</span><span class="o">)</span><span class="w"> </span><span class="nv">expr</span><span class="w"> 	</span><span class="c">//unary plus/minus</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">expr</span><span class="w"> </span><span class="s">&#39;/&#39;</span><span class="w"> </span><span class="nv">expr</span><span class="w"> 	</span><span class="c">//division</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">expr</span><span class="w"> </span><span class="s">&#39;*&#39;</span><span class="o">?</span><span class="w"> </span><span class="nv">expr</span><span class="w"> 	</span><span class="c">//explicit multiplication</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">expr</span><span class="w"> </span><span class="o">(</span><span class="s">&#39;+&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;-&#39;</span><span class="o">)</span><span class="w"> </span><span class="nv">expr</span><span class="w"> 	</span><span class="c">//addition/subtraction</span><span class="w"></span>
-<span class="w">	</span><span class="p">;</span><span class="w"></span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-antlr" data-lang="antlr">expr
+	:	INT //numbers
+	|	ID  //variables
+	|	'(' expr ')' 	//grouping with parentheses
+	|	&lt;assoc=right&gt; expr '^' expr 	//exponentiation
+	|	('+' | '-') expr 	//unary plus/minus
+	|	expr '/' expr 	//division
+	|	expr '*'? expr 	//explicit multiplication
+	|	expr ('+' | '-') expr 	//addition/subtraction
+	;</code></pre></figure>
 
-<p>The ? after the ‘*’ indicates that the * symbol is optional–it can be omitted. But this doesn’t work as expected! This grammar parses <code>7 + 3</code> as <code>7*(+3)</code>, which is not what we want. Splitting implicit multiplication off as a seperate alternative appears to solve this problem.</p>
+<p>The <code class="highlighter-rouge">?</code> after the <code class="highlighter-rouge">*</code> indicates that the <code class="highlighter-rouge">*</code> symbol is optional–it can be omitted. But this doesn’t work as expected! This grammar parses <code class="highlighter-rouge">7 + 3</code> as <code class="highlighter-rouge">7*(+3)</code>, which is not what we want. Splitting implicit multiplication off as a seperate alternative appears to solve this problem.</p>
 
-<figure class="highlight"><pre><code class="language-antlr" data-lang="antlr"><span></span><span class="nl">expr</span><span class="w"></span>
-<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="no">INT</span><span class="w"> </span><span class="c">//numbers</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="no">ID</span><span class="w">  </span><span class="c">//variables</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="s">&#39;(&#39;</span><span class="w"> </span><span class="nv">expr</span><span class="w"> </span><span class="s">&#39;)&#39;</span><span class="w"> </span><span class="c">//grouping with parentheses</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="err">&lt;</span><span class="nv">assoc</span><span class="o">=</span><span class="nv">right</span><span class="err">&gt;</span><span class="w"> </span><span class="nv">expr</span><span class="w"> </span><span class="s">&#39;^&#39;</span><span class="w"> </span><span class="nv">expr</span><span class="w"> </span><span class="c">//exponentiation</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="o">(</span><span class="s">&#39;+&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;-&#39;</span><span class="o">)</span><span class="w"> </span><span class="nv">expr</span><span class="w">	</span><span class="c">//unary plus/minus</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">expr</span><span class="w"> </span><span class="s">&#39;/&#39;</span><span class="w"> </span><span class="nv">expr</span><span class="w">		</span><span class="c">//division</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">expr</span><span class="w"> </span><span class="s">&#39;*&#39;</span><span class="w"> </span><span class="nv">expr</span><span class="w">	</span><span class="c">//explicit multiplication</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">expr</span><span class="w"> </span><span class="nv">expr</span><span class="w">	</span><span class="c">//implicit multiplication</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">expr</span><span class="w"> </span><span class="o">(</span><span class="s">&#39;+&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;-&#39;</span><span class="o">)</span><span class="w"> </span><span class="nv">expr</span><span class="w">	</span><span class="c">//addition/subtraction</span><span class="w"></span>
-<span class="w">	</span><span class="p">;</span><span class="w"></span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-antlr" data-lang="antlr">expr
+	:	INT //numbers
+	|	ID  //variables
+	|	'(' expr ')' //grouping with parentheses
+	|	&lt;assoc=right&gt; expr '^' expr //exponentiation
+	|	('+' | '-') expr	//unary plus/minus
+	|	expr '/' expr		//division
+	|	expr '*' expr	//explicit multiplication
+	|	expr expr	//implicit multiplication
+	|	expr ('+' | '-') expr	//addition/subtraction
+	;</code></pre></figure>
 
-<p>But now we have a new problem: implicit multiplication does not respect order of operations! This grammar generates the following parse tree for the input <code>4x+3</code>.</p>
+<p>But now we have a new problem: implicit multiplication does not respect order of operations. This grammar generates the following parse tree for the input <code class="highlighter-rouge">4x+3</code>.</p>
 
 <p><img style="width:auto;" src="assets/images/posts/MathGrammar/modified_parse_tree.png" /></p>
 
@@ -229,77 +229,77 @@ into the {body} of the default.hbs template -->
 
 <p>But we can enforce order of operations by having a hierarchy of production rules like the following general pattern [1].</p>
 
-<figure class="highlight"><pre><code class="language-antlr" data-lang="antlr"><span></span><span class="nl">type_variable</span><span class="p">:</span><span class="w"> </span><span class="o">...</span><span class="w"></span>
+<figure class="highlight"><pre><code class="language-antlr" data-lang="antlr">type_variable: ...
 
-<span class="nv">type_primary</span><span class="p">:</span><span class="w"> </span><span class="nv">type_variable</span><span class="w"></span>
-<span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w"></span>
+type_primary: type_variable
+              | ...
 
-<span class="nv">type_secondary</span><span class="p">:</span><span class="w"> </span><span class="nv">type_primary</span><span class="w"></span>
-<span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w"></span>
+type_secondary: type_primary
+              | ...
 
-<span class="nv">type_tertiary</span><span class="p">:</span><span class="w"> </span><span class="nv">type_secondary</span><span class="w"></span>
-<span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w"></span>
+type_tertiary: type_secondary
+              | ...
 
-<span class="nv">type_expression</span><span class="p">:</span><span class="w"> </span><span class="nv">type_tertiary</span><span class="w"></span>
-<span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="o">...</span><span class="w"></span></code></pre></figure>
+type_expression: type_tertiary
+              | ...</code></pre></figure>
 
 <p>So instead of relying on ANTLR to determine precedence according to the order of each alternative, we bake it into the grammar itself. We might rewrite our math expression grammar as follows [2].</p>
 
-<figure class="highlight"><pre><code class="language-antlr" data-lang="antlr"><span></span><span class="nl">term</span><span class="w"></span>
-<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="no">INT</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="no">ID</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="s">&#39;(&#39;</span><span class="w"> </span><span class="nv">expr</span><span class="w"> </span><span class="s">&#39;)&#39;</span><span class="w"> </span><span class="c">//parentheses</span><span class="w"></span>
-<span class="w">	</span><span class="p">;</span><span class="w"></span>
+<figure class="highlight"><pre><code class="language-antlr" data-lang="antlr">term
+	:	INT
+	|	ID
+	|	'(' expr ')' //parentheses
+	;
 
-<span class="c">//Implicit multiplication</span><span class="w"></span>
-<span class="nl">factor</span><span class="w"></span>
-<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="nv">term</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="err">&lt;</span><span class="nv">assoc</span><span class="o">=</span><span class="nv">right</span><span class="err">&gt;</span><span class="w"> </span><span class="nv">term</span><span class="w"> </span><span class="s">&#39;^&#39;</span><span class="w"> </span><span class="nv">factor</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">term</span><span class="w"> </span><span class="nv">factor</span><span class="w"></span>
-<span class="w">	</span><span class="p">;</span><span class="w"></span>
+//Implicit multiplication
+factor
+	:	term
+	|	&lt;assoc=right&gt; term '^' factor
+	|	term factor
+	;
 
-<span class="c">//Unary minus/plus</span><span class="w"></span>
-<span class="nl">prefix</span><span class="w"></span>
-<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="nv">factor</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="o">(</span><span class="s">&#39;+&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;-&#39;</span><span class="o">)</span><span class="w"> </span><span class="nv">prefix</span><span class="w"> </span><span class="c">//unary plus/minus</span><span class="w"></span>
-<span class="w">	</span><span class="p">;</span><span class="w"></span>
+//Unary minus/plus
+prefix
+	:	factor
+	|	('+' | '-') prefix //unary plus/minus
+	;
 
-<span class="c">//Explicit multiplication/division</span><span class="w"></span>
-<span class="nl">multdiv</span><span class="w"></span>
-<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="nv">prefix</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">multdiv</span><span class="w"> </span><span class="s">&#39;/&#39;</span><span class="w"> </span><span class="nv">prefix</span><span class="w"> </span><span class="c">//division</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">multdiv</span><span class="w"> </span><span class="s">&#39;*&#39;</span><span class="w"> </span><span class="nv">prefix</span><span class="w"> </span><span class="c">//explicit multiplication</span><span class="w"></span>
-<span class="w">	</span><span class="p">;</span><span class="w"></span>
+//Explicit multiplication/division
+multdiv
+	:	prefix
+	|	multdiv '/' prefix //division
+	|	multdiv '*' prefix //explicit multiplication
+	;
 
-<span class="nl">expr</span><span class="w"></span>
-<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="nv">multdiv</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">expr</span><span class="w"> </span><span class="o">(</span><span class="s">&#39;+&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;-&#39;</span><span class="o">)</span><span class="w"> </span><span class="nv">multdiv</span><span class="w"> </span><span class="c">//addition/subtraction</span><span class="w"></span>
-<span class="w">	</span><span class="p">;</span><span class="w"></span></code></pre></figure>
+expr
+	:	multdiv
+	|	expr ('+' | '-') multdiv //addition/subtraction
+	;</code></pre></figure>
 
-<p>Notice I awkwardly included exponentiation in the factor production relying on ANTLR to implicitly determine it’s precedence over implicit multiplication. This suggests that the above grammar is overcomplicated, that is, we can collapse much of this hierarchy and let ANTLR do some of the work. Here is our final grammar.</p>
+<p>Notice I awkwardly included exponentiation in the factor production relying on ANTLR to implicitly determine its precedence over implicit multiplication. This suggests that the above grammar is overcomplicated, that is, we can collapse much of this hierarchy and let ANTLR do some of the work. Here is our final grammar.</p>
 
-<figure class="highlight"><pre><code class="language-antlr" data-lang="antlr"><span></span><span class="nl">term</span><span class="w"></span>
-<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="no">LEAF</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="s">&#39;(&#39;</span><span class="w"> </span><span class="nv">expr</span><span class="w"> </span><span class="s">&#39;)&#39;</span><span class="w">	</span><span class="c">//parentheses</span><span class="w"></span>
-<span class="w">	</span><span class="p">;</span><span class="w"></span>
+<figure class="highlight"><pre><code class="language-antlr" data-lang="antlr">term
+	:	LEAF
+	|	'(' expr ')'	//parentheses
+	;
 
-<span class="c">//Implicit multiplication</span><span class="w"></span>
-<span class="nl">factor</span><span class="w"></span>
-<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="nv">term</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="err">&lt;</span><span class="nv">assoc</span><span class="o">=</span><span class="nv">right</span><span class="err">&gt;</span><span class="w"> </span><span class="nv">term</span><span class="w"> </span><span class="s">&#39;^&#39;</span><span class="w"> </span><span class="nv">factor</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">term</span><span class="w"> </span><span class="nv">factor</span><span class="w"></span>
-<span class="w">	</span><span class="p">;</span><span class="w"></span>
+//Implicit multiplication
+factor
+	:	term
+	|	&lt;assoc=right&gt; term '^' factor
+	|	term factor
+	;
 
-<span class="c">//Unary minus/plus</span><span class="w"></span>
-<span class="nl">expr</span><span class="w"></span>
-<span class="w">	</span><span class="p">:</span><span class="w">	</span><span class="nv">factor</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="o">(</span><span class="s">&#39;+&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;-&#39;</span><span class="o">)</span><span class="w"> </span><span class="nv">expr</span><span class="w"> </span><span class="c">//unary plus/minus</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">expr</span><span class="w"> </span><span class="s">&#39;/&#39;</span><span class="w"> </span><span class="nv">expr</span><span class="w">	</span><span class="c">//division</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">expr</span><span class="w"> </span><span class="s">&#39;*&#39;</span><span class="w"> </span><span class="nv">expr</span><span class="w">	</span><span class="c">//explicit multiplication</span><span class="w"></span>
-<span class="w">	</span><span class="o">|</span><span class="w">	</span><span class="nv">expr</span><span class="w"> </span><span class="o">(</span><span class="s">&#39;+&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s">&#39;-&#39;</span><span class="o">)</span><span class="w"> </span><span class="nv">expr</span><span class="w">	</span><span class="c">//addition/subtraction</span><span class="w"></span>
-<span class="w">	</span><span class="p">;</span><span class="w"></span></code></pre></figure>
+//Unary minus/plus
+expr
+	:	factor
+	|	('+' | '-') expr //unary plus/minus
+	|	expr '/' expr	//division
+	|	expr '*' expr	//explicit multiplication
+	|	expr ('+' | '-') expr	//addition/subtraction
+	;</code></pre></figure>
 
-<p>And the parse tree for <code>4x^2 - 3x + -2</code>.</p>
+<p>And the parse tree for <code class="highlighter-rouge">4x^2 - 3x + -2</code>.</p>
 
 <p><img style="width:auto;" src="assets/images/posts/MathGrammar/final_parse_tree.png" /></p>
 
@@ -307,9 +307,9 @@ into the {body} of the default.hbs template -->
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>You can see that there is a reason most languages–even computer algebra systems–require an explicit multiplication symbol. Requiring a * is a small price to pay for a simpler language grammar.</p>
+<p>You can see that there is a reason most languages–even computer algebra systems–require an explicit multiplication symbol. Requiring a <code class="highlighter-rouge">*</code> is a small price to pay for a simpler language grammar.</p>
 
-<p>This is a great example of how tweaking a very simple problem can sometimes produce a very challenging problem. As a math teacher I really like this example because there is so much opportunity to teach. We review the concept of order of operations and how order of operations works in mathematics, and we learn about a strategy for dealing with order of operations in formal grammars. All of this from a very applied, very real-world problem that the students can value.</p>
+<p>This is a great example of how tweaking a very simple problem can sometimes produce a very challenging problem. As a math teacher I really like this example, because there is so much opportunity to teach. We review the concept of order of operations and how order of operations works in mathematics, and we learn about a strategy for dealing with order of operations in formal grammars. All of this is done from a very applied, very real-world problem that the students can value.</p>
 
 <p>But the punchline shouldn’t be that writing a formal grammar for a math expression parser is hard. Rather, writing grammars in general is hard, language itself is hard. This challenge came up in the context of math expressions, but it could just as easily come up in the context of parsing any language. John Levine [3] calls writing a grammar with error recovery a “black art,” Cooper and Torczon [4] call compiler construction an “art and science,” Michael L. Scott [5] refers to the “art” of language design and cites Donald Knuth [6] as suggesting programming can be regarded as the “art of telling another human being what one wants the computer to do.” I like to think that what these heavyweights are telling us is that we should embrace the difficulty as something beautiful.</p>
 
@@ -317,7 +317,7 @@ into the {body} of the default.hbs template -->
 
 <h4 id="notes">Notes</h4>
 
-<p>[1]: This pattern is described by Laurence Finston at <a href="http://lists.gnu.org/archive/html/help-bison/2005-08/msg00004.html">http://lists.gnu.org/archive/html/help-bison/2005-08/msg00004.html</a>.</p>
+<p>[1]: This standard pattern is described by Laurence Finston at <a href="http://lists.gnu.org/archive/html/help-bison/2005-08/msg00004.html">http://lists.gnu.org/archive/html/help-bison/2005-08/msg00004.html</a>.</p>
 
 <p>[2]: This implementation of the general pattern is essentially stackoverflow user rici’s, <a href="http://stackoverflow.com/questions/12875573/how-can-i-have-an-implicit-multiplication-rule-with-bison">http://stackoverflow.com/questions/12875573/how-can-i-have-an-implicit-multiplication-rule-with-bison</a>.</p>
 
@@ -396,6 +396,17 @@ into the {body} of the default.hbs template -->
                                 
                                 
                                   
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/what-is-the-ielr1-parsing-algorithm">What is the IELR(1) Parsing Algorithm?</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
                                     
                                         
                                         
@@ -416,8 +427,6 @@ into the {body} of the default.hbs template -->
                                   
                                     
                                         
-                                        
-                                            <li><a href="/defining-the-wolfram-language-part-1-finding-operators">Defining the Wolfram Language Part 1: Finding Operators</a></li>
                                         
                                     
                                   
@@ -471,7 +480,7 @@ into the {body} of the default.hbs template -->
                         <footer class="read-next-card-footer">
                             <a href="/tag/computer-science/">
                                 
-                                    See all 5 posts  →
+                                    See all 6 posts  →
                                 
                             </a>
                         </footer>
@@ -636,7 +645,7 @@ into the {body} of the default.hbs template -->
         <!-- The footer at the very bottom of the screen -->
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
-                <section class="copyright"><a href="/">Robert Jacobson</a> &copy; 2018</section>
+                <section class="copyright"><a href="/">Robert Jacobson</a> &copy; 2020</section>
                 <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
                     <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
                     <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
@@ -645,7 +654,7 @@ into the {body} of the default.hbs template -->
                     
                     
                     <a href="https://github.com/rljacobson" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://plus.google.com/+RobertJacobson" target="_blank" rel="noopener">Google+</a>
+                    
                     <a href="https://www.linkedin.com/in/robert-jacobson-7149986" target="_blank" rel="noopener">LinkedIn</a>
                 </nav>
             </div>

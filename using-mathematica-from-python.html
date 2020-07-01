@@ -194,52 +194,52 @@ into the {body} of the default.hbs template -->
 
 <p>First we locate the necessary MathLink library, namely libMLi3.a. On my system it is found here:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions/AlternativeLibraries</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions/AlternativeLibraries</code></pre></figure>
 
 <p>I’m using the “AlternativeLibraries” version as per the README file located in that directory. We’ll also need the mathlink.h header file here:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions</code></pre></figure>
 
 <p>Now we find the MathLink Python bindings and example code:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>/Applications/Mathematica.app/SystemFiles/Links/Python</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">/Applications/Mathematica.app/SystemFiles/Links/Python</code></pre></figure>
 
 <p>Since we will be editing these files, go ahead and copy them to a folder in which to work. That way, if we mess something up we have a backup of the original files.</p>
 
 <p>One of those files, the setup.py file, uses Python’s distutils facility to compile and install the Python MathLink bindings extension to our Python environment’s site-packages directory. Edit the file to reflect your mathematica version (this might not be strictly necessary):</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="n">mathematicaversion</span> <span class="o">=</span> <span class="s2">&quot;10.0&quot;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">mathematicaversion</span> <span class="o">=</span> <span class="s">"10.0"</span></code></pre></figure>
 
-<p>Now find your platform in the <code>if-elif</code> block (in my case “darwin”) and edit <code>include_dirs</code> and <code>library_dirs</code> to be the location of the mathlink.h header file and the library file libMLi3.a respectively. Here’s what that piece of code now looks like for my system:</p>
+<p>Now find your platform in the <code class="highlighter-rouge">if-elif</code> block (in my case “darwin”) and edit <code class="highlighter-rouge">include_dirs</code> and <code class="highlighter-rouge">library_dirs</code> to be the location of the mathlink.h header file and the library file libMLi3.a respectively. Here’s what that piece of code now looks like for my system:</p>
 
-<figure class="highlight"><pre><code class="language-python" data-lang="python"><span></span><span class="k">elif</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;darwin&#39;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="p">)):</span>
-  <span class="n">setup</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;mathlink&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">pythonlinkversion</span><span class="p">,</span>
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">elif</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s">r'darwin'</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span><span class="p">)):</span>
+  <span class="n">setup</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">"mathlink"</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">pythonlinkversion</span><span class="p">,</span>
     <span class="n">ext_modules</span><span class="o">=</span><span class="p">[</span>
       <span class="n">Extension</span><span class="p">(</span>
-        <span class="s2">&quot;mathlink&quot;</span><span class="p">,</span>
-        <span class="p">[</span><span class="s2">&quot;mathlink.c&quot;</span><span class="p">],</span>
-        <span class="n">include_dirs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions/AlternativeLibraries&quot;</span><span class="p">],</span>
-        <span class="n">library_dirs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions/AlternativeLibraries&quot;</span><span class="p">],</span>
-        <span class="n">libraries</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MLi3&quot;</span><span class="p">],</span>
+        <span class="s">"mathlink"</span><span class="p">,</span>
+        <span class="p">[</span><span class="s">"mathlink.c"</span><span class="p">],</span>
+        <span class="n">include_dirs</span> <span class="o">=</span> <span class="p">[</span><span class="s">"/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions/AlternativeLibraries"</span><span class="p">],</span>
+        <span class="n">library_dirs</span> <span class="o">=</span> <span class="p">[</span><span class="s">"/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions/AlternativeLibraries"</span><span class="p">],</span>
+        <span class="n">libraries</span> <span class="o">=</span> <span class="p">[</span><span class="s">"MLi3"</span><span class="p">],</span>
       <span class="p">)</span>
     <span class="p">]</span>
   <span class="p">)</span></code></pre></figure>
 
-<p>The Python extention is mathlink.c. We need to make a minor adjustment to mathlink.c by defining <code>MLINTERFACE</code> to be 3 <em>before</em> we include the mathlink.h header file:</p>
+<p>The Python extention is mathlink.c. We need to make a minor adjustment to mathlink.c by defining <code class="highlighter-rouge">MLINTERFACE</code> to be 3 <em>before</em> we include the mathlink.h header file:</p>
 
-<figure class="highlight"><pre><code class="language-c" data-lang="c"><span></span><span class="cp">#define MLINTERFACE 3</span>
-<span class="cp">#include</span> <span class="cpf">&quot;mathlink.h&quot;</span><span class="cp"></span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#define MLINTERFACE 3
+#include "mathlink.h"</span></code></pre></figure>
 
 <p>That’s it for the Python bindings! Let’s compile and install:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>$ python setup.py build
-$ sudo python setup.py install</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>python setup.py build
+<span class="nv">$ </span><span class="nb">sudo </span>python setup.py install</code></pre></figure>
 
 <p>You should now be able to run the example script with the following command:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span></span>python textfrontend.py -linkname <span class="s2">&quot;math -mathlink&quot;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">python textfrontend.py <span class="nt">-linkname</span> <span class="s2">"math -mathlink"</span></code></pre></figure>
 
-<p>If you look inside textfrontend.py you’ll find a strange attempt by the author to add the Mathematica bin directory to the path. Since the <code>math</code> command is already in my path, this line is unnecessary. The script sets up the mathlink connection using the -linkname argument. Consider these things as opportunities for improvement as you monkey with this example code.</p>
+<p>If you look inside textfrontend.py you’ll find a strange attempt by the author to add the Mathematica bin directory to the path. Since the <code class="highlighter-rouge">math</code> command is already in my path, this line is unnecessary. The script sets up the mathlink connection using the -linkname argument. Consider these things as opportunities for improvement as you monkey with this example code.</p>
 
 <p>Now go write some good Python code!</p>
 
@@ -310,6 +310,17 @@ $ sudo python setup.py install</code></pre></figure>
                                 
                                 
                                   
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/what-is-the-ielr1-parsing-algorithm">What is the IELR(1) Parsing Algorithm?</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
                                     
                                         
                                         
@@ -330,8 +341,6 @@ $ sudo python setup.py install</code></pre></figure>
                                   
                                     
                                         
-                                        
-                                            <li><a href="/defining-the-wolfram-language-part-1-finding-operators">Defining the Wolfram Language Part 1: Finding Operators</a></li>
                                         
                                     
                                   
@@ -385,7 +394,7 @@ $ sudo python setup.py install</code></pre></figure>
                         <footer class="read-next-card-footer">
                             <a href="/tag/computer-science/">
                                 
-                                    See all 5 posts  →
+                                    See all 6 posts  →
                                 
                             </a>
                         </footer>
@@ -542,7 +551,7 @@ $ sudo python setup.py install</code></pre></figure>
         <!-- The footer at the very bottom of the screen -->
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
-                <section class="copyright"><a href="/">Robert Jacobson</a> &copy; 2018</section>
+                <section class="copyright"><a href="/">Robert Jacobson</a> &copy; 2020</section>
                 <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
                     <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
                     <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
@@ -551,7 +560,7 @@ $ sudo python setup.py install</code></pre></figure>
                     
                     
                     <a href="https://github.com/rljacobson" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://plus.google.com/+RobertJacobson" target="_blank" rel="noopener">Google+</a>
+                    
                     <a href="https://www.linkedin.com/in/robert-jacobson-7149986" target="_blank" rel="noopener">LinkedIn</a>
                 </nav>
             </div>

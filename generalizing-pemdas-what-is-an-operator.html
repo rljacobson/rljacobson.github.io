@@ -182,11 +182,11 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>In programming languages, an <em>operator</em> is a symbol used to represent a specific operation such as subtraction of integers or dereferencing a pointer. The symbols <code>+</code>, <code>*</code>, and <code>!</code> are commonly used as operators in many programming languages, for example. In this article we define some basic programming language terminology that allows us to categorize operators according to their different properties.</p>
+                    <p>In programming languages, an <em>operator</em> is a symbol used to represent a specific operation such as subtraction of integers or dereferencing a pointer. The symbols <code class="highlighter-rouge">+</code>, <code class="highlighter-rouge">*</code>, and <code class="highlighter-rouge">!</code> are commonly used as operators in many programming languages, for example. In this article we define some basic programming language terminology that allows us to categorize operators according to their different properties.</p>
 
 <h2 id="computation-with-expressions">Computation with Expressions</h2>
 
-<p>Virtually all programming languages have <em>expressions</em>, like <code>2 + 4</code>, which consist of <em>operators</em> (the <code>+</code> operator in <code>2 + 4</code>) and their <em>operands</em> (or <em>arguments</em>; the <code>2</code> and the <code>4</code>), that is, the things operators operate on.  This language is barrowed from mathematics where, for example, $17/2 + \sin(\pi/2)$ is an expression that <em>evaluates</em> to the <em>value</em> $19/2$. Most programming lanugages also have other language constructs like statements and declarations that are not expressions. In some languages, like Wolfram Language, <a href="https://reference.wolfram.com/language/tutorial/EverythingIsAnExpression.html"><em>everything is an expression</em></a>. In these languages, an entire program itself is an expression, albeit possibly a very complex one, and executing a program is called <em>evaluation</em>.</p>
+<p>Virtually all programming languages have <em>expressions</em>, like <code class="highlighter-rouge">2 + 4</code>, which consist of <em>operators</em> (the <code class="highlighter-rouge">+</code> operator in <code class="highlighter-rouge">2 + 4</code>) and their <em>operands</em> (or <em>arguments</em>; the <code class="highlighter-rouge">2</code> and the <code class="highlighter-rouge">4</code>), that is, the things operators operate on.  This language is barrowed from mathematics where, for example, $17/2 + \sin(\pi/2)$ is an expression that <em>evaluates</em> to the <em>value</em> $19/2$. Most programming languages also have other language constructs like statements and declarations that are not expressions. In some languages, like Wolfram Language, <a href="https://reference.wolfram.com/language/tutorial/EverythingIsAnExpression.html"><em>everything is an expression</em></a>. In these languages, an entire program itself is an expression, albeit possibly a very complex one, and executing a program is called <em>evaluation</em>.</p>
 
 <h2 id="properties-of-operators">Properties of Operators</h2>
 
@@ -210,28 +210,28 @@ into the {body} of the default.hbs template -->
     </tr>
     <tr>
       <td>Unary</td>
-      <td>Factorial: <code>!</code></td>
+      <td>Factorial: <code class="highlighter-rouge">!</code></td>
       <td>$3! = 3 \cdot 2 \cdot 1 = 6$</td>
     </tr>
     <tr>
       <td>Binary</td>
-      <td>Addition: <code>+</code></td>
+      <td>Addition: <code class="highlighter-rouge">+</code></td>
       <td>$2 + 4 = 6$</td>
     </tr>
     <tr>
       <td>Ternary</td>
-      <td>The conditional operator <br />found in many languages: <br /><code>a ? b : c</code></td>
-      <td><code>// if a&gt;b then x else y</code> <br /><code>result = a &gt; b ? x : y; </code></td>
+      <td>The conditional operator <br />found in many languages: <br /><code class="highlighter-rouge">a ? b : c</code></td>
+      <td><code class="highlighter-rouge">// if a&gt;b then x else y</code> <br /><code class="highlighter-rouge">result = a &gt; b ? x : y; </code></td>
     </tr>
     <tr>
       <td>Variadic <br />(takes a variable number <br />of arguments)</td>
-      <td>Lists: <code>{x, y, ...}</code></td>
-      <td><code>{ }</code> (empty list); <br /><code>{2, 3, 5, 7, 11}</code></td>
+      <td>Lists: <code class="highlighter-rouge">{x, y, ...}</code></td>
+      <td><code class="highlighter-rouge">{ }</code> (empty list); <br /><code class="highlighter-rouge">{2, 3, 5, 7, 11}</code></td>
     </tr>
     <tr>
       <td>$n$-ary <br />(takes $n$ arguments)</td>
       <td>A function of $n$ arguments:<br /> $f(a_1, a_2, \ldots, a_n)$</td>
-      <td><code>DeleteCases[expr, pattern,</code><br /><code> levelspec, n]</code></td>
+      <td><code class="highlighter-rouge">DeleteCases[expr, pattern,</code><br /><code class="highlighter-rouge"> levelspec, n]</code></td>
     </tr>
   </tbody>
 </table>
@@ -253,32 +253,32 @@ into the {body} of the default.hbs template -->
   <tbody>
     <tr>
       <td>Prefix: precedes its operand(s)</td>
-      <td>Unary minus: <code>-</code></td>
+      <td>Unary minus: <code class="highlighter-rouge">-</code></td>
       <td>$-7$</td>
     </tr>
     <tr>
       <td>Postfix: follows its operand(s)</td>
-      <td>Factorial: <code>!</code></td>
+      <td>Factorial: <code class="highlighter-rouge">!</code></td>
       <td>$3!$</td>
     </tr>
     <tr>
       <td>Infix: between its operands</td>
-      <td>Addition: <code>+</code></td>
+      <td>Addition: <code class="highlighter-rouge">+</code></td>
       <td>$2 + 4$</td>
     </tr>
     <tr>
       <td>Matchfix (Circumfix): surrounds its operand(s)</td>
-      <td>Floor function: <code>⌊ ⌋</code></td>
+      <td>Floor function: <code class="highlighter-rouge">⌊ ⌋</code></td>
       <td>$\lfloor{2.78}\rfloor = 2$</td>
     </tr>
   </tbody>
 </table>
 
-<p>The affix of operators with more than two operands defy easy categorization. To illustrate, suppose we wish to invent our own ternary operator, and we have the symbols <code>@</code>, <code>#</code>, <code>$</code>, and <code>&amp;</code> available to use to represent our operator if we need them. If <code>a</code>, <code>b</code>, and <code>c</code> are operands, then we could define the operator as <code>@ a # b $ c &amp;</code> or <code>a # b $ c &amp;</code> or <code>@ a # b $ c</code> or <code>a # b $ c</code>. Or instead of using different symbols to separate the operands, we could use just one symbol, as Mathematica does with the <code>Span</code> operator: <code>i ;; j ;; k</code>.</p>
+<p>The affix of operators with more than two operands defy easy categorization. To illustrate, suppose we wish to invent our own ternary operator, and we have the symbols <code class="highlighter-rouge">@</code>, <code class="highlighter-rouge">#</code>, <code class="highlighter-rouge">$</code>, and <code class="highlighter-rouge">&amp;</code> available to use to represent our operator if we need them. If <code class="highlighter-rouge">a</code>, <code class="highlighter-rouge">b</code>, and <code class="highlighter-rouge">c</code> are operands, then we could define the operator as <code class="highlighter-rouge">@ a # b $ c &amp;</code> or <code class="highlighter-rouge">a # b $ c &amp;</code> or <code class="highlighter-rouge">@ a # b $ c</code> or <code class="highlighter-rouge">a # b $ c</code>. Or instead of using different symbols to separate the operands, we could use just one symbol, as Wolfram Language does with the <code class="highlighter-rouge">Span</code> operator: <code class="highlighter-rouge">start ;; stop ;; step</code>.</p>
 
 <h3 id="associativity">Associativity</h3>
 
-<p>The <em>associativity</em> of an operator determines how an operator <em>groups</em> with expressions around it. Consider the exponentiation (power) operator <code>^</code> in the expression <code>2^3^2</code>$=2^{3^2}$, which is a perfectly valid expression in many programming languages and in mathematics. Setting aside mathematical tradition, this expression <em>could</em> mean either <code>(2^3)^2</code> $= (2^3)^2 = $ <code>8^2 = 64</code>, but it could also mean <code>2^(3^2)</code> $= 2^{(3^2)} = $ <code>2^9 = 512</code>. These are clearly very different meanings! In the first interpretation, we say the <code>^</code> operator <em>associates to the left</em>, because the left-most operation is done first. In the second interpretation, we say the <code>^</code> operator <em>associates to the right</em>. Mathematical tradition and most programming languages define <code>^</code> as right associative.</p>
+<p>The <em>associativity</em> of an operator determines how an operator <em>groups</em> with expressions around it. Consider the exponentiation (power) operator <code class="highlighter-rouge">^</code> in the expression <code class="highlighter-rouge">2^3^2</code>$=2^{3^2}$, which is a perfectly valid expression in many programming languages and in mathematics. Setting aside mathematical tradition, this expression <em>could</em> mean either <code class="highlighter-rouge">(2^3)^2</code> $= (2^3)^2 = $ <code class="highlighter-rouge">8^2 = 64</code>, but it could also mean <code class="highlighter-rouge">2^(3^2)</code> $= 2^{(3^2)} = $ <code class="highlighter-rouge">2^9 = 512</code>. These are clearly very different meanings! In the first interpretation, we say the <code class="highlighter-rouge">^</code> operator <em>associates to the left</em>, because the left-most operation is done first. In the second interpretation, we say the <code class="highlighter-rouge">^</code> operator <em>associates to the right</em>. Mathematical tradition and most programming languages define <code class="highlighter-rouge">^</code> as right associative.</p>
 
 <h3 id="precedence">Precedence</h3>
 
@@ -368,6 +368,17 @@ into the {body} of the default.hbs template -->
                                 
                                 
                                   
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/what-is-the-ielr1-parsing-algorithm">What is the IELR(1) Parsing Algorithm?</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
                                     
                                         
                                         
@@ -392,8 +403,6 @@ into the {body} of the default.hbs template -->
                                   
                                     
                                         
-                                        
-                                            <li><a href="/defining-the-wolfram-language-part-0-the-challenge">Defining the Wolfram Language Part 0: The Challenge</a></li>
                                         
                                     
                                   
@@ -443,7 +452,7 @@ into the {body} of the default.hbs template -->
                         <footer class="read-next-card-footer">
                             <a href="/tag/computer-science/">
                                 
-                                    See all 5 posts  →
+                                    See all 6 posts  →
                                 
                             </a>
                         </footer>
@@ -604,7 +613,7 @@ into the {body} of the default.hbs template -->
         <!-- The footer at the very bottom of the screen -->
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
-                <section class="copyright"><a href="/">Robert Jacobson</a> &copy; 2018</section>
+                <section class="copyright"><a href="/">Robert Jacobson</a> &copy; 2020</section>
                 <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
                     <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
                     <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
@@ -613,7 +622,7 @@ into the {body} of the default.hbs template -->
                     
                     
                     <a href="https://github.com/rljacobson" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://plus.google.com/+RobertJacobson" target="_blank" rel="noopener">Google+</a>
+                    
                     <a href="https://www.linkedin.com/in/robert-jacobson-7149986" target="_blank" rel="noopener">LinkedIn</a>
                 </nav>
             </div>

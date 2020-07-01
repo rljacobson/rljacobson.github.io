@@ -207,95 +207,95 @@ into the {body} of the default.hbs template -->
       <td>The most common operators only. Usually no precedence or associativity.</td>
     </tr>
     <tr>
-      <td><a href="https://reference.wolfram.com/language/ref/WolframLanguageData.html"><code>WolframLanguageData[]</code></a></td>
+      <td><a href="https://reference.wolfram.com/language/ref/WolframLanguageData.html"><code class="highlighter-rouge">WolframLanguageData[]</code></a></td>
       <td>Only has info for most common operators. For most operators, gives precedence rank, arity, affix. Less often associativity info is apparent.</td>
     </tr>
     <tr>
-      <td><code>Precedence[]</code></td>
+      <td><code class="highlighter-rouge">Precedence[]</code></td>
       <td>Undocumented built-in function. When provided the long name of an operator, gives precedence. Only works with some operators and is often incorrect.</td>
     </tr>
     <tr>
-      <td><code>UnicodeCharacters.tr</code></td>
+      <td><code class="highlighter-rouge">UnicodeCharacters.tr</code></td>
       <td>Gives explicit precedence, affix, and associativity for 338 operators that are a single Unicode character outside of ASCII character set. Note that this system file uses a different precedence numbering scheme than other sources and which applies only to the notebook interface.</td>
     </tr>
     <tr>
-      <td><code>`System`Convert`</code> <code>MLStringDataDump`</code> <code>$ExtractedOperators</code></td>
-      <td>Undocumented list of 272 single character unicode operators all but one of which is in <code>UnicodeCharacters.tr</code>. A proper subset of the next source, but I include it for completeness.</td>
+      <td><code class="highlighter-rouge">`System`Convert`</code> <code class="highlighter-rouge">MLStringDataDump`</code> <code class="highlighter-rouge">$ExtractedOperators</code></td>
+      <td>Undocumented list of 272 single character unicode operators all but one of which is in <code class="highlighter-rouge">UnicodeCharacters.tr</code>. A proper subset of the next source, but I include it for completeness.</td>
     </tr>
     <tr>
-      <td><code>System`Convert`</code> <code>MLStringDataDump`</code> <code>$Operators</code></td>
+      <td><code class="highlighter-rouge">System`Convert`</code> <code class="highlighter-rouge">MLStringDataDump`</code> <code class="highlighter-rouge">$Operators</code></td>
       <td>Undocumented list of 340 operators—characters only. Includes most operators, even single and multi-character ASCII operators. Excludes Association brackets, box operators, and obscure bracketing operators.</td>
     </tr>
     <tr>
-      <td><code>Internal`SymbolNameQ[]</code></td>
-      <td>Undocumented function that apparently identifies a string as a “symbol name.” Computing the complement of the set of Unicode characters for which <code>SymbolNameQ</code> evaluates to True gives a list of operators, including some single-character box operators found in no other list.</td>
+      <td><code class="highlighter-rouge">Internal`SymbolNameQ[]</code></td>
+      <td>Undocumented function that apparently identifies a string as a “symbol name.” Computing the complement of the set of Unicode characters for which <code class="highlighter-rouge">SymbolNameQ</code> evaluates to True gives a list of operators, including some single-character box operators found in no other list.</td>
     </tr>
   </tbody>
 </table>
 
-<p>Of the sources in this table, the only ones that are <em>documented</em> are <code>WolframLanguageData</code>, <code>UnicodeCharacters.tr</code>, and (by definition) the official documentation, and <code>UnicodeCharacters.tr</code> is only documented in the sense that <a href="https://reference.wolfram.com/language/Notation/tutorial/ComplexPatternsAndAdvancedFeatures.html">it is mentioned exactly once seemingly in passing in the official documentation</a> (although see below). It is important to understand that no single source contains all operators, and all but <code>$ExtractedOperators</code> and (ironically) the official documentation are necessary to obtain all available information about all operators.</p>
+<p>Of the sources in this table, the only ones that are <em>documented</em> are <code class="highlighter-rouge">WolframLanguageData</code>, <code class="highlighter-rouge">UnicodeCharacters.tr</code>, and (by definition) the official documentation, and <code class="highlighter-rouge">UnicodeCharacters.tr</code> is only documented in the sense that <a href="https://reference.wolfram.com/language/Notation/tutorial/ComplexPatternsAndAdvancedFeatures.html">it is mentioned exactly once seemingly in passing in the official documentation</a> (although see below). It is important to understand that no single source contains all operators, and all but <code class="highlighter-rouge">$ExtractedOperators</code> and (ironically) the official documentation are necessary to obtain all available information about all operators.</p>
 
 <h3 id="the-official-documentation">The Official Documentation</h3>
 
-<p>The first place to look for anyone interested in learning about Mathematica’s operators is the operator table given in the <a href="https://wolfr.am/wS1xS8bZ">Operator Input Forms</a> documentation. This table claims to give operator precedence (in the form of “precedence rank”), associativity, and usage information from which arity and affix are apparent. Unfortunately, you will find that this table is sometimes incorrect, woefully incomplete, and certainly outdated. There are several cases of multiple precedence levels being incorrectly represented in the table as a single precedence level. Associativity information for many listed operators is missing. (<code>TagSet</code> is right associative, for example.) Finally, nearly 200 operators are either missing or are listed en mass under labels like, “other ordering operators.”</p>
+<p>The first place to look for anyone interested in learning about Mathematica’s operators is the operator table given in the <a href="https://wolfr.am/wS1xS8bZ">Operator Input Forms</a> documentation. This table claims to give operator precedence (in the form of “precedence rank”), associativity, and usage information from which arity and affix are apparent. Unfortunately, you will find that this table is sometimes incorrect, woefully incomplete, and certainly outdated. There are several cases of multiple precedence levels being incorrectly represented in the table as a single precedence level. Associativity information for many listed operators is missing. (<code class="highlighter-rouge">TagSet</code> is right associative, for example.) Finally, nearly 200 operators are either missing or are listed en mass under labels like, “other ordering operators.”</p>
 
 <p>Other pages of the official documentation, while often very helpful for learning Mathematica, usually do not give information about associativity and precedence. Mathematica’s documentation, in my opinion, is generally superlative and sets the standard by which all other documentation should be measured. Even so, it contains a great number of errors and is simply not intended to stand in for the kind of language spec needed by, e.g., compiler tool authors that is motivating our study.</p>
 
-<h3 id="the-undocumented-precedence-function">The Undocumented <code>Precedence[]</code> Function</h3>
+<h3 id="the-undocumented-precedence-function">The Undocumented <code class="highlighter-rouge">Precedence[]</code> Function</h3>
 
-<p>Advanced Mathematica programmers frequently pop up on <a href="https://mathematica.stackexchange.com/">mathematica.stackexchange.com</a> asking about how to choose a Mathematica operator without a built-in meaning (of which there are many) that has just the right operator precedence they need for their use case. The answer given by the Mathematica gurus is almost invariably to use the undocumented <code>Precedence[]</code> function. I am sorry to report that on this point the Mathematica gurus are giving bad advice. Here are a few problems with the <code>Precedence[]</code> function:</p>
+<p>Advanced Mathematica programmers frequently pop up on <a href="https://mathematica.stackexchange.com/">mathematica.stackexchange.com</a> asking about how to choose a Mathematica operator without a built-in meaning (of which there are many) that has just the right operator precedence they need for their use case. The answer given by the Mathematica gurus is almost invariably to use the undocumented <code class="highlighter-rouge">Precedence[]</code> function. I am sorry to report that on this point the Mathematica gurus are giving bad advice. Here are a few problems with the <code class="highlighter-rouge">Precedence[]</code> function:</p>
 
 <ol>
-  <li>It takes the (symbolic) names of operators, not symbols. For example, <code>Precedence[Element]</code> evaluates to <code>250.</code>, but <code>Precedence[∈]</code> predictably fails with a syntax error. Consequently, you need to know the symbolic name of the operator you are interested in.<sup style="font-weight:bolder" id="a1" name="a1"><a href="#opnames">1</a></sup></li>
-  <li>As a corollary to (1), if an operator <em>has no name</em>, <code>Precedence</code> is useless. This is not an obscure problem, as there are several important operators with no apparent name, such as the square brackets operator for function application <code>f[e]</code>.<sup style="font-weight:bolder" id="a1" name="a1"><a href="#opnames">1</a></sup></li>
-  <li><code>Precedence</code> fails to return a true precedence level for roughly 10% of the operators that do have names. <code>Precedence</code> indicates failure by returning <code>670.</code>, which is inconvenient since <code>670.</code> is a valid precedence level.</li>
-  <li>The same symbolic name can be associated to both the unary and binary operators associated to the function. For example, <code>Precedence[PlusMinus]</code> gives the precedence of the unary operator <code>±x</code> (<code>310.</code>) rather than the precedence of the binary operator <code>x ± y</code> (<code>480.</code>)</li>
-  <li><code>Precedence</code> combines precedence levels that should be split—but not as much as the <a href="https://wolfr.am/wS1xS8bZ">Operator Input Forms</a> documentation.</li>
-  <li><code>Precedence</code> is sometimes just plain wrong. For example, contrary to <code>Precedence</code>, <code>Union</code> has a higher precedence than <code>Span</code>.</li>
+  <li>It takes the (symbolic) names of operators, not symbols. For example, <code class="highlighter-rouge">Precedence[Element]</code> evaluates to <code class="highlighter-rouge">250.</code>, but <code class="highlighter-rouge">Precedence[∈]</code> predictably fails with a syntax error. Consequently, you need to know the symbolic name of the operator you are interested in.<sup style="font-weight:bolder" id="a1" name="a1"><a href="#opnames">1</a></sup></li>
+  <li>As a corollary to (1), if an operator <em>has no name</em>, <code class="highlighter-rouge">Precedence</code> is useless. This is not an obscure problem, as there are several important operators with no apparent name, such as the square brackets operator for function application <code class="highlighter-rouge">f[e]</code>.<sup style="font-weight:bolder" id="a1" name="a1"><a href="#opnames">1</a></sup></li>
+  <li><code class="highlighter-rouge">Precedence</code> fails to return a true precedence level for roughly 10% of the operators that do have names. <code class="highlighter-rouge">Precedence</code> indicates failure by returning <code class="highlighter-rouge">670.</code>, which is inconvenient since <code class="highlighter-rouge">670.</code> is a valid precedence level.</li>
+  <li>The same symbolic name can be associated to both the unary and binary operators associated to the function. For example, <code class="highlighter-rouge">Precedence[PlusMinus]</code> gives the precedence of the unary operator <code class="highlighter-rouge">±x</code> (<code class="highlighter-rouge">310.</code>) rather than the precedence of the binary operator <code class="highlighter-rouge">x ± y</code> (<code class="highlighter-rouge">480.</code>)</li>
+  <li><code class="highlighter-rouge">Precedence</code> combines precedence levels that should be split—but not as much as the <a href="https://wolfr.am/wS1xS8bZ">Operator Input Forms</a> documentation.</li>
+  <li><code class="highlighter-rouge">Precedence</code> is sometimes just plain wrong. For example, contrary to <code class="highlighter-rouge">Precedence</code>, <code class="highlighter-rouge">Union</code> has a higher precedence than <code class="highlighter-rouge">Span</code>.</li>
 </ol>
 
-<p>We have spent a lot of ink explaining why the official documentation, the <a href="https://wolfr.am/wS1xS8bZ">Operator Input Forms</a> table in particular, and the <code>Precedence[]</code> function are not the best sources of information about Mathematica operators in part to correct the record on the subject, as these two sources are what come up the most often in technical discussions, even among experts. But we have made only meager progress toward our goal of accurately documenting every Mathematica operator. Where <em>should</em> we—and the gurus on <a href="https://mathematica.stackexchange.com/">mathematica.stackexchange.com</a>—be looking if not to these sources?</p>
+<p>We have spent a lot of ink explaining why the official documentation, the <a href="https://wolfr.am/wS1xS8bZ">Operator Input Forms</a> table in particular, and the <code class="highlighter-rouge">Precedence[]</code> function are not the best sources of information about Mathematica operators in part to correct the record on the subject, as these two sources are what come up the most often in technical discussions, even among experts. But we have made only meager progress toward our goal of accurately documenting every Mathematica operator. Where <em>should</em> we—and the gurus on <a href="https://mathematica.stackexchange.com/">mathematica.stackexchange.com</a>—be looking if not to these sources?</p>
 
-<p>For most purposes, we should look to <a href="https://reference.wolfram.com/language/ref/WolframLanguageData.html"><code>WolframLanguageData[]</code></a>.</p>
+<p>For most purposes, we should look to <a href="https://reference.wolfram.com/language/ref/WolframLanguageData.html"><code class="highlighter-rouge">WolframLanguageData[]</code></a>.</p>
 
-<h3 id="wolframlanguagedata"><code>WolframLanguageData[]</code></h3>
+<h3 id="wolframlanguagedata"><code class="highlighter-rouge">WolframLanguageData[]</code></h3>
 
-<p>I have found that the precedence rank returned by <a href="https://reference.wolfram.com/language/ref/WolframLanguageData.html"><code>WolframLanguageData[]</code></a> is more accurate than the <code>Precedence</code> function. As a bonus, <code>WolframLanguageData</code> gives you really nice operator synonym, usage, and FullForm data, and programmatic access to all kinds of information related to Mathematica functions and their documentation.</p>
+<p>I have found that the precedence rank returned by <a href="https://reference.wolfram.com/language/ref/WolframLanguageData.html"><code class="highlighter-rouge">WolframLanguageData[]</code></a> is more accurate than the <code class="highlighter-rouge">Precedence</code> function. As a bonus, <code class="highlighter-rouge">WolframLanguageData</code> gives you really nice operator synonym, usage, and FullForm data, and programmatic access to all kinds of information related to Mathematica functions and their documentation.</p>
 
-<figure class="highlight"><pre><code class="language-wolfram" data-lang="wolfram"><span></span><span class="nb">In</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">:=</span><span class="w"> </span><span class="nb">WolframLanguageData</span><span class="p">[</span><span class="s">&quot;Power&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PrecedenceRanks&quot;</span><span class="p">]</span><span class="w"></span>
+<figure class="highlight"><pre><code class="language-wolfram" data-lang="wolfram">In[1]:= WolframLanguageData["Power", "PrecedenceRanks"]
 
-<span class="nb">Out</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">=</span><span class="w"> </span><span class="p">{{</span><span class="nv">expr1</span><span class="err">\</span><span class="nt">_expr2</span><span class="err">\%</span><span class="nv">expr3</span><span class="p">,</span><span class="w"> </span><span class="nb">Power</span><span class="p">[</span><span class="nb">Subscript</span><span class="p">[</span><span class="nv">expr1</span><span class="p">,</span><span class="nv">expr2</span><span class="p">],</span><span class="nv">expr3</span><span class="p">]}</span><span class="o">-&gt;</span><span class="m">8</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="nv">expr1</span><span class="o">^</span><span class="nv">expr2</span><span class="p">,</span><span class="w"> </span><span class="nb">Power</span><span class="p">[</span><span class="nv">expr1</span><span class="p">,</span><span class="nv">expr2</span><span class="p">]}</span><span class="o">-&gt;</span><span class="m">21</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="nv">expr1</span><span class="o">^</span><span class="nv">expr2</span><span class="p">,</span><span class="w"> </span><span class="nb">Power</span><span class="p">[</span><span class="nv">expr1</span><span class="p">,</span><span class="nv">expr2</span><span class="p">]}</span><span class="o">-&gt;</span><span class="m">21</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="nv">expr1</span><span class="o">^</span><span class="nv">expr2</span><span class="p">,</span><span class="w"> </span><span class="nb">Power</span><span class="p">[</span><span class="nv">expr1</span><span class="p">,</span><span class="nv">expr2</span><span class="p">]}</span><span class="o">-&gt;</span><span class="m">21</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="nb">Subsuperscript</span><span class="p">[</span><span class="nv">expr1</span><span class="p">,</span><span class="w"> </span><span class="nv">expr2</span><span class="p">,</span><span class="w"> </span><span class="nv">expr3</span><span class="p">],</span><span class="w"></span>
-<span class="w">            </span><span class="nb">Power</span><span class="p">[</span><span class="nb">Subscript</span><span class="p">[</span><span class="nv">expr1</span><span class="p">,</span><span class="nv">expr2</span><span class="p">],</span><span class="nv">expr3</span><span class="p">]}</span><span class="o">-&gt;</span><span class="m">21</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="nv">expr1</span><span class="err">\</span><span class="o">^</span><span class="nv">expr2</span><span class="err">\%</span><span class="nv">expr3</span><span class="p">,</span><span class="w"> </span><span class="nb">Power</span><span class="p">[</span><span class="nb">Subscript</span><span class="p">[</span><span class="nv">expr1</span><span class="p">,</span><span class="nv">expr3</span><span class="p">],</span><span class="nv">expr2</span><span class="p">]}</span><span class="o">-&gt;</span><span class="m">21</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="err">\</span><span class="o">@</span><span class="nv">expr</span><span class="err">\%</span><span class="nv">n</span><span class="p">,</span><span class="nb">Power</span><span class="p">[</span><span class="nv">expr</span><span class="p">,</span><span class="nb">Power</span><span class="p">[</span><span class="nv">n</span><span class="p">,</span><span class="o">-</span><span class="m">1</span><span class="p">]]}</span><span class="o">-&gt;</span><span class="m">22</span><span class="p">}</span><span class="w"></span></code></pre></figure>
+Out[1]= {{expr1\_expr2\%expr3, Power[Subscript[expr1,expr2],expr3]}-&gt;8,
+        {expr1^expr2, Power[expr1,expr2]}-&gt;21,
+        {expr1^expr2, Power[expr1,expr2]}-&gt;21,
+        {expr1^expr2, Power[expr1,expr2]}-&gt;21,
+        {Subsuperscript[expr1, expr2, expr3],
+            Power[Subscript[expr1,expr2],expr3]}-&gt;21,
+        {expr1\^expr2\%expr3, Power[Subscript[expr1,expr3],expr2]}-&gt;21,
+        {\@expr\%n,Power[expr,Power[n,-1]]}-&gt;22}</code></pre></figure>
 
-<p>Another bonus of <code>WolframLanguageData</code> is that you do not already have to know the name of every function with an operator. You can ask <code>WolframLanguageData</code> to just give you everything in its database, which includes the box sublanguage. The following will generate a list for you. Be warned that it will download data for all 5,000+ functions and ultimately give you a list of 135 (as of August 2018) <code>{name, rankdata, shortnotation}</code> triples:</p>
+<p>Another bonus of <code class="highlighter-rouge">WolframLanguageData</code> is that you do not already have to know the name of every function with an operator. You can ask <code class="highlighter-rouge">WolframLanguageData</code> to just give you everything in its database, which includes the box sublanguage. The following will generate a list for you. Be warned that it will download data for all 5,000+ functions and ultimately give you a list of 135 (as of August 2018) <code class="highlighter-rouge">{name, rankdata, shortnotation}</code> triples:</p>
 
-<figure class="highlight"><pre><code class="language-wolfram" data-lang="wolfram"><span></span><span class="nb">In</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">:=</span><span class="w"> </span><span class="nb">Select</span><span class="p">[</span><span class="w"></span>
-<span class="w">            </span><span class="nb">WolframLanguageData</span><span class="p">[</span><span class="w"></span>
-<span class="w">                </span><span class="nb">WolframLanguageData</span><span class="p">[</span><span class="s">&quot;Entities&quot;</span><span class="p">],</span><span class="w"> </span>
-<span class="w">                </span><span class="p">{</span><span class="s">&quot;Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;PrecedenceRanks&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ShortNotations&quot;</span><span class="p">}</span><span class="w"></span>
-<span class="w">            </span><span class="p">],</span><span class="w"> </span>
-<span class="w">            </span><span class="nf">#</span><span class="p">[[</span><span class="m">2</span><span class="p">]]</span><span class="w"> </span><span class="o">=!=</span><span class="w"> </span><span class="nb">Missing</span><span class="p">[</span><span class="s">&quot;NotApplicable&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">        </span><span class="p">]</span><span class="w"></span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-wolfram" data-lang="wolfram">In[1]:= Select[
+            WolframLanguageData[
+                WolframLanguageData["Entities"], 
+                {"Name", "PrecedenceRanks", "ShortNotations"}
+            ], 
+            #[[2]] =!= Missing["NotApplicable"] &amp;
+        ]</code></pre></figure>
 
-<p>The <code>"ShortNotations"</code> data provided by <code>WolframLanguageData</code> leaves a lot to be desired, and while arity and affix are usually apparent from the usage data, <code>WolframLanguageData</code> usually does not provide enough information to deduce operator associativity. Unfortunately, <code>WolframLanguageData</code> will not give you every operator, either. However, this is the <em>only</em> source outside of the documentation itself that gives all multicharacter box operators. With some effort, it is possible to use <code>WolframLanguageData</code> to programmatically extract even more information about operators from the documentation, but the information earned by this effort is much easier to obtain elsewhere.</p>
+<p>The <code class="highlighter-rouge">"ShortNotations"</code> data provided by <code class="highlighter-rouge">WolframLanguageData</code> leaves a lot to be desired, and while arity and affix are usually apparent from the usage data, <code class="highlighter-rouge">WolframLanguageData</code> usually does not provide enough information to deduce operator associativity. Unfortunately, <code class="highlighter-rouge">WolframLanguageData</code> will not give you every operator, either. However, this is the <em>only</em> source outside of the documentation itself that gives all multicharacter box operators. With some effort, it is possible to use <code class="highlighter-rouge">WolframLanguageData</code> to programmatically extract even more information about operators from the documentation, but the information earned by this effort is much easier to obtain elsewhere.</p>
 
 <p>Let’s dive deeper.</p>
 
-<h3 id="unicodecharacterstr"><code>UnicodeCharacters.tr</code></h3>
+<h3 id="unicodecharacterstr"><code class="highlighter-rouge">UnicodeCharacters.tr</code></h3>
 
-<p>The Mathematica system files include a file named <code>UnicodeCharacters.tr</code> that appears to contain information about how the Mathematica frontend interprets ~1100 Unicode characters. As its name implies, the <code>UnicodeCharacters.tr</code> file appears to only include characters that are <em>single</em> Unicode characters <em>outside</em> of the ASCII character set. It does not include <code>!</code> or <code>/@</code>, for example. Most people describe the file as “undocumented,” but in fact <a href="https://reference.wolfram.com/language/Notation/tutorial/ComplexPatternsAndAdvancedFeatures.html">it is mentioned exactly once in the official documentation</a> for the Notation Package:</p>
+<p>The Mathematica system files include a file named <code class="highlighter-rouge">UnicodeCharacters.tr</code> that appears to contain information about how the Mathematica frontend interprets ~1100 Unicode characters. As its name implies, the <code class="highlighter-rouge">UnicodeCharacters.tr</code> file appears to only include characters that are <em>single</em> Unicode characters <em>outside</em> of the ASCII character set. It does not include <code class="highlighter-rouge">!</code> or <code class="highlighter-rouge">/@</code>, for example. Most people describe the file as “undocumented,” but in fact <a href="https://reference.wolfram.com/language/Notation/tutorial/ComplexPatternsAndAdvancedFeatures.html">it is mentioned exactly once in the official documentation</a> for the Notation Package:</p>
 
 <blockquote>
-  <p>“The <code>SyntaxForm</code> option value can be any operator string valid in the Wolfram Language, that is, any operator contained in the UnicodeCharacters.tr file.”</p>
+  <p>“The <code class="highlighter-rouge">SyntaxForm</code> option value can be any operator string valid in the Wolfram Language, that is, any operator contained in the UnicodeCharacters.tr file.”</p>
 </blockquote>
 
-<p>(As an aside, this line in the documentation is incorrect in the sense that <code>UnicodeCharacters.tr</code> does not include every operator string valid in the Wolfram Language, ASCII operator strings in particular, while these missing operator strings are still valid values for the <code>SyntaxForm</code> option.)</p>
+<p>(As an aside, this line in the documentation is incorrect in the sense that <code class="highlighter-rouge">UnicodeCharacters.tr</code> does not include every operator string valid in the Wolfram Language, ASCII operator strings in particular, while these missing operator strings are still valid values for the <code class="highlighter-rouge">SyntaxForm</code> option.)</p>
 
 <p>Most of the records in the file are <em>not</em> operators, but for the operators that are included, it gives us the most detailed syntactic information of any source. Each record has up to 9 columns (fields) that we might label as follows:</p>
 
@@ -311,70 +311,70 @@ into the {body} of the default.hbs template -->
   <li>Rendered As</li>
 </ol>
 
-<p>This is everything we could hope to know about the linguistics of an operator—the proverbial holy grail of operator syntax. Be aware that it uses a <em>different</em> precedence numbering scheme from <code>Precedence[]</code>, so be sure not to mix up the two. Note also that the precedence in the <code>UnicodeCharacters.tr</code> refers to precedence within the frontend only. (The meaning of this last sentence will become clear in the section, “Programmatically determining properties of operators.”)</p>
+<p>This is everything we could hope to know about the linguistics of an operator—the proverbial holy grail of operator syntax. Be aware that it uses a <em>different</em> precedence numbering scheme from <code class="highlighter-rouge">Precedence[]</code>, so be sure not to mix up the two. Note also that the precedence in the <code class="highlighter-rouge">UnicodeCharacters.tr</code> refers to precedence within the frontend only. (The meaning of this last sentence will become clear in the section, “Programmatically determining properties of operators.”)</p>
 
-<p>This code snippet reads the data from <code>UnicodeCharacters.tr</code> into the variable <code>chars</code>:<sup style="font-weight:bolder" id="a2" name="a2"><a href="#mrwizard">2</a></sup></p>
+<p>This code snippet reads the data from <code class="highlighter-rouge">UnicodeCharacters.tr</code> into the variable <code class="highlighter-rouge">chars</code>:<sup style="font-weight:bolder" id="a2" name="a2"><a href="#mrwizard">2</a></sup></p>
 
-<figure class="highlight"><pre><code class="language-wolfram" data-lang="wolfram"><span></span><span class="nb">In</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">:=</span><span class="w"> </span><span class="nv">chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ReadList</span><span class="p">[</span><span class="w"></span>
-<span class="w">            </span><span class="nv">System`Dump`unicodeCharactersTR</span><span class="p">,</span><span class="w"> </span>
-<span class="w">            </span><span class="nb">Word</span><span class="p">,</span><span class="w"> </span><span class="nb">WordSeparators</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;\t\t&quot;</span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="nb">RecordLists</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb">True</span><span class="w"></span>
-<span class="w">        </span><span class="p">]</span><span class="o">;</span><span class="w"></span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-wolfram" data-lang="wolfram">In[1]:= chars = ReadList[
+            System`Dump`unicodeCharactersTR, 
+            Word, WordSeparators -&gt; {"\t\t"},
+            RecordLists -&gt; True
+        ];</code></pre></figure>
 
 <p>We can filter out non-operators using the Class/Affix column. Let’s look at the unique values in that column.</p>
 
-<figure class="highlight"><pre><code class="language-wolfram" data-lang="wolfram"><span></span><span class="nb">In</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">:=</span><span class="w"> </span><span class="nb">Union</span><span class="p">[</span><span class="nb">Select</span><span class="p">[</span><span class="nv">chars</span><span class="p">,</span><span class="w"> </span><span class="nb">Length</span><span class="p">[</span><span class="nf">#</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="o">&amp;</span><span class="p">][[</span><span class="nb">All</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">]]]</span><span class="w"></span>
+<figure class="highlight"><pre><code class="language-wolfram" data-lang="wolfram">In[1]:= Union[Select[chars, Length[#] &gt;= 4 &amp;][[All, 4]]]
 
-<span class="nb">Out</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;Alias&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Auto&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Close&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CompoundPrefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Infix&quot;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">        </span><span class="s">&quot;InfixOpen&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;LargeOp:Prefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Letter&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;NonBreakingAfterLetter&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s">&quot;NonBreakingBeforeLetter&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Open&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Postfix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Prefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;WhiteSp&quot;</span><span class="p">}</span><span class="w"></span></code></pre></figure>
+Out[1]= {"Alias", "Auto", "Close", "CompoundPrefix", "Infix", 
+        "InfixOpen", "LargeOp:Prefix", "Letter", "NonBreakingAfterLetter",
+        "NonBreakingBeforeLetter", "Open", "Postfix", "Prefix", "WhiteSp"}</code></pre></figure>
 
 <p>These are the ones we want:</p>
 
-<figure class="highlight"><pre><code class="language-wolfram" data-lang="wolfram"><span></span><span class="nb">In</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">:=</span><span class="w"> </span><span class="nv">affixes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;Close&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CompoundPrefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Infix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;InfixOpen&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="s">&quot;LargeOp:Prefix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Open&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Postfix&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Prefix&quot;</span><span class="p">}</span><span class="o">;</span><span class="w"></span>
-<span class="w">        </span><span class="nv">ops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Select</span><span class="p">[</span><span class="nv">chars</span><span class="p">,</span><span class="w"> </span><span class="nb">Length</span><span class="p">[</span><span class="nf">#</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">MemberQ</span><span class="p">[</span><span class="nv">affixes</span><span class="p">,</span><span class="w"> </span><span class="nf">#</span><span class="p">[[</span><span class="m">4</span><span class="p">]]]</span><span class="o">&amp;</span><span class="p">]</span><span class="o">;</span><span class="w"></span>
-<span class="w">        </span><span class="nb">Length</span><span class="p">[</span><span class="nv">ops</span><span class="p">]</span><span class="w"></span>
+<figure class="highlight"><pre><code class="language-wolfram" data-lang="wolfram">In[1]:= affixes = {"Close", "CompoundPrefix", "Infix", "InfixOpen",
+                "LargeOp:Prefix", "Open", "Postfix", "Prefix"};
+        ops = Select[chars, Length[#] &gt;= 4 &amp;&amp; MemberQ[affixes, #[[4]]]&amp;];
+        Length[ops]
 
-<span class="nb">Out</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">=</span><span class="w"> </span><span class="m">337</span><span class="w"></span></code></pre></figure>
+Out[1]= 337</code></pre></figure>
 
-<p>The character <code>〚</code> is the only one listed with affix <code>InfixOpen</code>, while the other matchfix (circumfix) operators are under <code>Open</code> or <code>Close</code>. Most of them appear to function like parentheses, but their rendering in the frontend is flakey. We also have <code>LargeOp:Prefix</code> operators like ∑ (<code>\[Sum]</code>), and then ∇ (<code>\[Del]</code>), which is the only operator with affix <code>CompoundPrefix</code>.</p>
+<p>The character <code class="highlighter-rouge">〚</code> is the only one listed with affix <code class="highlighter-rouge">InfixOpen</code>, while the other matchfix (circumfix) operators are under <code class="highlighter-rouge">Open</code> or <code class="highlighter-rouge">Close</code>. Most of them appear to function like parentheses, but their rendering in the frontend is flakey. We also have <code class="highlighter-rouge">LargeOp:Prefix</code> operators like ∑ (<code class="highlighter-rouge">\[Sum]</code>), and then ∇ (<code class="highlighter-rouge">\[Del]</code>), which is the only operator with affix <code class="highlighter-rouge">CompoundPrefix</code>.</p>
 
-<p>Of the sources of operators and their precedence, the <code>UnicodeCharacters.tr</code> is among the largest, and since it is presumably used by Mathematica internals, you can be sure that it is also the most accurate.</p>
+<p>Of the sources of operators and their precedence, the <code class="highlighter-rouge">UnicodeCharacters.tr</code> is among the largest, and since it is presumably used by Mathematica internals, you can be sure that it is also the most accurate.</p>
 
-<p>Mysteriously, however, it nonetheless seems to be wrong about precedence in at least one case that I have found so far: <code>UnicodeCharacters.tr</code> gives <code>CircleDot</code> and <code>PermutationProduct</code> the same precedence, but <code>CircleDot</code> does have a <em>higher</em> precedence than <code>PermutationProduct</code> while still being lower than the next highest operator, <code>SmallCircle</code>. That is to say, at least in v11.3, <code>CircleDot</code>’s real precedence is <code>606.</code>, not <code>605.</code> as it is listed.</p>
+<p>Mysteriously, however, it nonetheless seems to be wrong about precedence in at least one case that I have found so far: <code class="highlighter-rouge">UnicodeCharacters.tr</code> gives <code class="highlighter-rouge">CircleDot</code> and <code class="highlighter-rouge">PermutationProduct</code> the same precedence, but <code class="highlighter-rouge">CircleDot</code> does have a <em>higher</em> precedence than <code class="highlighter-rouge">PermutationProduct</code> while still being lower than the next highest operator, <code class="highlighter-rouge">SmallCircle</code>. That is to say, at least in v11.3, <code class="highlighter-rouge">CircleDot</code>’s real precedence is <code class="highlighter-rouge">606.</code>, not <code class="highlighter-rouge">605.</code> as it is listed.</p>
 
 <p>This, my dear readers, is where everyone else who has come this way has stopped looking. Let’s go deeper.</p>
 
-<h3 id="systemconvertmlstringdatadumpoperators"><code>System`Convert`MLStringDataDump`$Operators</code></h3>
+<h3 id="systemconvertmlstringdatadumpoperators"><code class="highlighter-rouge">System`Convert`MLStringDataDump`$Operators</code></h3>
 
-<p>The undocumented<sup style="font-weight:bolder" id="a3" name="a3"><a href="#undocumented">3</a></sup> system variable <code>System`Convert`MLStringDataDump`$Operators</code> is a list of 340 operators without any additional information. The list is only available in the notebook frontend. The undocumented function <code>System`Convert`MLStringDataDump`OperatorQ[]</code> works by checking membership in this list.</p>
+<p>The undocumented<sup style="font-weight:bolder" id="a3" name="a3"><a href="#undocumented">3</a></sup> system variable <code class="highlighter-rouge">System`Convert`MLStringDataDump`$Operators</code> is a list of 340 operators without any additional information. The list is only available in the notebook frontend. The undocumented function <code class="highlighter-rouge">System`Convert`MLStringDataDump`OperatorQ[]</code> works by checking membership in this list.</p>
 
-<p>This is the only list, excluding the documentation and <code>WolframLanguageData</code>, that includes all single and multi-character ASCII operators. As with most other sources, no box operators are included. It also excludes Association brackets, obscure bracketing symbols, many LargeOp:Prefix operators, and a handful of other operators found in <code>UnicodeCharacters.tr</code>.</p>
+<p>This is the only list, excluding the documentation and <code class="highlighter-rouge">WolframLanguageData</code>, that includes all single and multi-character ASCII operators. As with most other sources, no box operators are included. It also excludes Association brackets, obscure bracketing symbols, many LargeOp:Prefix operators, and a handful of other operators found in <code class="highlighter-rouge">UnicodeCharacters.tr</code>.</p>
 
 <p>We have scoured the documentation, taken a deep dive into Mathematica system files, and explored undocumented features described nowhere else outside of this article save the offices of Wolfram. It may surprise you, then, that there are more operators than we have found so far.</p>
 
-<h3 id="the-complement-of-internalsymbolnameq-characters">The Complement of <code>Internal`SymbolNameQ</code> Characters</h3>
+<h3 id="the-complement-of-internalsymbolnameq-characters">The Complement of <code class="highlighter-rouge">Internal`SymbolNameQ</code> Characters</h3>
 
-<p>Our strategy in this section is to make a list of every Unicode character in the character range used by Mathematica that is <em>not</em> a letter, <a href="https://reference.wolfram.com/language/tutorial/LettersAndLetterLikeForms.html">letter-like form</a>, or member of <code>System`Convert`MLStringDataDump`$Operators</code>, which we asign the shorter alias <code>ops</code>. Using the definition of <code>LetterLikeQ[]</code> along with the opaque built-in function <code>Internal`SymbolNameQ[]</code>, we can search the list of Unicode characters to find the complement of the set of characters we can already categorize. Our search criteria is as follows:</p>
+<p>Our strategy in this section is to make a list of every Unicode character in the character range used by Mathematica that is <em>not</em> a letter, <a href="https://reference.wolfram.com/language/tutorial/LettersAndLetterLikeForms.html">letter-like form</a>, or member of <code class="highlighter-rouge">System`Convert`MLStringDataDump`$Operators</code>, which we asign the shorter alias <code class="highlighter-rouge">ops</code>. Using the definition of <code class="highlighter-rouge">LetterLikeQ[]</code> along with the opaque built-in function <code class="highlighter-rouge">Internal`SymbolNameQ[]</code>, we can search the list of Unicode characters to find the complement of the set of characters we can already categorize. Our search criteria is as follows:</p>
 
-<figure class="highlight"><pre><code class="language-wolfram" data-lang="wolfram"><span></span><span class="nb">In</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">:=</span><span class="w"> </span><span class="nv">crit</span><span class="p">[</span><span class="nt">c_</span><span class="p">]</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="nv">Internal`SymbolNameQ</span><span class="p">[</span><span class="nv">c</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="nb">DigitQ</span><span class="p">[</span><span class="nv">c</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w">  </span><span class="o">!</span><span class="w"> </span>
-<span class="w">        </span><span class="nb">StringMatchQ</span><span class="p">[</span><span class="nv">c</span><span class="p">,</span><span class="w"> </span><span class="nb">WhitespaceCharacter</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="nb">MemberQ</span><span class="p">[</span><span class="nv">ops</span><span class="p">,</span><span class="w"> </span><span class="nv">c</span><span class="p">]</span><span class="o">;</span><span class="w"></span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-wolfram" data-lang="wolfram">In[1]:= crit[c_] := ! Internal`SymbolNameQ[c] &amp;&amp; ! DigitQ[c] &amp;&amp;  ! 
+        StringMatchQ[c, WhitespaceCharacter] &amp;&amp; ! MemberQ[ops, c];</code></pre></figure>
 
 <p>The following code produces a table of code/character pairs matching the criteria above:</p>
 
-<figure class="highlight"><pre><code class="language-wolfram" data-lang="wolfram"><span></span><span class="nb">In</span><span class="p">[</span><span class="m">1</span><span class="p">]</span><span class="o">:=</span><span class="w"> </span><span class="nb">Select</span><span class="p">[</span><span class="w"></span>
-<span class="w">            </span><span class="nb">Table</span><span class="p">[{</span><span class="nv">i</span><span class="p">,</span><span class="w"> </span><span class="nb">FromCharacterCode</span><span class="p">[</span><span class="nv">i</span><span class="p">]},</span><span class="w"> </span><span class="p">{</span><span class="nv">i</span><span class="p">,</span><span class="w"> </span><span class="m">65535</span><span class="p">}],</span><span class="w"> </span>
-<span class="w">            </span><span class="nv">crit</span><span class="p">[</span><span class="nf">#</span><span class="p">[[</span><span class="m">2</span><span class="p">]]]</span><span class="o">&amp;</span><span class="w"></span>
-<span class="w">        </span><span class="p">]</span><span class="w"></span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-wolfram" data-lang="wolfram">In[1]:= Select[
+            Table[{i, FromCharacterCode[i]}, {i, 65535}], 
+            crit[#[[2]]]&amp;
+        ]</code></pre></figure>
 
-<p>The result is a bit of a surprise: We get a seemingly random handful of ASCII characters, Association brackets, several of the <code>LargeOp:Prefix</code> operators that are missing in the other lists along with a small handful of other Unicode operators also from <code>UnicodeCharacters.tr</code>, and, most interestingly, single character versions of multicharacter box operators that are not in any other source. These box operators are:</p>
+<p>The result is a bit of a surprise: We get a seemingly random handful of ASCII characters, Association brackets, several of the <code class="highlighter-rouge">LargeOp:Prefix</code> operators that are missing in the other lists along with a small handful of other Unicode operators also from <code class="highlighter-rouge">UnicodeCharacters.tr</code>, and, most interestingly, single character versions of multicharacter box operators that are not in any other source. These box operators are:</p>
 
-<figure class="highlight"><pre><code class="language-text" data-lang="text"><span></span>0xf7c0: \), 0xf7c1: \!, 0xf7c2: \@, 0xf7c5: \%, 
+<figure class="highlight"><pre><code class="language-text" data-lang="text">0xf7c0: \), 0xf7c1: \!, 0xf7c2: \@, 0xf7c5: \%, 
 0xf7c6: \^, 0xf7c7: \&amp;, 0xf7c8: \*, 0xf7c9: \(, 
 0xf7ca: \_, 0xf7cb: \+, 0xf7cc: \/, 0xf7cd: \`</code></pre></figure>
 
-<p>The list also includes the nonoperator characters <code>0xf767: \[ErrorIndicator]</code>, <code>0x2043: \[SkeletonIndicator]</code>, the ASCII delete character <code>0x007f</code> (127), the ASCII bell character <code>0x0007</code>, and <code>0xf3ad</code>, which is an unassigned noncharacter Unicode codepoint “for private use.”</p>
+<p>The list also includes the nonoperator characters <code class="highlighter-rouge">0xf767: \[ErrorIndicator]</code>, <code class="highlighter-rouge">0x2043: \[SkeletonIndicator]</code>, the ASCII delete character <code class="highlighter-rouge">0x007f</code> (127), the ASCII bell character <code class="highlighter-rouge">0x0007</code>, and <code class="highlighter-rouge">0xf3ad</code>, which is an unassigned noncharacter Unicode codepoint “for private use.”</p>
 
 <p>Since every other Unicode character is either already identified as an operator or in a set known to exclude operators, any unidentified single character Unicode operators are guaranteed to be in this list. We have found them all.</p>
 
@@ -383,19 +383,19 @@ into the {body} of the default.hbs template -->
 <p>There are other <em>lexemes</em>—meaningful strings in the language—that could be considered operators but that do not appear outside of the documentation:</p>
 
 <ul>
-  <li>String-related characters like <code>"</code> and escape characters <code>\n</code>, <code>\t</code>, etc.</li>
-  <li>The character representation operators: <code>\[name]</code>, <code>\:nn</code>, and <code>\.nnnn</code>.</li>
-  <li>The number representation operators: <code>^^</code>, <code>*^</code>, and <code>``</code>, though the single <code>`</code> character does appear in the previous subsection.</li>
-  <li>The comment matchfix operator <code>(*...*)</code>.</li>
+  <li>String-related characters like <code class="highlighter-rouge">"</code> and escape characters <code class="highlighter-rouge">\n</code>, <code class="highlighter-rouge">\t</code>, etc.</li>
+  <li>The character representation operators: <code class="highlighter-rouge">\[name]</code>, <code class="highlighter-rouge">\:nn</code>, and <code class="highlighter-rouge">\.nnnn</code>.</li>
+  <li>The number representation operators: <code class="highlighter-rouge">^^</code>, <code class="highlighter-rouge">*^</code>, and <code class="highlighter-rouge">``</code>, though the single <code class="highlighter-rouge">`</code> character does appear in the previous subsection.</li>
+  <li>The comment matchfix operator <code class="highlighter-rouge">(*...*)</code>.</li>
 </ul>
 
-<p>These lexemes are such basic units of the language that they may be processed by Mathematica during or even prior to the lexical analysis phase of the code parsing process similar to how <code>C/C++</code> compiler drivers preprocess <code>#define</code>, <code>#include</code>, and other preprocessor directives before sending the result to the compiler.</p>
+<p>These lexemes are such basic units of the language that they may be processed by Mathematica during or even prior to the lexical analysis phase of the code parsing process similar to how <code class="highlighter-rouge">C/C++</code> compiler drivers preprocess <code class="highlighter-rouge">#define</code>, <code class="highlighter-rouge">#include</code>, and other preprocessor directives before sending the result to the compiler.</p>
 
 <p>These sorts of language elements are not unique to Wolfram Language, of course, and language tool authors generally make choices about how to handle them based on their syntactic role within the language and what simplifies the software engineering task.</p>
 
 <hr />
 
-<p><a name="opnames">[1]</a>: <span style="font-size:85%">While this may be a minor complaint, the symbolic names of operators do not always correspond to the function of that name. For example, <code>Infix</code> is the symbolic name for the ternary operator <code>a~f~b</code> which evaluates as <code>f[a, b]</code>, whereas the <code>Infix[]</code> function is just a function that effects the display of <code>f[a, b]</code>, writing it in terms of the <code>Infix</code> ternary operator. Meanwhile, the square brackets operator for function application <code>f[e]</code> is apparently nameless despite the existence of the <a href="https://reference.wolfram.com/language/ref/Construct.html"><code>Construct[]</code></a> function. </span> <a href="#a1">↩</a></p>
+<p><a name="opnames">[1]</a>: <span style="font-size:85%">While this may be a minor complaint, the symbolic names of operators do not always correspond to the function of that name. For example, <code class="highlighter-rouge">Infix</code> is the symbolic name for the ternary operator <code class="highlighter-rouge">a~f~b</code> which evaluates as <code class="highlighter-rouge">f[a, b]</code>, whereas the <code class="highlighter-rouge">Infix[]</code> function is just a function that effects the display of <code class="highlighter-rouge">f[a, b]</code>, writing it in terms of the <code class="highlighter-rouge">Infix</code> ternary operator. Meanwhile, the square brackets operator for function application <code class="highlighter-rouge">f[e]</code> is apparently nameless despite the existence of the <a href="https://reference.wolfram.com/language/ref/Construct.html"><code class="highlighter-rouge">Construct[]</code></a> function. </span> <a href="#a1">↩</a></p>
 
 <p><a name="mrwizard">[2]</a>: <span style="font-size:85%">
 I have borrowed this code with minimal modifications from Mathematica Stack Exchange user <a href="https://mathematica.stackexchange.com/a/153753/27662">Mr. Wizard</a>.
@@ -472,6 +472,17 @@ In fact, the only mention of this variable on the public internet appears to be 
                                 
                                 
                                   
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/what-is-the-ielr1-parsing-algorithm">What is the IELR(1) Parsing Algorithm?</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
                                     
                                         
                                         
@@ -496,8 +507,6 @@ In fact, the only mention of this variable on the public internet appears to be 
                                   
                                     
                                         
-                                        
-                                            <li><a href="/defining-the-wolfram-language-part-0-the-challenge">Defining the Wolfram Language Part 0: The Challenge</a></li>
                                         
                                     
                                   
@@ -547,7 +556,7 @@ In fact, the only mention of this variable on the public internet appears to be 
                         <footer class="read-next-card-footer">
                             <a href="/tag/computer-science/">
                                 
-                                    See all 5 posts  →
+                                    See all 6 posts  →
                                 
                             </a>
                         </footer>
@@ -704,7 +713,7 @@ In fact, the only mention of this variable on the public internet appears to be 
         <!-- The footer at the very bottom of the screen -->
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
-                <section class="copyright"><a href="/">Robert Jacobson</a> &copy; 2018</section>
+                <section class="copyright"><a href="/">Robert Jacobson</a> &copy; 2020</section>
                 <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
                     <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
                     <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
@@ -713,7 +722,7 @@ In fact, the only mention of this variable on the public internet appears to be 
                     
                     
                     <a href="https://github.com/rljacobson" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://plus.google.com/+RobertJacobson" target="_blank" rel="noopener">Google+</a>
+                    
                     <a href="https://www.linkedin.com/in/robert-jacobson-7149986" target="_blank" rel="noopener">LinkedIn</a>
                 </nav>
             </div>
