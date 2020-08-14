@@ -8,6 +8,35 @@
     
       
       <item>
+        <title>Making a Pratt Parser Generator</title>
+        
+          <description>&lt;h2 id=&quot;a-brief-history-of-the-pratt-parsing-algorithm&quot;&gt;A brief history of the Pratt parsing algorithm&lt;/h2&gt;
+&lt;p&gt;The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the pecedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a heirarchy of langauges defined according to how difficult the language is to parse.&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; But computer programmers needed practical, efficient algorithms to parse computer programs for translation to machine code. Parsers of the 1950s relied on ad hoc logic rather than systematic algorithms (a feature which persists to this day, though to a much lesser degree). The 1960s was a golden age of parsing algorithm research when nearly all of the concepts and algorithms we use today were discovered and rigorously studied. By the early 1970s, parsing theory had evolved to the point that  Stephen C. Johnson, a computer scientist at Bell Labs / AT&amp;amp;T, was able to start work on YACC (now “Yacc”), “Yet Another Compiler Compiler.”&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; YACC was first publically described in 1975 and shipped with Unix version 3&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;  and is still in use today.&lt;/p&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;The theory is much richer than I am able to present here. It is utterly fascinating, existing at the intersection of linguistics, mathematics, and computer science. Computer scientist Jeffery Kegler calls Chomsky’s book &lt;em&gt;Syntactic Structures&lt;/em&gt; “one of the most important books of all time.”&lt;br /&gt; Chomsky, Noam. 1957. &lt;em&gt;Syntactic Structures&lt;/em&gt;. Mouton &amp;amp; Co., 1957.&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;See Jeffery Kegler’s charming &lt;a href=&quot;https://jeffreykegler.github.io/personal/timeline_v3&quot;&gt;&lt;em&gt;“Parsing: a timeline”&lt;/em&gt;&lt;/a&gt; from which most of my historical information is derived.&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;The name is telling of the state of the art in compiler construction at the time, as there were several other “compiler compilers” in use at Bell Labs.&lt;br /&gt;Johnson, Stephen C. 1975. “Yacc: Yet Another Compiler-Compiler”. AT&amp;amp;T Bell Laboratories Technical Reports. AT&amp;amp;T Bell Laboratories Murray Hill, New Jersey 07974 (32). Retrieved 22 December 2018.&amp;nbsp;&lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        
+        <pubDate>Thu, 13 Aug 2020 11:00:00 -0400</pubDate>
+        <link>
+        /designing-a-pratt-parser-generator</link>
+        <guid isPermaLink="true">/designing-a-pratt-parser-generator</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Bayes' Theorem and the Deathly Hallows</title>
         
           <description>&lt;p&gt;This article is an expanded version of the math part of &lt;a href=&quot;https://medium.com/@arhyne/covid-19-population-testing-vs-thoughts-and-prayers-454e64946dde&quot;&gt;an article I

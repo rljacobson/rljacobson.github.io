@@ -1,4 +1,314 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-07-31T20:11:29-04:00</updated><id>/</id><title type="html">After Math</title><subtitle>A blog by Robert Jacobson.</subtitle><author><name>Robert Jacobson</name></author><entry><title type="html">Bayes’ Theorem and the Deathly Hallows</title><link href="/Bayes-Theorem" rel="alternate" type="text/html" title="Bayes' Theorem and the Deathly Hallows" /><published>2020-07-01T11:00:00-04:00</published><updated>2020-07-01T11:00:00-04:00</updated><id>/Bayes-Theorem</id><content type="html" xml:base="/Bayes-Theorem">&lt;p&gt;This article is an expanded version of the math part of &lt;a href=&quot;https://medium.com/@arhyne/covid-19-population-testing-vs-thoughts-and-prayers-454e64946dde&quot;&gt;an article I
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-08-13T21:15:51-04:00</updated><id>/</id><title type="html">After Math</title><subtitle>A blog by Robert Jacobson.</subtitle><author><name>Robert Jacobson</name></author><entry><title type="html">Making a Pratt Parser Generator</title><link href="/designing-a-pratt-parser-generator" rel="alternate" type="text/html" title="Making a Pratt Parser Generator" /><published>2020-08-13T11:00:00-04:00</published><updated>2020-08-13T11:00:00-04:00</updated><id>/designing-a-pratt-parser-generator</id><content type="html" xml:base="/designing-a-pratt-parser-generator">&lt;h2 id=&quot;a-brief-history-of-the-pratt-parsing-algorithm&quot;&gt;A brief history of the Pratt parsing algorithm&lt;/h2&gt;
+&lt;p&gt;The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the pecedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a heirarchy of langauges defined according to how difficult the language is to parse.&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; But computer programmers needed practical, efficient algorithms to parse computer programs for translation to machine code. Parsers of the 1950s relied on ad hoc logic rather than systematic algorithms (a feature which persists to this day, though to a much lesser degree). The 1960s was a golden age of parsing algorithm research when nearly all of the concepts and algorithms we use today were discovered and rigorously studied. By the early 1970s, parsing theory had evolved to the point that  Stephen C. Johnson, a computer scientist at Bell Labs / AT&amp;amp;T, was able to start work on YACC (now “Yacc”), “Yet Another Compiler Compiler.”&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt; YACC was first publically described in 1975 and shipped with Unix version 3&lt;sup id=&quot;fnref:3&quot;&gt;&lt;a href=&quot;#fn:3&quot; class=&quot;footnote&quot;&gt;3&lt;/a&gt;&lt;/sup&gt;  and is still in use today.&lt;/p&gt;
+
+&lt;p&gt;The thorny challenge of parsing expressions was partially solved in 1961 by the venerable shunting-yard algorithm described by Dutch computer scientist Edsger W. Dijkstra, which algorithm could efficiently parse binary infix operator expressions with a value stack and an operator stack, creating nodes from the bottom up. Vaughan R. Pratt generalized Dijkstra’s sunting-yard algorithm to parsing of entire languages, this time using a single stack, or using recursive descent with the call stack as an implicit stack, creating nodes from the top down. Pratt’s parsing algorithm overcomes a number of limitations with the shunting-yard algorithm and is simpler.&lt;/p&gt;
+
+&lt;p&gt;Precedence climbing was apparently first invented by Martin Richards in 1979&lt;sup id=&quot;fnref:4&quot;&gt;&lt;a href=&quot;#fn:4&quot; class=&quot;footnote&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; for his BCPL compiler. Precedence climbing uses a single recursive function and a single table mapping token IDs to their precedence instead of Pratt’s mutual recursive descent and multiple tables. In fact, precedence climbing can be seen as a special case of Pratt parsing, though historically they have been understood as related but not identical.&lt;sup id=&quot;fnref:5&quot;&gt;&lt;a href=&quot;#fn:5&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;&lt;sup&gt;,&lt;/sup&gt;&lt;sup id=&quot;fnref:6&quot;&gt;&lt;a href=&quot;#fn:6&quot; class=&quot;footnote&quot;&gt;6&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;Vaughan Pratt had described his algorithm six years earlier in 1973 at the very first meeting of POPL, the Symposium on Principles of Programming Languages, which remains among the most important conferences in the field. It is interesting to see what other papers are published in the 1973 POPL Proceedings. One finds, for example, Aho, S. C. Johnson, and J. D. Ullman’s “Deterministic parsing of ambiguous grammars,“&lt;sup id=&quot;fnref:8&quot;&gt;&lt;a href=&quot;#fn:8&quot; class=&quot;footnote&quot;&gt;7&lt;/a&gt;&lt;/sup&gt; and James H. Morris, Jr.’s “Types are not sets,”&lt;sup id=&quot;fnref:9&quot;&gt;&lt;a href=&quot;#fn:9&quot; class=&quot;footnote&quot;&gt;8&lt;/a&gt;&lt;/sup&gt; among papers by several other influential luminaries. Vaughan Pratt had been developing an alternative expression syntax for MACLISP called CGOL,&lt;sup id=&quot;fnref:10&quot;&gt;&lt;a href=&quot;#fn:10&quot; class=&quot;footnote&quot;&gt;9&lt;/a&gt;&lt;/sup&gt; which he needed to parse.&lt;/p&gt;
+
+&lt;h2 id=&quot;parser-design&quot;&gt;Parser design&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-typical-design&quot;&gt;The typical design&lt;/h3&gt;
+
+&lt;p&gt;There are already many articles on the web describing the Pratt parsing algorithm. (I recommend &lt;sup id=&quot;fnref:5:1&quot;&gt;&lt;a href=&quot;#fn:5&quot; class=&quot;footnote&quot;&gt;5&lt;/a&gt;&lt;/sup&gt;.) If you are not familiar with the algorithm, go read up on it before returning here.&lt;/p&gt;
+
+&lt;p&gt;A typical object oriented design is to have a node class for each kind of AST node, each class implementing their own “parselet” method, traditionally named &lt;code class=&quot;highlighter-rouge&quot;&gt;led&lt;/code&gt;  for “left donation” after Pratt’s original article, that is called by a driver algorithm and is responsible for parsing the node instance’s operands (children) by calling back into the driver before returning. Each class also keeps track of its associativity and precedence. The driver algorithm consumes a token, looks up the appropriate class in a table, creates an instance and calls its parslet method.&lt;/p&gt;
+
+&lt;p&gt;We can be a little bit more efficient by having only a handful of superclasses corresponding to each required (affix, associativity) combination. In the typical object-oriented Pratt-parser design, every operator would need a subclass of the form&lt;/p&gt;
+
+&lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Multiply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;InfixLeftAssoc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Multiply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Parser&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ASTNode&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Token&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; 
+  	&lt;span class=&quot;n&quot;&gt;precedence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;40&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  
+  &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MultiplyMethodA&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;U&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;param1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;param2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){...}&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;W&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MultiplyMethodB&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;param1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Y&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;param2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){...}&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// etc.
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This class establishes the Multiply operator as an infix, left associative operator. We have also initialized our operator precedence to 40. Again, the &lt;code class=&quot;highlighter-rouge&quot;&gt;InfixLeftAssoc&lt;/code&gt; superclass and other ancestor classes compute left and right binding power (LBP and RBP) from the value of precedence and associativity and implement the &lt;code class=&quot;highlighter-rouge&quot;&gt;led&lt;/code&gt; method (“left donation” parselette method) and any utility methods and members. This concrete subclass serves the following purposes:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;encodes the affix (by specifying its superclass)&lt;/li&gt;
+  &lt;li&gt;encodes the associativity  (by specifying its superclass)&lt;/li&gt;
+  &lt;li&gt;records the precedence&lt;/li&gt;
+  &lt;li&gt;provides a home for &lt;code class=&quot;highlighter-rouge&quot;&gt;MultiplyMethodA&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;MultiplyMethodB&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;But why are we using different classes at all? This OOP design has several flaws:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It violates the principle of separation of concerns: Why are AST nodes doing the work of the parser?&lt;/li&gt;
+  &lt;li&gt;It violates the DRY Principle: Unless you autogenerate the code, you need to write a class for every operator—even if you relegate the parslet code to a handful of superclasses.&lt;/li&gt;
+  &lt;li&gt;This parser design is littered with static data: operator tokens, constants for precedence, associativity, affix, and token IDs, all of which is redundant, as it exists in a table used by the driver algorithm anyway. (Ironically, it is precisely because of its object-oriented design that the code and the data it acts upon are so disparate. This is not entirely the fault of OOP per se but rather of a poor choice of what concepts should be materialized as objects.)&lt;/li&gt;
+  &lt;li&gt;Generalizing the previous point: This design fixes the language at compile time. If you want to change the precedence of an operator, you need to rewrite, recompile, and redeploy the parser.&lt;/li&gt;
+  &lt;li&gt;It is cumbersome to write an operator table statically: Unless the code is automatically generated, writing “&lt;code class=&quot;highlighter-rouge&quot;&gt;parser.registeroperator(op, prec, assoc, whatever)&lt;/code&gt;,” the code that line depends on, and every subclass for every single operator is a bummer. Even if you autogenerate code, you have to write a code generator.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div style=&quot;box-sizing: border-box;color: rgba(100, 100, 100);font-weight: 400;margin-left: 0px;margin-top:30px;margin-bottom:30px;margin-right: 80px;font-size:30px;overflow-wrap: break-word;padding-left: 30px;text-rendering: optimizelegibility;word-break: break-word;&quot;&gt;&amp;#10077;The temptation to write a code generator is often a sign that a more flexible design exists, a design that exploits whatever regularity exists in the code that makes programmatically generating the code possible in the first place.&amp;#10078;&lt;/div&gt;
+
+&lt;p&gt;The temptation to write a code generator is often a sign that a more flexible design exists, a design that exploits whatever regularity exists in the code that makes programmatically generating the code possible in the first place. &lt;em&gt;In principle&lt;/em&gt;, if code can automatically be generated, it can also be automatically compiled and executed. So maybe the (hypothetical) generate-compile-run pipeline (usually called a JIT or jitter) can be refactored to eliminate the compile step. In our case, instead of writing a bespoke Pratt parser in which the operator table is both encoded in the class hierarchy and generated again at runtime, why not write a generic Pratt parser that reads in the operator database at startup? As a bonus, modifying the language does not require a recompile: You can add, remove, or modify operators at &lt;em&gt;runtime&lt;/em&gt; if you’d like, and maintaining the expression grammar is as simple as editing a value in a spreadsheet. (Indeed, it could be literally that!)&lt;/p&gt;
+
+&lt;h3 id=&quot;operator-database&quot;&gt;Operator Database&lt;/h3&gt;
+
+&lt;p&gt;As a toy example, we might have an operator database as follows.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;TokenID&lt;/th&gt;
+      &lt;th&gt;Operator&lt;/th&gt;
+      &lt;th&gt;NameString&lt;/th&gt;
+      &lt;th&gt;Precedence&lt;/th&gt;
+      &lt;th&gt;Associativity&lt;/th&gt;
+      &lt;th&gt;Affix&lt;/th&gt;
+      &lt;th&gt;Arity&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;123&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Number&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;0&lt;/td&gt;
+      &lt;td&gt;None&lt;/td&gt;
+      &lt;td&gt;Null&lt;/td&gt;
+      &lt;td&gt;Nullary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;^&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Power&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;Right&lt;/td&gt;
+      &lt;td&gt;Infix&lt;/td&gt;
+      &lt;td&gt;Binary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;3&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;*&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Times&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;20&lt;/td&gt;
+      &lt;td&gt;Full&lt;/td&gt;
+      &lt;td&gt;Infix&lt;/td&gt;
+      &lt;td&gt;Binary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;/&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Divide&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;20&lt;/td&gt;
+      &lt;td&gt;Left&lt;/td&gt;
+      &lt;td&gt;Infix&lt;/td&gt;
+      &lt;td&gt;Binary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;5&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;+&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Plus&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;30&lt;/td&gt;
+      &lt;td&gt;Full&lt;/td&gt;
+      &lt;td&gt;Infix&lt;/td&gt;
+      &lt;td&gt;Binary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;6&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;-&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Minus&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;30&lt;/td&gt;
+      &lt;td&gt;Left&lt;/td&gt;
+      &lt;td&gt;Infix&lt;/td&gt;
+      &lt;td&gt;Binary&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;TokenID&lt;/code&gt; might be supplied by the lexer/scanner (many Pratt parsers are scanner-less) and will be used as the identifier. &lt;code class=&quot;highlighter-rouge&quot;&gt;Operator&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;NameString&lt;/code&gt; are only used for printing output. The remaining columns are required to compute the left and right binding powers of each operator. In this example language, every operator is either a terminal (number) or a binary infix operator.&lt;/p&gt;
+
+&lt;h3 id=&quot;more-sophisticated-operators&quot;&gt;More Sophisticated Operators&lt;/h3&gt;
+
+&lt;p&gt;Suppose we have ternary, mixfix, or matchfix operators. Then we need to modify the operator database to reflect how the operator tokens appear in an expression. A portion of our operator table might now look like this.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;TokenID&lt;/th&gt;
+      &lt;th&gt;LToken&lt;/th&gt;
+      &lt;th&gt;NToken&lt;/th&gt;
+      &lt;th&gt;OToken&lt;/th&gt;
+      &lt;th&gt;NameString&lt;/th&gt;
+      &lt;th&gt;Precedence&lt;/th&gt;
+      &lt;th&gt;Associativity&lt;/th&gt;
+      &lt;th&gt;Affix&lt;/th&gt;
+      &lt;th&gt;Arity&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;(&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;)&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Parentheses&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;Non&lt;/td&gt;
+      &lt;td&gt;Matchfix&lt;/td&gt;
+      &lt;td&gt;Unary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;⋮&lt;/td&gt;
+      &lt;td&gt;⋮&lt;/td&gt;
+      &lt;td&gt;⋮&lt;/td&gt;
+      &lt;td&gt;⋮&lt;/td&gt;
+      &lt;td&gt;⋮&lt;/td&gt;
+      &lt;td&gt;⋮&lt;/td&gt;
+      &lt;td&gt;⋮&lt;/td&gt;
+      &lt;td&gt;⋮&lt;/td&gt;
+      &lt;td&gt;⋮&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;43&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;[&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;]&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Index&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;30&lt;/td&gt;
+      &lt;td&gt;Left&lt;/td&gt;
+      &lt;td&gt;Infix&lt;/td&gt;
+      &lt;td&gt;Binary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;44&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;!&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Factorial&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;40&lt;/td&gt;
+      &lt;td&gt;Left&lt;/td&gt;
+      &lt;td&gt;Postfix&lt;/td&gt;
+      &lt;td&gt;Unary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;46&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;-&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;UnaryMinus&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;50&lt;/td&gt;
+      &lt;td&gt;Right&lt;/td&gt;
+      &lt;td&gt;Prefix&lt;/td&gt;
+      &lt;td&gt;Unary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;49&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;/&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Divide&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;60&lt;/td&gt;
+      &lt;td&gt;Left&lt;/td&gt;
+      &lt;td&gt;Infix&lt;/td&gt;
+      &lt;td&gt;Binary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;55&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;?&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;:&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;IfThenElse&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;70&lt;/td&gt;
+      &lt;td&gt;Left&lt;/td&gt;
+      &lt;td&gt;Infix&lt;/td&gt;
+      &lt;td&gt;Ternary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;57&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;+&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Plus&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;80&lt;/td&gt;
+      &lt;td&gt;Full&lt;/td&gt;
+      &lt;td&gt;Infix&lt;/td&gt;
+      &lt;td&gt;Binary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;60&lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;-&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Minus&quot;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;90&lt;/td&gt;
+      &lt;td&gt;Left&lt;/td&gt;
+      &lt;td&gt;Infix&lt;/td&gt;
+      &lt;td&gt;Binary&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;In this design, the database includes which tokens of the operator can take a left operand (&lt;code class=&quot;highlighter-rouge&quot;&gt;LToken&lt;/code&gt;), can begin an expression (no left operand, &lt;code class=&quot;highlighter-rouge&quot;&gt;NToken&lt;/code&gt;), or are included in some other position (&lt;code class=&quot;highlighter-rouge&quot;&gt;OToken&lt;/code&gt;).&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;LToken&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;NToken&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;OToken&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Affix&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;Arity&lt;/code&gt; can all be inferred from a single example usage, for example:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;op1 ? op2 : op3&lt;/code&gt;
+This suggests that there may be a way to generate a parser for an expression language using nothing but examples. Indeed, there is!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To reiterate the point, this table of operators might live in a plaintext CSV file. At startup—not at compile time—the Pratt parser reads in the operator table. AST nodes know their identity by their &lt;code class=&quot;highlighter-rouge&quot;&gt;TokenID&lt;/code&gt; (which is really an operator ID) or string representation and perform identity-specific actions via dynamic dispatch.&lt;/p&gt;
+
+&lt;h3 id=&quot;dynamic-dispatch&quot;&gt;Dynamic Dispatch&lt;/h3&gt;
+
+&lt;p&gt;That last sentence should have raised your suspicion. A fundamental benefit of this design, I claim, is that it keeps you from having to write boilerplate for every operator. Are we just shifting the boilerplate from the operator AST subclasses to a jump table implementation?&lt;/p&gt;
+
+&lt;p&gt;No. Until computers can read our minds, there is no getting around having to write operator-specific code. But we &lt;em&gt;are&lt;/em&gt; avoiding writing the surrounding class definition and whatever code is used to statically define the operator table. The latter is replaced with a simple and generic function that reads the table into memory from disk. There are several alternatives for replacing the former.&lt;/p&gt;
+
+&lt;p&gt;What we need is a mechanism to allow new functions to be created/loaded at runtime and associated with an operator action. The program will then dispatch the call dynamically, choosing the appropriate function for each operator at runtime. Since both the choice of which function to call &lt;em&gt;and&lt;/em&gt; the set of available choices of functions is determined at runtime, let’s call this &lt;em&gt;double dynamic dispatch&lt;/em&gt;. Regular dynamic dispatch is as old as the hills and just as common: a simple jump table will do. Interpreters for dynamic programming languages usually implement some kind of double dynamic dispatch, often in two different forms: by calling functions created dynamically in the interpreted language, and by calling out to external library functions written in C, for example. Which technique to use will depend on the nature of the operator-specific functions. To take two examples:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;If your operator-specific functions can be decomposed into simple primitives, say, AST transformations, then they can be described in an encoding that can be consumed by combinators or a simple state machine. This is essentially a thinly veiled DSL and corresponds philosophically to calling functions created dynamically in the interpreted language.&lt;/li&gt;
+  &lt;li&gt;Dynamically loaded, pre-compiled libraries of functions with a predetermined API implementing operator actions, pointers to which can be stored in a lookup table. This is how interpreted languages implement their FFIs.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Neither of these techniques are as difficult as they appear. Don’t let them intimidate you.&lt;/p&gt;
+
+&lt;p&gt;In the next article I will sketch the design described above in code.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;The theory is much richer than I am able to present here. It is utterly fascinating, existing at the intersection of linguistics, mathematics, and computer science. Computer scientist Jeffery Kegler calls Chomsky’s book &lt;em&gt;Syntactic Structures&lt;/em&gt; “one of the most important books of all time.”&lt;br /&gt; Chomsky, Noam. 1957. &lt;em&gt;Syntactic Structures&lt;/em&gt;. Mouton &amp;amp; Co., 1957.&amp;nbsp;&lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;See Jeffery Kegler’s charming &lt;a href=&quot;https://jeffreykegler.github.io/personal/timeline_v3&quot;&gt;&lt;em&gt;“Parsing: a timeline”&lt;/em&gt;&lt;/a&gt; from which most of my historical information is derived.&amp;nbsp;&lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:3&quot;&gt;
+      &lt;p&gt;The name is telling of the state of the art in compiler construction at the time, as there were several other “compiler compilers” in use at Bell Labs.&lt;br /&gt;Johnson, Stephen C. 1975. “Yacc: Yet Another Compiler-Compiler”. AT&amp;amp;T Bell Laboratories Technical Reports. AT&amp;amp;T Bell Laboratories Murray Hill, New Jersey 07974 (32). Retrieved 22 December 2018.&amp;nbsp;&lt;a href=&quot;#fnref:3&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:4&quot;&gt;
+      &lt;p&gt;Theodore Norvell, Parsing Expressions by Recursive Descent. 1999. http://www.engr.mun.ca/~theo/Misc/exp_parsing.htm&amp;nbsp;&lt;a href=&quot;#fnref:4&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:5&quot;&gt;
+      &lt;p&gt;Theodore Norvell, From Precedence Climbing to Pratt Parsing. 2016. http://www.engr.mun.ca/~theo/Misc/pratt_parsing.htm&amp;nbsp;&lt;a href=&quot;#fnref:5&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&amp;nbsp;&lt;a href=&quot;#fnref:5:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:6&quot;&gt;
+      &lt;p&gt;Andy Chu, Pratt Parsing and Precedence Climbing Are the Same Algorithm. 2016. https://www.oilshell.org/blog/2016/11/01.html&amp;nbsp;&lt;a href=&quot;#fnref:6&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:8&quot;&gt;
+      &lt;p&gt;A. V. Aho, S. C. Johnson, and J. D. Ullman. 1973. Deterministic parsing of ambiguous grammars. In &lt;em&gt;Proceedings of the 1st annual ACM SIGACT-SIGPLAN symposium on Principles of programming languages&lt;/em&gt; (POPL ‘73). ACM, New York, NY, USA, 1-21. DOI=http://dx.doi.org/10.1145/512927.512928&amp;nbsp;&lt;a href=&quot;#fnref:8&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:9&quot;&gt;
+      &lt;p&gt;James H. Morris, Jr.. 1973. Types are not sets. In &lt;em&gt;Proceedings of the 1st annual ACM SIGACT-SIGPLAN symposium on Principles of programming languages&lt;/em&gt; (POPL ‘73). ACM, New York, NY, USA, 120-124. DOI=http://dx.doi.org/10.1145/512927.512938&amp;nbsp;&lt;a href=&quot;#fnref:9&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:10&quot;&gt;
+      &lt;p&gt;Pratt, Vaughan R. 1976. CGOL: An Alternative External Representation for LISP Users. AI Working Paper 121, MIT Artificial Intelligence Laboratory, Cambridge, MA, Mar. 1976. Online: https://dspace.mit.edu/bitstream/handle/1721.1/41951/AI_WP_121.pdf?sequence=1.&amp;nbsp;&lt;a href=&quot;#fnref:10&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>Robert Jacobson</name><email>rljacobson@gmail.com</email></author><category term="Compilers" /><category term="Computer Science" /><category term="Software Engineering" /><summary type="html">A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the pecedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a heirarchy of langauges defined according to how difficult the language is to parse.1 But computer programmers needed practical, efficient algorithms to parse computer programs for translation to machine code. Parsers of the 1950s relied on ad hoc logic rather than systematic algorithms (a feature which persists to this day, though to a much lesser degree). The 1960s was a golden age of parsing algorithm research when nearly all of the concepts and algorithms we use today were discovered and rigorously studied. By the early 1970s, parsing theory had evolved to the point that Stephen C. Johnson, a computer scientist at Bell Labs / AT&amp;amp;T, was able to start work on YACC (now “Yacc”), “Yet Another Compiler Compiler.”2 YACC was first publically described in 1975 and shipped with Unix version 33 and is still in use today. The theory is much richer than I am able to present here. It is utterly fascinating, existing at the intersection of linguistics, mathematics, and computer science. Computer scientist Jeffery Kegler calls Chomsky’s book Syntactic Structures “one of the most important books of all time.” Chomsky, Noam. 1957. Syntactic Structures. Mouton &amp;amp; Co., 1957.&amp;nbsp;&amp;#8617; See Jeffery Kegler’s charming “Parsing: a timeline” from which most of my historical information is derived.&amp;nbsp;&amp;#8617; The name is telling of the state of the art in compiler construction at the time, as there were several other “compiler compilers” in use at Bell Labs.Johnson, Stephen C. 1975. “Yacc: Yet Another Compiler-Compiler”. AT&amp;amp;T Bell Laboratories Technical Reports. AT&amp;amp;T Bell Laboratories Murray Hill, New Jersey 07974 (32). Retrieved 22 December 2018.&amp;nbsp;&amp;#8617;</summary></entry><entry><title type="html">Bayes’ Theorem and the Deathly Hallows</title><link href="/Bayes-Theorem" rel="alternate" type="text/html" title="Bayes' Theorem and the Deathly Hallows" /><published>2020-07-01T11:00:00-04:00</published><updated>2020-07-01T11:00:00-04:00</updated><id>/Bayes-Theorem</id><content type="html" xml:base="/Bayes-Theorem">&lt;p&gt;This article is an expanded version of the math part of &lt;a href=&quot;https://medium.com/@arhyne/covid-19-population-testing-vs-thoughts-and-prayers-454e64946dde&quot;&gt;an article I
    cowrote with marine biologist Dr. Andrew Rhyne about how &lt;strong&gt;many well-meaning public health professionals have misinterpreted the math
     behind test
     efficiency, Bayes’ Theorem. This misinterpretation has lead to dangerous public policy positions.&lt;/strong&gt;&lt;/a&gt; Anyone with a math allergy is invited to read that article instead.&lt;/p&gt;
@@ -1122,12 +1432,4 @@ expr
 
 &lt;p&gt;&lt;img src=&quot;https://lh6.googleusercontent.com/-A94MoG2qZf0/U9LVeJVM5CI/AAAAAAAATQ0/U-FMEk0sxio/w377-h502-no/IMG_0538.jpg&quot; alt=&quot;enter image description here&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;As I walked toward the exit of the room with The School of Athens fresco I found a painting of two platonic skeletons in a closet. It is fitting to find these geometric objects so close by the ancient Greek’s who studied their mathematical properties so extensively.&lt;/p&gt;</content><author><name>Robert Jacobson</name><email>rljacobson@gmail.com</email></author><category term="Mathematics" /><category term="Art" /><category term="Geometry" /><summary type="html">Euclid in The School of Athens</summary></entry><entry><title type="html">How Springer sent me to collections for adopting their textbook.</title><link href="/how-springer-sent-me-to-collections-for-adopting-their-textbook" rel="alternate" type="text/html" title="How Springer sent me to collections for adopting their textbook." /><published>2014-04-17T20:52:00-04:00</published><updated>2014-04-17T20:52:00-04:00</updated><id>/how-springer-sent-me-to-collections-for-adopting-their-textbook</id><content type="html" xml:base="/how-springer-sent-me-to-collections-for-adopting-their-textbook">&lt;p&gt;The story begins with one of those little mundane activities that fill every professor’s day. Right before the spring semester began I was evaluating various textbook options for the next time I teach undergraduate real analysis. Stephen Abbott’s &lt;em&gt;Understanding Analysis&lt;/em&gt; published by Springer seemed to be exactly the kind of book I was looking for.&lt;!--more--&gt; It is standard practice with many academic publishers to send faculty evaluation copies of textbooks upon request (and frequently without request, too!). I asked my department secretary to request an evaluation copy of Abbott’s book for me.&lt;/p&gt;
-
-&lt;p&gt;The book arrived in my office mailbox in no time, and soon thereafter an invoice for $54.95 addressed to me personally arrived in my email with the comment, “60 DAY APPROVAL COPY, FREE WITH ADOPTION ONLY.” I forwarded the invoice to the secretary with the news that I had decided to adopt the textbook, and she communicated the news to the Springer rep listed on the invoice. All standard stuff.&lt;/p&gt;
-
-&lt;p&gt;Then a couple of weeks later I got another copy of the same textbook in my mailbox. Oh, how funny! They accidentally sent me two. I gave it to the secretary. She rolls her eyes and says she’ll take care of it. She ships it back to Springer. Emails fly. The secretary forwarded one to me to inform me that it had been dealt with. The Springer rep was suitably embarrassed. He had written, “Can you believe we sent them a second book and then charged them for the first!” Someone at Springer would apparently take care of it for us.&lt;/p&gt;
-
-&lt;p&gt;Then I get another invoice addressed to me personally. It must have gone out before the people at Springer took care of it. Right?&lt;/p&gt;
-
-&lt;p&gt;Nope. Today I got a letter from a collections agency. Dr. Robert Jacobson owes $61. Springer literally sent me to a collections agency because I wanted to adopt their textbook for my course.&lt;/p&gt;</content><author><name>Robert Jacobson</name><email>rljacobson@gmail.com</email></author><category term="Education" /><category term="Academia" /><summary type="html">The story begins with one of those little mundane activities that fill every professor’s day. Right before the spring semester began I was evaluating various textbook options for the next time I teach undergraduate real analysis. Stephen Abbott’s Understanding Analysis published by Springer seemed to be exactly the kind of book I was looking for. It is standard practice with many academic publishers to send faculty evaluation copies of textbooks upon request (and frequently without request, too!). I asked my department secretary to request an evaluation copy of Abbott’s book for me.</summary></entry></feed>
+&lt;p&gt;As I walked toward the exit of the room with The School of Athens fresco I found a painting of two platonic skeletons in a closet. It is fitting to find these geometric objects so close by the ancient Greek’s who studied their mathematical properties so extensively.&lt;/p&gt;</content><author><name>Robert Jacobson</name><email>rljacobson@gmail.com</email></author><category term="Mathematics" /><category term="Art" /><category term="Geometry" /><summary type="html">Euclid in The School of Athens</summary></entry></feed>
