@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Defining the Wolfram Language Part 2: Operator Properties | After Math</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="In this third installment of our n part series, &ldquo;Defining the Wolfram Language,&rdquo; we begin to study the properties, namely the arity, affix, associativity, and precedence, of the Mathematica operators we found in Part 1. If we ended Part 1 proud of our accomplishment—perhaps even a little smug—then we will get reacquainted with our humility in this article.">
+    <meta name="generator" content="Hugo 0.123.2">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/">
+    
+
+    <meta property="og:title" content="Defining the Wolfram Language Part 2: Operator Properties" />
+<meta property="og:description" content="In this third installment of our n part series, &ldquo;Defining the Wolfram Language,&rdquo; we begin to study the properties, namely the arity, affix, associativity, and precedence, of the Mathematica operators we found in Part 1. If we ended Part 1 proud of our accomplishment—perhaps even a little smug—then we will get reacquainted with our humility in this article." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-09-04T20:26:00-05:00" />
+<meta property="article:modified_time" content="2018-09-04T20:26:00-05:00" />
+
+<meta itemprop="name" content="Defining the Wolfram Language Part 2: Operator Properties">
+<meta itemprop="description" content="In this third installment of our n part series, &ldquo;Defining the Wolfram Language,&rdquo; we begin to study the properties, namely the arity, affix, associativity, and precedence, of the Mathematica operators we found in Part 1. If we ended Part 1 proud of our accomplishment—perhaps even a little smug—then we will get reacquainted with our humility in this article."><meta itemprop="datePublished" content="2018-09-04T20:26:00-05:00" />
+<meta itemprop="dateModified" content="2018-09-04T20:26:00-05:00" />
+<meta itemprop="wordCount" content="2228">
+<meta itemprop="keywords" content="Computer science,compilers,Mathematica," /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Defining the Wolfram Language Part 2: Operator Properties"/>
+<meta name="twitter:description" content="In this third installment of our n part series, &ldquo;Defining the Wolfram Language,&rdquo; we begin to study the properties, namely the arity, affix, associativity, and precedence, of the Mathematica operators we found in Part 1. If we ended Part 1 proud of our accomplishment—perhaps even a little smug—then we will get reacquainted with our humility in this article."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  <header class="cover bg-top" style="background-image: url('http://localhost:1313/imgs/posts/NuclearOperator.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        After Math
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/computer-science/" title="Computer Science page">
+              Computer Science
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/education/" title="Education page">
+              Education
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/mathematics/" title="Mathematics page">
+              Mathematics
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/" title="Tags page">
+              Tags
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div class="ananke-socials">
+  
+    
+    <a href="https://twitter.com/rljacobson" target="_blank" rel="noopener" class="twitter ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Twitter link" aria-label="follow on Twitter——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://github.com/rljacobson/" target="_blank" rel="noopener" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://www.linkedin.com/in/robertljacobson/" target="_blank" rel="noopener" class="linkedin ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" aria-label="follow on LinkedIn——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <div class="f2 f1-l fw2 white-90 mb0 lh-title">Defining the Wolfram Language Part 2: Operator Properties</div>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb4" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+      
+      <a href="https://twitter.com/intent/tweet?url=http://localhost:1313/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/&amp;text=Defining%20the%20Wolfram%20Language%20Part%202:%20Operator%20Properties" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
+        
+        <span class="icon"> <svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+        
+      </a>
+    
+      
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://localhost:1313/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/&amp;title=Defining%20the%20Wolfram%20Language%20Part%202:%20Operator%20Properties" class="ananke-social-link linkedin no-underline" aria-label="share on LinkedIn">
+        
+        <span class="icon"> <svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+        
+      </a>
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Defining the Wolfram Language Part 2: Operator Properties</h1>
+      
+      <p class="tracked">
+        By <strong>Robert Jacobson</strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2018-09-04T20:26:00-05:00">September 4, 2018</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>In this third installment of our <em>n</em> part series, &ldquo;Defining the Wolfram Language,&rdquo; we begin to study the properties, namely the arity, affix, associativity, and precedence, of the Mathematica operators we found in <a href="defining-the-wolfram-language-part-1-finding-operators">Part 1</a>. If we ended Part 1 proud of our accomplishment—perhaps even a little smug—then we will get reacquainted with our humility in this article.</p>
+<p>For a refresher on what is meant by the words operator, arity, affix, associativity, and precedence, see <a href="generalizing-pemdas-what-is-an-operator">Generalizing PEMDAS: What is an operator?</a></p>
+<h2 id="programmatically-determining-properties-of-operators">Programmatically determining properties of operators</h2>
+<p>We described several sources of data about Wolfram Language operators and their linguistic properties in [Part 1](<a href="defining-the-wolfram-language-part-1-finding-operators">Part 1</a>). Putting these different sources together gives you a database, but there are still some gaps in the dataset. As far as I know, though, these are the only operators anyone who isn&rsquo;t an employee of Wolfram knows about.</p>
+<p>Is there a programmatic way to fill in the gaps in the resulting dataset once you know the operators, that is, what lexical tokens make up the operators? It&rsquo;s easy to programmatically determine affix (prefix, infix, etc.) and arity (unary, binary, etc.) from the usage data that can be obtained from <code>WolframLanguageData</code>, and we have everything we need for those operators listed in <code>UnicodeCharacters.tr</code>.</p>
+<p>Precedence is a lot harder. I have implemented a strategy that compares two operators by instantiating expressions involving the two operators and inspecting the result. The remainder of this section gives just a few examples to illustrate the fundamental reason why this strategy cannot work.</p>
+<p>Two synonyms of the same operator:</p>
+<p>{% highlight wolfram %}
+{% raw %}
+In[1]:= FullForm[Hold[a[Conditioned]b&lt;-&gt;c]]
+In[2]:= FullForm[Hold[a[Conditioned]b[TwoWayRule]c]]</p>
+<p>Out[1]= Hold[Conditioned[a,TwoWayRule[b,c]]]
+Out[2]= Hold[TwoWayRule[Conditioned[a,b],c]]
+{% endraw %}
+{% endhighlight %}</p>
+<p>The <em>only</em> binary operator that cannot be parsed like this:</p>
+<p>{% highlight wolfram %}
+{% raw %}
+In[1]:= a [DirectedEdge] b [UndirectedEdge] c</p>
+<p>Out[1]= Syntax::tsntxi: &ldquo;a[DirectedEdge]b[UndirectedEdge]c&rdquo; is incomplete; more input is needed.
+{% endraw %}
+{% endhighlight %}</p>
+<p>This next one is not uncommon:</p>
+<p>{% highlight wolfram %}
+{% raw %}
+In[1]:= FullForm[Hold[a [LeftTee] b [UpTee] c]]
+In[2]:= FullForm[ToExpression[&ldquo;Hold[a [LeftTee] b [UpTee] c]&rdquo;]]</p>
+<p>Out[1]= Hold[LeftTee[a,UpTee[b,c]]]
+Out[2]= Hold[UpTee[LeftTee[a,b],c]]
+{% endraw %}
+{% endhighlight %}</p>
+<p>There are several differences between the notebook and command line interfaces, and <code>ToExpression</code> appears to precisely mirror those differences. Perhaps the command line and <code>ToExpression</code> have the same parser. Whatever the case, we cannot assume that a piece of code will execute the same way on the command line as it will through the notebook interface.</p>
+<p>Many operators do not have a <code>FullForm</code> (unevaluated interpretation) equal to the functions they represent. Consider <code>Divide</code>:</p>
+<p>{% highlight wolfram %}
+{% raw %}
+In[1]:= (* Give the Head of the first element within Hold. *)
+Hold[a/b][[1, 0]]</p>
+<p>Out[1]= Times
+{% endraw %}
+{% endhighlight %}</p>
+<p>Considering this one fact alone, whatever strategy one uses to inspect an instantiated expression to determine precedence will have to account for every special case of how the <code>FullForm</code> of each operator might interact with that of another in a nongeneric way. The amount of manual labor one has to do to account for this is $Ω(n^2)$, where $n$ is the number operators.</p>
+<p>Then there is the case of <code>GreaterSlantEqual</code> and <code>LessSlantEqual</code>, both the symbols and their corresponding functions. The short version is, these two symbols are now disassociated from their corresponding functions, which functions now have no operator notation despite the insistance of the documentation. To be clear, I think it&rsquo;s the right move to remap the <code>*SlantEqual</code> symbols to <code>&gt;=</code> and <code>&lt;=</code>, but&hellip;</p>
+<h2 id="wolfram-language-as-language">Wolfram Language as Language</h2>
+<p>We have seen that, even in a single version on a single platform, Mathematica itself does not always interpret Wolfram Language consistently in several dimensions:</p>
+<ol>
+<li>The notebook interface versus <code>ToExpression</code> and command line</li>
+<li>Operator synonyms</li>
+<li>With respect to the documentation</li>
+<li>Associated (defining) functions of each operator versus how the input is immediately (re)interpreted; possibly equivalently, an expression&rsquo;s <code>FullForm</code> versus the literal interpretation of the expression as an application of its associated (defining) function</li>
+<li>System-internal descriptions of operators like <code>UnicodeCharacters.tr</code> and <code>System`Convert`MLStringDataDump`$Operators</code>.</li>
+</ol>
+<p>To be clear, most inconsistencies in interpretation boil down to details of implementation choices that do not affect the output computed by a given expression. Whether <code>a-b</code> is parsed as <code>Subtract[a, b]</code> or <code>Plus[a, Times[-1, b]]</code> generally makes no difference in the final output. Other inconsistencies are a natural consequence of the fact that Mathematica is one of the most complex software systems ever created. The inconsistencies that are genuine bugs are almost all confined to recently introduced operators and outdated documentation. The differences in operator precedence between the notebook interface and <code>ToExpression</code> and command line interface are more serious. However, consider:</p>
+<blockquote>
+<p>For the front end, however, a significant amount of specialized code is needed to support each different type of user interface environment. The front end contains about 700,000 lines of system‐independent C++ source code, of which roughly 200,000 lines are concerned with expression formatting. Then there are between 50,000 and 100,000 lines of specific code customized for each user interface environment.<sup style="font-weight:bolder" id="a1" name="a1"><a href="#notes">1</a></sup></p>
+</blockquote>
+<p>The language evolves just like any natural language evolves. There is no single Wolfram Language just as there is no single English language. We find ourselves with a curious postmodern synthesis of axiomatic mathematical systems and fluid human communication. Our hypothetical quest to lock down the syntax and semantics of Wolfram Language can only ever be Wolfram Language-<em>like</em>, not only because of practical challenges of extracting accurate language information from Mathematica, or because a language spec will need to draw an arbitrary line between core language and auxiliary or incidental library content, or even because a bug-for-bug, quirk-for-quirk emulation of Mathematica&rsquo;s behavior is impractical to achieve, but rather because the object of our study, Wolfram Langauge, is itself a thriving living organism changing and adapting to its environment, developing branches on which built-in symbolics like <a href="https://reference.wolfram.com/language/ref/Black.html"><code>Black</code></a> are eschewed in favor of strings like <a href="https://reference.wolfram.com/language/ref/EntityValue.html"><code>&quot;EntityCount&quot;</code></a>, tendrils where option patterns are replaced with optional arguments or even Free-form Input, appendages where textual expression representations are replaced with opaque graphical object representations like the instantiation of <a href="https://reference.wolfram.com/language/ref/LinearLayer.html#352245294"><code>LinearLayer[5]</code></a>.</p>
+<p>Stephen Wolfram has written about how decisions are made for the design of Wolfram Language:</p>
+<blockquote>
+<p>I’ve worked very hard over the past 30 plus years to maintain the unity and coherence of the Wolfram Language. But every day I’m doing meetings where we decide about new things to be added to the language—and it’s always a big challenge and a big responsibility to maintain the standards we’ve set, and to make sure that the decisions we make today will serve us well in the years to come.</p>
+</blockquote>
+<blockquote>
+<p>It could be about our symbolic framework for neural nets. Or about integrating with databases. Or how to represent complex engineering systems. Or new primitives for functional programming. Or new forms of geo visualization. Or quantum computing. Or programmatic interactions with mail servers. Or the symbolic representation of molecules. Or a zillion other topics that the Wolfram Language covers now, or will cover in the future.</p>
+</blockquote>
+<blockquote>
+<p>What are the important functions in a particular area? How do they relate to other functions? Do they have the correct names? How can we deal with seemingly incompatible design constraints? Are people going to understand these functions? Oh, and are related graphics or icons as good and clear and elegant as they can be?<sup style="font-weight:bolder" id="a2" name="a2"><a href="#design">2</a></sup></p>
+</blockquote>
+<p><a href="https://www.stephenwolfram.com/livestreams/">Stephen livestreams many of his language design meetings</a>. It is fascinating to watch the language evolve in realtime and the designers identify and wrestle with often very subtle but important design challenges. What is clear is that Wolfram Language is designed very differently from other programming languages, and I think this difference is precisely because other langauges, generally speaking, are intentionally designed with limitations of expressibility. As a corollary, most successful programming languages change only very slowly or else stand completely still.</p>
+<p>Or, from another point of view, Wolfram Langauge embraces the principle of <em>orthogonality</em>, that there should only be a small number of independent fundamental langauge features that are sufficient to express all other aspects of the language, illustrated by the differences between Lisp-like langauges and, say, C++.</p>
+<blockquote>
+<p>This is
+one great advantage of Lisp-like languages: They have very few ways of forming compound
+expressions, and almost no syntactic structure. All of the formal properties can be covered in an hour,
+like the rules of chess. After a short time we forget about syntactic details of the language (because
+there are none) and get on with the real issues &ndash; figuring out what we want to compute, how we will
+decompose problems into manageable parts, and how we will work on the parts. <sup style="font-weight:bolder" id="a2" name="a2"><a href="#scip">3</a></sup></p>
+</blockquote>
+<p>Computer scientist Alan J. Perlis writes in the forward to <a href="#scip">[3]</a>:</p>
+<blockquote>
+<p>It would be difficult to find two languages that are the communicating coin of two more
+different cultures than those gathered around these two languages [Lisp and Pascal]. Pascal is for building pyramids — imposing, breathtaking, static structures built by armies pushing heavy blocks into place. Lisp is for
+building organisms — imposing, breathtaking, dynamic structures built by squads fitting fluctuating
+myriads of simpler organisms into place. The organizing principles used are the same in both cases,
+except for one extraordinarily important difference: The discretionary exportable functionality
+entrusted to the individual Lisp programmer is more than an order of magnitude greater than that to be
+found within Pascal enterprises. Lisp programs inflate libraries with functions whose utility transcends
+the application that produced them. The list, Lisp’s native data structure, is largely responsible for such
+growth of utility. The simple structure and natural applicability of lists are reflected in functions that
+are amazingly nonidiosyncratic. In Pascal the plethora of declarable data structures induces a
+specialization within functions that inhibits and penalizes casual cooperation. It is better to have 100
+functions operate on one data structure than to have 10 functions operate on 10 data structures. As a
+result the pyramid must stand unchanged for a millennium; the organism must evolve or perish.</p>
+</blockquote>
+<p>For languages designed in the spirit of Lisp, operator syntax is only window dressing. In fact, in many such languages, the syntax and semantics of operators—or even numeric literals!—can even be redefined by the programmer. This is possible to a limited extent in Wolfram Language, but more importantly, all operators in Wolfram Language are merely syntactic sugar for their <code>FullForm</code> counterparts.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Our journey through the landscape of Wolfram Language operator syntax has been a necessary and instructive part of our hypothetical project of rigorously describing the Wolfram Language. The previous section suggests, however, that operator syntax is primarily an ergonomic layer between the human programmer and the underlying language semantics and behavior. The most important language features are those which transcend a particular operator syntax. If all there were in Wolfram Language were <code>FullForm</code> expressions, very little of the language would be lost.</p>
+<p>What would remain? We have so far only concerned ourselves with the surface details of Wolfram Language. We will now turn from the question, &ldquo;What does it look like?,&rdquo; to the question, &ldquo;How does it work?&rdquo; Every programming language requires some notion of data, types, operations, and runtime environment, even if one or more of these catagories is combined with another, as when functions can be treated as data, or concealed from the programmer, as in so-called &ldquo;untyped&rdquo; languages. Some language characteristics, such as how names are ascribed and resolved, may involve all four of these notions at once. A useful langauge spec will lay out these language subsystems and describe how they interact.</p>
+<p>The boundary between that which is language definition and that which is &ldquo;implementation defined,&rdquo; that is, a choice left to the language implementor, will continue to be blurry. Ambiguity and undefined behavior is unavoidable despite its offence to our inner mathematician. But it also gives us freedom to make our own choices about what is correct—or even correct the mistakes of the original language designers.</p>
+<p>As I consider the rigorous intellectual work required to map out a mature, serious language like Wolfram Language—there are mathematical and engineering mountains to climb—I am reminded again of the words of Alan Perlis who imagined the perpetual compounding complexity of computer systems and the mathematical and software engineering technologies required to tame them:</p>
+<blockquote>
+<p>Each breakthrough in hardware technology leads to more massive programming enterprises, new organizational principles, and an enrichment of abstract models. Every
+reader should ask himself periodically ‘‘Toward what end, toward what end?’’ — but do not ask it too
+often lest you pass up the fun of programming for the constipation of bittersweet philosophy.<sup style="font-weight:bolder"><a href="#scip">3</a></sup></p>
+</blockquote>
+<p>I now adapt Perlis&rsquo; poetic words as we end: <em>Invent and fit; have fits and reinvent! We toast the Wolfram Language programmer who pens their thoughts within nests of brackets.</em></p>
+<hr>
+<p><a name="notes">[1]</a>: <span style="font-size:85%"> &ldquo;<a href="https://reference.wolfram.com/language/tutorial/TheSoftwareEngineeringOfTheWolframSystem.html">The Software Engineering of the Wolfram System</a>,&rdquo; from the <em>Wolfram Language &amp; System Documentation Center</em>. Retrieved September 4, 2018. This article appears to have been written when Mathematica was on Version 6. It is reasonable to assume the code statistics are more dramatic for Mathematica versions ≥ 11.3. </span> <a href="#a1">↩</a></p>
+<p><a name="design">[2]</a>: <span style="font-size:85%"> Stephen Wolfram, &ldquo;<a href="https://www.wired.com/story/what-do-i-do-all-day-livestreamed-technology-ceoing/">What Do I Do All Day? Livestreamed Technology CEOing</a>,&rdquo; <em>Wired</em>, November 11, 2017. Retrieved September 4, 2018. </span> <a href="#a2">↩</a></p>
+<p><a name="sicp">[3]</a>: <span style="font-size:85%"> Harold Abelson, Gerald Jay Sussman, and Julie Sussman, <em>The Structure and Interpretation of Computer Programs</em>, Second Edition (1996), MIT Press. <br>This classic programming text has introduced generations of programmers and computer scientists to the &ldquo;different cultures&rdquo; surrounding Lisp-like languages and Pascal-like languages—and to the computer science common to both. </span> <a href="#a3">↩</a></p><ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/computer-science/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Computer Science</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/compilers/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Compilers</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/mathematica/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Mathematica</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/posts/2018-08-16-defining-the-wolfram-language-part-1-finding-operators/">Defining the Wolfram Language Part 1: Finding Operators</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2018-07-02-defining-the-wolfram-language-part-0-the-challenge/">Defining the Wolfram Language Part 0: The Challenge</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2018-09-03-generalizing-pemdas-what-is-an-operator/">Generalizing PEMDAS: What is an operator?</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2015-01-28-the-grammar-of-mathematical-expressions/">The grammar of mathematical expressions</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2014-12-10-using-mathematica-from-python/">Using Mathematica From Python</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2018-10-10-what-is-the-ielr1-parsing-algorithm/">What is the IELR(1) Parsing Algorithm?</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Robert Jacobson 2024 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+    
+    <a href="https://twitter.com/rljacobson" target="_blank" rel="noopener" class="twitter ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Twitter link" aria-label="follow on Twitter——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://github.com/rljacobson/" target="_blank" rel="noopener" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://www.linkedin.com/in/robertljacobson/" target="_blank" rel="noopener" class="linkedin ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" aria-label="follow on LinkedIn——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

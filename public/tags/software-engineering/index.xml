@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Software Engineering on After Math</title>
+    <link>http://localhost:1313/tags/software-engineering/</link>
+    <description>Recent content in Software Engineering on After Math</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Robert Jacobson</copyright>
+    <lastBuildDate>Thu, 13 Aug 2020 11:00:00 -0500</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/software-engineering/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Making a Pratt Parser Generator Part 1</title>
+      <link>http://localhost:1313/posts/2020-08-13-designing-a-pratt-parser-generator/</link>
+      <pubDate>Thu, 13 Aug 2020 11:00:00 -0500</pubDate>
+      <guid>http://localhost:1313/posts/2020-08-13-designing-a-pratt-parser-generator/</guid>
+      <description>A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse.</description>
+    </item>
+  </channel>
+</rss>

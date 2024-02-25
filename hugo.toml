@@ -1,0 +1,35 @@
+baseURL = 'https://www.RobertJacobson.dev/'
+languageCode = 'en-us'
+title = 'After Math'
+copyright = 'Robert Jacobson'
+theme = 'ananke'
+
+Paginate = 10 # this is set low for demonstrating with dummy content. Set to a higher number
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true # Allow HTML in md files
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
+[params]
+  math = false
+  recent_posts_number = 10
+
+
+[[params.ananke_socials]]
+name = "twitter"
+url = "https://twitter.com/rljacobson"
+
+[[params.ananke_socials]]
+name = "github"
+url = "https://github.com/rljacobson/"
+
+
+[[params.ananke_socials]]
+name = "linkedin"
+url = "https://www.linkedin.com/in/robertljacobson/"

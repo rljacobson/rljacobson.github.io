@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Bayes&#39; Theorem and the Deathly Hallows | After Math</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="This article is an expanded version of the math part of an article I cowrote with marine biologist Dr. Andrew Rhyne about how many well-meaning public health professionals have misinterpreted the math behind test efficiency, Bayes’ Theorem. This misinterpretation has lead to dangerous public policy positions. Anyone with a math allergy is invited to read that article instead.
+I and Dr. Andrew Rhyne, marine biologist and my longtime collaborator in fighting wildlife crime, have spent a lot of time in the last several months working on how best to fight the COVID-19 pandemic, especially in college communities like our own Roger Williams University.">
+    <meta name="generator" content="Hugo 0.123.2">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/posts/2020-07-01-bayes-theorem/">
+    
+
+    <meta property="og:title" content="Bayes&#39; Theorem and the Deathly Hallows" />
+<meta property="og:description" content="This article is an expanded version of the math part of an article I cowrote with marine biologist Dr. Andrew Rhyne about how many well-meaning public health professionals have misinterpreted the math behind test efficiency, Bayes’ Theorem. This misinterpretation has lead to dangerous public policy positions. Anyone with a math allergy is invited to read that article instead.
+I and Dr. Andrew Rhyne, marine biologist and my longtime collaborator in fighting wildlife crime, have spent a lot of time in the last several months working on how best to fight the COVID-19 pandemic, especially in college communities like our own Roger Williams University." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/2020-07-01-bayes-theorem/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-07-01T11:00:00-05:00" />
+<meta property="article:modified_time" content="2020-07-01T11:00:00-05:00" />
+
+<meta itemprop="name" content="Bayes&#39; Theorem and the Deathly Hallows">
+<meta itemprop="description" content="This article is an expanded version of the math part of an article I cowrote with marine biologist Dr. Andrew Rhyne about how many well-meaning public health professionals have misinterpreted the math behind test efficiency, Bayes’ Theorem. This misinterpretation has lead to dangerous public policy positions. Anyone with a math allergy is invited to read that article instead.
+I and Dr. Andrew Rhyne, marine biologist and my longtime collaborator in fighting wildlife crime, have spent a lot of time in the last several months working on how best to fight the COVID-19 pandemic, especially in college communities like our own Roger Williams University."><meta itemprop="datePublished" content="2020-07-01T11:00:00-05:00" />
+<meta itemprop="dateModified" content="2020-07-01T11:00:00-05:00" />
+<meta itemprop="wordCount" content="4405">
+<meta itemprop="keywords" content="Mathematics,Statistics,COVID-19,Healthcare," /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Bayes&#39; Theorem and the Deathly Hallows"/>
+<meta name="twitter:description" content="This article is an expanded version of the math part of an article I cowrote with marine biologist Dr. Andrew Rhyne about how many well-meaning public health professionals have misinterpreted the math behind test efficiency, Bayes’ Theorem. This misinterpretation has lead to dangerous public policy positions. Anyone with a math allergy is invited to read that article instead.
+I and Dr. Andrew Rhyne, marine biologist and my longtime collaborator in fighting wildlife crime, have spent a lot of time in the last several months working on how best to fight the COVID-19 pandemic, especially in college communities like our own Roger Williams University."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  <header class="cover bg-top" style="background-image: url('http://localhost:1313/imgs/posts/Covid19Testing/Scientist.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        After Math
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/computer-science/" title="Computer Science page">
+              Computer Science
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/education/" title="Education page">
+              Education
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/mathematics/" title="Mathematics page">
+              Mathematics
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/" title="Tags page">
+              Tags
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div class="ananke-socials">
+  
+    
+    <a href="https://twitter.com/rljacobson" target="_blank" rel="noopener" class="twitter ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Twitter link" aria-label="follow on Twitter——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://github.com/rljacobson/" target="_blank" rel="noopener" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://www.linkedin.com/in/robertljacobson/" target="_blank" rel="noopener" class="linkedin ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" aria-label="follow on LinkedIn——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <div class="f2 f1-l fw2 white-90 mb0 lh-title">Bayes&#39; Theorem and the Deathly Hallows</div>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb4" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+      
+      <a href="https://twitter.com/intent/tweet?url=http://localhost:1313/posts/2020-07-01-bayes-theorem/&amp;text=Bayes%27%20Theorem%20and%20the%20Deathly%20Hallows" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
+        
+        <span class="icon"> <svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+        
+      </a>
+    
+      
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://localhost:1313/posts/2020-07-01-bayes-theorem/&amp;title=Bayes%27%20Theorem%20and%20the%20Deathly%20Hallows" class="ananke-social-link linkedin no-underline" aria-label="share on LinkedIn">
+        
+        <span class="icon"> <svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+        
+      </a>
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Bayes&#39; Theorem and the Deathly Hallows</h1>
+      
+      <p class="tracked">
+        By <strong>Robert Jacobson</strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2020-07-01T11:00:00-05:00">July 1, 2020</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>This article is an expanded version of the math part of <a href="https://medium.com/@arhyne/covid-19-population-testing-vs-thoughts-and-prayers-454e64946dde">an article I
+cowrote with marine biologist Dr. Andrew Rhyne about how <strong>many well-meaning public health professionals have misinterpreted the math
+behind test
+efficiency, Bayes’ Theorem. This misinterpretation has lead to dangerous public policy positions.</strong></a> Anyone with a math allergy is invited to read that article instead.</p>
+<p>I and Dr. Andrew Rhyne, marine biologist and my
+<a href="http://natureintelligence.trade/">longtime collaborator in fighting wildlife crime</a>, have
+spent a lot of time in the last several months working on how best to fight the
+COVID-19 pandemic, especially in college communities like
+our own Roger Williams University.</p>
+<h2 id="how-understanding-bayes-theorem-is-crucial-in-informing-health-policies">How understanding Bayes’ Theorem is crucial in informing health policies</h2>
+<img style="width:auto;" src="assets/images/posts/Covid19Testing/VennDiagram.png" width="auto">
+<p>Imagine a Venn diagram of intellectual ideas with three overlapping circles as depicted above. The first orange
+circle represents those ideas that are important for the well-being, smooth functioning, and progression of human
+society. In this circle, we find the germ theory of disease, the moral imperative of the Golden Rule, and basic arithmetic. The second blue circle represents ideas that are confusing or subtle. The Hegelian dialectic lives here alongside every book with the word semiotics in the title, and the Paradox of Indoor Ornithology, which claims that the sight of a green apple is evidence supporting the notion that all ravens are black ravens.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> If you just said, “What?,” I want to point out that that’s the point: these are difficult, confusing ideas. Finally, we have the circle of ideas that are just too easy to believe one understands when one actually does not. These are ideas that, whether or not they appear simple, have the peculiar ability to lure us into a completely unfounded confidence in our understanding of them. Clearly this circle contains virtually all public political discourse, for example, but it also contains some surprises: Robert Frost’s “<em>Stopping by Woods on a Snowy Evening</em>,” the dangers of quicksand, leprosy, and the inventor of peanut butter, to name a few. You think you know, but google it.</p>
+<p>Frightening is the overlapping intersection of these three circles. Here are challenging ideas that are important for human society that we often get wrong while confidently believing we understand. <em>Bayes’ Theorem is one of these ideas.</em></p>
+<h2 id="the-basics-of-bayes-theorem">The Basics of Bayes’ Theorem</h2>
+<p>It’s not that Bayes’ Theorem is widely known—it does have “theorem” in its name, after all. But when it is known, it is often misinterpreted or misapplied. Despite mathematical notation that makes it look like an alien language, Bayes’ Theorem is actually quite short and simple:</p>
+$$\displaystyle P(A\mid B) = \frac{P(B \mid A) \times P(A)}{P(B)}$$
+<p>.</p>
+<p>This formula expresses a relationship between four probabilities. It’s best explained with a concrete example, and the subject of this article, testing for disease, is a classic. If we test somebody for, say, COVID-19, then there are four possible scenarios:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Person actually has COVID-19</th>
+<th>Person does not have COVID-19</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Test result is positive</strong></td>
+<td>true positive</td>
+<td>false positive</td>
+</tr>
+<tr>
+<td><strong>Test result is negative</strong></td>
+<td>false negative</td>
+<td>true negative</td>
+</tr>
+</tbody>
+</table>
+<p>A word of warning: It is <em>very easy</em> to mix up these terms. Just keep referring back to this table whenever you need to.</p>
+<p>The first thing to understand is this: The probability of having COVID-19 <em>given</em> that you already know the test came out positive, which we will denote by $P(cov\mid pos)$, is a <em>different</em> probability from the probability of the test coming out positive <em>given</em> you have COVID-19, which we likewise denote by  $P(pos\mid cov)$. The difference, of course, is what information you already know. The question, “If an animal is in the chicken coup, what’s the probability that it is a chicken?,” $P(chicken \mid coup)$ in our notation, is a different question from, “If the animal is a chicken, what is the probability that it is in the coup?,” $P(coup\mid chicken)$. It could be that my chickens are indoor chickens that never leave the coup, so $P(coup \mid chicken)=100%$, but I also keep an equal number of turkeys in the coup, so $P(chicken \mid coup) = 50%$.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>You are now fluent in the alien language that makes up the mathematical notation of Bayes’ Theorem. The power of Bayes’ Theorem is that we can convert from $P(chicken \mid coup)$ into $P(coup\mid chicken)$ using the unconditional probabilities of an animal being a chicken regardless of location, $P(chicken)$, and the probability of an animal being in the coup regardless of species, $P(coup)$. With COVID-19 testing, we can compute the probability that you are infected with COVID-19 given that your test result is positive using knowledge of the probability that you will test positive given that you really are infected:</p>
+$$\displaystyle P(cov\mid pos) = \frac{P(pos \mid cov) \times P(cov)}{P(pos)}$$
+<p>.</p>
+<p>This mathematical trick allows us to determine the relationships between the four scenarios in the table above.</p>
+<h2 id="the-importance-of-bayes-theorem">The Importance of Bayes’ Theorem</h2>
+<p>It should be obvious that understanding the performance of tests for disease and of drugs with which to treat them is paramount for the prevention and treatment of disease from the individual level to the level of worldwide populations.</p>
+<p>As we form policies about testing people for COVID-19, we need to answer these questions: How should the knowledge we get out of Bayes’ Theorem influence our testing strategy for monitoring the population for COVID-19? What policies would be the best use of our limited resources?</p>
+<h2 id="the-paradox-of-bayes-theorem">The Paradox of Bayes’ Theorem</h2>
+<p>What could be so subtle about a simple formula with just four quantities and two arithmetic operations? In short, interpretation. Here is a classic homework problem described by mathematician Chris Wiggins<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>:</p>
+<blockquote>
+<p>A patient goes to see a doctor. The doctor performs a test with 99 percent reliability—that is, 99 percent of people who are sick test positive and 99 percent of the healthy people test negative. The doctor knows that only one percent of the people in the country are sick. Now the question is: if the patient tests positive, what are the chances the patient is sick?</p>
+<p>The intuitive answer is 99 percent, but the correct answer is 50 percent….</p>
+</blockquote>
+<p>Even with “good” tests, testing positive does not necessarily mean you “probably” have the disease! For this example, the surprising result is because the disease is very rare in the population. When it comes to testing for diseases, the punchline is: <em>There is a higher proportion of false positives relative to true positives when the prevalence of a disease is very low.</em></p>
+<h2 id="the-deadly-misunderstanding-of-bayes-theorem">The Deadly Misunderstanding of Bayes’ Theorem</h2>
+<h3 id="false-positives">False Positives</h3>
+<p>That last sentence is worth repeating:</p>
+<blockquote>
+<p>There is a higher proportion of false positives relative to true positives when the prevalence of a disease is very low.</p>
+</blockquote>
+<p>False positives come with “costs”. If people who test positive but are in reality not infected have to self-quarantine, they could experience a major disruption to their lives, including to their financial and mental health. Citing Bayes’ Theorem, many experts conclude that because COVID-19 is such a low-incidence disease, the cost of whole population testing outweighs the benefits. A logician might structure this argument as follows:</p>
+<ol>
+<li>The prevalence of COVID-19 is low, perhaps less than 1% in the United States.</li>
+<li>Since the prevalence of the disease is very low, the proportion of false positives to true positives will be high for any given test.</li>
+<li>The social and economic cost of false positives is high.</li>
+<li>Therefore, the cost of large scale testing swamps any possible benefit.</li>
+</ol>
+<p><strong>This is a dangerously incorrect mathematical interpretation.</strong></p>
+<p>Consider a 99% reliable test as in the classic example above. Suppose we test a town with a population of 10,000 people. If 0.1% of people in town (that’s 1 in 1000) are infected, then 10 people have COVID-19, and our test detects all 10 of them 99 times out of 100 (on average). Meanwhile, the test incorrectly labels 1% of the 9990 remaining people (again, on average), which is about 100 people, as positive.</p>
+<p>Will we get significantly fewer false positives if the infection rate is higher, as some experts suggest? Let’s instead suppose that 1% of the people are actually infected—that’s 100 infected people, 10 times more than we thought. Then the test correctly labels 99 of the 100 infected people on average. Of the remaining 9900 covid-free people, 99 people are incorrectly labeled as positive by the test. There are fewer false positives, yes, but fewer only by one person.</p>
+<p>The mistake is to think that the quality of testing depends on the prevalence of disease. It doesn’t. The test will be exactly the same regardless of prevalence, because its false positive rate is not affected by prevalence. The test could not possibly be influenced by the state of the population outside of the testing lab.</p>
+<p>On the other hand, our testing policies must be informed by the state of the population. A significantly lower prevalence <em>does not</em> result in <em>significantly more</em> false positives as some experts have claimed, and so we shouldn’t care at all that 50% versus 9% of the people who tested positive are actually infected—the “cost” we pay as a population for those false positives is virtually the same as it would be with a much higher rate of infection. Yet the benefit is exponential: We catch infections much sooner, <em>before</em> they have a chance to take root.</p>
+<figure>
+<img alt="Thoughts and Prayers vs. Aggressive Population Testing." src="assets/images/posts/Covid19Testing/ExponentialGraph.png" style="width:75%">
+<figcaption style="font-size: small; font-weight: bold; text-align: center">Thoughts and Prayers vs. Aggressive Population Testing.</figcaption>
+</figure>
+<p>We want nobody in the population to be infected, and if nobody is infected, then the only way for a test to turn out positive is if the test is wrong—a <em>false</em> positive. In other words, we want <em>every</em> positive test result to be a <em>false</em> positive—and to keep it that way. Choosing not to test the population at large because the prevalence of disease is low is the equivalent of deciding that you don’t need to take your medication anymore because it is working. The reason you are healthy is <em>because</em> it is working! <em>Many</em> <em>public health</em> <em>specialists</em> <em>are advising schools and employers based on exactly this backwards reasoning.</em></p>
+<h3 id="false-negatives">False Negatives</h3>
+<p>Some have argued that we should be concerned instead about false negatives. Suppose, for example, that a test is only capable of identifying an infected sample 50% of the time. That means roughly that every time the population is tested, half of the infected individuals are identified and removed (via quarantine). If removing half of all infected individuals from a college campus sounds like an obviously good idea to you, that&rsquo;s is because it is. Simple arithmetic shows whole population testing — especially repeated whole population testing — reduces the number of infected individuals in the population. (Sophisticated models do as well: See <a href="https://larremorelab.github.io/covid-calculator3">Larremore et al.</a>; <a href="https://www.sciencedirect.com/science/article/pii/S1551741120305313">Dawoud, RSAP.</a>)</p>
+<figure>
+<img alt="Sample simulation trajectories from fully mixed model demonstrating the effectiveness of whole population testing." src="assets/images/posts/Covid19Testing/LarremoreModel.png" style="width:auto">
+<figcaption style="font-size: small; font-weight: bold; text-align: center">
+Sample simulation trajectories from fully mixed model demonstrating the effectiveness of whole population testing. Notice the scale of the $y$-axis. (Figure S1 of
+<a href="https://www.medrxiv.org/content/10.1101/2020.06.22.20136309v2">Larremore et al. preprint</a>)
+</figcaption>
+</figure>
+<p>And yet some health experts like Dr. Tom Jeanne, the deputy epidemiologist for Oregon, justifies his guidance to not employ whole population testing based on the rate of false negatives: “A negative result does not meaningfully increase confidence that a person is not infected,” Jeanne said. “And just as importantly, a negative result does not mean that a person has any period of protection when they are not or cannot be infected” (<a href="https://www.insidehighered.com/news/2020/06/22/differing-views-states-consider-whether-colleges-should-test-all-students-covid-19">Murakami, InsideHigherEd</a>). But our inability to certify an individual as disease free with a high degree of confidence is immaterial. Our goal, rather, is to reduce the rate of infection to zero or near zero and then keep it that way.</p>
+<p>The discussion so far is based on the premise that tests for COVID-19 have a nonzero false positive rate. Current
+tests for COVID-19 use a diagnostic technique called qPCR to detect the presence of three distinct genes, a control and two carried by the coronavirus that causes COVID-19.<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> In essence, the test makes copies of these genes, if they are present, “amplifies” their presence in the sample, and quantifies the amount of the original gene by measuring this amplification. For this discussion, our only interest is in the presence or absence of the gene. The probability of detecting these genes in people that are notor were not infected by nCOV-SARS-2 is virtually zero. Thus, if the gene is detectable after amplification, it must have been present in the original sample, and the person that sample came from must therefore be infected by the virus. If a gene were somehow constructed by cosmic coincidence, it is possible that the gene would be amplified and detected by the test. But remember, two distinct genes are detected, so a false positive requires not one but two separate cosmic coincidences to occur simultaneously. It is exceedingly rare to have a false positive with the PCR methods developed for this virus. <em>None of the FDA approved tests have false positives.</em> (<a href="https://www.fda.gov/emergency-preparedness-and-response/mcm-legal-regulatory-and-policy-framework/emergency-use-authorization%23LDTs">FDA</a>)</p>
+<p>On the other hand, false negatives <em>are</em> possible. For qPCR methods, a false negative occurs when the viral load, that is, the number of viruses in the sample, starts out too low to be amplified sufficiently to be detected (<a href="https://asm.org/Articles/2020/April/False-Negatives-and-Reinfections-the-Challenges-of">Prinzi</a><a href="https://asm.org/Articles/2020/April/False-Negatives-and-Reinfections-the-Challenges-of">, ASM</a>). In the course of a COVID-19 infection, there are two time periods during which the viral load is very low: when the infection has only barely begun, and when the virus has been almost completely wiped out by the body’s immune system. Early in the infection (<a href="https://www.acpjournals.org/doi/10.7326/M20-1495">Kucirka et al, AIM</a>) is the period with the highest likelihood that an infected person will transmit the virus to others. This is also the easiest point in the progression of infection to detect the virus. Thus, false negative rates are tied to infection potential: the higher the potential for spreading the infection, the lower the false negative rate, and vice versa. This situation is exactly why testing populations repeatedly are worthy causes.</p>
+<p>What does Dr. Jeanne conclude from this? That because false negative rates are high, the results likely will be wrong, and thus it doesn’t make sense to use tests on asymptomatic people (<a href="https://www.insidehighered.com/news/2020/06/22/differing-views-states-consider-whether-colleges-should-test-all-students-covid-19">Murakami, InsideHigherEd</a>). This is not what a high false negative rate means. A test with a high false negative rate might also have an extremely high true positive rate, which is precisely the situation with qPCR tests for COVID-19. Indeed, if almost nobody has a disease, then a test that always gives a negative result no matter what would be correct <em>the vast majority of the time</em>. It simply is not the appropriate measure by which to judge a test in this context.</p>
+<h2 id="the-deadly-misapplication-of-bayes-theorem">The Deadly Misapplication of Bayes’ Theorem</h2>
+<p>Moreover, when we say the false negative rate is <em>high</em>, we implicitly mean that it is high <em>relative to some other thing</em> and <em>for a specific purpose</em>. If a person is tested every 3 days, and the false negative rate is 70%, then the probability that the person will test positive before or on day nine is 76%. Now, a false negative rate of 70% is very high relative to other tests for other diseases, and for the purpose of testing a person a single time to certify that person as free of disease, the test would be all but useless. But in the context of whole population testing, even a false negative rate as “bad” as 70% is actually pretty good.</p>
+<p>This misinterpretation of the significance of Bayes’ Theorem and of false positives and false negatives in particular is not isolated to just one or two public health specialists. I have collected in the table below just a small sampling of different public health authorities that are making this same mistake.</p>
+<p><strong>Public health professionals arguing against mass scale testing.</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Person / Group</strong></th>
+<th><strong>Reason for not deploying population scale testing.</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dr. Tom Jeanne, the deputy epidemiologist for <a href="http://www.oregon.gov/highered/about/Documents/News-Updates/OHA-HECC-higher-education-health-standards-covid-FINAL.pdf">Oregon</a></td>
+<td>“’A negative result does not meaningfully increase confidence that a person is not infected,’ Jeanne said. ’And just as importantly, a negative result does not mean that a person has any period of protection when they are not or cannot be infected.’&quot;And because the state has only so many tests, he said it doesn’t make sense to use them on asymptomatic people when the results likely will be wrong.”</td>
+</tr>
+<tr>
+<td>Michael T. Osterholm, PhD, MPH of University of Minnesota, <a href="https://www.cidrap.umn.edu/covid-19/covid-19-cidrap-viewpoint">CIDRAP</a></td>
+<td>“Universal testing in hospital settings (not recommended). Universal testing of all patients at the time of admission is of limited value in areas with low prevalence of infection (particularly in the absence of a known exposure) because of the high likelihood of false-positive tests. The lower predictive value of a positive test in this setting makes interpretation of the test result difficult.”<br/><br/>“Workplace testing (not recommended except in certain circumstances). In most situations, workplace testing will not be of value… Owing to uncertainties in test performance in asymptomatic individuals because of low prevalence of infection in the population, the meaning of a positive or negative test result in this situation is not clear.”<br/><br/>“Widespread community-based testing (not recommended). Again, in low-prevalence settings, widespread community testing does not offer a public health benefit because of the varying positive and negative predictive value of the test results.”</td>
+</tr>
+<tr>
+<td><a href="https://www.acha.org/documents/Resources/COVID_19/COVID-19_Testing_June-3-2020.pdf">American College Health Association</a></td>
+<td>“The overall prevalence of COVID in a healthy young adult population is likely to be very low, and probably less than 1%. At this prevalence level, the positive and negative predictive values of most screening tests would be unreliable unless the test used has both extremely high sensitivity and specificity. Many tests available today do not meet that standard.”<br/>“Screening large numbers (thousands) of students will likely produce no substantial public health benefit, and at very high cost.”<br/>Response to our email expressing concern about their approach: “Thank you for reaching out and providing your thoughts. Our brief aligns with current CDC testing recommendations.”</td>
+</tr>
+<tr>
+<td><a href="https://covid.risd.edu/faq/">Rhode Island School of Design</a></td>
+<td>“Based on our research, as well as consultation with <a href="https://keelingassociates.com/">Keeling and Associates,</a> we recommend that RISD focus on the use of diagnostic testing, initiated by symptomatology and/or contact tracing, supported by strict use of quarantine and isolation. Mass testing of asymptomatic people has been proposed by several schools, however we have found that such testing does not have high scientific value, because it provides only a quick snapshot of a current condition, which could change within hours. We also do not recommend surveillance testing, which samples the population to track the presence of the virus, because the rates of false negative/positive results for low-prevalence groups may approach the population disease incidence (~1%).”</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-mathematicians-stone">The Mathematician’s Stone</h2>
+<p>Some widespread claims about population testing are likely to be true. For example, several scientists and public health specialists have pointed out that random population sampling is unlikely to make a significant impact on public health. This claim is backed by strong scientific evidence. There is also near universal agreement that serology (antibody) tests, or any other tests currently available for past or present nCOV-SARS-2 infection, should not be used to clear someone as healthy and therefore safe to join a group. Since these conversations necessarily use a lot of technical language—serology tests, random sampling—it is all too easy for nonspecialists to hear one thing and understand another. It matters a great deal how scientists talk about these technical topics. Scientists need to anticipate sources of confusion, like the difference between sensitivity and specificity, or false positives and false negatives, or random sampling and whole population testing.</p>
+<p>It is possible that I am grossly misinformed regarding the characteristics of qPCR testing for COVID-19, or that I am
+wrong in thinking most people have significant misconceptions about leprosy. But with mathematics, nobody needs to trust what I say is true on my authority as a mathematician. Anyone with sufficient mathematical training can see for themselves. To make it easier for nonscientists to do this kind of verification, I have built an online tool that anyone can use to compute outcomes of interest based on estimates of a test’s performance characteristics that can be adjusted with a slider. The source code is also available on GitHub so that anyone who finds a mistake in the code can report the error or even submit a fix.</p>
+<figure>
+<a href="https://www.robertjacobson.dev/BayesTesting/BayesTesting.html">
+<img alt="Online probability calculator" src="assets/images/posts/Covid19Testing/Screenshot.png" style="width:auto; border: 1px solid #2e2e2e">
+</a>
+<figcaption style="font-size: small; font-weight: bold; text-align: center">
+The tool is live at this address: <a href="https://www.robertjacobson.dev/BayesTesting/BayesTesting.html">https://www.robertjacobson.dev/BayesTesting/BayesTesting.html</a>.
+</figcaption>
+</figure>
+<p>I want to be very clear about what I am criticizing in the work of the scientists I have pointed out by name or description. In the case of Oregon’s deputy epidemiology Dr. Tom Jeanne, for instance, it may be the case that Dr. Jeane is right that wide-scale testing is not the right thing for Oregon at this time. There are many factors to consider in making that determination, including test kit availability, test processing capacity, and funding, and it is likely that Dr. Jeane has carefully weighed all of these factors. However, his claim that a high false negative rate means that test results will likely be incorrect or that they make wide-scale testing of little use <em>is wrong as a matter of arithmetic</em>.</p>
+<h2 id="but-what-if">But What If…?</h2>
+<p>A variety of justifications have been proposed for not implementing whole-population testing. Suppose that the only tests we have access to are not as good as the qPCR methods have been described above.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Problem</strong></th>
+<th><strong>Remedy</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The sensitivity (true positive rate) of the test is low, resulting in many false negatives</td>
+<td>Test often and reduce the dilution of the samples at collection.</td>
+</tr>
+<tr>
+<td>The specificity (true negative rate) of the test is low, resulting in many false positives.</td>
+<td>Re-test samples that test positive, preferably with a more accurate test. If the population is tested frequently at regular intervals, say, every three days, a person who tests positive might only be asked to quarantine until the next test returns negative. Since the entire population is regularly tested, contact tracing may not be necessary. In some limited circumstances, it might be reasonable only to ask someone who tests positive to follow more aggressive prevention and social distancing practices instead of absolute quarantine until they can be retested.</td>
+</tr>
+<tr>
+<td>The prevalence (infection rate) of the disease is extremely low or zero.</td>
+<td>This is the goal and is not a problem. Keep testing to keep it this way.</td>
+</tr>
+<tr>
+<td>We do not have the test processing capacity or number of tests or financial resources necessary to test everybody in the population.</td>
+<td>Several reports have demonstrated sample pooling as effective in the context of population monitoring for COVID-19. Sample pooling can increase testing capacity by an order of magnitude and reduce costs.</td>
+</tr>
+<tr>
+<td>Quarantining and contact tracing are too disruptive or costly or distressing to implement for someone who is a false positive (healthy but tests positive).</td>
+<td>If you are regularly testing the entire population, there is less need to do contact tracing, because you are already testing the contacts regularly. Reduce false positives by retesting samples that test positive, preferably with a more accurate test. People who test positive can also be tested again after a few days, increasing confidence in the test result.People that are isolated because of contacts with positive people can be tested negative and return to their lives rather than sitting in isolation for two weeks.</td>
+</tr>
+<tr>
+<td>Even with mitigation strategies, the test processing capacity is not sufficient to test everyone.</td>
+<td>Test as many people as you have capacity for on a schedule that will eventually test everyone given enough time. Prioritize the processing of tests of clinical importance, skipping them to the front of the line.</td>
+</tr>
+</tbody>
+</table>
+<p>Among the greatest concerns of public health officials regarding whole population testing are the availability and cost of tests and the available capacity to process the tests. At the same time, the benefit of whole population testing is enormous. Resource usage may be a limiting factor in some regions, but sample pooling can potentially magnify the capacity of those resources by an order of magnitude. Performing and processing 2,500 tests a day might be out of reach for a single institution, but 300 or fewer tests required by sample pooling might be feasible, allowing the institution to test everyone on a regular schedule. Over time, test processing capacity is likely to increase (<a href="http://www.mhtc.org/wp-content/uploads/2020/05/2020.5.22-MHTC-Main-Deck-vFinal.pdf">MA High Technology Council, The War on COVID-19: Reducing Rt Deep Dives</a>).</p>
+<h2 id="when-not-to-use-whole-population-testing-and-when-to-stop-testing">When not to use whole population testing, and when to stop testing</h2>
+<p>Despite the mathematical case for whole population testing, there are still valid reasons not to employ wide scale testing of asymptomatic people. There is still an acute shortage of test kits in many regions. Similarly, test processing capacity needs to be ramped up to support large-scale testing. Some institutions might not have sufficient funding for whole population testing in communities that feel the need to accept the risk of reopening without ideal precautions. Some communities may have so much contact with their ambient population that testing the entire community would be futile.</p>
+<p>For communities that are good candidates for whole population testing, the argument we are making may sound too aggressive, as if the argument does not allow for the end of testing. The purpose of testing the population is to reduce the prevalence of the disease to zero despite the nonzero prevalence of the disease in the ambient region. Testing can stop</p>
+<ol>
+<li>when the prevalence of the disease in the region off-campus drops low enough to no longer be a threat to the health and lives of the campus community;</li>
+<li>when a vaccine is widely available to the campus community;</li>
+<li>when the region reaches herd immunity.</li>
+</ol>
+<p>What should Colleges and Communities do? There is no one-size-fits-all solution. What does seem clear is that unless campuses are willing to take dramatic measures that will be hard for colleges and universities to swallow, the outcome is likely to be grim. We have no choice but to pay a steep price while we wait for the endgame of this pandemic. We can choose to pay the financial costs of investing in the infrastructure and resources for wide-scale testing, or we can save our money and pay instead with the human lives of those that will succumb to the disease we choose not to test for.</p>
+<hr>
+<div class="footnotes">Background image credit: <a href="https://www.flickr.com/photos/governortomwolf/49628500797">Governor Tom Wolf</a></div>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>This paradox is more popularly—and more boringly—called the <a href="https://en.wikipedia.org/wiki/Raven_paradox">Raven Paradox</a>. Unfortunately, we are no closer to understanding why a raven is like a writing desk.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>This does not constitute animal husbandry advice.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>From Chris Wiggins, “What is Bayes’s theorem, and how can it be used to assign probabilities to questions such as the existence of God? What scientific value does it have?” Scientific American, Dec. 2005. Online: <a href="https://www.scientificamerican.com/article/what-is-bayess-theorem-an/">https://www.scientificamerican.com/article/what-is-bayess-theorem-an/</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>The technique also detects an additional “control” gene inserted artificially as a baseline comparison for quantitative measurements. For the purposes of the present discussion, we care only about detecting the presence of the virus, not about quantifying viral load.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/mathematics/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Mathematics</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/statistics/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Statistics</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/covid-19/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">COVID-19</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/healthcare/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Healthcare</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/posts/2014-07-25-platonic-solids-and-the-school-of-athens/">Platonic Solids and the School of Athens</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2014-02-19-hangout-on-air-math-a-love-story/">Hangout On Air - Math: A Love Story</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2014-01-28-sneaky-continuous-functions/">Sneaky Continuous Functions</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2014-01-18-blogging-the-jmm-saying-goodbye/">Blogging the JMM: Saying Goodbye</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2014-01-17-blogging-the-jmm-friday/">Blogging the JMM: Friday</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2014-01-16-blogging-the-jmm-thursday/">Blogging the JMM: Thursday</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2014-01-15-blogging-the-jmm-wednesday/">Blogging The JMM: Wednesday</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2014-01-14-blogging-the-largest-math-conference-in-the-world/">Blogging the largest math conference in the world</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Robert Jacobson 2024 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+    
+    <a href="https://twitter.com/rljacobson" target="_blank" rel="noopener" class="twitter ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Twitter link" aria-label="follow on Twitter——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://github.com/rljacobson/" target="_blank" rel="noopener" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://www.linkedin.com/in/robertljacobson/" target="_blank" rel="noopener" class="linkedin ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" aria-label="follow on LinkedIn——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Making a Pratt Parser Generator Part 1 | After Math</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse.">
+    <meta name="generator" content="Hugo 0.123.2">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/posts/2020-08-13-designing-a-pratt-parser-generator/">
+    
+
+    <meta property="og:title" content="Making a Pratt Parser Generator Part 1" />
+<meta property="og:description" content="A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/2020-08-13-designing-a-pratt-parser-generator/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-08-13T11:00:00-05:00" />
+<meta property="article:modified_time" content="2020-08-13T11:00:00-05:00" />
+
+<meta itemprop="name" content="Making a Pratt Parser Generator Part 1">
+<meta itemprop="description" content="A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse."><meta itemprop="datePublished" content="2020-08-13T11:00:00-05:00" />
+<meta itemprop="dateModified" content="2020-08-13T11:00:00-05:00" />
+<meta itemprop="wordCount" content="2160">
+<meta itemprop="keywords" content="Compilers,Computer Science,Software Engineering," /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Making a Pratt Parser Generator Part 1"/>
+<meta name="twitter:description" content="A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  <header class="cover bg-top" style="background-image: url('http://localhost:1313/imgs/posts/Sentence.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        After Math
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/computer-science/" title="Computer Science page">
+              Computer Science
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/education/" title="Education page">
+              Education
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/mathematics/" title="Mathematics page">
+              Mathematics
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/" title="Tags page">
+              Tags
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div class="ananke-socials">
+  
+    
+    <a href="https://twitter.com/rljacobson" target="_blank" rel="noopener" class="twitter ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Twitter link" aria-label="follow on Twitter——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://github.com/rljacobson/" target="_blank" rel="noopener" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://www.linkedin.com/in/robertljacobson/" target="_blank" rel="noopener" class="linkedin ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" aria-label="follow on LinkedIn——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <div class="f2 f1-l fw2 white-90 mb0 lh-title">Making a Pratt Parser Generator Part 1</div>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb4" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+      
+      <a href="https://twitter.com/intent/tweet?url=http://localhost:1313/posts/2020-08-13-designing-a-pratt-parser-generator/&amp;text=Making%20a%20Pratt%20Parser%20Generator%20Part%201" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
+        
+        <span class="icon"> <svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+        
+      </a>
+    
+      
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://localhost:1313/posts/2020-08-13-designing-a-pratt-parser-generator/&amp;title=Making%20a%20Pratt%20Parser%20Generator%20Part%201" class="ananke-social-link linkedin no-underline" aria-label="share on LinkedIn">
+        
+        <span class="icon"> <svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+        
+      </a>
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Making a Pratt Parser Generator Part 1</h1>
+      
+      <p class="tracked">
+        By <strong>Robert Jacobson</strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2020-08-13T11:00:00-05:00">August 13, 2020</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h2 id="a-brief-history-of-the-pratt-parsing-algorithm">A brief history of the Pratt parsing algorithm</h2>
+<p>The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> But computer programmers needed practical, efficient algorithms to parse computer programs for translation to machine code. Parsers of the 1950s relied on ad hoc logic rather than systematic algorithms (a feature which persists to this day, though to a much lesser degree). The 1960s was a golden age of parsing algorithm research when nearly all of the concepts and algorithms we use today were discovered and rigorously studied. By the early 1970s, parsing theory had evolved to the point that  Stephen C. Johnson, a computer scientist at Bell Labs / AT&amp;T, was able to start work on YACC (now &ldquo;Yacc&rdquo;), &ldquo;Yet Another Compiler Compiler.&rdquo;<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> YACC was first publically described in 1975 and shipped with Unix version 3<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>  and is still in use today.</p>
+<p>The thorny challenge of parsing expressions was partially solved in 1961 by the venerable shunting-yard algorithm described by Dutch computer scientist Edsger W. Dijkstra, which algorithm could efficiently parse binary infix operator expressions with a value stack and an operator stack, creating nodes from the bottom up. Vaughan R. Pratt generalized Dijkstra&rsquo;s shunting-yard algorithm to parsing of entire languages, this time using a single stack, or using recursive descent with the call stack as an implicit stack, creating nodes from the top down. Pratt&rsquo;s parsing algorithm overcomes a number of limitations with the shunting-yard algorithm and is simpler.</p>
+<p>Precedence climbing was apparently first invented by Martin Richards in 1979<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup> for his BCPL compiler. Precedence climbing uses a single recursive function and a single table mapping token IDs to their precedence instead of Pratt&rsquo;s mutual recursive descent and multiple tables. In fact, precedence climbing can be seen as a special case of Pratt parsing, though historically they have been understood as related but not identical.<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup><sup>,</sup><sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup></p>
+<p>Vaughan Pratt had described his algorithm six years earlier in 1973 at the very first meeting of POPL, the Symposium on Principles of Programming Languages, which remains among the most important conferences in the field. It is interesting to see what other papers are published in the 1973 POPL Proceedings. One finds, for example, Aho, S. C. Johnson, and J. D. Ullman&rsquo;s &ldquo;Deterministic parsing of ambiguous grammars,“<sup id="fnref:7"><a href="#fn:7" class="footnote-ref" role="doc-noteref">7</a></sup> and James H. Morris, Jr.’s “Types are not sets,”<sup id="fnref:8"><a href="#fn:8" class="footnote-ref" role="doc-noteref">8</a></sup> among papers by several other influential luminaries. Vaughan Pratt had been developing an alternative expression syntax for MACLISP called CGOL,<sup id="fnref:9"><a href="#fn:9" class="footnote-ref" role="doc-noteref">9</a></sup> which he needed to parse.</p>
+<h2 id="parser-design">Parser design</h2>
+<h3 id="the-typical-design">The typical design</h3>
+<p>There are already many articles on the web describing the Pratt parsing algorithm. (I recommend <sup id="fnref1:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>.) If you are not familiar with the algorithm, go read up on it before returning here.</p>
+<p>A typical object oriented design is to have a node class for each kind of AST node, each class implementing their own &ldquo;parselet&rdquo; method, traditionally named <code>led</code>  for &ldquo;left denotation&rdquo; after Pratt&rsquo;s original article, that is called by a driver algorithm and is responsible for parsing the node instance&rsquo;s operands (children) by calling back into the driver before returning. Each class also keeps track of its associativity and precedence. The driver algorithm consumes a token, looks up the appropriate class in a table, creates an instance and calls its parselet method.</p>
+<p>We can be a little bit more efficient by having only a handful of superclasses corresponding to each required (affix, associativity) combination. In the typical object-oriented Pratt-parser design, every operator would need a subclass of the form (in pseudo-C++)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Multiply</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> InfixLeftAssoc{
+</span></span><span style="display:flex;"><span>  Multiply(Parser parser, ASTNode left, Token <span style="color:#66d9ef">operator</span>)<span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>  	precedence(<span style="color:#ae81ff">40</span>){
+</span></span><span style="display:flex;"><span>		super(parser, left, <span style="color:#66d9ef">operator</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  T <span style="color:#a6e22e">MultiplyMethodA</span>(U param1, V param2){...}
+</span></span><span style="display:flex;"><span>  W <span style="color:#a6e22e">MultiplyMethodB</span>(X param1, Y param2){...}
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// etc.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>This class establishes the Multiply operator as an infix, left associative operator. We have also initialized our operator precedence to 40. Again, the <code>InfixLeftAssoc</code> superclass and other ancestor classes compute left and right binding power (LBP and RBP) from the value of precedence and associativity and implement the <code>led</code> method (&ldquo;left denotation&rdquo; parselet method) and any utility methods and members. This concrete subclass serves the following purposes:</p>
+<ol>
+<li>encodes the affix (by specifying its superclass)</li>
+<li>encodes the associativity  (by specifying its superclass)</li>
+<li>records the precedence</li>
+<li>provides a home for <code>MultiplyMethodA</code> and <code>MultiplyMethodB</code></li>
+</ol>
+<p>But why are we using different classes at all? This OOP design has several flaws:</p>
+<ul>
+<li>It violates the principle of separation of concerns: Why are AST nodes doing the work of the parser?</li>
+<li>It violates the DRY Principle: Unless you autogenerate the code, you need to write a class for every operator—even if you relegate the parselet code to a handful of superclasses.</li>
+<li>This parser design is littered with static data: operator tokens, constants for precedence, associativity, affix, and token IDs, all of which is redundant, as it exists in a table used by the driver algorithm anyway. (Ironically, it is precisely because of its object-oriented design that the code and the data it acts upon are so disparate. This is not entirely the fault of OOP per se but rather of a poor choice of what concepts should be materialized as objects.)</li>
+<li>Generalizing the previous point: This design fixes the language at compile time. If you want to change the precedence of an operator, you need to rewrite, recompile, and redeploy the parser.</li>
+<li>It is cumbersome to write an operator table statically: Unless the code is automatically generated, writing &ldquo;<code>parser.registeroperator(op, prec, assoc, whatever)</code>,&rdquo; the code that line depends on, and every subclass for every single operator is a bummer. Even if you autogenerate code, you have to write a code generator.</li>
+</ul>
+<div style="box-sizing: border-box;color: rgba(100, 100, 100);font-weight: 400;margin-left: 0px;margin-top:30px;margin-bottom:30px;margin-right: 80px;font-size:30px;overflow-wrap: break-word;padding-left: 30px;text-rendering: optimizelegibility;word-break: break-word;">&#10077;The temptation to write a code generator is often a sign that a more flexible design exists, a design that exploits whatever regularity exists in the code that makes programmatically generating the code possible in the first place.&#10078;</div>
+<p>The temptation to write a code generator is often a sign that a more flexible design exists, a design that exploits whatever regularity exists in the code that makes programmatically generating the code possible in the first place. <em>In principle</em>, if code can automatically be generated, it can also be automatically compiled and executed. So maybe the (hypothetical) generate-compile-run pipeline (usually called a JIT or jitter) can be refactored to eliminate the compile step. In our case, instead of writing a bespoke Pratt parser in which the operator table is both encoded in the class hierarchy and generated again at runtime, why not write a generic Pratt parser that reads in the operator database at startup? As a bonus, modifying the language does not require a recompile: You can add, remove, or modify operators at <em>runtime</em> if you&rsquo;d like, and maintaining the expression grammar is as simple as editing a value in a spreadsheet. (Indeed, it could be literally that!)</p>
+<h3 id="operator-database">Operator Database</h3>
+<p>As a toy example, we might have an operator database as follows.</p>
+<table>
+<thead>
+<tr>
+<th>TokenID</th>
+<th>Operator</th>
+<th>NameString</th>
+<th>Precedence</th>
+<th>Associativity</th>
+<th>Affix</th>
+<th>Arity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>&quot;123&quot;</code></td>
+<td><code>&quot;Number&quot;</code></td>
+<td>0</td>
+<td>None</td>
+<td>Null</td>
+<td>Nullary</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>&quot;^&quot;</code></td>
+<td><code>&quot;Power&quot;</code></td>
+<td>10</td>
+<td>Right</td>
+<td>Infix</td>
+<td>Binary</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>&quot;*&quot;</code></td>
+<td><code>&quot;Times&quot;</code></td>
+<td>20</td>
+<td>Full</td>
+<td>Infix</td>
+<td>Binary</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>&quot;/&quot;</code></td>
+<td><code>&quot;Divide&quot;</code></td>
+<td>20</td>
+<td>Left</td>
+<td>Infix</td>
+<td>Binary</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>&quot;+&quot;</code></td>
+<td><code>&quot;Plus&quot;</code></td>
+<td>30</td>
+<td>Full</td>
+<td>Infix</td>
+<td>Binary</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>&quot;-&quot;</code></td>
+<td><code>&quot;Minus&quot;</code></td>
+<td>30</td>
+<td>Left</td>
+<td>Infix</td>
+<td>Binary</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>TokenID</code> might be supplied by the lexer/scanner (many Pratt parsers are <a href="https://en.wikipedia.org/wiki/Scannerless_parsing">scanner-less</a>) and used as the identifier. <code>Operator</code> and <code>NameString</code> are only used for printing output. The remaining columns are required to compute the left and right binding powers of each operator. In this example language, every operator is either a terminal (number) or a binary infix operator.</p>
+<h3 id="more-sophisticated-operators">More Sophisticated Operators</h3>
+<p>Suppose we have ternary, mixfix, or matchfix operators. Then we need to modify the operator database to reflect how the operator tokens appear in an expression. A portion of our operator table might now look like this.</p>
+<table>
+<thead>
+<tr>
+<th>TokenID</th>
+<th>LToken</th>
+<th>NToken</th>
+<th>OToken</th>
+<th>NameString</th>
+<th>Precedence</th>
+<th>Associativity</th>
+<th>Affix</th>
+<th>Arity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td><code>&quot;(&quot;</code></td>
+<td></td>
+<td><code>&quot;)&quot;</code></td>
+<td><code>&quot;Parentheses&quot;</code></td>
+<td>10</td>
+<td>Non</td>
+<td>Matchfix</td>
+<td>Unary</td>
+</tr>
+<tr>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+<td>⋮</td>
+</tr>
+<tr>
+<td>43</td>
+<td><code>&quot;[&quot;</code></td>
+<td></td>
+<td><code>&quot;]&quot;</code></td>
+<td><code>&quot;Index&quot;</code></td>
+<td>30</td>
+<td>Left</td>
+<td>Infix</td>
+<td>Binary</td>
+</tr>
+<tr>
+<td>44</td>
+<td></td>
+<td><code>&quot;!&quot;</code></td>
+<td></td>
+<td><code>&quot;Factorial&quot;</code></td>
+<td>40</td>
+<td>Left</td>
+<td>Postfix</td>
+<td>Unary</td>
+</tr>
+<tr>
+<td>46</td>
+<td></td>
+<td><code>&quot;-&quot;</code></td>
+<td></td>
+<td><code>&quot;UnaryMinus&quot;</code></td>
+<td>50</td>
+<td>Right</td>
+<td>Prefix</td>
+<td>Unary</td>
+</tr>
+<tr>
+<td>49</td>
+<td><code>&quot;/&quot;</code></td>
+<td></td>
+<td></td>
+<td><code>&quot;Divide&quot;</code></td>
+<td>60</td>
+<td>Left</td>
+<td>Infix</td>
+<td>Binary</td>
+</tr>
+<tr>
+<td>55</td>
+<td><code>&quot;?&quot;</code></td>
+<td></td>
+<td><code>&quot;:&quot;</code></td>
+<td><code>&quot;IfThenElse&quot;</code></td>
+<td>70</td>
+<td>Left</td>
+<td>Infix</td>
+<td>Ternary</td>
+</tr>
+<tr>
+<td>57</td>
+<td><code>&quot;+&quot;</code></td>
+<td></td>
+<td></td>
+<td><code>&quot;Plus&quot;</code></td>
+<td>80</td>
+<td>Full</td>
+<td>Infix</td>
+<td>Binary</td>
+</tr>
+<tr>
+<td>60</td>
+<td><code>&quot;-&quot;</code></td>
+<td></td>
+<td></td>
+<td><code>&quot;Minus&quot;</code></td>
+<td>90</td>
+<td>Left</td>
+<td>Infix</td>
+<td>Binary</td>
+</tr>
+</tbody>
+</table>
+<p>In this design, the database includes which tokens of the operator can take a left operand (<code>LToken</code>), can begin an expression (no left operand, <code>NToken</code>), or are included in some other position (<code>OToken</code>).</p>
+<blockquote>
+<p>The <code>LToken</code>, <code>NToken</code>, <code>OToken</code>, <code>Affix</code>, and <code>Arity</code> can all be inferred from a single example usage, for example:
+<code>op1 ? op2 : op3</code>
+This suggests that there may be a way to generate a parser for an expression language using nothing but examples. Indeed, there is!</p>
+</blockquote>
+<p>To reiterate the point, this table of operators might live in a plaintext CSV file. At startup—not at compile time—the Pratt parser reads in the operator table. AST nodes know their identity by their <code>TokenID</code> (which is really an operator ID) or string representation and perform identity-specific actions via dynamic dispatch.</p>
+<h3 id="dynamic-dispatch">Dynamic Dispatch</h3>
+<p>That last sentence should have raised your suspicion. A fundamental benefit of this design, I claim, is that it keeps you from having to write boilerplate for every operator. Are we just shifting the boilerplate from the operator AST subclasses to a jump table implementation?</p>
+<p>No. Until computers can read our minds, there is no getting around having to write operator-specific code. But we <em>are</em> avoiding writing the surrounding class definition and whatever code is used to statically define the operator table. The latter is replaced with a simple and generic function that reads the table into memory from disk. There are several alternatives for replacing the former.</p>
+<p>What we need is a mechanism to allow new functions to be created/loaded at runtime and associated with an operator action. The program will then dispatch the call dynamically, choosing the appropriate function for each operator at runtime. Since both the choice of which function to call <em>and</em> the set of available choices of functions is determined at runtime, let&rsquo;s call this <em>double dynamic dispatch</em>. Regular dynamic dispatch is as old as the hills and just as common: a simple jump table will do. Interpreters for dynamic programming languages usually implement some kind of double dynamic dispatch, often in two different forms: by calling functions created dynamically in the interpreted language, and by calling out to external library functions written in C, for example. Which technique to use will depend on the nature of the operator-specific functions. To take two examples:</p>
+<ul>
+<li>If your operator-specific functions can be decomposed into simple primitives, say, AST transformations, then they can be described in an encoding that can be consumed by combinators or a simple state machine. This is essentially a thinly veiled DSL and corresponds philosophically to calling functions created dynamically in the interpreted language.</li>
+<li>Dynamically loaded, pre-compiled libraries of functions with a predetermined API implementing operator actions, pointers to which can be stored in a lookup table. This is how interpreted languages implement their FFIs.</li>
+</ul>
+<p>Neither of these techniques are as difficult as they appear. Don&rsquo;t let them intimidate you.</p>
+<p>In the next article I will sketch the design described above in code.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>The theory is much richer than I am able to present here. It is utterly fascinating, existing at the intersection of linguistics, mathematics, and computer science. Computer scientist Jeffery Kegler calls Chomsky&rsquo;s book <em>Syntactic Structures</em> &ldquo;one of the most important books of all time.&quot;<br> Chomsky, Noam. 1957. <em>Syntactic Structures</em>. Mouton &amp; Co., 1957.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>See Jeffery Kegler&rsquo;s charming <a href="https://jeffreykegler.github.io/personal/timeline_v3"><em>&ldquo;Parsing: a timeline&rdquo;</em></a> from which most of my historical information is derived.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>The name is telling of the state of the art in compiler construction at the time, as there were several other &ldquo;compiler compilers&rdquo; in use at Bell Labs.<br>Johnson, Stephen C. 1975. &ldquo;Yacc: Yet Another Compiler-Compiler&rdquo;. AT&amp;T Bell Laboratories Technical Reports. AT&amp;T Bell Laboratories Murray Hill, New Jersey 07974 (32). Retrieved 22 December 2018.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p>Theodore Norvell, Parsing Expressions by Recursive Descent. 1999. <a href="http://www.engr.mun.ca/~theo/Misc/exp_parsing.htm">http://www.engr.mun.ca/~theo/Misc/exp_parsing.htm</a>&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p>Theodore Norvell, From Precedence Climbing to Pratt Parsing. 2016. <a href="http://www.engr.mun.ca/~theo/Misc/pratt_parsing.htm">http://www.engr.mun.ca/~theo/Misc/pratt_parsing.htm</a>&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a>&#160;<a href="#fnref1:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6">
+<p>Andy Chu, Pratt Parsing and Precedence Climbing Are the Same Algorithm. 2016. <a href="https://www.oilshell.org/blog/2016/11/01.html">https://www.oilshell.org/blog/2016/11/01.html</a>&#160;<a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:7">
+<p>A. V. Aho, S. C. Johnson, and J. D. Ullman. 1973. Deterministic parsing of ambiguous grammars. In <em>Proceedings of
+the 1st annual ACM SIGACT-SIGPLAN symposium on Principles of programming languages</em> (POPL &lsquo;73). ACM, New York, NY,
+USA, 1-21. DOI: <a href="http://dx.doi.org/10.1145/512927.512928">http://dx.doi.org/10.1145/512927.512928</a>&#160;<a href="#fnref:7" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:8">
+<p>James H. Morris, Jr.. 1973. Types are not sets. In <em>Proceedings of the 1st annual ACM SIGACT-SIGPLAN symposium on
+Principles of programming languages</em> (POPL &lsquo;73). ACM, New York, NY, USA, 120-124. DOI:
+<a href="http://dx.doi.org/10.1145/512927.512938">http://dx.doi.org/10.1145/512927.512938</a>&#160;<a href="#fnref:8" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:9">
+<p>Pratt, Vaughan R. 1976. CGOL: An Alternative External Representation for LISP Users. AI Working Paper 121, MIT Artificial Intelligence Laboratory, Cambridge, MA, Mar. 1976. Online: <a href="https://dspace.mit.edu/bitstream/handle/1721.1/41951/AI_WP_121.pdf?sequence=1">https://dspace.mit.edu/bitstream/handle/1721.1/41951/AI_WP_121.pdf?sequence=1</a>.&#160;<a href="#fnref:9" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/compilers/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Compilers</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/computer-science/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Computer Science</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/software-engineering/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Software Engineering</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Robert Jacobson 2024 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+    
+    <a href="https://twitter.com/rljacobson" target="_blank" rel="noopener" class="twitter ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Twitter link" aria-label="follow on Twitter——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://github.com/rljacobson/" target="_blank" rel="noopener" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://www.linkedin.com/in/robertljacobson/" target="_blank" rel="noopener" class="linkedin ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" aria-label="follow on LinkedIn——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

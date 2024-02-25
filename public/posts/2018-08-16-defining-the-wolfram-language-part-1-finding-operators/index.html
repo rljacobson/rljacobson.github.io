@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Defining the Wolfram Language Part 1: Finding Operators | After Math</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="Finding All Wolfram Language Operators
+In this second article, Part 1 of an n part series on Defining the Wolfram Language, we start getting our hands dirty hunting down every single operator in Mathematica and each operator&rsquo;s linguistic properties. To my knowledge, nobody outside of Wolfram has created such an exhaustive list before.">
+    <meta name="generator" content="Hugo 0.123.2">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/posts/2018-08-16-defining-the-wolfram-language-part-1-finding-operators/">
+    
+
+    <meta property="og:title" content="Defining the Wolfram Language Part 1: Finding Operators" />
+<meta property="og:description" content="Finding All Wolfram Language Operators
+In this second article, Part 1 of an n part series on Defining the Wolfram Language, we start getting our hands dirty hunting down every single operator in Mathematica and each operator&rsquo;s linguistic properties. To my knowledge, nobody outside of Wolfram has created such an exhaustive list before." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/2018-08-16-defining-the-wolfram-language-part-1-finding-operators/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-08-16T15:26:00-05:00" />
+<meta property="article:modified_time" content="2018-08-16T15:26:00-05:00" />
+
+<meta itemprop="name" content="Defining the Wolfram Language Part 1: Finding Operators">
+<meta itemprop="description" content="Finding All Wolfram Language Operators
+In this second article, Part 1 of an n part series on Defining the Wolfram Language, we start getting our hands dirty hunting down every single operator in Mathematica and each operator&rsquo;s linguistic properties. To my knowledge, nobody outside of Wolfram has created such an exhaustive list before."><meta itemprop="datePublished" content="2018-08-16T15:26:00-05:00" />
+<meta itemprop="dateModified" content="2018-08-16T15:26:00-05:00" />
+<meta itemprop="wordCount" content="2526">
+<meta itemprop="keywords" content="Computer science,compilers,Mathematica," /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Defining the Wolfram Language Part 1: Finding Operators"/>
+<meta name="twitter:description" content="Finding All Wolfram Language Operators
+In this second article, Part 1 of an n part series on Defining the Wolfram Language, we start getting our hands dirty hunting down every single operator in Mathematica and each operator&rsquo;s linguistic properties. To my knowledge, nobody outside of Wolfram has created such an exhaustive list before."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  <header class="cover bg-top" style="background-image: url('http://localhost:1313/imgs/posts/TelephoneOperators.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        After Math
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/computer-science/" title="Computer Science page">
+              Computer Science
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/education/" title="Education page">
+              Education
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/mathematics/" title="Mathematics page">
+              Mathematics
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/" title="Tags page">
+              Tags
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div class="ananke-socials">
+  
+    
+    <a href="https://twitter.com/rljacobson" target="_blank" rel="noopener" class="twitter ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Twitter link" aria-label="follow on Twitter——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://github.com/rljacobson/" target="_blank" rel="noopener" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://www.linkedin.com/in/robertljacobson/" target="_blank" rel="noopener" class="linkedin ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" aria-label="follow on LinkedIn——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <div class="f2 f1-l fw2 white-90 mb0 lh-title">Defining the Wolfram Language Part 1: Finding Operators</div>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb4" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+      
+      <a href="https://twitter.com/intent/tweet?url=http://localhost:1313/posts/2018-08-16-defining-the-wolfram-language-part-1-finding-operators/&amp;text=Defining%20the%20Wolfram%20Language%20Part%201:%20Finding%20Operators" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
+        
+        <span class="icon"> <svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+        
+      </a>
+    
+      
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://localhost:1313/posts/2018-08-16-defining-the-wolfram-language-part-1-finding-operators/&amp;title=Defining%20the%20Wolfram%20Language%20Part%201:%20Finding%20Operators" class="ananke-social-link linkedin no-underline" aria-label="share on LinkedIn">
+        
+        <span class="icon"> <svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+        
+      </a>
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Defining the Wolfram Language Part 1: Finding Operators</h1>
+      
+      <p class="tracked">
+        By <strong>Robert Jacobson</strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2018-08-16T15:26:00-05:00">August 16, 2018</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><h1 id="finding-all-wolfram-language-operators">Finding All Wolfram Language Operators</h1>
+<p>In this second article, Part 1 of an <em>n</em> part series on <em>Defining the Wolfram Language</em>, we start getting our hands dirty hunting down every single operator in Mathematica and each operator&rsquo;s linguistic properties. To my knowledge, nobody outside of Wolfram has created such an exhaustive list before.</p>
+<p>The operator properties we hope to document are arity, affix, associativity, and precedence. In the next article, &ldquo;<a href="generalizing-pemdas-what-is-an-operator">Generalizing PEMDAS: What is an operator?</a>,&rdquo; we will define and discuss the signficance of these linguistic properties of operators for programming languages generally. If these terms are foreign to you, do not worry, you will not need to know what these terms mean for this article, but you can read the next article before reading Part 1 without any confusion.</p>
+<h2 id="data-sources">Data Sources</h2>
+<p>It is surprisingly difficult to get accurate information about all Wolfram Language operators implemented in Mathematica. There are a few different sources of information about operators and their properties. I list all publicly known sources (as of August 2018) in the table below, the last two of which appear to be described nowhere else on the public internet. We will explore these sources in more detail in the remainder of this section.</p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://reference.wolfram.com/language/">Official Documentation</a></td>
+<td>The most common operators only. Usually no precedence or associativity.</td>
+</tr>
+<tr>
+<td><a href="https://reference.wolfram.com/language/ref/WolframLanguageData.html"><code>WolframLanguageData[]</code></a></td>
+<td>Only has info for most common operators. For most operators, gives precedence rank, arity, affix. Less often associativity info is apparent.</td>
+</tr>
+<tr>
+<td><code>Precedence[]</code></td>
+<td>Undocumented built-in function. When provided the long name of an operator, gives precedence. Only works with some operators and is often incorrect.</td>
+</tr>
+<tr>
+<td><code>UnicodeCharacters.tr</code></td>
+<td>Gives explicit precedence, affix, and associativity for 338 operators that are a single Unicode character outside of ASCII character set. Note that this system file uses a different precedence numbering scheme than other sources and which applies only to the notebook interface.</td>
+</tr>
+<tr>
+<td><code>`System`Convert`</code> <code>MLStringDataDump` </code> <code>$ExtractedOperators </code></td>
+<td>Undocumented list of 272 single character unicode operators all but one of which is in <code>UnicodeCharacters.tr</code>. A proper subset of the next source, but I include it for completeness.</td>
+</tr>
+<tr>
+<td><code>System`Convert`</code> <code>MLStringDataDump`</code> <code>$Operators</code></td>
+<td>Undocumented list of 340 operators—characters only. Includes most operators, even single and multi-character ASCII operators. Excludes Association brackets, box operators, and obscure bracketing operators.</td>
+</tr>
+<tr>
+<td><code>Internal`SymbolNameQ[]</code></td>
+<td>Undocumented function that apparently identifies a string as a &ldquo;symbol name.&rdquo; Computing the complement of the set of Unicode characters for which <code>SymbolNameQ</code> evaluates to True gives a list of operators, including some single-character box operators found in no other list.</td>
+</tr>
+</tbody>
+</table>
+<p>Of the sources in this table, the only ones that are <em>documented</em> are <code>WolframLanguageData</code>, <code>UnicodeCharacters.tr</code>, and (by definition) the official documentation, and <code>UnicodeCharacters.tr</code> is only documented in the sense that <a href="https://reference.wolfram.com/language/Notation/tutorial/ComplexPatternsAndAdvancedFeatures.html">it is mentioned exactly once seemingly in passing in the official documentation</a> (although see below). It is important to understand that no single source contains all operators, and all but <code>$ExtractedOperators</code> and (ironically) the official documentation are necessary to obtain all available information about all operators.</p>
+<h3 id="the-official-documentation">The Official Documentation</h3>
+<p>The first place to look for anyone interested in learning about Mathematica&rsquo;s operators is the operator table given in the <a href="https://wolfr.am/wS1xS8bZ">Operator Input Forms</a> documentation. This table claims to give operator precedence (in the form of &ldquo;precedence rank&rdquo;), associativity, and usage information from which arity and affix are apparent. Unfortunately, you will find that this table is sometimes incorrect, woefully incomplete, and certainly outdated. There are several cases of multiple precedence levels being incorrectly represented in the table as a single precedence level. Associativity information for many listed operators is missing. (<code>TagSet</code> is right associative, for example.) Finally, nearly 200 operators are either missing or are listed en mass under labels like, &ldquo;other ordering operators.&rdquo;</p>
+<p>Other pages of the official documentation, while often very helpful for learning Mathematica, usually do not give information about associativity and precedence. Mathematica&rsquo;s documentation, in my opinion, is generally superlative and sets the standard by which all other documentation should be measured. Even so, it contains a great number of errors and is simply not intended to stand in for the kind of language spec needed by, e.g., compiler tool authors that is motivating our study.</p>
+<h3 id="the-undocumented-precedence-function">The Undocumented <code>Precedence[]</code> Function</h3>
+<p>Advanced Mathematica programmers frequently pop up on <a href="https://mathematica.stackexchange.com/">mathematica.stackexchange.com</a> asking about how to choose a Mathematica operator without a built-in meaning (of which there are many) that has just the right operator precedence they need for their use case. The answer given by the Mathematica gurus is almost invariably to use the undocumented <code>Precedence[]</code> function. I am sorry to report that on this point the Mathematica gurus are giving bad advice. Here are a few problems with the <code>Precedence[]</code> function:</p>
+<ol>
+<li>It takes the (symbolic) names of operators, not symbols. For example, <code>Precedence[Element]</code> evaluates to <code>250.</code>, but <code>Precedence[∈]</code> predictably fails with a syntax error. Consequently, you need to know the symbolic name of the operator you are interested in.<sup style="font-weight:bolder" id="a1" name="a1"><a href="#opnames">1</a></sup></li>
+<li>As a corollary to (1), if an operator <em>has no name</em>, <code>Precedence</code> is useless. This is not an obscure problem, as there are several important operators with no apparent name, such as the square brackets operator for function application <code>f[e]</code>.<sup style="font-weight:bolder" id="a1" name="a1"><a href="#opnames">1</a></sup></li>
+<li><code>Precedence</code> fails to return a true precedence level for roughly 10% of the operators that do have names. <code>Precedence</code> indicates failure by returning <code>670.</code>, which is inconvenient since <code>670.</code> is a valid precedence level.</li>
+<li>The same symbolic name can be associated to both the unary and binary operators associated to the function. For example, <code>Precedence[PlusMinus]</code> gives the precedence of the unary operator <code>±x</code> (<code>310.</code>) rather than the precedence of the binary operator <code>x ± y</code> (<code>480.</code>)</li>
+<li><code>Precedence</code> combines precedence levels that should be split—but not as much as the <a href="https://wolfr.am/wS1xS8bZ">Operator Input Forms</a> documentation.</li>
+<li><code>Precedence</code> is sometimes just plain wrong. For example, contrary to <code>Precedence</code>, <code>Union</code> has a higher precedence than <code>Span</code>.</li>
+</ol>
+<p>We have spent a lot of ink explaining why the official documentation, the <a href="https://wolfr.am/wS1xS8bZ">Operator Input Forms</a> table in particular, and the <code>Precedence[]</code> function are not the best sources of information about Mathematica operators in part to correct the record on the subject, as these two sources are what come up the most often in technical discussions, even among experts. But we have made only meager progress toward our goal of accurately documenting every Mathematica operator. Where <em>should</em> we—and the gurus on <a href="https://mathematica.stackexchange.com/">mathematica.stackexchange.com</a>—be looking if not to these sources?</p>
+<p>For most purposes, we should look to <a href="https://reference.wolfram.com/language/ref/WolframLanguageData.html"><code>WolframLanguageData[]</code></a>.</p>
+<h3 id="wolframlanguagedata"><code>WolframLanguageData[]</code></h3>
+<p>I have found that the precedence rank returned by <a href="https://reference.wolfram.com/language/ref/WolframLanguageData.html"><code>WolframLanguageData[]</code></a> is more accurate than the <code>Precedence</code> function. As a bonus, <code>WolframLanguageData</code> gives you really nice operator synonym, usage, and FullForm data, and programmatic access to all kinds of information related to Mathematica functions and their documentation.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mma" data-lang="mma"><span style="display:flex;"><span>In[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">:=</span> WolframLanguageData[<span style="color:#e6db74">&#34;Power&#34;</span>, <span style="color:#e6db74">&#34;PrecedenceRanks&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Out[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span> {{expr1<span style="color:#960050;background-color:#1e0010">\</span>_expr2<span style="color:#960050;background-color:#1e0010">\%</span>expr3, Power[Subscript[expr1,expr2],expr3]}<span style="color:#f92672">-&gt;</span><span style="color:#ae81ff">8</span>,
+</span></span><span style="display:flex;"><span>        {expr1<span style="color:#f92672">^</span>expr2, Power[expr1,expr2]}<span style="color:#f92672">-&gt;</span><span style="color:#ae81ff">21</span>,
+</span></span><span style="display:flex;"><span>        {expr1<span style="color:#f92672">^</span>expr2, Power[expr1,expr2]}<span style="color:#f92672">-&gt;</span><span style="color:#ae81ff">21</span>,
+</span></span><span style="display:flex;"><span>        {expr1<span style="color:#f92672">^</span>expr2, Power[expr1,expr2]}<span style="color:#f92672">-&gt;</span><span style="color:#ae81ff">21</span>,
+</span></span><span style="display:flex;"><span>        {Subsuperscript[expr1, expr2, expr3],
+</span></span><span style="display:flex;"><span>            Power[Subscript[expr1,expr2],expr3]}<span style="color:#f92672">-&gt;</span><span style="color:#ae81ff">21</span>,
+</span></span><span style="display:flex;"><span>        {expr1<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#f92672">^</span>expr2<span style="color:#960050;background-color:#1e0010">\%</span>expr3, Power[Subscript[expr1,expr3],expr2]}<span style="color:#f92672">-&gt;</span><span style="color:#ae81ff">21</span>,
+</span></span><span style="display:flex;"><span>        {<span style="color:#960050;background-color:#1e0010">\</span><span style="color:#f92672">@</span>expr<span style="color:#960050;background-color:#1e0010">\%</span>n,Power[expr,Power[n,<span style="color:#ae81ff">-1</span>]]}<span style="color:#f92672">-&gt;</span><span style="color:#ae81ff">22</span>}
+</span></span></code></pre></div><p>Another bonus of <code>WolframLanguageData</code> is that you do not already have to know the name of every function with an operator. You can ask <code>WolframLanguageData</code> to just give you everything in its database, which includes the box sublanguage. The following will generate a list for you. Be warned that it will download data for all 5,000+ functions and ultimately give you a list of 135 (as of August 2018) <code>{name, rankdata, shortnotation}</code> triples:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mma" data-lang="mma"><span style="display:flex;"><span>In[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">:=</span> Select[
+</span></span><span style="display:flex;"><span>            WolframLanguageData[
+</span></span><span style="display:flex;"><span>                WolframLanguageData[<span style="color:#e6db74">&#34;Entities&#34;</span>],
+</span></span><span style="display:flex;"><span>                {<span style="color:#e6db74">&#34;Name&#34;</span>, <span style="color:#e6db74">&#34;PrecedenceRanks&#34;</span>, <span style="color:#e6db74">&#34;ShortNotations&#34;</span>}
+</span></span><span style="display:flex;"><span>            ],
+</span></span><span style="display:flex;"><span>            #[[<span style="color:#ae81ff">2</span>]] <span style="color:#f92672">=!=</span> Missing[<span style="color:#e6db74">&#34;NotApplicable&#34;</span>] <span style="color:#f92672">&amp;</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span></code></pre></div><p>The <code>&quot;ShortNotations&quot;</code> data provided by <code>WolframLanguageData</code> leaves a lot to be desired, and while arity and affix are usually apparent from the usage data, <code>WolframLanguageData</code> usually does not provide enough information to deduce operator associativity. Unfortunately, <code>WolframLanguageData</code> will not give you every operator, either. However, this is the <em>only</em> source outside of the documentation itself that gives all multicharacter box operators. With some effort, it is possible to use <code>WolframLanguageData</code> to programmatically extract even more information about operators from the documentation, but the information earned by this effort is much easier to obtain elsewhere.</p>
+<p>Let&rsquo;s dive deeper.</p>
+<h3 id="unicodecharacterstr"><code>UnicodeCharacters.tr</code></h3>
+<p>The Mathematica system files include a file named <code>UnicodeCharacters.tr</code> that appears to contain information about how the Mathematica frontend interprets ~1100 Unicode characters. As its name implies, the <code>UnicodeCharacters.tr</code> file appears to only include characters that are <em>single</em> Unicode characters <em>outside</em> of the ASCII character set. It does not include <code>!</code> or <code>/@</code>, for example. Most people describe the file as &ldquo;undocumented,&rdquo; but in fact <a href="https://reference.wolfram.com/language/Notation/tutorial/ComplexPatternsAndAdvancedFeatures.html">it is mentioned exactly once in the official documentation</a> for the Notation Package:</p>
+<blockquote>
+<p>&ldquo;The <code>SyntaxForm</code> option value can be any operator string valid in the Wolfram Language, that is, any operator contained in the UnicodeCharacters.tr file.&rdquo;</p>
+</blockquote>
+<p>(As an aside, this line in the documentation is incorrect in the sense that <code>UnicodeCharacters.tr</code> does not include every operator string valid in the Wolfram Language, ASCII operator strings in particular, while these missing operator strings are still valid values for the <code>SyntaxForm</code> option.)</p>
+<p>Most of the records in the file are <em>not</em> operators, but for the operators that are included, it gives us the most detailed syntactic information of any source. Each record has up to 9 columns (fields) that we might label as follows:</p>
+<ol>
+<li>Hex Code</li>
+<li>Long Name</li>
+<li>Alternative Input Methods</li>
+<li>Class/Affix</li>
+<li>Precedence</li>
+<li>Associativity</li>
+<li>Left Spacing</li>
+<li>Right Spacing</li>
+<li>Rendered As</li>
+</ol>
+<p>This is everything we could hope to know about the linguistics of an operator—the proverbial holy grail of operator syntax. Be aware that it uses a <em>different</em> precedence numbering scheme from <code>Precedence[]</code>, so be sure not to mix up the two. Note also that the precedence in the <code>UnicodeCharacters.tr</code> refers to precedence within the frontend only. (The meaning of this last sentence will become clear in the section, &ldquo;Programmatically determining properties of operators.&rdquo;)</p>
+<p>This code snippet reads the data from <code>UnicodeCharacters.tr</code> into the variable <code>chars</code>:<sup style="font-weight:bolder" id="a2" name="a2"><a href="#mrwizard">2</a></sup></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mma" data-lang="mma"><span style="display:flex;"><span>In[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">:=</span> chars <span style="color:#f92672">=</span> ReadList[
+</span></span><span style="display:flex;"><span>            System`Dump`unicodeCharactersTR,
+</span></span><span style="display:flex;"><span>            Word, WordSeparators <span style="color:#f92672">-&gt;</span> {<span style="color:#e6db74">&#34;\t\t&#34;</span>},
+</span></span><span style="display:flex;"><span>            RecordLists <span style="color:#f92672">-&gt;</span> True
+</span></span><span style="display:flex;"><span>        ];
+</span></span></code></pre></div><p>We can filter out non-operators using the Class/Affix column. Let&rsquo;s look at the unique values in that column.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mma" data-lang="mma"><span style="display:flex;"><span>In[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">:=</span> Union[Select[chars, Length[#] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">&amp;</span>][[All, <span style="color:#ae81ff">4</span>]]]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Out[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;Alias&#34;</span>, <span style="color:#e6db74">&#34;Auto&#34;</span>, <span style="color:#e6db74">&#34;Close&#34;</span>, <span style="color:#e6db74">&#34;CompoundPrefix&#34;</span>, <span style="color:#e6db74">&#34;Infix&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;InfixOpen&#34;</span>, <span style="color:#e6db74">&#34;LargeOp:Prefix&#34;</span>, <span style="color:#e6db74">&#34;Letter&#34;</span>, <span style="color:#e6db74">&#34;NonBreakingAfterLetter&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;NonBreakingBeforeLetter&#34;</span>, <span style="color:#e6db74">&#34;Open&#34;</span>, <span style="color:#e6db74">&#34;Postfix&#34;</span>, <span style="color:#e6db74">&#34;Prefix&#34;</span>, <span style="color:#e6db74">&#34;WhiteSp&#34;</span>}
+</span></span></code></pre></div><p>These are the ones we want:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mma" data-lang="mma"><span style="display:flex;"><span>In[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">:=</span> affixes <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;Close&#34;</span>, <span style="color:#e6db74">&#34;CompoundPrefix&#34;</span>, <span style="color:#e6db74">&#34;Infix&#34;</span>, <span style="color:#e6db74">&#34;InfixOpen&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;LargeOp:Prefix&#34;</span>, <span style="color:#e6db74">&#34;Open&#34;</span>, <span style="color:#e6db74">&#34;Postfix&#34;</span>, <span style="color:#e6db74">&#34;Prefix&#34;</span>};
+</span></span><span style="display:flex;"><span>        ops <span style="color:#f92672">=</span> Select[chars, Length[#] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">&amp;&amp;</span> MemberQ[affixes, #[[<span style="color:#ae81ff">4</span>]]]<span style="color:#f92672">&amp;</span>];
+</span></span><span style="display:flex;"><span>        Length[ops]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Out[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">=</span> <span style="color:#ae81ff">337</span>
+</span></span></code></pre></div><p>The character <code>〚</code> is the only one listed with affix <code>InfixOpen</code>, while the other matchfix (circumfix) operators are under <code>Open</code> or <code>Close</code>. Most of them appear to function like parentheses, but their rendering in the frontend is flakey. We also have <code>LargeOp:Prefix</code> operators like ∑ (<code>\[Sum]</code>), and then ∇ (<code>\[Del]</code>), which is the only operator with affix <code>CompoundPrefix</code>.</p>
+<p>Of the sources of operators and their precedence, the <code>UnicodeCharacters.tr</code> is among the largest, and since it is presumably used by Mathematica internals, you can be sure that it is also the most accurate.</p>
+<p>Mysteriously, however, it nonetheless seems to be wrong about precedence in at least one case that I have found so far: <code>UnicodeCharacters.tr</code> gives <code>CircleDot</code> and <code>PermutationProduct</code> the same precedence, but <code>CircleDot</code> does have a <em>higher</em> precedence than <code>PermutationProduct</code> while still being lower than the next highest operator, <code>SmallCircle</code>. That is to say, at least in v11.3, <code>CircleDot</code>&rsquo;s real precedence is <code>606.</code>, not <code>605.</code> as it is listed.</p>
+<p>This, my dear readers, is where everyone else who has come this way has stopped looking. Let&rsquo;s go deeper.</p>
+<h3 id="-systemconvertmlstringdatadumpoperators-"><code>System`Convert`MLStringDataDump`$Operators</code></h3>
+<p>The undocumented<sup style="font-weight:bolder" id="a3" name="a3"><a href="#undocumented">3</a></sup> system variable <code>System`Convert`MLStringDataDump`$Operators</code> is a list of 340 operators without any additional information. The list is only available in the notebook frontend. The undocumented function <code>System`Convert`MLStringDataDump`OperatorQ[]</code> works by checking membership in this list.</p>
+<p>This is the only list, excluding the documentation and <code>WolframLanguageData</code>, that includes all single and multi-character ASCII operators. As with most other sources, no box operators are included. It also excludes Association brackets, obscure bracketing symbols, many LargeOp:Prefix operators, and a handful of other operators found in <code>UnicodeCharacters.tr</code>.</p>
+<p>We have scoured the documentation, taken a deep dive into Mathematica system files, and explored undocumented features described nowhere else outside of this article save the offices of Wolfram. It may surprise you, then, that there are more operators than we have found so far.</p>
+<h3 id="the-complement-of--internalsymbolnameq--characters">The Complement of <code>Internal`SymbolNameQ</code> Characters</h3>
+<p>Our strategy in this section is to make a list of every Unicode character in the character range used by Mathematica that is <em>not</em> a letter, <a href="https://reference.wolfram.com/language/tutorial/LettersAndLetterLikeForms.html">letter-like form</a>, or member of <code>System`Convert`MLStringDataDump`$Operators</code>, which we assign the shorter alias <code>ops</code>. Using the definition of <code>LetterLikeQ[]</code> along with the opaque built-in function <code>Internal`SymbolNameQ[]</code>, we can search the list of Unicode characters to find the complement of the set of characters we can already categorize. Our search criteria is as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mma" data-lang="mma"><span style="display:flex;"><span>In[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">:=</span> crit[c_] <span style="color:#f92672">:=</span> <span style="color:#f92672">!</span> Internal`SymbolNameQ[c] <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span> DigitQ[c] <span style="color:#f92672">&amp;&amp;</span>  <span style="color:#f92672">!</span>
+</span></span><span style="display:flex;"><span>        StringMatchQ[c, WhitespaceCharacter] <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span> MemberQ[ops, c];
+</span></span></code></pre></div><p>The following code produces a table of code/character pairs matching the criteria above:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mma" data-lang="mma"><span style="display:flex;"><span>In[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">:=</span> Select[
+</span></span><span style="display:flex;"><span>            Table[{i, FromCharacterCode[i]}, {i, <span style="color:#ae81ff">65535</span>}],
+</span></span><span style="display:flex;"><span>            crit[#[[<span style="color:#ae81ff">2</span>]]]<span style="color:#f92672">&amp;</span>
+</span></span><span style="display:flex;"><span>        ]
+</span></span></code></pre></div><p>The result is a bit of a surprise: We get a seemingly random handful of ASCII characters, Association brackets, several of the <code>LargeOp:Prefix</code> operators that are missing in the other lists along with a small handful of other Unicode operators also from <code>UnicodeCharacters.tr</code>, and, most interestingly, single character versions of multicharacter box operators that are not in any other source. These box operators are:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mma" data-lang="mma"><span style="display:flex;"><span><span style="color:#ae81ff">0</span>xf7c0<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">\</span>), <span style="color:#ae81ff">0</span>xf7c1<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">\</span><span style="color:#f92672">!</span>, <span style="color:#ae81ff">0</span>xf7c2<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">\</span><span style="color:#f92672">@</span>, <span style="color:#ae81ff">0</span>xf7c5<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">\%</span>,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>xf7c6<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">\</span><span style="color:#f92672">^</span>, <span style="color:#ae81ff">0</span>xf7c7<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">\</span><span style="color:#f92672">&amp;</span>, <span style="color:#ae81ff">0</span>xf7c8<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">\</span><span style="color:#f92672">*</span>, <span style="color:#ae81ff">0</span>xf7c9<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">\</span>(,
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">0</span>xf7ca<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">\</span>_, <span style="color:#ae81ff">0</span>xf7cb<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">\</span><span style="color:#f92672">+</span>, <span style="color:#ae81ff">0</span>xf7cc<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">\</span><span style="color:#f92672">/</span>, <span style="color:#ae81ff">0</span>xf7cd<span style="color:#960050;background-color:#1e0010">:</span> <span style="color:#960050;background-color:#1e0010">\`</span>
+</span></span></code></pre></div><p>The list also includes the nonoperator characters <code>0xf767: \[ErrorIndicator]</code>, <code>0x2043: \[SkeletonIndicator]</code>, the ASCII delete character <code>0x007f</code> (127), the ASCII bell character <code>0x0007</code>, and <code>0xf3ad</code>, which is an unassigned noncharacter Unicode codepoint &ldquo;for private use.&rdquo;</p>
+<p>Since every other Unicode character is either already identified as an operator or in a set known to exclude operators, any unidentified single character Unicode operators are guaranteed to be in this list. We have found them all.</p>
+<h3 id="other-operators">Other &ldquo;Operators&rdquo;</h3>
+<p>There are other <em>lexemes</em>—meaningful strings in the language—that could be considered operators but that do not appear outside of the documentation:</p>
+<ul>
+<li>String-related characters like <code>&quot;</code> and escape characters <code>\n</code>, <code>\t</code>, etc.</li>
+<li>The character representation operators: <code>\[name]</code>, <code>\:nn</code>, and <code>\.nnnn</code>.</li>
+<li>The number representation operators: <code>^^</code>, <code>*^</code>, and <code>``</code>, though the single <code>`</code> character does appear in the previous subsection.</li>
+<li>The comment matchfix operator <code>(*...*)</code>.</li>
+</ul>
+<p>These lexemes are such basic units of the language that they may be processed by Mathematica during or even prior to the lexical analysis phase of the code parsing process similar to how <code>C/C++</code> compiler drivers preprocess <code>#define</code>, <code>#include</code>, and other preprocessor directives before sending the result to the compiler.</p>
+<p>These sorts of language elements are not unique to Wolfram Language, of course, and language tool authors generally make choices about how to handle them based on their syntactic role within the language and what simplifies the software engineering task.</p>
+<hr>
+<p><a name="opnames">[1]</a>: <span style="font-size:85%">While this may be a minor complaint, the symbolic names of operators do not always correspond to the function of that name. For example, <code>Infix</code> is the symbolic name for the ternary operator <code>a~f~b</code> which evaluates as <code>f[a, b]</code>, whereas the <code>Infix[]</code> function is just a function that effects the display of <code>f[a, b]</code>, writing it in terms of the <code>Infix</code> ternary operator. Meanwhile, the square brackets operator for function application <code>f[e]</code> is apparently nameless despite the existence of the <a href="https://reference.wolfram.com/language/ref/Construct.html"><code>Construct[]</code></a> function. </span> <a href="#a1">↩</a></p>
+<p><a name="mrwizard">[2]</a>: <span style="font-size:85%">
+I have borrowed this code with minimal modifications from Mathematica Stack Exchange user <a href="https://mathematica.stackexchange.com/a/153753/27662">Mr. Wizard</a>.
+</span> <a href="#a2">↩</a></p>
+<p><a name="undocumented">[3]</a>: <span style="font-size:85%">
+In fact, the only mention of this variable on the public internet appears to be this article.
+</span> <a href="#a3">↩</a></p><ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/computer-science/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Computer Science</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/compilers/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Compilers</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/mathematica/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Mathematica</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/posts/2018-07-02-defining-the-wolfram-language-part-0-the-challenge/">Defining the Wolfram Language Part 0: The Challenge</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2015-01-28-the-grammar-of-mathematical-expressions/">The grammar of mathematical expressions</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2014-12-10-using-mathematica-from-python/">Using Mathematica From Python</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2018-10-10-what-is-the-ielr1-parsing-algorithm/">What is the IELR(1) Parsing Algorithm?</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Robert Jacobson 2024 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+    
+    <a href="https://twitter.com/rljacobson" target="_blank" rel="noopener" class="twitter ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Twitter link" aria-label="follow on Twitter——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://github.com/rljacobson/" target="_blank" rel="noopener" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://www.linkedin.com/in/robertljacobson/" target="_blank" rel="noopener" class="linkedin ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" aria-label="follow on LinkedIn——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

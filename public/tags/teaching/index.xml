@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Teaching on After Math</title>
+    <link>http://localhost:1313/tags/teaching/</link>
+    <description>Recent content in Teaching on After Math</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Robert Jacobson</copyright>
+    <lastBuildDate>Sat, 12 Apr 2014 16:33:00 -0500</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/teaching/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How To Ask Your Professor For Something</title>
+      <link>http://localhost:1313/posts/2014-04-12-how-to-ask-your-professor-for-something/</link>
+      <pubDate>Sat, 12 Apr 2014 16:33:00 -0500</pubDate>
+      <guid>http://localhost:1313/posts/2014-04-12-how-to-ask-your-professor-for-something/</guid>
+      <description>&lt;p&gt;Do you need to ask your professor for an extension on a due date or to reschedule a quiz? A little thought before you click send on that email can make a big difference. Here is some advice.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

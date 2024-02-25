@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Computer Science on After Math</title>
+    <link>http://localhost:1313/tags/computer-science/</link>
+    <description>Recent content in Computer Science on After Math</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Robert Jacobson</copyright>
+    <lastBuildDate>Thu, 13 Aug 2020 11:00:00 -0500</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/computer-science/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Making a Pratt Parser Generator Part 1</title>
+      <link>http://localhost:1313/posts/2020-08-13-designing-a-pratt-parser-generator/</link>
+      <pubDate>Thu, 13 Aug 2020 11:00:00 -0500</pubDate>
+      <guid>http://localhost:1313/posts/2020-08-13-designing-a-pratt-parser-generator/</guid>
+      <description>A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse.</description>
+    </item>
+    <item>
+      <title>Defining the Wolfram Language Part 2: Operator Properties</title>
+      <link>http://localhost:1313/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/</link>
+      <pubDate>Tue, 04 Sep 2018 20:26:00 -0500</pubDate>
+      <guid>http://localhost:1313/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/</guid>
+      <description>&lt;p&gt;In this third installment of our &lt;em&gt;n&lt;/em&gt; part series, &amp;ldquo;Defining the Wolfram Language,&amp;rdquo; we begin to study the properties, namely the arity, affix, associativity, and precedence, of the Mathematica operators we found in &lt;a href=&#34;defining-the-wolfram-language-part-1-finding-operators&#34;&gt;Part 1&lt;/a&gt;. If we ended Part 1 proud of our accomplishment—perhaps even a little smug—then we will get reacquainted with our humility in this article.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Generalizing PEMDAS: What is an operator?</title>
+      <link>http://localhost:1313/posts/2018-09-03-generalizing-pemdas-what-is-an-operator/</link>
+      <pubDate>Mon, 03 Sep 2018 11:30:00 -0500</pubDate>
+      <guid>http://localhost:1313/posts/2018-09-03-generalizing-pemdas-what-is-an-operator/</guid>
+      <description>In programming languages, an operator is a symbol used to represent a specific operation such as subtraction of integers or dereferencing a pointer. The symbols +, *, and ! are commonly used as operators in many programming languages, for example. In this article we define some basic programming language terminology that allows us to categorize operators according to their different properties.&#xA;Computation with Expressions Virtually all programming languages have expressions, like 2 + 4, which consist of operators (the + operator in 2 + 4) and their operands (or arguments; the 2 and the 4), that is, the things operators operate on.</description>
+    </item>
+    <item>
+      <title>Defining the Wolfram Language Part 1: Finding Operators</title>
+      <link>http://localhost:1313/posts/2018-08-16-defining-the-wolfram-language-part-1-finding-operators/</link>
+      <pubDate>Thu, 16 Aug 2018 15:26:00 -0500</pubDate>
+      <guid>http://localhost:1313/posts/2018-08-16-defining-the-wolfram-language-part-1-finding-operators/</guid>
+      <description>&lt;h1 id=&#34;finding-all-wolfram-language-operators&#34;&gt;Finding All Wolfram Language Operators&lt;/h1&gt;&#xA;&lt;p&gt;In this second article, Part 1 of an &lt;em&gt;n&lt;/em&gt; part series on &lt;em&gt;Defining the Wolfram Language&lt;/em&gt;, we start getting our hands dirty hunting down every single operator in Mathematica and each operator&amp;rsquo;s linguistic properties. To my knowledge, nobody outside of Wolfram has created such an exhaustive list before.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Defining the Wolfram Language Part 0: The Challenge</title>
+      <link>http://localhost:1313/posts/2018-07-02-defining-the-wolfram-language-part-0-the-challenge/</link>
+      <pubDate>Mon, 02 Jul 2018 20:14:00 -0500</pubDate>
+      <guid>http://localhost:1313/posts/2018-07-02-defining-the-wolfram-language-part-0-the-challenge/</guid>
+      <description>&lt;p&gt;&lt;em&gt;What is the definition of the Wolfram Language?&lt;/em&gt; This is the first in a series of articles attempting to answer this question.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The grammar of mathematical expressions</title>
+      <link>http://localhost:1313/posts/2015-01-28-the-grammar-of-mathematical-expressions/</link>
+      <pubDate>Wed, 28 Jan 2015 22:31:00 -0500</pubDate>
+      <guid>http://localhost:1313/posts/2015-01-28-the-grammar-of-mathematical-expressions/</guid>
+      <description>&lt;p&gt;Using computers to do automatic translation has a long and rich history in computer science. A course in compiler construction is a veritable survey of topics in computer science running the gamut from formal languages to data structures and algorithms to Hopfcroft&amp;rsquo;s algorithm to minimize deterministic automata. One of the first things a student learns in a compiler construction course is how to formally describe the grammar of a language using (extended) Backus–Naur form (EBNF).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Using Mathematica From Python</title>
+      <link>http://localhost:1313/posts/2014-12-10-using-mathematica-from-python/</link>
+      <pubDate>Wed, 10 Dec 2014 22:27:00 -0500</pubDate>
+      <guid>http://localhost:1313/posts/2014-12-10-using-mathematica-from-python/</guid>
+      <description>&lt;p&gt;In which I show you how to programmatically interface with a Mathematica kernel from Python.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>What is the IELR(1) Parsing Algorithm?</title>
+      <link>http://localhost:1313/posts/2018-10-10-what-is-the-ielr1-parsing-algorithm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/2018-10-10-what-is-the-ielr1-parsing-algorithm/</guid>
+      <description>This short article is for those students, programmers, and computer scientists who already have a basic idea of what a parser is and does but who want to know what that mysterious reference to &amp;ldquo;IELR(1)&amp;rdquo; means in the Bison parser generator manual.&#xA;The IELR(1) Parsing Algorithm The IELR(1) parsing algorithm was developed in 2008 by Joel E. Denny as part of his Ph.D. research under the supervision of Brian A. Malloy at Clemson University.</description>
+    </item>
+  </channel>
+</rss>
