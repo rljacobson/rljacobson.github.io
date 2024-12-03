@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Calculus on After Math</title>
-    <link>https://www.RobertJacobson.dev/tags/calculus/</link>
+    <link>http://localhost:1313/tags/calculus/</link>
     <description>Recent content in Calculus on After Math</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Robert Jacobson</copyright>
     <lastBuildDate>Tue, 28 Jan 2014 21:41:00 -0500</lastBuildDate>
-    <atom:link href="https://www.RobertJacobson.dev/tags/calculus/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/calculus/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Sneaky Continuous Functions</title>
-      <link>https://www.RobertJacobson.dev/posts/2014-01-28-sneaky-continuous-functions/</link>
+      <link>http://localhost:1313/posts/2014-01-28-sneaky-continuous-functions/</link>
       <pubDate>Tue, 28 Jan 2014 21:41:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2014-01-28-sneaky-continuous-functions/</guid>
+      <guid>http://localhost:1313/posts/2014-01-28-sneaky-continuous-functions/</guid>
       <description>&lt;script src=&#34;https://sagecell.sagemath.org/static/jquery.min.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script src=&#34;https://sagecell.sagemath.org/static/embedded_sagecell.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script&gt;&#xA;// Make any div with class &#39;sage&#39; a &#34;minimal&#34; Sage cell with &#34;Plot it!&#34; button.&#xA;sagecell.makeSagecell({inputLocation:  &#39;div.sage&#39;,&#xA;                       evalButtonText: &#39;Plot it!&#39;});&#xA;// Make *any* div with class &#39;compute&#39; a Sage cell.&#xA;sagecell.makeSagecell({inputLocation: &#39;div.compute&#39;,&#xA;                       evalButtonText: &#39;Evaluate&#39;});&#xA;&lt;/script&gt;&#xA;&lt;p&gt;While the target audience of this article is my fantastic calculus students, other math teachers might enjoy it as well.&lt;/p&gt;&#xA;&lt;h2 id=&#34;sneaky-continuous-functions&#34;&gt;Sneaky Continuous Functions&lt;/h2&gt;&#xA;&lt;p&gt;When students in first semester calculus first start learning about limits, they are often asked to determine limits using the graph of a function, which we will call the graphical method, and also by constructing a table of values of the function, which we will call the numerical method. Students should be warned that these methods, while perfectly legitimate and often quite useful, are really just fancy ways of &lt;em&gt;guessing&lt;/em&gt; the value of the limit, that is, the graphical and numerical methods do not supply us with mathematical certainty regarding the value of the limit. After all, what if your function is very sneaky and merely &lt;em&gt;looks like&lt;/em&gt; it&amp;rsquo;s approaching a value $L$ as $x$ approaches $c$ when in fact it ultimately approaches a different value $K$?&lt;/p&gt;</description>
     </item>
   </channel>

@@ -2,74 +2,74 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mathematics on After Math</title>
-    <link>https://www.RobertJacobson.dev/tags/mathematics/</link>
+    <link>http://localhost:1313/tags/mathematics/</link>
     <description>Recent content in Mathematics on After Math</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Robert Jacobson</copyright>
     <lastBuildDate>Wed, 01 Jul 2020 11:00:00 -0500</lastBuildDate>
-    <atom:link href="https://www.RobertJacobson.dev/tags/mathematics/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/mathematics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bayes&#39; Theorem and the Deathly Hallows</title>
-      <link>https://www.RobertJacobson.dev/posts/2020-07-01-bayes-theorem/</link>
+      <link>http://localhost:1313/posts/2020-07-01-bayes-theorem/</link>
       <pubDate>Wed, 01 Jul 2020 11:00:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2020-07-01-bayes-theorem/</guid>
+      <guid>http://localhost:1313/posts/2020-07-01-bayes-theorem/</guid>
       <description>This article is an expanded version of the math part of an article I cowrote with marine biologist Dr. Andrew Rhyne about how many well-meaning public health professionals have misinterpreted the math behind test efficiency, Bayes’ Theorem. This misinterpretation has lead to dangerous public policy positions. Anyone with a math allergy is invited to read that article instead.&#xA;I and Dr. Andrew Rhyne, marine biologist and my longtime collaborator in fighting wildlife crime, have spent a lot of time in the last several months working on how best to fight the COVID-19 pandemic, especially in college communities like our own Roger Williams University.</description>
     </item>
     <item>
       <title>Platonic Solids and the School of Athens</title>
-      <link>https://www.RobertJacobson.dev/posts/2014-07-25-platonic-solids-and-the-school-of-athens/</link>
+      <link>http://localhost:1313/posts/2014-07-25-platonic-solids-and-the-school-of-athens/</link>
       <pubDate>Fri, 25 Jul 2014 22:57:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2014-07-25-platonic-solids-and-the-school-of-athens/</guid>
+      <guid>http://localhost:1313/posts/2014-07-25-platonic-solids-and-the-school-of-athens/</guid>
       <description>&lt;h2 id=&#34;euclid-in-the-school-of-athens&#34;&gt;Euclid in The School of Athens&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://lh4.googleusercontent.com/-UC44EGZXUfQ/U9LVe6BOFeI/AAAAAAAATQ4/Z3iy0xM4NVc/w723-h542-no/IMG_0537+2.JPG&#34; alt=&#34;Me in front of The School of Athens&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;This is a very special fresco painting by Italian Renaissance artist Raphael in the Vatican Museum called &lt;a href=&#34;http://en.wikipedia.org/wiki/The_School_of_Athens&#34;&gt;The School of Athens&lt;/a&gt;. It depicts the great philosophers of ancient Greece, famously with Plato pointing up and Aristotle pointing down.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Hangout On Air - Math: A Love Story</title>
-      <link>https://www.RobertJacobson.dev/posts/2014-02-19-hangout-on-air-math-a-love-story/</link>
+      <link>http://localhost:1313/posts/2014-02-19-hangout-on-air-math-a-love-story/</link>
       <pubDate>Wed, 19 Feb 2014 19:15:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2014-02-19-hangout-on-air-math-a-love-story/</guid>
+      <guid>http://localhost:1313/posts/2014-02-19-hangout-on-air-math-a-love-story/</guid>
       <description>&lt;p&gt;The &lt;a href=&#34;https://plus.google.com/communities/100568607954673744130&#34;&gt;Mathematics Community on Google+&lt;/a&gt; had our second ever Hangout On Air last week. I was joined by &lt;a href=&#34;https://plus.google.com/+LuisGuzmanJr/posts&#34;&gt;Luis Guzman&lt;/a&gt;, &lt;a href=&#34;https://plus.google.com/+JasonDavison/posts&#34;&gt;Jason Davison&lt;/a&gt;, and &lt;a href=&#34;https://plus.google.com/+AmyRobinson/posts&#34;&gt;Amy Robinson&lt;/a&gt; in a conversation that ranged from fluid dynamics to applying the mathematics of networks to map our ideas to JPEG image compression.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Sneaky Continuous Functions</title>
-      <link>https://www.RobertJacobson.dev/posts/2014-01-28-sneaky-continuous-functions/</link>
+      <link>http://localhost:1313/posts/2014-01-28-sneaky-continuous-functions/</link>
       <pubDate>Tue, 28 Jan 2014 21:41:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2014-01-28-sneaky-continuous-functions/</guid>
+      <guid>http://localhost:1313/posts/2014-01-28-sneaky-continuous-functions/</guid>
       <description>&lt;script src=&#34;https://sagecell.sagemath.org/static/jquery.min.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script src=&#34;https://sagecell.sagemath.org/static/embedded_sagecell.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script&gt;&#xA;// Make any div with class &#39;sage&#39; a &#34;minimal&#34; Sage cell with &#34;Plot it!&#34; button.&#xA;sagecell.makeSagecell({inputLocation:  &#39;div.sage&#39;,&#xA;                       evalButtonText: &#39;Plot it!&#39;});&#xA;// Make *any* div with class &#39;compute&#39; a Sage cell.&#xA;sagecell.makeSagecell({inputLocation: &#39;div.compute&#39;,&#xA;                       evalButtonText: &#39;Evaluate&#39;});&#xA;&lt;/script&gt;&#xA;&lt;p&gt;While the target audience of this article is my fantastic calculus students, other math teachers might enjoy it as well.&lt;/p&gt;&#xA;&lt;h2 id=&#34;sneaky-continuous-functions&#34;&gt;Sneaky Continuous Functions&lt;/h2&gt;&#xA;&lt;p&gt;When students in first semester calculus first start learning about limits, they are often asked to determine limits using the graph of a function, which we will call the graphical method, and also by constructing a table of values of the function, which we will call the numerical method. Students should be warned that these methods, while perfectly legitimate and often quite useful, are really just fancy ways of &lt;em&gt;guessing&lt;/em&gt; the value of the limit, that is, the graphical and numerical methods do not supply us with mathematical certainty regarding the value of the limit. After all, what if your function is very sneaky and merely &lt;em&gt;looks like&lt;/em&gt; it&amp;rsquo;s approaching a value $L$ as $x$ approaches $c$ when in fact it ultimately approaches a different value $K$?&lt;/p&gt;</description>
     </item>
     <item>
       <title>Blogging the JMM: Saying Goodbye</title>
-      <link>https://www.RobertJacobson.dev/posts/2014-01-18-blogging-the-jmm-saying-goodbye/</link>
+      <link>http://localhost:1313/posts/2014-01-18-blogging-the-jmm-saying-goodbye/</link>
       <pubDate>Sat, 18 Jan 2014 15:40:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2014-01-18-blogging-the-jmm-saying-goodbye/</guid>
+      <guid>http://localhost:1313/posts/2014-01-18-blogging-the-jmm-saying-goodbye/</guid>
       <description>&lt;p&gt;It&amp;rsquo;s over. Getting my internet fix in the hotel lobby at midnight, walking 18 miles a day through the convention center, sitting in uncomfortable chairs for hours, getting dinner in a local restaurant and realizing halfway through the meal that every single person dining there is also a mathematician, randomly bumping into an old friend or mentor or student&amp;ndash;it ended today at around lunchtime when I made the trek back to the hotel lobby one last time.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Blogging the JMM: Friday</title>
-      <link>https://www.RobertJacobson.dev/posts/2014-01-17-blogging-the-jmm-friday/</link>
+      <link>http://localhost:1313/posts/2014-01-17-blogging-the-jmm-friday/</link>
       <pubDate>Fri, 17 Jan 2014 22:41:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2014-01-17-blogging-the-jmm-friday/</guid>
+      <guid>http://localhost:1313/posts/2014-01-17-blogging-the-jmm-friday/</guid>
       <description>&lt;p&gt;I love the exhibit hall. I love books, and the exhibit hall is full of some of my favorite kinds of books. I spend hours picking through the texts, flipping through their pages. The AMS sold me on a great book directed at undergraduates on Fourier analysis and an advanced text on Riemannian manifolds. In fact, &lt;a href=&#34;https://plus.google.com/111299122922781685506/posts/jcXLNdoUcYc&#34;&gt;they managed to photograph me mid-purchase&lt;/a&gt;! I also learned they are selling &lt;a href=&#34;https://plus.google.com/111299122922781685506/posts/Apf42MJvpGx&#34;&gt;their first ever children&amp;rsquo;s book this spring&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Blogging the JMM: Thursday</title>
-      <link>https://www.RobertJacobson.dev/posts/2014-01-16-blogging-the-jmm-thursday/</link>
+      <link>http://localhost:1313/posts/2014-01-16-blogging-the-jmm-thursday/</link>
       <pubDate>Thu, 16 Jan 2014 17:02:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2014-01-16-blogging-the-jmm-thursday/</guid>
+      <guid>http://localhost:1313/posts/2014-01-16-blogging-the-jmm-thursday/</guid>
       <description>&lt;p&gt;The best part of the Joint Meetings is networking with like-minded people. I ran into many old friends and colleagues. Today (Thursday) several math bloggers and Google+&amp;lsquo;ers organized an impromptu meeting for lunch. I stuck a sign on the message board inviting other math bloggers to join us, and a cohort of tumblr bloggers discovered it and joined us. Such is the power of the JMM message board.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Blogging The JMM: Wednesday</title>
-      <link>https://www.RobertJacobson.dev/posts/2014-01-15-blogging-the-jmm-wednesday/</link>
+      <link>http://localhost:1313/posts/2014-01-15-blogging-the-jmm-wednesday/</link>
       <pubDate>Wed, 15 Jan 2014 20:53:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2014-01-15-blogging-the-jmm-wednesday/</guid>
+      <guid>http://localhost:1313/posts/2014-01-15-blogging-the-jmm-wednesday/</guid>
       <description>&lt;p&gt;Today I learned about connections between musical rhythm and knot theory, abstract algebra and dance, a Navy ship from the mid 1800s called the U.S.S. Constellation, and some great undergraduate real analysis pedagogy. In today&amp;rsquo;s post, I&amp;rsquo;ll share with you some of the most interesting mathematical ideas I heard today.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Blogging the largest math conference in the world</title>
-      <link>https://www.RobertJacobson.dev/posts/2014-01-14-blogging-the-largest-math-conference-in-the-world/</link>
+      <link>http://localhost:1313/posts/2014-01-14-blogging-the-largest-math-conference-in-the-world/</link>
       <pubDate>Tue, 14 Jan 2014 17:05:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2014-01-14-blogging-the-largest-math-conference-in-the-world/</guid>
+      <guid>http://localhost:1313/posts/2014-01-14-blogging-the-largest-math-conference-in-the-world/</guid>
       <description>I am in Baltimore to attend the 2014 Joint Mathematics Meetings, the largest gathering of mathematicians in the world involving the American Mathematical Society, the Mathematics Association of America, and many other professional societies related to the mathematics profession. There will be over 2500 talks given on topics ranging from the mathematics of pop-up books (#489) to the density of Henig efficient points in locally convex topological vector spaces (#2341) to rational numbers and the common core (#903).</description>
     </item>
   </channel>

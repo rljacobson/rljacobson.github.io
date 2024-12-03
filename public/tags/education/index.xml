@@ -2,46 +2,46 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Education on After Math</title>
-    <link>https://www.RobertJacobson.dev/tags/education/</link>
+    <link>http://localhost:1313/tags/education/</link>
     <description>Recent content in Education on After Math</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Robert Jacobson</copyright>
     <lastBuildDate>Thu, 17 Apr 2014 20:52:00 -0500</lastBuildDate>
-    <atom:link href="https://www.RobertJacobson.dev/tags/education/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/education/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How Springer sent me to collections for adopting their textbook.</title>
-      <link>https://www.RobertJacobson.dev/posts/2014-04-17-how-springer-sent-me-to-collections-for-adopting-their-textbook/</link>
+      <link>http://localhost:1313/posts/2014-04-17-how-springer-sent-me-to-collections-for-adopting-their-textbook/</link>
       <pubDate>Thu, 17 Apr 2014 20:52:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2014-04-17-how-springer-sent-me-to-collections-for-adopting-their-textbook/</guid>
+      <guid>http://localhost:1313/posts/2014-04-17-how-springer-sent-me-to-collections-for-adopting-their-textbook/</guid>
       <description>&lt;p&gt;The story begins with one of those little mundane activities that fill every professor&amp;rsquo;s day. Right before the spring semester began I was evaluating various textbook options for the next time I teach undergraduate real analysis. Stephen Abbott&amp;rsquo;s &lt;em&gt;Understanding Analysis&lt;/em&gt; published by Springer seemed to be exactly the kind of book I was looking for.&lt;/p&gt;</description>
     </item>
     <item>
       <title>How To Ask Your Professor For Something</title>
-      <link>https://www.RobertJacobson.dev/posts/2014-04-12-how-to-ask-your-professor-for-something/</link>
+      <link>http://localhost:1313/posts/2014-04-12-how-to-ask-your-professor-for-something/</link>
       <pubDate>Sat, 12 Apr 2014 16:33:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2014-04-12-how-to-ask-your-professor-for-something/</guid>
+      <guid>http://localhost:1313/posts/2014-04-12-how-to-ask-your-professor-for-something/</guid>
       <description>&lt;p&gt;Do you need to ask your professor for an extension on a due date or to reschedule a quiz? A little thought before you click send on that email can make a big difference. Here is some advice.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Sneaky Continuous Functions</title>
-      <link>https://www.RobertJacobson.dev/posts/2014-01-28-sneaky-continuous-functions/</link>
+      <link>http://localhost:1313/posts/2014-01-28-sneaky-continuous-functions/</link>
       <pubDate>Tue, 28 Jan 2014 21:41:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2014-01-28-sneaky-continuous-functions/</guid>
+      <guid>http://localhost:1313/posts/2014-01-28-sneaky-continuous-functions/</guid>
       <description>&lt;script src=&#34;https://sagecell.sagemath.org/static/jquery.min.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script src=&#34;https://sagecell.sagemath.org/static/embedded_sagecell.js&#34;&gt;&lt;/script&gt;&#xA;&lt;script&gt;&#xA;// Make any div with class &#39;sage&#39; a &#34;minimal&#34; Sage cell with &#34;Plot it!&#34; button.&#xA;sagecell.makeSagecell({inputLocation:  &#39;div.sage&#39;,&#xA;                       evalButtonText: &#39;Plot it!&#39;});&#xA;// Make *any* div with class &#39;compute&#39; a Sage cell.&#xA;sagecell.makeSagecell({inputLocation: &#39;div.compute&#39;,&#xA;                       evalButtonText: &#39;Evaluate&#39;});&#xA;&lt;/script&gt;&#xA;&lt;p&gt;While the target audience of this article is my fantastic calculus students, other math teachers might enjoy it as well.&lt;/p&gt;&#xA;&lt;h2 id=&#34;sneaky-continuous-functions&#34;&gt;Sneaky Continuous Functions&lt;/h2&gt;&#xA;&lt;p&gt;When students in first semester calculus first start learning about limits, they are often asked to determine limits using the graph of a function, which we will call the graphical method, and also by constructing a table of values of the function, which we will call the numerical method. Students should be warned that these methods, while perfectly legitimate and often quite useful, are really just fancy ways of &lt;em&gt;guessing&lt;/em&gt; the value of the limit, that is, the graphical and numerical methods do not supply us with mathematical certainty regarding the value of the limit. After all, what if your function is very sneaky and merely &lt;em&gt;looks like&lt;/em&gt; it&amp;rsquo;s approaching a value $L$ as $x$ approaches $c$ when in fact it ultimately approaches a different value $K$?&lt;/p&gt;</description>
     </item>
     <item>
       <title>Susan Meisenhelder&#39;s &#39;MOOC Mania&#39;</title>
-      <link>https://www.RobertJacobson.dev/posts/2014-01-28-susan-meisenhelders-mooc-mania/</link>
+      <link>http://localhost:1313/posts/2014-01-28-susan-meisenhelders-mooc-mania/</link>
       <pubDate>Tue, 28 Jan 2014 16:28:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2014-01-28-susan-meisenhelders-mooc-mania/</guid>
+      <guid>http://localhost:1313/posts/2014-01-28-susan-meisenhelders-mooc-mania/</guid>
       <description>Susan Meisenhelder offers a scathing critique of MOOCs in her article &amp;ldquo;MOOC Mania&amp;rdquo; published in the latest issue of Thought &amp;amp; Action. (Here is a link to a ~5mb pdf of her article.)&#xA;The evidence so far suggests that MOOCs are great for a very specific kind of student looking for a very specific kind of product, but that MOOCs are really awful for some of the very groups that they are marketed to serve, namely students with less privilege (low-income, working class), and students on the lower end of the academic success scale (little education, poor performers).</description>
     </item>
     <item>
       <title>When Students Die</title>
-      <link>https://www.RobertJacobson.dev/posts/2013-12-18-when-students-die/</link>
+      <link>http://localhost:1313/posts/2013-12-18-when-students-die/</link>
       <pubDate>Wed, 18 Dec 2013 21:05:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2013-12-18-when-students-die/</guid>
+      <guid>http://localhost:1313/posts/2013-12-18-when-students-die/</guid>
       <description>A colleague who had been worried about one of her star students who had been missing from class for a couple of weeks came into my office. “She committed suicide yesterday.” She needed to talk through it. She told me that she and two other professors had gone to the Student Services people a few days earlier—on a weekend—concerned about the student. She told me about all the ways they had tried to get to the bottom of what was going on in the days leading up to it.</description>
     </item>
   </channel>

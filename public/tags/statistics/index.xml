@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Statistics on After Math</title>
-    <link>https://www.RobertJacobson.dev/tags/statistics/</link>
+    <link>http://localhost:1313/tags/statistics/</link>
     <description>Recent content in Statistics on After Math</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Robert Jacobson</copyright>
     <lastBuildDate>Wed, 01 Jul 2020 11:00:00 -0500</lastBuildDate>
-    <atom:link href="https://www.RobertJacobson.dev/tags/statistics/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/statistics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bayes&#39; Theorem and the Deathly Hallows</title>
-      <link>https://www.RobertJacobson.dev/posts/2020-07-01-bayes-theorem/</link>
+      <link>http://localhost:1313/posts/2020-07-01-bayes-theorem/</link>
       <pubDate>Wed, 01 Jul 2020 11:00:00 -0500</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2020-07-01-bayes-theorem/</guid>
+      <guid>http://localhost:1313/posts/2020-07-01-bayes-theorem/</guid>
       <description>This article is an expanded version of the math part of an article I cowrote with marine biologist Dr. Andrew Rhyne about how many well-meaning public health professionals have misinterpreted the math behind test efficiency, Bayes’ Theorem. This misinterpretation has lead to dangerous public policy positions. Anyone with a math allergy is invited to read that article instead.&#xA;I and Dr. Andrew Rhyne, marine biologist and my longtime collaborator in fighting wildlife crime, have spent a lot of time in the last several months working on how best to fight the COVID-19 pandemic, especially in college communities like our own Roger Williams University.</description>
     </item>
   </channel>
