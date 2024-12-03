@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on After Math</title>
-    <link>http://localhost:1313/tags/python/</link>
+    <link>https://www.RobertJacobson.dev/tags/python/</link>
     <description>Recent content in Python on After Math</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Robert Jacobson</copyright>
     <lastBuildDate>Wed, 10 Dec 2014 22:27:00 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://www.RobertJacobson.dev/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Using Mathematica From Python</title>
-      <link>http://localhost:1313/posts/2014-12-10-using-mathematica-from-python/</link>
+      <link>https://www.RobertJacobson.dev/posts/2014-12-10-using-mathematica-from-python/</link>
       <pubDate>Wed, 10 Dec 2014 22:27:00 -0500</pubDate>
-      <guid>http://localhost:1313/posts/2014-12-10-using-mathematica-from-python/</guid>
+      <guid>https://www.RobertJacobson.dev/posts/2014-12-10-using-mathematica-from-python/</guid>
       <description>&lt;p&gt;In which I show you how to programmatically interface with a Mathematica kernel from Python.&lt;/p&gt;</description>
     </item>
   </channel>

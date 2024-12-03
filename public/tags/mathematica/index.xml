@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mathematica on After Math</title>
-    <link>http://localhost:1313/tags/mathematica/</link>
+    <link>https://www.RobertJacobson.dev/tags/mathematica/</link>
     <description>Recent content in Mathematica on After Math</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Robert Jacobson</copyright>
     <lastBuildDate>Tue, 04 Sep 2018 20:26:00 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/mathematica/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://www.RobertJacobson.dev/tags/mathematica/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Defining the Wolfram Language Part 2: Operator Properties</title>
-      <link>http://localhost:1313/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/</link>
+      <link>https://www.RobertJacobson.dev/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/</link>
       <pubDate>Tue, 04 Sep 2018 20:26:00 -0500</pubDate>
-      <guid>http://localhost:1313/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/</guid>
+      <guid>https://www.RobertJacobson.dev/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/</guid>
       <description>&lt;p&gt;In this third installment of our &lt;em&gt;n&lt;/em&gt; part series, &amp;ldquo;Defining the Wolfram Language,&amp;rdquo; we begin to study the properties, namely the arity, affix, associativity, and precedence, of the Mathematica operators we found in &lt;a href=&#34;defining-the-wolfram-language-part-1-finding-operators&#34;&gt;Part 1&lt;/a&gt;. If we ended Part 1 proud of our accomplishment—perhaps even a little smug—then we will get reacquainted with our humility in this article.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Defining the Wolfram Language Part 1: Finding Operators</title>
-      <link>http://localhost:1313/posts/2018-08-16-defining-the-wolfram-language-part-1-finding-operators/</link>
+      <link>https://www.RobertJacobson.dev/posts/2018-08-16-defining-the-wolfram-language-part-1-finding-operators/</link>
       <pubDate>Thu, 16 Aug 2018 15:26:00 -0500</pubDate>
-      <guid>http://localhost:1313/posts/2018-08-16-defining-the-wolfram-language-part-1-finding-operators/</guid>
+      <guid>https://www.RobertJacobson.dev/posts/2018-08-16-defining-the-wolfram-language-part-1-finding-operators/</guid>
       <description>&lt;h1 id=&#34;finding-all-wolfram-language-operators&#34;&gt;Finding All Wolfram Language Operators&lt;/h1&gt;&#xA;&lt;p&gt;In this second article, Part 1 of an &lt;em&gt;n&lt;/em&gt; part series on &lt;em&gt;Defining the Wolfram Language&lt;/em&gt;, we start getting our hands dirty hunting down every single operator in Mathematica and each operator&amp;rsquo;s linguistic properties. To my knowledge, nobody outside of Wolfram has created such an exhaustive list before.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Defining the Wolfram Language Part 0: The Challenge</title>
-      <link>http://localhost:1313/posts/2018-07-02-defining-the-wolfram-language-part-0-the-challenge/</link>
+      <link>https://www.RobertJacobson.dev/posts/2018-07-02-defining-the-wolfram-language-part-0-the-challenge/</link>
       <pubDate>Mon, 02 Jul 2018 20:14:00 -0500</pubDate>
-      <guid>http://localhost:1313/posts/2018-07-02-defining-the-wolfram-language-part-0-the-challenge/</guid>
+      <guid>https://www.RobertJacobson.dev/posts/2018-07-02-defining-the-wolfram-language-part-0-the-challenge/</guid>
       <description>&lt;p&gt;&lt;em&gt;What is the definition of the Wolfram Language?&lt;/em&gt; This is the first in a series of articles attempting to answer this question.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Using Mathematica From Python</title>
-      <link>http://localhost:1313/posts/2014-12-10-using-mathematica-from-python/</link>
+      <link>https://www.RobertJacobson.dev/posts/2014-12-10-using-mathematica-from-python/</link>
       <pubDate>Wed, 10 Dec 2014 22:27:00 -0500</pubDate>
-      <guid>http://localhost:1313/posts/2014-12-10-using-mathematica-from-python/</guid>
+      <guid>https://www.RobertJacobson.dev/posts/2014-12-10-using-mathematica-from-python/</guid>
       <description>&lt;p&gt;In which I show you how to programmatically interface with a Mathematica kernel from Python.&lt;/p&gt;</description>
     </item>
   </channel>

@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Science Communication on After Math</title>
-    <link>http://localhost:1313/tags/science-communication/</link>
+    <link>https://www.RobertJacobson.dev/tags/science-communication/</link>
     <description>Recent content in Science Communication on After Math</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Robert Jacobson</copyright>
     <lastBuildDate>Wed, 19 Feb 2014 19:15:00 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/science-communication/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://www.RobertJacobson.dev/tags/science-communication/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hangout On Air - Math: A Love Story</title>
-      <link>http://localhost:1313/posts/2014-02-19-hangout-on-air-math-a-love-story/</link>
+      <link>https://www.RobertJacobson.dev/posts/2014-02-19-hangout-on-air-math-a-love-story/</link>
       <pubDate>Wed, 19 Feb 2014 19:15:00 -0500</pubDate>
-      <guid>http://localhost:1313/posts/2014-02-19-hangout-on-air-math-a-love-story/</guid>
+      <guid>https://www.RobertJacobson.dev/posts/2014-02-19-hangout-on-air-math-a-love-story/</guid>
       <description>&lt;p&gt;The &lt;a href=&#34;https://plus.google.com/communities/100568607954673744130&#34;&gt;Mathematics Community on Google+&lt;/a&gt; had our second ever Hangout On Air last week. I was joined by &lt;a href=&#34;https://plus.google.com/+LuisGuzmanJr/posts&#34;&gt;Luis Guzman&lt;/a&gt;, &lt;a href=&#34;https://plus.google.com/+JasonDavison/posts&#34;&gt;Jason Davison&lt;/a&gt;, and &lt;a href=&#34;https://plus.google.com/+AmyRobinson/posts&#34;&gt;Amy Robinson&lt;/a&gt; in a conversation that ranged from fluid dynamics to applying the mathematics of networks to map our ideas to JPEG image compression.&lt;/p&gt;</description>
     </item>
   </channel>

@@ -1,16 +1,11 @@
 ---
 title: "Making a Pratt Parser Generator Part 2"
-date: 2020-10-20 11:00
-cover: assets/images/posts/Sentence.jpg
+date: "2024-02-24T11:00:00-05:00"
+featured_image: "imgs/posts/Sentence.jpg"
 tags: [Compilers, Computer Science, Software Engineering]
-layout: post
-current: post
-class: post-template
-subclass: 'post tag-computer-science'
-navigation: True
-comments: True
-MathJax: True
-author: robert
+math: True
+draft: True
+author: "Robert Jacobson"
 ---
 
 ## Recap

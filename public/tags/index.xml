@@ -2,144 +2,144 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on After Math</title>
-    <link>http://localhost:1313/tags/</link>
+    <link>https://www.RobertJacobson.dev/tags/</link>
     <description>Recent content in Tags on After Math</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Robert Jacobson</copyright>
     <lastBuildDate>Thu, 13 Aug 2020 11:00:00 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://www.RobertJacobson.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Compilers</title>
-      <link>http://localhost:1313/tags/compilers/</link>
+      <link>https://www.RobertJacobson.dev/tags/compilers/</link>
       <pubDate>Thu, 13 Aug 2020 11:00:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/compilers/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/compilers/</guid>
       <description></description>
     </item>
     <item>
       <title>Software Engineering</title>
-      <link>http://localhost:1313/tags/software-engineering/</link>
+      <link>https://www.RobertJacobson.dev/tags/software-engineering/</link>
       <pubDate>Thu, 13 Aug 2020 11:00:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/software-engineering/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/software-engineering/</guid>
       <description></description>
     </item>
     <item>
       <title>COVID-19</title>
-      <link>http://localhost:1313/tags/covid-19/</link>
+      <link>https://www.RobertJacobson.dev/tags/covid-19/</link>
       <pubDate>Wed, 01 Jul 2020 11:00:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/covid-19/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/covid-19/</guid>
       <description></description>
     </item>
     <item>
       <title>Healthcare</title>
-      <link>http://localhost:1313/tags/healthcare/</link>
+      <link>https://www.RobertJacobson.dev/tags/healthcare/</link>
       <pubDate>Wed, 01 Jul 2020 11:00:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/healthcare/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/healthcare/</guid>
       <description></description>
     </item>
     <item>
       <title>Statistics</title>
-      <link>http://localhost:1313/tags/statistics/</link>
+      <link>https://www.RobertJacobson.dev/tags/statistics/</link>
       <pubDate>Wed, 01 Jul 2020 11:00:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/statistics/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/statistics/</guid>
       <description></description>
     </item>
     <item>
       <title>Mathematica</title>
-      <link>http://localhost:1313/tags/mathematica/</link>
+      <link>https://www.RobertJacobson.dev/tags/mathematica/</link>
       <pubDate>Tue, 04 Sep 2018 20:26:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/mathematica/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/mathematica/</guid>
       <description></description>
     </item>
     <item>
       <title>Computer Science</title>
-      <link>http://localhost:1313/tags/computer-science/</link>
+      <link>https://www.RobertJacobson.dev/tags/computer-science/</link>
       <pubDate>Thu, 02 Mar 2017 12:00:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/computer-science/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/computer-science/</guid>
       <description></description>
     </item>
     <item>
       <title>Education</title>
-      <link>http://localhost:1313/tags/education/</link>
+      <link>https://www.RobertJacobson.dev/tags/education/</link>
       <pubDate>Thu, 02 Mar 2017 12:00:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/education/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/education/</guid>
       <description></description>
     </item>
     <item>
       <title>Mathematics</title>
-      <link>http://localhost:1313/tags/mathematics/</link>
+      <link>https://www.RobertJacobson.dev/tags/mathematics/</link>
       <pubDate>Thu, 02 Mar 2017 12:00:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/mathematics/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/mathematics/</guid>
       <description></description>
     </item>
     <item>
       <title>Programming</title>
-      <link>http://localhost:1313/tags/programming/</link>
+      <link>https://www.RobertJacobson.dev/tags/programming/</link>
       <pubDate>Wed, 10 Dec 2014 22:27:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/programming/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/programming/</guid>
       <description></description>
     </item>
     <item>
       <title>Python</title>
-      <link>http://localhost:1313/tags/python/</link>
+      <link>https://www.RobertJacobson.dev/tags/python/</link>
       <pubDate>Wed, 10 Dec 2014 22:27:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/python/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/python/</guid>
       <description></description>
     </item>
     <item>
       <title>Art</title>
-      <link>http://localhost:1313/tags/art/</link>
+      <link>https://www.RobertJacobson.dev/tags/art/</link>
       <pubDate>Fri, 25 Jul 2014 22:57:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/art/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/art/</guid>
       <description></description>
     </item>
     <item>
       <title>Geometry</title>
-      <link>http://localhost:1313/tags/geometry/</link>
+      <link>https://www.RobertJacobson.dev/tags/geometry/</link>
       <pubDate>Fri, 25 Jul 2014 22:57:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/geometry/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/geometry/</guid>
       <description></description>
     </item>
     <item>
       <title>Academia</title>
-      <link>http://localhost:1313/tags/academia/</link>
+      <link>https://www.RobertJacobson.dev/tags/academia/</link>
       <pubDate>Thu, 17 Apr 2014 20:52:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/academia/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/academia/</guid>
       <description></description>
     </item>
     <item>
       <title>Teaching</title>
-      <link>http://localhost:1313/tags/teaching/</link>
+      <link>https://www.RobertJacobson.dev/tags/teaching/</link>
       <pubDate>Sat, 12 Apr 2014 16:33:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/teaching/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/teaching/</guid>
       <description></description>
     </item>
     <item>
       <title>Science Communication</title>
-      <link>http://localhost:1313/tags/science-communication/</link>
+      <link>https://www.RobertJacobson.dev/tags/science-communication/</link>
       <pubDate>Wed, 19 Feb 2014 19:15:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/science-communication/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/science-communication/</guid>
       <description></description>
     </item>
     <item>
       <title>Data Science</title>
-      <link>http://localhost:1313/tags/data-science/</link>
+      <link>https://www.RobertJacobson.dev/tags/data-science/</link>
       <pubDate>Sat, 15 Feb 2014 21:49:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/data-science/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/data-science/</guid>
       <description></description>
     </item>
     <item>
       <title>Finance</title>
-      <link>http://localhost:1313/tags/finance/</link>
+      <link>https://www.RobertJacobson.dev/tags/finance/</link>
       <pubDate>Sat, 15 Feb 2014 21:49:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/finance/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/finance/</guid>
       <description></description>
     </item>
     <item>
       <title>Calculus</title>
-      <link>http://localhost:1313/tags/calculus/</link>
+      <link>https://www.RobertJacobson.dev/tags/calculus/</link>
       <pubDate>Tue, 28 Jan 2014 21:41:00 -0500</pubDate>
-      <guid>http://localhost:1313/tags/calculus/</guid>
+      <guid>https://www.RobertJacobson.dev/tags/calculus/</guid>
       <description></description>
     </item>
   </channel>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Common Optimizations for Levenshtein Edit Distance | After Math</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="I have been studying algorithms to compute the Levenshtein edit distance between two strings, which is defined as the minimum number of &ldquo;edits&rdquo; required to transform one string into another string. This is useful for a variety of things, from DNA sequence alignment to spell correction to address validation. I am studying it to resolve misspelled and OCR&rsquo;ed scientific names of organisms to their real names, a famous problem in the field.">
+    <meta name="generator" content="Hugo 0.123.2">
+    
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+    
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/posts/2024-12-02-edit-distance-optimizations/">
+    
+
+    <meta property="og:title" content="Common Optimizations for Levenshtein Edit Distance" />
+<meta property="og:description" content="I have been studying algorithms to compute the Levenshtein edit distance between two strings, which is defined as the minimum number of &ldquo;edits&rdquo; required to transform one string into another string. This is useful for a variety of things, from DNA sequence alignment to spell correction to address validation. I am studying it to resolve misspelled and OCR&rsquo;ed scientific names of organisms to their real names, a famous problem in the field." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/2024-12-02-edit-distance-optimizations/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-12-02T21:18:14-06:00" />
+<meta property="article:modified_time" content="2024-12-02T21:18:14-06:00" />
+
+<meta itemprop="name" content="Common Optimizations for Levenshtein Edit Distance">
+<meta itemprop="description" content="I have been studying algorithms to compute the Levenshtein edit distance between two strings, which is defined as the minimum number of &ldquo;edits&rdquo; required to transform one string into another string. This is useful for a variety of things, from DNA sequence alignment to spell correction to address validation. I am studying it to resolve misspelled and OCR&rsquo;ed scientific names of organisms to their real names, a famous problem in the field."><meta itemprop="datePublished" content="2024-12-02T21:18:14-06:00" />
+<meta itemprop="dateModified" content="2024-12-02T21:18:14-06:00" />
+<meta itemprop="wordCount" content="4428">
+<meta itemprop="keywords" content="Algorithms,Computer Science,Software Engineering," /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Common Optimizations for Levenshtein Edit Distance"/>
+<meta name="twitter:description" content="I have been studying algorithms to compute the Levenshtein edit distance between two strings, which is defined as the minimum number of &ldquo;edits&rdquo; required to transform one string into another string. This is useful for a variety of things, from DNA sequence alignment to spell correction to address validation. I am studying it to resolve misspelled and OCR&rsquo;ed scientific names of organisms to their real names, a famous problem in the field."/>
+
+	
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  
+  <header class="cover bg-top" style="background-image: url('http://localhost:1313/imgs/posts/Levenshtein.jpg');">
+    <div class="bg-black-60">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        After Math
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/about/" title="About page">
+              About
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/computer-science/" title="Computer Science page">
+              Computer Science
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/education/" title="Education page">
+              Education
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/mathematics/" title="Mathematics page">
+              Mathematics
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/tags/" title="Tags page">
+              Tags
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div class="ananke-socials">
+  
+    
+    <a href="https://twitter.com/rljacobson" target="_blank" rel="noopener" class="twitter ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Twitter link" aria-label="follow on Twitter——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://github.com/rljacobson/" target="_blank" rel="noopener" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://www.linkedin.com/in/robertljacobson/" target="_blank" rel="noopener" class="linkedin ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" aria-label="follow on LinkedIn——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+
+    </div>
+  </div>
+</nav>
+
+      <div class="tc-l pv6 ph3 ph4-ns">
+        
+          <div class="f2 f1-l fw2 white-90 mb0 lh-title">Common Optimizations for Levenshtein Edit Distance</div>
+          
+        
+      </div>
+    </div>
+  </header>
+
+
+
+    <main class="pb4" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside>
+      
+
+
+
+
+
+
+
+
+
+
+  <div id="sharing" class="mt3 ananke-socials">
+    
+      
+      <a href="https://twitter.com/intent/tweet?url=http://localhost:1313/posts/2024-12-02-edit-distance-optimizations/&amp;text=Common%20Optimizations%20for%20Levenshtein%20Edit%20Distance" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
+        
+        <span class="icon"> <svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+        
+      </a>
+    
+      
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://localhost:1313/posts/2024-12-02-edit-distance-optimizations/&amp;title=Common%20Optimizations%20for%20Levenshtein%20Edit%20Distance" class="ananke-social-link linkedin no-underline" aria-label="share on LinkedIn">
+        
+        <span class="icon"> <svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+        
+      </a>
+    
+  </div>
+
+
+      <h1 class="f1 athelas mt3 mb1">Common Optimizations for Levenshtein Edit Distance</h1>
+      
+      <p class="tracked">
+        By <strong>Robert Jacobson</strong>
+      </p>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2024-12-02T21:18:14-06:00">December 2, 2024</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>I have been studying algorithms to compute the <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein edit distance</a> between two strings, which is defined as the minimum number of &ldquo;edits&rdquo; required to transform one string into another string. This is useful for a variety of things, from DNA sequence alignment to spell correction to address validation. I am studying it to resolve misspelled and OCR&rsquo;ed scientific names of organisms to their real names, a famous problem in the field. The idea, of course, is to search a list of correct names for the given name and select the correct name that has the lowest distance to the given name. Sometimes this is called fuzzy matching.</p>
+<p>There are lots of other great articles you can read to learn about this metric and about the standard algorithm to compute it, so I won&rsquo;t go into those details here. Read one of those articles and then come back here once you have a vague idea about how it works.</p>
+<p>Right, ok, the main idea is that we construct a matrix in which a cell at <code>(row, col) = (i, j)</code> stores the minimum number of edits required to transform the first <code>i</code> characters of the first string into the first <code>j</code> characters of the second string, and this is done by taking the smallest number of edits from among the choices of <code>delete</code>, <code>insert</code>, and <code>substitute</code>. The number in <code>(m, n)</code>, where <code>m</code> and <code>n</code> are the lengths of the strings, is the final edit distance. If you keep track of <em>which</em> edits result in the minimum value at each cell (there may be more than one) while you compute the matrix, you can even recover the sequence(s) of edits required to do the job by tracing backwards from the lower right corner to the upper left corner. This is sometimes called the Wagner–Fischer algorithm. Here&rsquo;s the obligatory cute example:</p>
+<pre tabindex="0"><code>Standard Algorithm (max_cost = 4)
+       d   o   g   b   e   r   t
+   0 → 1 → 2 → 3 → 4 → 5 → 6 → 7
+   ↓ ↘   ↘   ↘   ↘   ↘   ⇘
+r  1   1 → 2 → 3 → 4 → 5   5 → 6
+   ↓ ↘ ↓ ⇘                   ↘
+o  2   2   1 → 2 → 3 → 4 → 5 → 6
+   ↓ ↘ ↓   ↓ ↘   ⇘
+b  3   3   2   2   2 → 3 → 4 → 5
+   ↓ ↘ ↓ ⇘ ↓ ↘ ↓ ↘ ↓ ↘   ↘   ↘
+o  4   4   3   3   3   3 → 4 → 5
+   ↓ ↘ ↓   ↓ ↘ ↓ ↘ ↓ ↘ ↓ ↘   ⇘
+t  5   5   4   4   4   4   4   4
+</code></pre><p>If you are fuzzy searching a very large database, or if you are doing a lot of searches, or if your strings are extremely long, then it is important to do this computation very fast. There are specialized algorithms for a variety of special situations, some using GPUs or SIMD instructions, some in which the list being searched is preprocessed, and so forth. I will discuss only the pedestrian case here, though the others are also fascinating.</p>
+<h2 id="major-optimizations">Major Optimizations</h2>
+<p>The most significant optimizations that you can make, at least for the case that you compare a single string against a large number of other strings, have very little to do with the Levenshtein distance computation itself. They are the first two we tackle.</p>
+<h3 id="remember-the-closest-match">Remember The Closest Match</h3>
+<p>In the special <em>but very common</em> case that you are trying to find the closest string in a large collection of strings to a single particular string, the best optimization you can do is to remember the smallest distance you have seen so far and use that distance as the <code>max_edits</code> parameter in any limited distance / banded algorithm variant (discussed below). The speedup is <em>significant</em>. For both synthetic and real-world data I have found that this algorithm takes only twice as long as a noop function that immediately returns. YMMV, of course, but for typical use cases expect to see a multiple orders of magnitude performance benefit.</p>
+<h3 id="allocate-once">Allocate Once</h3>
+<p>Many real-world implementations, including those implementations intended for use in industrial strength databases, allocate memory on ever single call. Allocation is a slow operation, so this is quite wasteful. In MySQL/MariaDB, for example, UDFs provide an initialization function and a mechanism to remember data between function calls:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">lev_init</span>(UDF_INIT <span style="color:#f92672">*</span>initid, UDF_ARGS <span style="color:#f92672">*</span>args, <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>message) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...other code to check the number and type of arguments or anything else...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Preallocate a buffer. A pointer to it can be saved in `UDF_INIT::ptr`.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    initid<span style="color:#f92672">-&gt;</span>ptr <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>)<span style="color:#66d9ef">new</span>(std<span style="color:#f92672">::</span>nothrow) <span style="color:#66d9ef">int</span>[DAMLEV_MAX_EDIT_DIST];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (initid<span style="color:#f92672">-&gt;</span>ptr <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ... any other necessary code...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">lev_deinit</span>(UDF_INIT <span style="color:#f92672">*</span>initid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Don&#39;t forget to properly release the memory!
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">delete</span>[] <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">*&gt;</span>(initid<span style="color:#f92672">-&gt;</span>ptr);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">lev</span>(UDF_INIT <span style="color:#f92672">*</span>initid, UDF_ARGS <span style="color:#f92672">*</span>args, <span style="color:#a6e22e">[[maybe_unused]]</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>is_null, <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>error) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Fetch the preallocated buffer.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>buffer <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*&gt;</span>(initid<span style="color:#f92672">-&gt;</span>ptr);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ...the rest of the algorithm...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>In cases where it&rsquo;s feasible, such as database queries, allocate memory only a single time and reuse that memory on
+every function call. As always, be sure to reclaim that memory on teardown.</p>
+<h3 id="trimming">Trimming</h3>
+<p>Under some circumstances, trimming any common prefix or suffix prior to running the algorithm can be advantageous. The resulting strings are shorter, and in the max-limited case the length differences between the strings might already exceed the max allowed distance, letting you return without doing the algorithm at all. This is especially useful when</p>
+<ol>
+<li>the strings are long, and</li>
+<li>the strings are known to be similar, and</li>
+<li>you can use SIMD or other specialized instructions to perform the trimming very quickly.</li>
+</ol>
+<p>For reasonably short strings (&lt;250 characters), if the other optimizations given here are implemented, trimming won&rsquo;t give any measurable advantage even when the strings are identical. On the other hand, this means that trimming is essentially &ldquo;free&rdquo; to do&ndash;it&rsquo;s a wash&ndash;so if you have some other external reason to trim the strings, you might as well.</p>
+<h3 id="limited-distance-variant-the-banded-algorithm">Limited Distance Variant (The Banded Algorithm)</h3>
+<p>In many situations, you only care about computing distances that are &ldquo;small,&rdquo; say, less than some number <code>max_edits</code>. Now, edit distance is <em>always</em> bounded above by the length of the longest string, so we&rsquo;ll assume <code>max_edits</code> is always smaller than that. In such a case we can use a &ldquo;banded&rdquo; variant of the standard algorithm. The basic idea is, we don&rsquo;t have to compute the cells of the matrix for which we can prove that the edit distance from that cell will exceed <code>max_edits</code>, and if you can prove that the distance will exceed <code>max_edits</code> no matter what, you don&rsquo;t have to finish the computation at all. Just return <code>infinity</code> or <code>max_edits + 1</code> or whatever makes sense to you.</p>
+<h4 id="bailing-early">Bailing Early</h4>
+<p>Observe that if one string is longer than the other, then you will need to insert characters into the shorter one (equivalently, delete characters from the longer one) to make the strings the same length. Assuming <code>m &gt; n</code>, you will need at least <code>m-n</code> insertions. So if <code>m-n &gt; max_edits</code>, you&rsquo;re done! And it only costs one subtraction and one comparison. This exit condition can be combined with any of the other optimizations discussed here.</p>
+<p>Another simple idea is, while computing each row, to keep track of the minimum distance computed in the row, and if that minimum row distance ever exceeds <code>max_edits</code>, you know that the final edit distance will exceed <code>max_edits</code>, because the minimum edit distance is nondecreasing with each row. (This optimization is not needed if you use optimal band narrowing discussed below, but other banded algorithms can benefit.)</p>
+<p>These two optimizations are quite common in real-world implementations.</p>
+<h4 id="narrowing-the-band">Narrowing the Band</h4>
+<h5 id="constant-width-band">Constant Width Band</h5>
+<p>The simplest way to construct the band is to observe that if we do more than <code>max_edits</code> inserts or deletions, then we
+will obviously exceed <code>max_edits</code>. Therefore, we only need to compute <code>matrix(i, j)</code> where the column <code>j</code> satisfies <code>i - max_edits &lt;= j &lt;= i + max_edits</code>. So the band has a width of <code>2*max_edits + 1</code>, and you end up computing a total of
+<code>(2*max_edits + 1)*m</code> cells, where here we assume WLOG that <code>m&gt;=n</code>.  (The <code>+1</code> is for the cell exactly on the diagonal itself.) This is the most common banded variant I have seen
+in the wild.</p>
+<p>We can do better by noticing that <code>(m-n)</code> insertions are required in order to make the strings the same length. The quantity <code>max_edits - (m-n)</code> represents the remaining cost budget after accounting for the <code>(m-n)</code> insertions we know are required. It is possible for there to be additional insertions beyond the required <code>(m-n)</code> insertions, but for every additional insertion beyond the <code>(m-n)</code>, there will have to be a corresponding deletion for the strings to end up the same length. Therefore, for every additional insertion, the total cost will be 2, one for the insertion and one for the corresponding deletion. There can be at most <code>(max_edits -(m-n))/2</code>, because <code>2*(max_edits - (m-n))/2 = max_edits - (m-n)</code>, our remaining cost budget. The upshot is that now our band can only go a distance <code>max_edits - (max_edits -(m-n))/2 = (max_edits + m-n) / 2 </code> away from the diagonal. Therefore, the band has total width <code>2*(max_edits + m-n) / 2 + 1 = max_edits + m-n + 1</code>. Since we already assume that <code>m - n &lt; max_edits</code> (because otherwise we would have bailed early), this band width is <em>strictly better</em> than the one in the previous paragraph.</p>
+<p>I rarely see this optimization employed in implementations with constant band width even though it is mentioned in the literature. My guess is it&rsquo;s because academics are terrible communicators and so it can be difficult for non academics to understand why the formula works.</p>
+<h5 id="dynamic-width-band">Dynamic Width Band</h5>
+<p>There are a few different ways to narrow the band dynamically. A simple way is to just subtract the minimum edit distance within a row from your total cost budget. On my own machine, this counterintuitively performs <em>worse</em> than having a constant band width. The most likely reason is that the benefits of computing fewer cells are outweighed by the increase in branch mispredictions. The lesson here is that dynamically adjusting the band width has to give a big enough advantage that it pays for itself. Of course, you should benchmark and measure <em>on your own machine</em>.</p>
+<p>There are a few other heuristic methods of narrowing the band, but let&rsquo;s skip to the optimal band width. First we will establish some terminology, and then we will derive the stop condition.</p>
+<p>The diagonal cells of the matrix <em>starting from the upper left corner</em> represent when the strings are the same length. The diagonal cells of the matrix <em>starting from the lower right corner</em> represent when the strings have the same number of characters remaining. You can think of this second diagonal as where you are after spending the <code>(m-n)</code> inserts into the shorter string to obtain the longer string (or equivalently, the deletions from the longer string to obtain the shorter string). We shall call it the <em>right diagonal</em>. On the <code>i</code>th row the right diagonal is at column <code>i + (m-n)</code>. Also, we will call the first column in the band <code>start_j</code> and the last column in the band <code>end_j</code>, so that we compute all cells <code>matrix(i, j)</code> for <code>start_j &lt;= j &lt;= end_j</code> (inclusive). Recall that ultimately the final edit distance will be computed in the bottom right corner, <code>matrix(m, n)</code>.</p>
+<p>After computing a row, we have additional information about our remaining cost budget. Assume for the moment that
+<code>end_j</code> is large enough that it extends <em>beyond</em> the right diagonal. The cell <code>matrix(i, end_j)</code> represents both the
+insertions needed to reach the right diagonal, the additional insertions to reach <code>end_j</code>, and any additional edits that
+may have occurred. But recall that every insertion beyond the right diagonal (beyond <code>(m-n)</code> insertions) must
+necessarily be paired with a deletion. The number of additional insertions at <code>end_j</code> is <code>|end_j - (i + (m-n))|</code>, which
+is just the distance from <code>end_j</code> to the right diagonal. Therefore,  <code>matrix(i, end_j) + |end_j - (i + (m-n))|</code> is a
+<em>lower bound</em> on the final number of edits required to transform one string into the other.  We require this lower bound
+to be no greater than <code>max_edits</code>, that is, <code>matrix(i, end_j) + |end_j - (i + (m-n))| &lt;= max_edits</code>. We can compute the LHS
+value explicitly at each row, and if <code>end_j</code> is too large, we decrement it and recheck the inequality and continue
+decrementing <code>end_j</code> until the inequality holds. As an exercise, verify to yourself that this inequality tells us we
+should initialize <code>end_j</code> to <code>(max_edits + m-n) / 2</code>, the same formula from the previous section. Consequently, this
+algorithm is at least as efficient as having a band of constant width <code>(max_edits + m-n)  + 1</code>.</p>
+<p>By a symmetric argument, we require <code>matrix(i, end_j) + |(i + (m-n)) - start_j| &lt;= max_edits</code>. (Try to write it out yourself as an exercise using the previous paragraph as a model.) After computing each row, the update of <code>start_j</code> and <code>end_j</code> looks something like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">// See if we can make the band narrower based on the row just computed.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">while</span>( end_j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> row[end_j] <span style="color:#f92672">+</span> std<span style="color:#f92672">::</span>abs(end_j <span style="color:#f92672">-</span> i <span style="color:#f92672">-</span> m<span style="color:#f92672">-</span>n) <span style="color:#f92672">&gt;</span> max ){
+</span></span><span style="display:flex;"><span>    end_j<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Increment for next row
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>end_j <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>min(m, end_j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// The starting point is a little different. It is &#34;sticky&#34; unless we can prove it can shrink.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Think of it as, both start and end do the most conservative thing.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">while</span>( start_j <span style="color:#f92672">&lt;=</span> end_j <span style="color:#f92672">&amp;&amp;</span> std<span style="color:#f92672">::</span>abs(i <span style="color:#f92672">+</span> m<span style="color:#f92672">-</span>n <span style="color:#f92672">-</span> start_j) <span style="color:#f92672">+</span> row[start_j] <span style="color:#f92672">&gt;</span> max ) {
+</span></span><span style="display:flex;"><span>    start_j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>If ever <code>start_j &gt; end_j</code> (the case of an &ldquo;empty band&rdquo;) before the algorithm ends, we know we will exceed <code>max_edits</code> and can stop computing.</p>
+<p>This needs to be modified slightly for Damerau–Levenshtein edit distance, which only differs by allowing transpositions, because Damerau–Levenshtein needs to see out an additional column to detect transpositions. So just subtract 1 from the LHS in both <code>start_j</code> and <code>end_j</code> inequalities.</p>
+<p>Very few implementations use this optimal band narrowing, but it is out there in a few places. As my advisor would say, it is well-known by those who know it.</p>
+<h2 id="micro-optimizations">Micro Optimizations</h2>
+<p>The optimizations in this section will give you, say, 2% here, or 5% there. Or they might make it slower on your
+machine. Different architectures behave differently. You need to benchmark and measure in order to know how it will
+behave on your machine. You would only experiment with these optimizations if you are interested in squeezing out the
+last drop of performance from your algorithm.</p>
+<h3 id="dont-initialize-sentinels">Don&rsquo;t initialize sentinels</h3>
+<p>Intuition dictates that you should initialize the cells immediately to the left or right of the band with <code>max_edits + 1</code>, like so:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (start_j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) row[start_j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> max <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (end_j   <span style="color:#f92672">&lt;</span> m) row[end_j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]   <span style="color:#f92672">=</span> max <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><p>The intuition is that these cells will be <em>read</em>, the first one when computing <code>matrix(i, start_j)</code>, and the second one when computing <code>matrix(i+1, end_{j+1} - 1)</code>. (The notation is a little clumsy here. The quantity <code>end_{j+1}</code> is meant to be the last column computed on row <code>i+1</code>.) Since we know the real values of <code>matrix(i, start_j - 1)</code> and <code>matrix(i, end_j + 1)</code> are too large to contribute to the final edit distance, and since we don&rsquo;t actually want to <em>compute</em> those values, we need (it seems) to put something there that the algorithm can safely read that we know will force the cell to not participate in the final answer.</p>
+<p>However, if you are using the memory optimizations described below, then the values remaining in these cells are:</p>
+<ul>
+<li>on the left hand side, the value of <code>matrix(i-1, start_{j - 1})</code> that was already proved to result in exceeding <code>max_edits</code> in order for us to increment <code>start_j</code> to its current position, or, in the case of <code>start_j==1</code>, the value <code>i</code>, which is the largest edit distance possible on row <code>i</code>; and</li>
+<li>on the right hand side, the value of <code>matrix(i-1, end_j)</code> that was already proved to result in exceeding <code>max_edits</code> in order for us to decrement <code>end_j</code> to its current position, or, in the case that <code>end_j</code> is as large as it&rsquo;s ever been, the value <code>i</code>, which is the largest edit distance possible on row <code>i</code>.</li>
+</ul>
+<p>In all cases, neither of these values will interfere with your final computation, as they are already too large to make a difference.</p>
+<h3 id="lazy--unconditional-initialization-of-first-column">Lazy / Unconditional Initialization of First Column</h3>
+<p>The standard algorithm initializes the first column (index zero) with <code>i</code>, which is the number of deletions required to transform the second string into the empty string. You only need to do this, of course, if <code>start_j == 1</code>, as otherwise that value will never be accessed. On my machine, initializing this value conditionally or unconditionally makes no difference&ndash;it&rsquo;s a complete wash.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (start_j <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#75715e">// This line seems to make no difference.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        row[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> i;
+</span></span></code></pre></div><h3 id="max-and-min-functions">Max and Min Functions</h3>
+<p>Some people like to define their own maximum and minimum functions like so:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">#define MIN(x, y) ((x) &lt; (y) ? (x) : (y))
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define MAX(x, y) ((x) &gt; (y) ? (x) : (y))
+</span></span></span></code></pre></div><p>On my machine <code>std::max</code> and <code>std::min</code> were measurably faster, though not by very much. Likewise, the STL provides multi-argument variants of these functions: <code>std::min({a, b, c})</code>. On some architectures this might provide a benefit.</p>
+<h3 id="make-the-first-string-the-longest--shortest-string">Make The First String The Longest / Shortest String</h3>
+<p>On your architecture you might see a benefit to forcing the longest string to be the source and the shortest string to be the target&ndash;or the other way around! I saw a very small but measurable difference. But if there is no difference, it might be helpful to do anyway just to make things easier to reason about. For example, if you always have <code>m &gt;= n</code>, then <code>m-n</code> is non negative, which might save you one use of absolute value. This won&rsquo;t make a difference in the running time, but I found it to ease the cognitive burden a little bit while studying the problem.</p>
+<h3 id="use-end_j-instead-of-i--right_band_width">Use <code>end_j</code> Instead of <code>i + right_band_width</code></h3>
+<p>Since we have derived the value of <code>end_j</code> by reasoning about a maximum distance from the diagonal, it is tempting to
+keep track of the right maximum distance and the left maximum distance and then let <code>j</code> range from <code>i - left_band_width</code>
+to <code>i + right_band_width</code>. In other words:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#75715e">// The inner loop over columns
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span>(j <span style="color:#f92672">=</span> i <span style="color:#f92672">-</span> left_band_width; j <span style="color:#f92672">&lt;=</span> i <span style="color:#f92672">+</span> right_band_width; j<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// compute `matrix(i,j)`
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>Instead of keeping track of relative distance from the diagonal, it&rsquo;s slightly more efficient to keep track of the
+absolute position of the start and end. Apparently all of those additions and subtractions do add up enough to make a
+measurable difference.</p>
+<h2 id="memory-optimizations">Memory Optimizations</h2>
+<p>The matrix for two strings of lengths <code>m</code> and <code>n</code> requires <code>(m+1)(n+1)</code> bytes of memory. So strings of length 100
+already need ~10KB of memory. This is certainly feasible with modern hardware, but the memory requirement grows quickly
+with string length. We can do much better. In general, these memory optimizations don&rsquo;t affect speed, at least for
+reasonably small strings, except for any benefit from the micro optimization of not initializing sentinel values (see above).</p>
+<p>It is easy to see that the computation of the next row of the matrix depends only on data in the previous and current
+rows. A common optimization, then, is to only keep two rows of the matrix in memory at any given time, one row to hold
+the previous row, and another to hold the row currently being computed. This obviously requires <code>2(m+2)</code> bytes, where,
+if we prefer, we can choose <code>m</code> to be the length of the shortest string&ndash;though which string length you use doesn&rsquo;t matter in practice.</p>
+<p>Similarly, Damerau–Levenshtein variants might keep three rows.</p>
+<h3 id="single-row-levenshtein">Single Row Levenshtein</h3>
+<p>Less common, but just as easy to implement, is to only keep <em>one</em> row in memory, and overwrite each cell of that row as the current row is being computed. Writing to the cell at <code>matrix(i, j)</code> overwrites the data from cell at <code>matrix(i-1, j)</code>, which is needed for the computation of the very next cell at <code>matrix(i, j+1)</code>. But after that, the data is no longer needed. Therefore, we can store the value of <code>matrix(i-1, j)</code> in a temporary variable before overwriting it and use the temporary variable for the computation of the next cell. (The data in <code>matrix(i, j-1)</code> is not a problem, of course, because it was computed in the previous iteration and lives in the previous array position.) This obviously requires only <code>(m+1)</code> bytes of storage, half of the two row optimization. Whether or not this advantage is worth the added complexity is a matter of opinion. For short strings on modern hardware it is unlikely to make a difference.</p>
+<p>One can do even better in banded variants of the algorithm. One needs only <code>2 * max_edits + 1</code> bytes at most (assuming <code>max_edits &lt; max(m, n)</code>). However, only in the most specialized of circumstances would any sane person implement this. I will leave the implementation details as an exercise to the reader.</p>
+<h3 id="two-row-dameraulevenshtein">Two Row Damerau–Levenshtein</h3>
+<p>I do not claim to be the first person to invent this, because I think that is unlikely given the tremendous amount of attention this algorithm has received, but I have never seen anyone else implement this technique.</p>
+<p>Following the pattern of the single row Levenshtein variant, we extend it to the two row Damerau–Levenshtein variant. We call our two rows <code>previous</code> and <code>current</code>, and we refer to the <code>(row, col) = (i, j)</code> entry in the (now unrealized) matrix of the vanilla algorithm as <code>matrix(i,j)</code>. Our argument that this algorithm does what we want it to will be an inductive argument. First the inductive step.</p>
+<p>At the start of the computation of cell <code>matrix(i, j)</code> assume the following is true:</p>
+<pre tabindex="0"><code>                current[p]  = {  matrix(i, p)     for p &lt; j
+                              {  matrix(i-1, p)   for p &gt;= j
+                previous[p] = {  matrix(i-1, p)   for p &lt; j - 2
+                              {  matrix(i-2, p)   for p &gt;= j - 2
+                previous_cell          = matrix(i-1, j-1)
+                previous_previous_cell = matrix(i-1, j-2)
+</code></pre><p>To compute <code>matrix(i, j)</code>, we need to use the following:</p>
+<pre tabindex="0"><code>                matrix(i  , j-1) = current[j-1]
+                matrix(i-2, j-2) = previous[j-2]
+                matrix(i-1, j-1) = previous_cell
+                matrix(i-1, j  ) = current[j]
+</code></pre><p>The RHS shows that, given the initial facts, we indeed have these values available, so we are indeed able to compute the value in <code>matrix(i, j)</code>. To establish the induction step, we need to show that we can update <code>current</code>, <code>previous</code>, <code>previous_cell</code>, and the tediously named <code>previous_previous_cell</code> so as to maintain the invariant for the start of the next iteration.</p>
+<p>For convenience, we introduce another temporary variable <code>current_cell</code>. We compute <code>current_cell = matrix(i, j)</code> and then perform the update for the next iteration (for <code>j+1</code>):</p>
+<pre tabindex="0"><code>previous[j-2]          &lt;-- previous_previous_cell := matrix(i-1, j-2),  only if j &gt; 1
+previous_previous_cell &lt;-- previous_cell          := matrix(i-1, j-1)
+previous_cell          &lt;-- current[j]             := matrix(i-1, j)
+current[j]             &lt;-- current_cell           := matrix(i, j)
+</code></pre><p>It is evident from this update procedure that we can indeed maintain the invariant. To establish the base case of the induction argument, you just need to show that there&rsquo;s a way to initialize everything, which is trivial and left as an exercise for the reader.</p>
+<h3 id="one-row-dameraulevenshtein">One Row Damerau–Levenshtein</h3>
+<p>I published an early attempt at a <em>one</em> row Damerau–Levenshtein variant several years ago in which I attempted to store
+the information from the <code>previous</code> array in a single variable. If you squint, wave your hands a little bit, and don&rsquo;t
+test the algorithm on a lot of cases with transpositions, the algorithm looks like it works. And a quick look around the
+internet shows that a few people picked up this algorithm, apparently trusting, perhaps because of my credentials, that
+I had proven it correct, or at least rigorously tested it. In retrospect, I wish I had labeled that algorithm as
+experimental and still in need of peer review. In my defense, I didn&rsquo;t make any claims about that algorithm at all, its
+fitness, or its peer review status&ndash;in fact I explicitly warned people not to trust code they find on the internet and
+to do their own testing. Even so, at the end of the day I did release an algorithm to a public space that isn&rsquo;t correct,
+and a few people apparently picked it up.</p>
+<p>I am not aware of a way to compute Damerau–Levenshtein (Levenshtein with transpositions) in a single row.</p>
+<p>I reiterate my warning to <em>not trust code you find on the internet</em> without doing your own review and testing. The desire to communicate that message especially in the context of Levenshtein edit distance implementations is actually what motivated me to publish anything publicly in the first place. I have found a lot of widely used implementations that are susceptible to buffer overflow and DoS attacks. I shudder to think of how much infrastructure is running these implementations on public facing servers.</p>
+<h2 id="more-esoteric-optimizations">More Esoteric Optimizations</h2>
+<p>The data dependence goes from top left to bottom right. Thus, the cells on the lines <code>i = -j + b</code> can be computed in
+parallel. This observation is the foundation for most GPU, SIMD, and multithreaded implementations. These variants
+almost certainly perform worse than the variants discussed here for small strings (on the order of 40 characters or so)
+because of overhead of shunting data around in memory. They are useful for very long strings. I haven&rsquo;t bothered
+implementing any of these, because my use case is small strings only.</p>
+<p>But that also means that I haven&rsquo;t <em>shown</em> conclusively that those variants are not faster than the variants I have implemented, and our mantra is <em>benchmark and measure on your machine. YOUR MILEAGE MAY VARY.</em></p>
+<p>You can do better than these algorithms if you are able to preprocess your list of strings to be searched. This is the
+standard approach taken for spelling correction and word prediction algorithms. <a href="https://www.geeksforgeeks.org/data-structure-dictionary-spell-checker/">Here is a very brief
+overview</a> to get you started. The most common
+strategy uses a data structure called a <a href="https://en.wikipedia.org/wiki/Trie">trie</a> (frustratingly pronounced &ldquo;tree&rdquo;, but
+I refuse to do so). There are other strategies. Be skeptical of claims made by a particular person on the internet who I
+won&rsquo;t name about an algorithm that is several orders of magnitude better than any other algorithm. Maybe it is and maybe
+it isn&rsquo;t for your use case. You will have to <em>benchmark and measure</em> to be sure. The best strategy for your use case
+will depend on your specific constrains on memory/disk space, speed requirements, available hardware, and so forth.</p>
+<ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/algorithms/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Algorithms</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/computer-science/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Computer Science</a>
+   </li>
+  
+   <li class="list di">
+     <a href="/tags/software-engineering/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">Software Engineering</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+  <div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">Related</p>
+    <ul class="pa0 list">
+	   
+	     <li  class="mb2">
+          <a href="/posts/2024-02-24-making-a-pratt-parser-generator-part-2/">Making a Pratt Parser Generator Part 2</a>
+        </li>
+	    
+	     <li  class="mb2">
+          <a href="/posts/2020-08-13-designing-a-pratt-parser-generator/">Making a Pratt Parser Generator Part 1</a>
+        </li>
+	    
+    </ul>
+</div>
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Robert Jacobson 2024 
+  </a>
+    <div>
+<div class="ananke-socials">
+  
+    
+    <a href="https://twitter.com/rljacobson" target="_blank" rel="noopener" class="twitter ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="Twitter link" aria-label="follow on Twitter——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://github.com/rljacobson/" target="_blank" rel="noopener" class="github ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="GitHub link" aria-label="follow on GitHub——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <path d="M256,32C132.3,32,32,134.8,32,261.7c0,101.5,64.2,187.5,153.2,217.9c11.2,2.1,15.3-5,15.3-11.1   c0-5.5-0.2-19.9-0.3-39.1c-62.3,13.9-75.5-30.8-75.5-30.8c-10.2-26.5-24.9-33.6-24.9-33.6c-20.3-14.3,1.5-14,1.5-14   c22.5,1.6,34.3,23.7,34.3,23.7c20,35.1,52.4,25,65.2,19.1c2-14.8,7.8-25,14.2-30.7c-49.7-5.8-102-25.5-102-113.5   c0-25.1,8.7-45.6,23-61.6c-2.3-5.8-10-29.2,2.2-60.8c0,0,18.8-6.2,61.6,23.5c17.9-5.1,37-7.6,56.1-7.7c19,0.1,38.2,2.6,56.1,7.7   c42.8-29.7,61.5-23.5,61.5-23.5c12.2,31.6,4.5,55,2.2,60.8c14.3,16.1,23,36.6,23,61.6c0,88.2-52.4,107.6-102.3,113.3   c8,7.1,15.2,21.1,15.2,42.5c0,30.7-0.3,55.5-0.3,63c0,6.1,4,13.3,15.4,11C415.9,449.1,480,363.1,480,261.7   C480,134.8,379.7,32,256,32z"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+    
+    <a href="https://www.linkedin.com/in/robertljacobson/" target="_blank" rel="noopener" class="linkedin ananke-social-link link-transition stackoverflow link dib z-999 pt3 pt0-l mr1" title="LinkedIn link" aria-label="follow on LinkedIn——Opens in a new window">
+      
+        <span class="icon"><svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span>
+      
+<span class="new-window"><svg  height="8px"  style="enable-background:new 0 0 1000 1000;" version="1.1" viewBox="0 0 1000 1000"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<path d="M598 128h298v298h-86v-152l-418 418-60-60 418-418h-152v-86zM810 810v-298h86v298c0 46-40 86-86 86h-596c-48 0-86-40-86-86v-596c0-46 38-86 86-86h298v86h-298v596h596z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
+</svg>
+</span></a>
+  
+</div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
