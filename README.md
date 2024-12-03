@@ -30,7 +30,8 @@ hugo
 
 ### To deploy:
 
-Pushing to GitHub triggers a GitHub Action that deploys changes automatically.
+Pushing to GitHub triggers a GitHub Action that deploys changes automatically. The branch to push to is configurable in
+`.github/hugo.yaml` and is currently set to `main`.
 
 ```shell
 git push
