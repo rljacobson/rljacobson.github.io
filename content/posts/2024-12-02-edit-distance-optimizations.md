@@ -1,7 +1,7 @@
 ---
 title: 'Common Optimizations for Levenshtein Edit Distance'
 date: 2024-12-02T21:18:14-06:00
-draft: True
+draft: False
 featured_image: "imgs/posts/Levenshtein.jpg"
 tags: [Algorithms, Computer Science, Software Engineering]
 math: False

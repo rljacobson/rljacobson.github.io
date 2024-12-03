@@ -7,8 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Robert Jacobson</copyright>
-    <lastBuildDate>Thu, 13 Aug 2020 11:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Mon, 02 Dec 2024 21:18:14 -0600</lastBuildDate>
     <atom:link href="https://www.RobertJacobson.dev/tags/computer-science/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Common Optimizations for Levenshtein Edit Distance</title>
+      <link>https://www.RobertJacobson.dev/posts/2024-12-02-edit-distance-optimizations/</link>
+      <pubDate>Mon, 02 Dec 2024 21:18:14 -0600</pubDate>
+      <guid>https://www.RobertJacobson.dev/posts/2024-12-02-edit-distance-optimizations/</guid>
+      <description>I have been studying algorithms to compute the Levenshtein edit distance between two strings, which is defined as the minimum number of &amp;ldquo;edits&amp;rdquo; required to transform one string into another string. This is useful for a variety of things, from DNA sequence alignment to spell correction to address validation. I am studying it to resolve misspelled and OCR&amp;rsquo;ed scientific names of organisms to their real names, a famous problem in the field.</description>
+    </item>
     <item>
       <title>Making a Pratt Parser Generator Part 1</title>
       <link>https://www.RobertJacobson.dev/posts/2020-08-13-designing-a-pratt-parser-generator/</link>
