@@ -38,7 +38,7 @@ The most significant optimizations that you can make, at least for the case that
 
 ### Remember The Closest Match
 
-In the special _but very common_ case that you are trying to find the closest string in a large collection of strings to a single particular string, the best optimization you can do is to remember the smallest distance you have seen so far and use that distance as the `max_edits` parameter in any limited distance / banded algorithm variant (discussed below). The speedup is _significant_. For both synthetic and real-world data I have found that this algorithm takes only twice as long as a noop function that immediately returns. YMMV, of course, but for typical use cases expect to see a multiple orders of magnitude performance benefit.
+In the special _but very common_ case that you are trying to find the closest string in a large collection of strings to a single particular string, the best optimization you can do is to remember the smallest distance you have seen so far and use that distance as the `max_edits` parameter in any limited distance / banded algorithm variant (discussed below). The speedup is significant. For both synthetic and real-world data I have found that this algorithm takes only 2/3rds as long to run as the others. Of course, your mileage may vary. 
 
 ### Allocate Once
 
@@ -446,5 +446,4 @@ I refuse to do so). There are other strategies. But of course this article is ab
 Be skeptical of claims about any algorithm that is several orders of magnitude better than any other algorithm. Maybe it is and maybe
 it isn't for your use case. You will have to _benchmark and measure_ to be sure. The best strategy for your use case
 will depend on your specific constrains on memory/disk space, speed requirements, available hardware, and so forth.
-
 

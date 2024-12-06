@@ -2,148 +2,145 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://www.RobertJacobson.dev/</loc>
     <lastmod>2024-12-02T21:18:14-06:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/algorithms/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/algorithms/</loc>
     <lastmod>2024-12-02T21:18:14-06:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2024-12-02-edit-distance-optimizations/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2024-12-02-edit-distance-optimizations/</loc>
     <lastmod>2024-12-02T21:18:14-06:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/</loc>
     <lastmod>2024-12-02T21:18:14-06:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/software-engineering/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/software-engineering/</loc>
     <lastmod>2024-12-02T21:18:14-06:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/compilers/</loc>
-    <lastmod>2024-02-24T11:00:00-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2024-02-24-making-a-pratt-parser-generator-part-2/</loc>
-    <lastmod>2024-02-24T11:00:00-05:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/2020-08-13-designing-a-pratt-parser-generator/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/compilers/</loc>
     <lastmod>2020-08-13T11:00:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2020-07-01-bayes-theorem/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2020-08-13-designing-a-pratt-parser-generator/</loc>
+    <lastmod>2020-08-13T11:00:00-05:00</lastmod>
+  </url><url>
+    <loc>https://www.RobertJacobson.dev/posts/2020-07-01-bayes-theorem/</loc>
     <lastmod>2020-07-01T11:00:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/covid-19/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/covid-19/</loc>
     <lastmod>2020-07-01T11:00:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/healthcare/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/healthcare/</loc>
     <lastmod>2020-07-01T11:00:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/statistics/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/statistics/</loc>
     <lastmod>2020-07-01T11:00:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/</loc>
     <lastmod>2018-09-04T20:26:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/mathematica/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/mathematica/</loc>
     <lastmod>2018-09-04T20:26:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2018-09-03-generalizing-pemdas-what-is-an-operator/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2018-09-03-generalizing-pemdas-what-is-an-operator/</loc>
     <lastmod>2018-09-03T11:30:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2018-08-16-defining-the-wolfram-language-part-1-finding-operators/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2018-08-16-defining-the-wolfram-language-part-1-finding-operators/</loc>
     <lastmod>2018-08-16T15:26:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2018-07-02-defining-the-wolfram-language-part-0-the-challenge/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2018-07-02-defining-the-wolfram-language-part-0-the-challenge/</loc>
     <lastmod>2018-07-02T20:14:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/computer-science/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/computer-science/</loc>
     <lastmod>2017-03-02T12:00:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/education/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/education/</loc>
     <lastmod>2017-03-02T12:00:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/mathematics/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/mathematics/</loc>
     <lastmod>2017-03-02T12:00:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/</loc>
     <lastmod>2017-03-02T12:00:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2015-01-28-the-grammar-of-mathematical-expressions/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2015-01-28-the-grammar-of-mathematical-expressions/</loc>
     <lastmod>2015-01-28T22:31:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/programming/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/programming/</loc>
     <lastmod>2014-12-10T22:27:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/python/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/python/</loc>
     <lastmod>2014-12-10T22:27:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2014-12-10-using-mathematica-from-python/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2014-12-10-using-mathematica-from-python/</loc>
     <lastmod>2014-12-10T22:27:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/art/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/art/</loc>
     <lastmod>2014-07-25T22:57:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/geometry/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/geometry/</loc>
     <lastmod>2014-07-25T22:57:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2014-07-25-platonic-solids-and-the-school-of-athens/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2014-07-25-platonic-solids-and-the-school-of-athens/</loc>
     <lastmod>2014-07-25T22:57:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/academia/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/academia/</loc>
     <lastmod>2014-04-17T20:52:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2014-04-17-how-springer-sent-me-to-collections-for-adopting-their-textbook/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2014-04-17-how-springer-sent-me-to-collections-for-adopting-their-textbook/</loc>
     <lastmod>2014-04-17T20:52:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2014-04-12-how-to-ask-your-professor-for-something/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2014-04-12-how-to-ask-your-professor-for-something/</loc>
     <lastmod>2014-04-12T16:33:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/teaching/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/teaching/</loc>
     <lastmod>2014-04-12T16:33:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2014-02-19-hangout-on-air-math-a-love-story/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2014-02-19-hangout-on-air-math-a-love-story/</loc>
     <lastmod>2014-02-19T19:15:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/science-communication/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/science-communication/</loc>
     <lastmod>2014-02-19T19:15:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/data-science/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/data-science/</loc>
     <lastmod>2014-02-15T21:49:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2014-02-15-does-a-1929-market-chart-predict-a-market-crash/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2014-02-15-does-a-1929-market-chart-predict-a-market-crash/</loc>
     <lastmod>2014-02-15T21:49:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/finance/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/finance/</loc>
     <lastmod>2014-02-15T21:49:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/calculus/</loc>
+    <loc>https://www.RobertJacobson.dev/tags/calculus/</loc>
     <lastmod>2014-01-28T21:41:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2014-01-28-sneaky-continuous-functions/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2014-01-28-sneaky-continuous-functions/</loc>
     <lastmod>2014-01-28T21:41:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2014-01-28-susan-meisenhelders-mooc-mania/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2014-01-28-susan-meisenhelders-mooc-mania/</loc>
     <lastmod>2014-01-28T16:28:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2014-01-18-blogging-the-jmm-saying-goodbye/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2014-01-18-blogging-the-jmm-saying-goodbye/</loc>
     <lastmod>2014-01-18T15:40:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2014-01-17-blogging-the-jmm-friday/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2014-01-17-blogging-the-jmm-friday/</loc>
     <lastmod>2014-01-17T22:41:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2014-01-16-blogging-the-jmm-thursday/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2014-01-16-blogging-the-jmm-thursday/</loc>
     <lastmod>2014-01-16T17:02:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2014-01-15-blogging-the-jmm-wednesday/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2014-01-15-blogging-the-jmm-wednesday/</loc>
     <lastmod>2014-01-15T20:53:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2014-01-14-blogging-the-largest-math-conference-in-the-world/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2014-01-14-blogging-the-largest-math-conference-in-the-world/</loc>
     <lastmod>2014-01-14T17:05:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2013-12-18-when-students-die/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2013-12-18-when-students-die/</loc>
     <lastmod>2013-12-18T21:05:00-05:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://www.RobertJacobson.dev/about/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://www.RobertJacobson.dev/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/2018-10-10-what-is-the-ielr1-parsing-algorithm/</loc>
+    <loc>https://www.RobertJacobson.dev/posts/2018-10-10-what-is-the-ielr1-parsing-algorithm/</loc>
   </url>
 </urlset>
