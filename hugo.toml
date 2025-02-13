@@ -15,7 +15,7 @@ Paginate = 10 # this is set low for demonstrating with dummy content. Set to a h
         enable = true
         [markup.goldmark.extensions.passthrough.delimiters]
           block = [['\[', '\]'], ['$$', '$$']]
-          inline = [['\(', '\)']]
+          inline = [['\(', '\)'], ['$', '$']]
 [params]
   math = false
   recent_posts_number = 10

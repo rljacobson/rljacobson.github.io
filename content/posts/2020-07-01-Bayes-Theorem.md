@@ -3,7 +3,7 @@ title: "Bayes' Theorem and the Deathly Hallows"
 date: "2020-07-01T11:00:00-05:00"
 featured_image: "imgs/posts/Covid19Testing/Scientist.jpg"
 tags: [Mathematics, Statistics, COVID-19, Healthcare]
-math: True
+math: true
 author: "Robert Jacobson"
 ---
 
@@ -20,7 +20,7 @@ I and Dr. Andrew Rhyne, marine biologist and my
 
 ## How understanding Bayes’ Theorem is crucial in informing health policies
 
-<img style="width:auto;" src="assets/images/posts/Covid19Testing/VennDiagram.png" width="auto">
+<img style="width:auto;" src="/imgs/posts/Covid19Testing/VennDiagram.png" width="auto">
 
 Imagine a Venn diagram of intellectual ideas with three overlapping circles as depicted above. The first orange
  circle represents those ideas that are important for the well-being, smooth functioning, and progression of human
@@ -32,7 +32,9 @@ Frightening is the overlapping intersection of these three circles. Here are cha
 
 It’s not that Bayes’ Theorem is widely known—it does have “theorem” in its name, after all. But when it is known, it is often misinterpreted or misapplied. Despite mathematical notation that makes it look like an alien language, Bayes’ Theorem is actually quite short and simple:
 
-$$\displaystyle P(A\mid B) = \frac{P(B \mid A) \times P(A)}{P(B)}$$.
+$$
+\displaystyle P(A\mid B) = \frac{P(B \mid A) \times P(A)}{P(B)}
+$$.
 
 This formula expresses a relationship between four probabilities. It’s best explained with a concrete example, and the subject of this article, testing for disease, is a classic. If we test somebody for, say, COVID-19, then there are four possible scenarios:
 
@@ -92,7 +94,7 @@ The mistake is to think that the quality of testing depends on the prevalence of
 
 On the other hand, our testing policies must be informed by the state of the population. A significantly lower prevalence _does not_ result in _significantly more_ false positives as some experts have claimed, and so we shouldn’t care at all that 50% versus 9% of the people who tested positive are actually infected—the “cost” we pay as a population for those false positives is virtually the same as it would be with a much higher rate of infection. Yet the benefit is exponential: We catch infections much sooner, _before_ they have a chance to take root.
 <figure>
-<img alt="Thoughts and Prayers vs. Aggressive Population Testing." src="assets/images/posts/Covid19Testing/ExponentialGraph.png" style="width:75%">
+<img alt="Thoughts and Prayers vs. Aggressive Population Testing." src="/imgs/posts/Covid19Testing/ExponentialGraph.png" style="width:75%">
 <figcaption style="font-size: small; font-weight: bold; text-align: center">Thoughts and Prayers vs. Aggressive Population Testing.</figcaption>
 </figure>
 
@@ -102,7 +104,7 @@ We want nobody in the population to be infected, and if nobody is infected, then
 
 Some have argued that we should be concerned instead about false negatives. Suppose, for example, that a test is only capable of identifying an infected sample 50% of the time. That means roughly that every time the population is tested, half of the infected individuals are identified and removed (via quarantine). If removing half of all infected individuals from a college campus sounds like an obviously good idea to you, that's is because it is. Simple arithmetic shows whole population testing — especially repeated whole population testing — reduces the number of infected individuals in the population. (Sophisticated models do as well: See [Larremore et al.](https://larremorelab.github.io/covid-calculator3); [Dawoud, RSAP.](https://www.sciencedirect.com/science/article/pii/S1551741120305313))
 <figure>
-<img alt="Sample simulation trajectories from fully mixed model demonstrating the effectiveness of whole population testing." src="assets/images/posts/Covid19Testing/LarremoreModel.png" style="width:auto">
+<img alt="Sample simulation trajectories from fully mixed model demonstrating the effectiveness of whole population testing." src="/imgs/posts/Covid19Testing/LarremoreModel.png" style="width:auto">
 <figcaption style="font-size: small; font-weight: bold; text-align: center">
 Sample simulation trajectories from fully mixed model demonstrating the effectiveness of whole population testing. Notice the scale of the $y$-axis. (Figure S1 of
 <a href="https://www.medrxiv.org/content/10.1101/2020.06.22.20136309v2">Larremore et al. preprint</a>)
@@ -142,7 +144,7 @@ It is possible that I am grossly misinformed regarding the characteristics of qP
  wrong in thinking most people have significant misconceptions about leprosy. But with mathematics, nobody needs to trust what I say is true on my authority as a mathematician. Anyone with sufficient mathematical training can see for themselves. To make it easier for nonscientists to do this kind of verification, I have built an online tool that anyone can use to compute outcomes of interest based on estimates of a test’s performance characteristics that can be adjusted with a slider. The source code is also available on GitHub so that anyone who finds a mistake in the code can report the error or even submit a fix.
 <figure>
 <a href="https://www.robertjacobson.dev/BayesTesting/BayesTesting.html">
-<img alt="Online probability calculator" src="assets/images/posts/Covid19Testing/Screenshot.png" style="width:auto; border: 1px solid #2e2e2e">
+<img alt="Online probability calculator" src="/imgs/posts/Covid19Testing/Screenshot.png" style="width:auto; border: 1px solid #2e2e2e">
 </a>
 <figcaption style="font-size: small; font-weight: bold; text-align: center">
 The tool is live at this address: <a href="https://www.robertjacobson.dev/BayesTesting/BayesTesting.html">https://www.robertjacobson.dev/BayesTesting/BayesTesting.html</a>.

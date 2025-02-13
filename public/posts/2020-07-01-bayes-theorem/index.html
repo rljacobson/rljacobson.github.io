@@ -46,11 +46,16 @@ I and Dr. Andrew Rhyne, marine biologist and my longtime collaborator in fightin
 <meta itemprop="description" content="This article is an expanded version of the math part of an article I cowrote with marine biologist Dr. Andrew Rhyne about how many well-meaning public health professionals have misinterpreted the math behind test efficiency, Bayes’ Theorem. This misinterpretation has lead to dangerous public policy positions. Anyone with a math allergy is invited to read that article instead.
 I and Dr. Andrew Rhyne, marine biologist and my longtime collaborator in fighting wildlife crime, have spent a lot of time in the last several months working on how best to fight the COVID-19 pandemic, especially in college communities like our own Roger Williams University."><meta itemprop="datePublished" content="2020-07-01T11:00:00-05:00" />
 <meta itemprop="dateModified" content="2020-07-01T11:00:00-05:00" />
-<meta itemprop="wordCount" content="4405">
+<meta itemprop="wordCount" content="4407">
 <meta itemprop="keywords" content="Mathematics,Statistics,COVID-19,Healthcare," /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Bayes&#39; Theorem and the Deathly Hallows"/>
 <meta name="twitter:description" content="This article is an expanded version of the math part of an article I cowrote with marine biologist Dr. Andrew Rhyne about how many well-meaning public health professionals have misinterpreted the math behind test efficiency, Bayes’ Theorem. This misinterpretation has lead to dangerous public policy positions. Anyone with a math allergy is invited to read that article instead.
 I and Dr. Andrew Rhyne, marine biologist and my longtime collaborator in fighting wildlife crime, have spent a lot of time in the last several months working on how best to fight the COVID-19 pandemic, especially in college communities like our own Roger Williams University."/>
 
+
+    
+      
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
 	
   </head>
 
@@ -232,14 +237,16 @@ spent a lot of time in the last several months working on how best to fight the
 COVID-19 pandemic, especially in college communities like
 our own Roger Williams University.</p>
 <h2 id="how-understanding-bayes-theorem-is-crucial-in-informing-health-policies">How understanding Bayes’ Theorem is crucial in informing health policies</h2>
-<img style="width:auto;" src="assets/images/posts/Covid19Testing/VennDiagram.png" width="auto">
+<img style="width:auto;" src="/imgs/posts/Covid19Testing/VennDiagram.png" width="auto">
 <p>Imagine a Venn diagram of intellectual ideas with three overlapping circles as depicted above. The first orange
 circle represents those ideas that are important for the well-being, smooth functioning, and progression of human
 society. In this circle, we find the germ theory of disease, the moral imperative of the Golden Rule, and basic arithmetic. The second blue circle represents ideas that are confusing or subtle. The Hegelian dialectic lives here alongside every book with the word semiotics in the title, and the Paradox of Indoor Ornithology, which claims that the sight of a green apple is evidence supporting the notion that all ravens are black ravens.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> If you just said, “What?,” I want to point out that that’s the point: these are difficult, confusing ideas. Finally, we have the circle of ideas that are just too easy to believe one understands when one actually does not. These are ideas that, whether or not they appear simple, have the peculiar ability to lure us into a completely unfounded confidence in our understanding of them. Clearly this circle contains virtually all public political discourse, for example, but it also contains some surprises: Robert Frost’s “<em>Stopping by Woods on a Snowy Evening</em>,” the dangers of quicksand, leprosy, and the inventor of peanut butter, to name a few. You think you know, but google it.</p>
 <p>Frightening is the overlapping intersection of these three circles. Here are challenging ideas that are important for human society that we often get wrong while confidently believing we understand. <em>Bayes’ Theorem is one of these ideas.</em></p>
 <h2 id="the-basics-of-bayes-theorem">The Basics of Bayes’ Theorem</h2>
 <p>It’s not that Bayes’ Theorem is widely known—it does have “theorem” in its name, after all. But when it is known, it is often misinterpreted or misapplied. Despite mathematical notation that makes it look like an alien language, Bayes’ Theorem is actually quite short and simple:</p>
-$$\displaystyle P(A\mid B) = \frac{P(B \mid A) \times P(A)}{P(B)}$$
+$$
+\displaystyle P(A\mid B) = \frac{P(B \mid A) \times P(A)}{P(B)}
+$$
 <p>.</p>
 <p>This formula expresses a relationship between four probabilities. It’s best explained with a concrete example, and the subject of this article, testing for disease, is a classic. If we test somebody for, say, COVID-19, then there are four possible scenarios:</p>
 <table>
@@ -264,7 +271,7 @@ $$\displaystyle P(A\mid B) = \frac{P(B \mid A) \times P(A)}{P(B)}$$
 </tbody>
 </table>
 <p>A word of warning: It is <em>very easy</em> to mix up these terms. Just keep referring back to this table whenever you need to.</p>
-<p>The first thing to understand is this: The probability of having COVID-19 <em>given</em> that you already know the test came out positive, which we will denote by $P(cov\mid pos)$, is a <em>different</em> probability from the probability of the test coming out positive <em>given</em> you have COVID-19, which we likewise denote by  $P(pos\mid cov)$. The difference, of course, is what information you already know. The question, “If an animal is in the chicken coup, what’s the probability that it is a chicken?,” $P(chicken \mid coup)$ in our notation, is a different question from, “If the animal is a chicken, what is the probability that it is in the coup?,” $P(coup\mid chicken)$. It could be that my chickens are indoor chickens that never leave the coup, so $P(coup \mid chicken)=100%$, but I also keep an equal number of turkeys in the coup, so $P(chicken \mid coup) = 50%$.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>The first thing to understand is this: The probability of having COVID-19 <em>given</em> that you already know the test came out positive, which we will denote by $P(cov\mid pos)$, is a <em>different</em> probability from the probability of the test coming out positive <em>given</em> you have COVID-19, which we likewise denote by  $P(pos\mid cov)$. The difference, of course, is what information you already know. The question, “If an animal is in the chicken coup, what’s the probability that it is a chicken?,” $P(chicken \mid coup)$ in our notation, is a different question from, “If the animal is a chicken, what is the probability that it is in the coup?,” $P(coup\mid chicken)$. It could be that my chickens are indoor chickens that never leave the coup, so $P(coup \mid chicken)=100\%$, but I also keep an equal number of turkeys in the coup, so $P(chicken \mid coup) = 50\%$.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
 <p>You are now fluent in the alien language that makes up the mathematical notation of Bayes’ Theorem. The power of Bayes’ Theorem is that we can convert from $P(chicken \mid coup)$ into $P(coup\mid chicken)$ using the unconditional probabilities of an animal being a chicken regardless of location, $P(chicken)$, and the probability of an animal being in the coup regardless of species, $P(coup)$. With COVID-19 testing, we can compute the probability that you are infected with COVID-19 given that your test result is positive using knowledge of the probability that you will test positive given that you really are infected:</p>
 $$\displaystyle P(cov\mid pos) = \frac{P(pos \mid cov) \times P(cov)}{P(pos)}$$
 <p>.</p>
@@ -298,14 +305,14 @@ $$\displaystyle P(cov\mid pos) = \frac{P(pos \mid cov) \times P(cov)}{P(pos)}$$
 <p>The mistake is to think that the quality of testing depends on the prevalence of disease. It doesn’t. The test will be exactly the same regardless of prevalence, because its false positive rate is not affected by prevalence. The test could not possibly be influenced by the state of the population outside of the testing lab.</p>
 <p>On the other hand, our testing policies must be informed by the state of the population. A significantly lower prevalence <em>does not</em> result in <em>significantly more</em> false positives as some experts have claimed, and so we shouldn’t care at all that 50% versus 9% of the people who tested positive are actually infected—the “cost” we pay as a population for those false positives is virtually the same as it would be with a much higher rate of infection. Yet the benefit is exponential: We catch infections much sooner, <em>before</em> they have a chance to take root.</p>
 <figure>
-<img alt="Thoughts and Prayers vs. Aggressive Population Testing." src="assets/images/posts/Covid19Testing/ExponentialGraph.png" style="width:75%">
+<img alt="Thoughts and Prayers vs. Aggressive Population Testing." src="/imgs/posts/Covid19Testing/ExponentialGraph.png" style="width:75%">
 <figcaption style="font-size: small; font-weight: bold; text-align: center">Thoughts and Prayers vs. Aggressive Population Testing.</figcaption>
 </figure>
 <p>We want nobody in the population to be infected, and if nobody is infected, then the only way for a test to turn out positive is if the test is wrong—a <em>false</em> positive. In other words, we want <em>every</em> positive test result to be a <em>false</em> positive—and to keep it that way. Choosing not to test the population at large because the prevalence of disease is low is the equivalent of deciding that you don’t need to take your medication anymore because it is working. The reason you are healthy is <em>because</em> it is working! <em>Many</em> <em>public health</em> <em>specialists</em> <em>are advising schools and employers based on exactly this backwards reasoning.</em></p>
 <h3 id="false-negatives">False Negatives</h3>
 <p>Some have argued that we should be concerned instead about false negatives. Suppose, for example, that a test is only capable of identifying an infected sample 50% of the time. That means roughly that every time the population is tested, half of the infected individuals are identified and removed (via quarantine). If removing half of all infected individuals from a college campus sounds like an obviously good idea to you, that&rsquo;s is because it is. Simple arithmetic shows whole population testing — especially repeated whole population testing — reduces the number of infected individuals in the population. (Sophisticated models do as well: See <a href="https://larremorelab.github.io/covid-calculator3">Larremore et al.</a>; <a href="https://www.sciencedirect.com/science/article/pii/S1551741120305313">Dawoud, RSAP.</a>)</p>
 <figure>
-<img alt="Sample simulation trajectories from fully mixed model demonstrating the effectiveness of whole population testing." src="assets/images/posts/Covid19Testing/LarremoreModel.png" style="width:auto">
+<img alt="Sample simulation trajectories from fully mixed model demonstrating the effectiveness of whole population testing." src="/imgs/posts/Covid19Testing/LarremoreModel.png" style="width:auto">
 <figcaption style="font-size: small; font-weight: bold; text-align: center">
 Sample simulation trajectories from fully mixed model demonstrating the effectiveness of whole population testing. Notice the scale of the $y$-axis. (Figure S1 of
 <a href="https://www.medrxiv.org/content/10.1101/2020.06.22.20136309v2">Larremore et al. preprint</a>)
@@ -352,7 +359,7 @@ tests for COVID-19 use a diagnostic technique called qPCR to detect the presence
 wrong in thinking most people have significant misconceptions about leprosy. But with mathematics, nobody needs to trust what I say is true on my authority as a mathematician. Anyone with sufficient mathematical training can see for themselves. To make it easier for nonscientists to do this kind of verification, I have built an online tool that anyone can use to compute outcomes of interest based on estimates of a test’s performance characteristics that can be adjusted with a slider. The source code is also available on GitHub so that anyone who finds a mistake in the code can report the error or even submit a fix.</p>
 <figure>
 <a href="https://www.robertjacobson.dev/BayesTesting/BayesTesting.html">
-<img alt="Online probability calculator" src="assets/images/posts/Covid19Testing/Screenshot.png" style="width:auto; border: 1px solid #2e2e2e">
+<img alt="Online probability calculator" src="/imgs/posts/Covid19Testing/Screenshot.png" style="width:auto; border: 1px solid #2e2e2e">
 </a>
 <figcaption style="font-size: small; font-weight: bold; text-align: center">
 The tool is live at this address: <a href="https://www.robertjacobson.dev/BayesTesting/BayesTesting.html">https://www.robertjacobson.dev/BayesTesting/BayesTesting.html</a>.
@@ -501,7 +508,7 @@ The tool is live at this address: <a href="https://www.robertjacobson.dev/BayesT
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://www.RobertJacobson.dev/" >
-    &copy;  Robert Jacobson 2024 
+    &copy;  Robert Jacobson 2025 
   </a>
     <div>
 <div class="ananke-socials">

@@ -43,10 +43,15 @@
 <meta itemprop="name" content="Defining the Wolfram Language Part 2: Operator Properties">
 <meta itemprop="description" content="In this third installment of our n part series, &ldquo;Defining the Wolfram Language,&rdquo; we begin to study the properties, namely the arity, affix, associativity, and precedence, of the Mathematica operators we found in Part 1. If we ended Part 1 proud of our accomplishment—perhaps even a little smug—then we will get reacquainted with our humility in this article."><meta itemprop="datePublished" content="2018-09-04T20:26:00-05:00" />
 <meta itemprop="dateModified" content="2018-09-04T20:26:00-05:00" />
-<meta itemprop="wordCount" content="2228">
+<meta itemprop="wordCount" content="2176">
 <meta itemprop="keywords" content="Computer science,compilers,Mathematica," /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Defining the Wolfram Language Part 2: Operator Properties"/>
 <meta name="twitter:description" content="In this third installment of our n part series, &ldquo;Defining the Wolfram Language,&rdquo; we begin to study the properties, namely the arity, affix, associativity, and precedence, of the Mathematica operators we found in Part 1. If we ended Part 1 proud of our accomplishment—perhaps even a little smug—then we will get reacquainted with our humility in this article."/>
 
+
+    
+      
+      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
 	
   </head>
 
@@ -225,40 +230,28 @@
 <p>Is there a programmatic way to fill in the gaps in the resulting dataset once you know the operators, that is, what lexical tokens make up the operators? It&rsquo;s easy to programmatically determine affix (prefix, infix, etc.) and arity (unary, binary, etc.) from the usage data that can be obtained from <code>WolframLanguageData</code>, and we have everything we need for those operators listed in <code>UnicodeCharacters.tr</code>.</p>
 <p>Precedence is a lot harder. I have implemented a strategy that compares two operators by instantiating expressions involving the two operators and inspecting the result. The remainder of this section gives just a few examples to illustrate the fundamental reason why this strategy cannot work.</p>
 <p>Two synonyms of the same operator:</p>
-<p>{% highlight wolfram %}
-{% raw %}
-In[1]:= FullForm[Hold[a[Conditioned]b&lt;-&gt;c]]
-In[2]:= FullForm[Hold[a[Conditioned]b[TwoWayRule]c]]</p>
-<p>Out[1]= Hold[Conditioned[a,TwoWayRule[b,c]]]
+<pre tabindex="0"><code class="language-wolfram" data-lang="wolfram">In[1]:= FullForm[Hold[a\[Conditioned]b&lt;-&gt;c]]
+In[2]:= FullForm[Hold[a\[Conditioned]b\[TwoWayRule]c]]
+
+Out[1]= Hold[Conditioned[a,TwoWayRule[b,c]]]
 Out[2]= Hold[TwoWayRule[Conditioned[a,b],c]]
-{% endraw %}
-{% endhighlight %}</p>
-<p>The <em>only</em> binary operator that cannot be parsed like this:</p>
-<p>{% highlight wolfram %}
-{% raw %}
-In[1]:= a [DirectedEdge] b [UndirectedEdge] c</p>
-<p>Out[1]= Syntax::tsntxi: &ldquo;a[DirectedEdge]b[UndirectedEdge]c&rdquo; is incomplete; more input is needed.
-{% endraw %}
-{% endhighlight %}</p>
-<p>This next one is not uncommon:</p>
-<p>{% highlight wolfram %}
-{% raw %}
-In[1]:= FullForm[Hold[a [LeftTee] b [UpTee] c]]
-In[2]:= FullForm[ToExpression[&ldquo;Hold[a [LeftTee] b [UpTee] c]&rdquo;]]</p>
-<p>Out[1]= Hold[LeftTee[a,UpTee[b,c]]]
+</code></pre><p>The <em>only</em> binary operator that cannot be parsed like this:</p>
+<pre tabindex="0"><code class="language-wolfram" data-lang="wolfram">In[1]:= a \[DirectedEdge] b \[UndirectedEdge] c
+
+Out[1]= Syntax::tsntxi: &#34;a\[DirectedEdge]b\[UndirectedEdge]c&#34; is incomplete; more input is needed.
+</code></pre><p>This next one is not uncommon:</p>
+<pre tabindex="0"><code class="language-wolfram" data-lang="wolfram">In[1]:= FullForm[Hold[a \[LeftTee] b \[UpTee] c]]
+In[2]:= FullForm[ToExpression[&#34;Hold[a \[LeftTee] b \[UpTee] c]&#34;]]
+
+Out[1]= Hold[LeftTee[a,UpTee[b,c]]]
 Out[2]= Hold[UpTee[LeftTee[a,b],c]]
-{% endraw %}
-{% endhighlight %}</p>
-<p>There are several differences between the notebook and command line interfaces, and <code>ToExpression</code> appears to precisely mirror those differences. Perhaps the command line and <code>ToExpression</code> have the same parser. Whatever the case, we cannot assume that a piece of code will execute the same way on the command line as it will through the notebook interface.</p>
+</code></pre><p>There are several differences between the notebook and command line interfaces, and <code>ToExpression</code> appears to precisely mirror those differences. Perhaps the command line and <code>ToExpression</code> have the same parser. Whatever the case, we cannot assume that a piece of code will execute the same way on the command line as it will through the notebook interface.</p>
 <p>Many operators do not have a <code>FullForm</code> (unevaluated interpretation) equal to the functions they represent. Consider <code>Divide</code>:</p>
-<p>{% highlight wolfram %}
-{% raw %}
-In[1]:= (* Give the Head of the first element within Hold. *)
-Hold[a/b][[1, 0]]</p>
-<p>Out[1]= Times
-{% endraw %}
-{% endhighlight %}</p>
-<p>Considering this one fact alone, whatever strategy one uses to inspect an instantiated expression to determine precedence will have to account for every special case of how the <code>FullForm</code> of each operator might interact with that of another in a nongeneric way. The amount of manual labor one has to do to account for this is $Ω(n^2)$, where $n$ is the number operators.</p>
+<pre tabindex="0"><code class="language-wolfram" data-lang="wolfram">In[1]:= (* Give the Head of the first element within Hold. *)
+        Hold[a/b][[1, 0]]
+
+Out[1]= Times
+</code></pre><p>Considering this one fact alone, whatever strategy one uses to inspect an instantiated expression to determine precedence will have to account for every special case of how the <code>FullForm</code> of each operator might interact with that of another in a nongeneric way. The amount of manual labor one has to do to account for this is $Ω(n^2)$, where $n$ is the number operators.</p>
 <p>Then there is the case of <code>GreaterSlantEqual</code> and <code>LessSlantEqual</code>, both the symbols and their corresponding functions. The short version is, these two symbols are now disassociated from their corresponding functions, which functions now have no operator notation despite the insistance of the documentation. To be clear, I think it&rsquo;s the right move to remap the <code>*SlantEqual</code> symbols to <code>&gt;=</code> and <code>&lt;=</code>, but&hellip;</p>
 <h2 id="wolfram-language-as-language">Wolfram Language as Language</h2>
 <p>We have seen that, even in a single version on a single platform, Mathematica itself does not always interpret Wolfram Language consistently in several dimensions:</p>
@@ -390,7 +383,7 @@ often lest you pass up the fun of programming for the constipation of bitterswee
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://www.RobertJacobson.dev/" >
-    &copy;  Robert Jacobson 2024 
+    &copy;  Robert Jacobson 2025 
   </a>
     <div>
 <div class="ananke-socials">

@@ -43,10 +43,12 @@
 <meta itemprop="name" content="The grammar of mathematical expressions">
 <meta itemprop="description" content="Using computers to do automatic translation has a long and rich history in computer science. A course in compiler construction is a veritable survey of topics in computer science running the gamut from formal languages to data structures and algorithms to Hopfcroft&rsquo;s algorithm to minimize deterministic automata. One of the first things a student learns in a compiler construction course is how to formally describe the grammar of a language using (extended) Backus–Naur form (EBNF)."><meta itemprop="datePublished" content="2015-01-28T22:31:00-05:00" />
 <meta itemprop="dateModified" content="2015-01-28T22:31:00-05:00" />
-<meta itemprop="wordCount" content="1173">
+<meta itemprop="wordCount" content="1095">
 <meta itemprop="keywords" content="Computer science,compilers," /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="The grammar of mathematical expressions"/>
 <meta name="twitter:description" content="Using computers to do automatic translation has a long and rich history in computer science. A course in compiler construction is a veritable survey of topics in computer science running the gamut from formal languages to data structures and algorithms to Hopfcroft&rsquo;s algorithm to minimize deterministic automata. One of the first things a student learns in a compiler construction course is how to formally describe the grammar of a language using (extended) Backus–Naur form (EBNF)."/>
 
+
+    
 	
   </head>
 
@@ -222,128 +224,114 @@
 <p>This article will assume a passing familiarity with EBNF notation.</p>
 <h2 id="a-simple-grammar-for-math-expressions">A simple grammar for math expressions.</h2>
 <p>An exercise every compiler construction student is given is to construct a grammar for simple mathematical expressions. This exercise is particularly easy with <a href="http://www.antlr.org">ANTLR 4</a>, a lexer and parser generator that can accept grammars than many other compiler tools would reject. Here is an ANTLR 4 grammar for simple math expressions.</p>
-<p>{% highlight antlr %}
-{% raw %}
-expr
-:	INT //numbers
-|	ID  //variables
-|	&lsquo;(&rsquo; expr &lsquo;)&rsquo;  //grouping with parentheses
-|	&lt;assoc=right&gt; expr &lsquo;^&rsquo; expr //exponentiation
-|	(&rsquo;+&rsquo; | &lsquo;-&rsquo;) expr	//unary plus/minus
-|	expr (&rsquo;/&rsquo; | &lsquo;*&rsquo;) expr	//explicit division/multiplication
-|	expr (&rsquo;+&rsquo; | &lsquo;-&rsquo;) expr	//addition/subtraction
-;
-{% endraw %}
-{% endhighlight %}</p>
-<p>For the input <code>4*x^2 - 3*x + -2</code> this grammar gives the following parse tree.</p>
-<img style="width:auto;" src="assets/images/posts/MathGrammar/simple_parse_tree.png" width="300" height="241">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>expr
+</span></span><span style="display:flex;"><span>	:	<span style="color:#66d9ef">INT</span> <span style="color:#75715e">//numbers</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#66d9ef">ID</span>  <span style="color:#75715e">//variables</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#e6db74">&#39;(&#39;</span> expr <span style="color:#e6db74">&#39;)&#39;</span>  <span style="color:#75715e">//grouping with parentheses</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#960050;background-color:#1e0010">&lt;</span>assoc<span style="color:#f92672">=</span>right<span style="color:#960050;background-color:#1e0010">&gt;</span> expr <span style="color:#e6db74">&#39;^&#39;</span> expr <span style="color:#75715e">//exponentiation</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">)</span> expr	<span style="color:#75715e">//unary plus/minus</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	expr <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;*&#39;</span><span style="color:#f92672">)</span> expr	<span style="color:#75715e">//explicit division/multiplication</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	expr <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">)</span> expr	<span style="color:#75715e">//addition/subtraction</span>
+</span></span><span style="display:flex;"><span>	;
+</span></span></code></pre></div><p>For the input <code>4*x^2 - 3*x + -2</code> this grammar gives the following parse tree.</p>
+<img style="width:auto;" src="/imgs/posts/MathGrammar/simple_parse_tree.png" width="300" height="241">
 <p>ANTLR conveniently handles the order of operations for us by giving precedence to the production alternative that comes first: the earlier the alternative, the higher the precedence of the operator. Also, the right associativity of exponentiation is taken care of by the directive &lt;assoc=right&gt;. Piece of cake. And it&rsquo;s easy to expand this grammar to include other operators, like the postfix factorial (!) for example.</p>
 <h2 id="the-grammatical-challenge-of-implicit-multiplication">The grammatical challenge of implicit multiplication</h2>
 <p>Mathematicians don&rsquo;t like to write an explicit symbol for multiplication unless we&rsquo;re compelled to. We prefer to write <code>4x^2 - 3x + -2</code> instead of <code>4*x^2 - 3*x + -2</code>. We might naively modify our grammar as follows.</p>
-<p>{% highlight antlr %}
-{% raw %}
-expr
-:	INT //numbers
-|	ID  //variables
-|	&lsquo;(&rsquo; expr &lsquo;)&rsquo; 	//grouping with parentheses
-|	&lt;assoc=right&gt; expr &lsquo;^&rsquo; expr 	//exponentiation
-|	(&rsquo;+&rsquo; | &lsquo;-&rsquo;) expr 	//unary plus/minus
-|	expr &lsquo;/&rsquo; expr 	//division
-|	expr &lsquo;*&rsquo;? expr 	//explicit multiplication
-|	expr (&rsquo;+&rsquo; | &lsquo;-&rsquo;) expr 	//addition/subtraction
-;
-{% endraw %}
-{% endhighlight %}</p>
-<p>The <code>?</code> after the <code>*</code> indicates that the <code>*</code> symbol is optional&ndash;it can be omitted. But this doesn&rsquo;t work as expected! This grammar parses <code>7 + 3</code> as <code>7*(+3)</code>, which is not what we want. Splitting implicit multiplication off as a seperate alternative appears to solve this problem.</p>
-<p>{% highlight antlr %}
-{% raw %}
-expr
-:	INT //numbers
-|	ID  //variables
-|	&lsquo;(&rsquo; expr &lsquo;)&rsquo; //grouping with parentheses
-|	&lt;assoc=right&gt; expr &lsquo;^&rsquo; expr //exponentiation
-|	(&rsquo;+&rsquo; | &lsquo;-&rsquo;) expr	//unary plus/minus
-|	expr &lsquo;/&rsquo; expr		//division
-|	expr &lsquo;*&rsquo; expr	//explicit multiplication
-|	expr expr	//implicit multiplication
-|	expr (&rsquo;+&rsquo; | &lsquo;-&rsquo;) expr	//addition/subtraction
-;
-{% endraw %}
-{% endhighlight %}</p>
-<p>But now we have a new problem: implicit multiplication does not respect order of operations. This grammar generates the following parse tree for the input <code>4x+3</code>.</p>
-<img style="width:auto;" src="assets/images/posts/MathGrammar/modified_parse_tree.png">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>expr
+</span></span><span style="display:flex;"><span>	:	<span style="color:#66d9ef">INT</span> <span style="color:#75715e">//numbers</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#66d9ef">ID</span>  <span style="color:#75715e">//variables</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#e6db74">&#39;(&#39;</span> expr <span style="color:#e6db74">&#39;)&#39;</span> 	<span style="color:#75715e">//grouping with parentheses</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#960050;background-color:#1e0010">&lt;</span>assoc<span style="color:#f92672">=</span>right<span style="color:#960050;background-color:#1e0010">&gt;</span> expr <span style="color:#e6db74">&#39;^&#39;</span> expr 	<span style="color:#75715e">//exponentiation</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">)</span> expr 	<span style="color:#75715e">//unary plus/minus</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	expr <span style="color:#e6db74">&#39;/&#39;</span> expr 	<span style="color:#75715e">//division</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	expr <span style="color:#e6db74">&#39;*&#39;</span><span style="color:#f92672">?</span> expr 	<span style="color:#75715e">//explicit multiplication</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	expr <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">)</span> expr 	<span style="color:#75715e">//addition/subtraction</span>
+</span></span><span style="display:flex;"><span>	;
+</span></span></code></pre></div><p>The <code>?</code> after the <code>*</code> indicates that the <code>*</code> symbol is optional&ndash;it can be omitted. But this doesn&rsquo;t work as expected! This grammar parses <code>7 + 3</code> as <code>7*(+3)</code>, which is not what we want. Splitting implicit multiplication off as a seperate alternative appears to solve this problem.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>expr
+</span></span><span style="display:flex;"><span>	:	<span style="color:#66d9ef">INT</span> <span style="color:#75715e">//numbers</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#66d9ef">ID</span>  <span style="color:#75715e">//variables</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#e6db74">&#39;(&#39;</span> expr <span style="color:#e6db74">&#39;)&#39;</span> <span style="color:#75715e">//grouping with parentheses</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#960050;background-color:#1e0010">&lt;</span>assoc<span style="color:#f92672">=</span>right<span style="color:#960050;background-color:#1e0010">&gt;</span> expr <span style="color:#e6db74">&#39;^&#39;</span> expr <span style="color:#75715e">//exponentiation</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">)</span> expr	<span style="color:#75715e">//unary plus/minus</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	expr <span style="color:#e6db74">&#39;/&#39;</span> expr		<span style="color:#75715e">//division</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	expr <span style="color:#e6db74">&#39;*&#39;</span> expr	<span style="color:#75715e">//explicit multiplication</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	expr expr	<span style="color:#75715e">//implicit multiplication</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	expr <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">)</span> expr	<span style="color:#75715e">//addition/subtraction</span>
+</span></span><span style="display:flex;"><span>	;
+</span></span></code></pre></div><p>But now we have a new problem: implicit multiplication does not respect order of operations. This grammar generates the following parse tree for the input <code>4x+3</code>.</p>
+<img style="width:auto;" src="/imgs/posts/MathGrammar/modified_parse_tree.png">
 <p>What&rsquo;s going on? Precedence only applies to tokens, e.g. operator symbols, and our implicit multiplication alternative has no operator. (This wrong solution is common. You&rsquo;ll see people on the web wondering why adding implicit multiplication doesn&rsquo;t respect operator precedence.)</p>
 <h2 id="the-solution">The solution</h2>
 <p>But we can enforce order of operations by having a hierarchy of production rules like the following general pattern [1].</p>
-<p>{% highlight antlr %}
-{% raw %}
-type_variable: &hellip;</p>
-<p>type_primary: type_variable
-| &hellip;</p>
-<p>type_secondary: type_primary
-| &hellip;</p>
-<p>type_tertiary: type_secondary
-| &hellip;</p>
-<p>type_expression: type_tertiary
-| &hellip;
-{% endraw %}
-{% endhighlight %}</p>
-<p>So instead of relying on ANTLR to determine precedence according to the order of each alternative, we bake it into the grammar itself. We might rewrite our math expression grammar as follows [2].</p>
-<p>{% highlight antlr %}
-{% raw %}
-term
-:	INT
-|	ID
-|	&lsquo;(&rsquo; expr &lsquo;)&rsquo; //parentheses
-;</p>
-<p>//Implicit multiplication
-factor
-:	term
-|	&lt;assoc=right&gt; term &lsquo;^&rsquo; factor
-|	term factor
-;</p>
-<p>//Unary minus/plus
-prefix
-:	factor
-|	(&rsquo;+&rsquo; | &lsquo;-&rsquo;) prefix //unary plus/minus
-;</p>
-<p>//Explicit multiplication/division
-multdiv
-:	prefix
-|	multdiv &lsquo;/&rsquo; prefix //division
-|	multdiv &lsquo;*&rsquo; prefix //explicit multiplication
-;</p>
-<p>expr
-:	multdiv
-|	expr (&rsquo;+&rsquo; | &lsquo;-&rsquo;) multdiv //addition/subtraction
-;
-{% endraw %}
-{% endhighlight %}</p>
-<p>Notice I awkwardly included exponentiation in the factor production relying on ANTLR to implicitly determine its precedence over implicit multiplication. This suggests that the above grammar is overcomplicated, that is, we can collapse much of this hierarchy and let ANTLR do some of the work. Here is our final grammar.</p>
-<p>{% highlight antlr %}
-{% raw %}
-term
-:	LEAF
-|	&lsquo;(&rsquo; expr &lsquo;)&rsquo;	//parentheses
-;</p>
-<p>//Implicit multiplication
-factor
-:	term
-|	&lt;assoc=right&gt; term &lsquo;^&rsquo; factor
-|	term factor
-;</p>
-<p>//Unary minus/plus
-expr
-:	factor
-|	(&rsquo;+&rsquo; | &lsquo;-&rsquo;) expr //unary plus/minus
-|	expr &lsquo;/&rsquo; expr	//division
-|	expr &lsquo;*&rsquo; expr	//explicit multiplication
-|	expr (&rsquo;+&rsquo; | &lsquo;-&rsquo;) expr	//addition/subtraction
-;
-{% endraw %}
-{% endhighlight %}</p>
-<p>And the parse tree for <code>4x^2 - 3x + -2</code>.</p>
-<img style="width:auto;" src="assets/images/posts/MathGrammar/final_parse_tree.png">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>type_variable: <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>type_primary: type_variable
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">|</span> <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>type_secondary: type_primary
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">|</span> <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>type_tertiary: type_secondary
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">|</span> <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>type_expression: type_tertiary
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">|</span> <span style="color:#f92672">...</span>
+</span></span></code></pre></div><p>So instead of relying on ANTLR to determine precedence according to the order of each alternative, we bake it into the grammar itself. We might rewrite our math expression grammar as follows [2].</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>term
+</span></span><span style="display:flex;"><span>	:	<span style="color:#66d9ef">INT</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#66d9ef">ID</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#e6db74">&#39;(&#39;</span> expr <span style="color:#e6db74">&#39;)&#39;</span> <span style="color:#75715e">//parentheses</span>
+</span></span><span style="display:flex;"><span>	;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Implicit multiplication</span>
+</span></span><span style="display:flex;"><span>factor
+</span></span><span style="display:flex;"><span>	:	term
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#960050;background-color:#1e0010">&lt;</span>assoc<span style="color:#f92672">=</span>right<span style="color:#960050;background-color:#1e0010">&gt;</span> term <span style="color:#e6db74">&#39;^&#39;</span> factor
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	term factor
+</span></span><span style="display:flex;"><span>	;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Unary minus/plus</span>
+</span></span><span style="display:flex;"><span>prefix
+</span></span><span style="display:flex;"><span>	:	factor
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">)</span> prefix <span style="color:#75715e">//unary plus/minus</span>
+</span></span><span style="display:flex;"><span>	;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Explicit multiplication/division</span>
+</span></span><span style="display:flex;"><span>multdiv
+</span></span><span style="display:flex;"><span>	:	prefix
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	multdiv <span style="color:#e6db74">&#39;/&#39;</span> prefix <span style="color:#75715e">//division</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	multdiv <span style="color:#e6db74">&#39;*&#39;</span> prefix <span style="color:#75715e">//explicit multiplication</span>
+</span></span><span style="display:flex;"><span>	;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>expr
+</span></span><span style="display:flex;"><span>	:	multdiv
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	expr <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">)</span> multdiv <span style="color:#75715e">//addition/subtraction</span>
+</span></span><span style="display:flex;"><span>	;
+</span></span></code></pre></div><p>Notice I awkwardly included exponentiation in the factor production relying on ANTLR to implicitly determine its precedence over implicit multiplication. This suggests that the above grammar is overcomplicated, that is, we can collapse much of this hierarchy and let ANTLR do some of the work. Here is our final grammar.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-antlr" data-lang="antlr"><span style="display:flex;"><span>term
+</span></span><span style="display:flex;"><span>	:	<span style="color:#66d9ef">LEAF</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#e6db74">&#39;(&#39;</span> expr <span style="color:#e6db74">&#39;)&#39;</span>	<span style="color:#75715e">//parentheses</span>
+</span></span><span style="display:flex;"><span>	;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Implicit multiplication</span>
+</span></span><span style="display:flex;"><span>factor
+</span></span><span style="display:flex;"><span>	:	term
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#960050;background-color:#1e0010">&lt;</span>assoc<span style="color:#f92672">=</span>right<span style="color:#960050;background-color:#1e0010">&gt;</span> term <span style="color:#e6db74">&#39;^&#39;</span> factor
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	term factor
+</span></span><span style="display:flex;"><span>	;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//Unary minus/plus</span>
+</span></span><span style="display:flex;"><span>expr
+</span></span><span style="display:flex;"><span>	:	factor
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">)</span> expr <span style="color:#75715e">//unary plus/minus</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	expr <span style="color:#e6db74">&#39;/&#39;</span> expr	<span style="color:#75715e">//division</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	expr <span style="color:#e6db74">&#39;*&#39;</span> expr	<span style="color:#75715e">//explicit multiplication</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">|</span>	expr <span style="color:#f92672">(</span><span style="color:#e6db74">&#39;+&#39;</span> <span style="color:#f92672">|</span> <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">)</span> expr	<span style="color:#75715e">//addition/subtraction</span>
+</span></span><span style="display:flex;"><span>	;
+</span></span></code></pre></div><p>And the parse tree for <code>4x^2 - 3x + -2</code>.</p>
+<img style="width:auto;" src="/imgs/posts/MathGrammar/final_parse_tree.png">
 <p>Success!</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>You can see that there is a reason most languages&ndash;even computer algebra systems&ndash;require an explicit multiplication symbol. Requiring a <code>*</code> is a small price to pay for a simpler language grammar.</p>
@@ -401,7 +389,7 @@ expr
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://www.RobertJacobson.dev/" >
-    &copy;  Robert Jacobson 2024 
+    &copy;  Robert Jacobson 2025 
   </a>
     <div>
 <div class="ananke-socials">

@@ -13,7 +13,7 @@ But that isn't stopping Mark Hulbert, writer for MarketWatch and a host of other
 
 Here's the general idea: if you plot the Dow Jones Industrial Average (henceforth referred to as DJIA) over the last 18 months, and you do the same for the period leading up to the 1929 stock market crash, and you line them up in a certain way, then it looks like the plots sort of line up. See?
 
-<img src="assets/images/posts/1929MarketChart/AllegedCurrentAndCrash.png" width="781" height="383">
+<img src="/imgs/posts/1929MarketChart/AllegedCurrentAndCrash.png" width="781" height="383">
 
 This graph, it is alleged, should make us afraid that the red curve representing the recent DJIA will follow the crash (visible on the right in this graph) of the blue curve representing the DJIA leading up to the infamous 1929 economic catastrophe. If you're a typical person, a non datahead whose college science lab is a distant memory, then this graph might look pretty convincing. But is there anything in reality that suggests there is cause for concern?
 
@@ -23,12 +23,12 @@ No. Nothing. Like, not even a little tiny thing. Let's see why.
 
 No. Here is the real plot of the real data for both periods:
 
-<img src="assets/images/posts/1929MarketChart/RealCurrentAndCrash.png" width="781" height="383">
+<img src="/imgs/posts/1929MarketChart/RealCurrentAndCrash.png" width="781" height="383">
 
 
 This is a little like comparing apples and oranges, so let's "normalize" these curves by giving them the same minimum. That is, we divide all the DJIA values by the minimum DJIA value over the entire interval so that the graph is now a plot of the percentage of the minimum value of the DJIA over the given period. (We could have normalized by dividing by the first value, or the max value, but you get similar results.)
 
-<img src="assets/images/posts/1929MarketChart/RealCurrentAndCrashNormalized.png" width="781" height="383">
+<img src="/imgs/posts/1929MarketChart/RealCurrentAndCrashNormalized.png" width="781" height="383">
 
 That's still dramatically different from the chart given by the doom-saying market commentators. So how did they get their chart?
 
@@ -40,12 +40,12 @@ Sort of, but not especially well. There are a few ways of measuring how well the
 
 Let's compare the recent period of DJIA activity highlighted by Hulbert to *every* other time period of the same length and see if there are periods that more closely match current activity than does the pre-1929 crash period. (Keep in mind that we are comparing plots that have gone through the same nonsensical scale manipulation that was applied to obtain the original Hulbert chart.)
 
-<img src="assets/images/posts/1929MarketChart/CurrentEllOneDistance.png" width="781" height="383">
+<img src="/imgs/posts/1929MarketChart/CurrentEllOneDistance.png" width="781" height="383">
 
 
 We expect that most time periods don't match up well. However, it does look like the pre-crash curve is a pretty good match. Let's zoom in to see what's going on.
 
-<img src="assets/images/posts/1929MarketChart/CurrentEllOneDistanceZoomed.png" width="781" height="383">
+<img src="/imgs/posts/1929MarketChart/CurrentEllOneDistanceZoomed.png" width="781" height="383">
 
 
 As you can see, it turns out there are many time periods that match recent DJIA activity better than the pre-1929 crash. Why aren't we using those time periods to predict the near-future activity of the DJIA? Could it be because they are exceptionally boring?
@@ -54,11 +54,11 @@ As you can see, it turns out there are many time periods that match recent DJIA 
 
 No. Not even a little bit. If we look for time periods that match up well to the pre-1929 period, we find many that match much better than recent activity.
 
-<img src="assets/images/posts/1929MarketChart/CrashEllOneDistance.png" width="781" height="383">
+<img src="/imgs/posts/1929MarketChart/CrashEllOneDistance.png" width="781" height="383">
 
 Again, we zoom in to see the detail, putting a horizontal line at the level representing how well the last 18 months matches the pre-1929 period.
 
-<img src="assets/images/posts/1929MarketChart/CrashEllOneDistanceZoomed.png" width="781" height="383">
+<img src="/imgs/posts/1929MarketChart/CrashEllOneDistanceZoomed.png" width="781" height="383">
 
 
 There are 17 periods that match better--sometimes much better--than recent history. Here I have made a chart for all 17 where I have graphed each a little beyond the length of the time period to see if our test predicts anything about the future.

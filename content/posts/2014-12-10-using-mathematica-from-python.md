@@ -25,43 +25,34 @@ Unfortunately the MathLink Python bindings are undocumented, unsupported, and *v
 First we locate the necessary MathLink library, namely libMLi3.a. On my system it is found here:
 
 
-{% highlight bash %}
-{% raw %}
+```bash
 /Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions/AlternativeLibraries
-{% endraw %}
-{% endhighlight %}
+```
 
 
 I'm using the "AlternativeLibraries" version as per the README file located in that directory. We'll also need the mathlink.h header file here:
 
-{% highlight bash %}
-{% raw %}
+```bash
 /Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions
-{% endraw %}
-{% endhighlight %}
+```
 
 Now we find the MathLink Python bindings and example code:
 
-{% highlight bash %}
-{% raw %}
+```bash
 /Applications/Mathematica.app/SystemFiles/Links/Python
-{% endraw %}
-{% endhighlight %}
+```
 
 Since we will be editing these files, go ahead and copy them to a folder in which to work. That way, if we mess something up we have a backup of the original files.
 
 One of those files, the setup.py file, uses Python's distutils facility to compile and install the Python MathLink bindings extension to our Python environment's site-packages directory. Edit the file to reflect your mathematica version (this might not be strictly necessary):
 
-{% highlight python %}
-{% raw %}
+```python
 mathematicaversion = "10.0"
-{% endraw %}
-{% endhighlight %}
+```
 
 Now find your platform in the `if-elif` block (in my case "darwin") and edit `include_dirs` and `library_dirs` to be the location of the mathlink.h header file and the library file libMLi3.a respectively. Here's what that piece of code now looks like for my system:
 
-{% highlight python %}
-{% raw %}
+```python
 elif(re.search(r'darwin', sys.platform)):
   setup(name="mathlink", version=pythonlinkversion,
     ext_modules=[
@@ -74,8 +65,7 @@ elif(re.search(r'darwin', sys.platform)):
       )
     ]
   )
-{% endraw %}
-{% endhighlight %}
+```
 
 The Python extention is mathlink.c. We need to make a minor adjustment to mathlink.c by defining `MLINTERFACE` to be 3 *before* we include the mathlink.h header file:
 
@@ -83,25 +73,20 @@ The Python extention is mathlink.c. We need to make a minor adjustment to mathli
 {% raw %}
 #define MLINTERFACE 3
 #include "mathlink.h"
-{% endraw %}
-{% endhighlight %}
+```
 
 That's it for the Python bindings! Let's compile and install:
 
-{% highlight bash %}
-{% raw %}
+```bash
 $ python setup.py build
 $ sudo python setup.py install
-{% endraw %}
-{% endhighlight %}
+```
 
 You should now be able to run the example script with the following command:
 
-{% highlight bash %}
-{% raw %}
+```bash
 python textfrontend.py -linkname "math -mathlink"
-{% endraw %}
-{% endhighlight %}
+```
 
 If you look inside textfrontend.py you'll find a strange attempt by the author to add the Mathematica bin directory to the path. Since the `math` command is already in my path, this line is unnecessary. The script sets up the mathlink connection using the -linkname argument. Consider these things as opportunities for improvement as you monkey with this example code.
 

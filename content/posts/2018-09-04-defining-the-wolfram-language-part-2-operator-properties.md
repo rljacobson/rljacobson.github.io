@@ -21,51 +21,43 @@ Precedence is a lot harder. I have implemented a strategy that compares two oper
 
 Two synonyms of the same operator:
 
-{% highlight wolfram %}
-{% raw %}
+```wolfram
 In[1]:= FullForm[Hold[a\[Conditioned]b<->c]]
 In[2]:= FullForm[Hold[a\[Conditioned]b\[TwoWayRule]c]]
 
 Out[1]= Hold[Conditioned[a,TwoWayRule[b,c]]]
 Out[2]= Hold[TwoWayRule[Conditioned[a,b],c]]
-{% endraw %}
-{% endhighlight %}
+```
 
 The *only* binary operator that cannot be parsed like this:
 
-{% highlight wolfram %}
-{% raw %}
+```wolfram
 In[1]:= a \[DirectedEdge] b \[UndirectedEdge] c
 
 Out[1]= Syntax::tsntxi: "a\[DirectedEdge]b\[UndirectedEdge]c" is incomplete; more input is needed.
-{% endraw %}
-{% endhighlight %}
+```
 
 
 This next one is not uncommon:
 
-{% highlight wolfram %}
-{% raw %}
+```wolfram
 In[1]:= FullForm[Hold[a \[LeftTee] b \[UpTee] c]]
 In[2]:= FullForm[ToExpression["Hold[a \[LeftTee] b \[UpTee] c]"]]
 
 Out[1]= Hold[LeftTee[a,UpTee[b,c]]]
 Out[2]= Hold[UpTee[LeftTee[a,b],c]]
-{% endraw %}
-{% endhighlight %}
+```
 
 There are several differences between the notebook and command line interfaces, and `ToExpression` appears to precisely mirror those differences. Perhaps the command line and `ToExpression` have the same parser. Whatever the case, we cannot assume that a piece of code will execute the same way on the command line as it will through the notebook interface.
 
 Many operators do not have a `FullForm` (unevaluated interpretation) equal to the functions they represent. Consider `Divide`:
 
-{% highlight wolfram %}
-{% raw %}
+```wolfram
 In[1]:= (* Give the Head of the first element within Hold. *)
         Hold[a/b][[1, 0]]
 
 Out[1]= Times
-{% endraw %}
-{% endhighlight %}
+```
 
 Considering this one fact alone, whatever strategy one uses to inspect an instantiated expression to determine precedence will have to account for every special case of how the `FullForm` of each operator might interact with that of another in a nongeneric way. The amount of manual labor one has to do to account for this is $Ω(n^2)$, where $n$ is the number operators.
 

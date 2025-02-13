@@ -43,10 +43,12 @@
 <meta itemprop="name" content="Using Mathematica From Python">
 <meta itemprop="description" content="In which I show you how to programmatically interface with a Mathematica kernel from Python."><meta itemprop="datePublished" content="2014-12-10T22:27:00-05:00" />
 <meta itemprop="dateModified" content="2014-12-10T22:27:00-05:00" />
-<meta itemprop="wordCount" content="697">
+<meta itemprop="wordCount" content="601">
 <meta itemprop="keywords" content="Computer science,Programming,Mathematica,Python," /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Using Mathematica From Python"/>
 <meta name="twitter:description" content="In which I show you how to programmatically interface with a Mathematica kernel from Python."/>
 
+
+    
 	
   </head>
 
@@ -227,68 +229,41 @@
 <h2 id="the-bad-newsand-a-fix">The Bad News—And a Fix</h2>
 <p>Unfortunately the MathLink Python bindings are undocumented, unsupported, and <em>very</em> outdated. Here I show you how I got it working on my system running Mac OS X Yosemite, Mathematica 10.0, and Python 2.7. It&rsquo;s not too hard. I&rsquo;ll assume you have the usual <a href="http://www.sagemath.org/doc/installation/source.html#section-macprereqs">command line developer tools</a> installed.</p>
 <p>First we locate the necessary MathLink library, namely libMLi3.a. On my system it is found here:</p>
-<p>{% highlight bash %}
-{% raw %}
-/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions/AlternativeLibraries
-{% endraw %}
-{% endhighlight %}</p>
-<p>I&rsquo;m using the &ldquo;AlternativeLibraries&rdquo; version as per the README file located in that directory. We&rsquo;ll also need the mathlink.h header file here:</p>
-<p>{% highlight bash %}
-{% raw %}
-/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions
-{% endraw %}
-{% endhighlight %}</p>
-<p>Now we find the MathLink Python bindings and example code:</p>
-<p>{% highlight bash %}
-{% raw %}
-/Applications/Mathematica.app/SystemFiles/Links/Python
-{% endraw %}
-{% endhighlight %}</p>
-<p>Since we will be editing these files, go ahead and copy them to a folder in which to work. That way, if we mess something up we have a backup of the original files.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions/AlternativeLibraries
+</span></span></code></pre></div><p>I&rsquo;m using the &ldquo;AlternativeLibraries&rdquo; version as per the README file located in that directory. We&rsquo;ll also need the mathlink.h header file here:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions
+</span></span></code></pre></div><p>Now we find the MathLink Python bindings and example code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/Applications/Mathematica.app/SystemFiles/Links/Python
+</span></span></code></pre></div><p>Since we will be editing these files, go ahead and copy them to a folder in which to work. That way, if we mess something up we have a backup of the original files.</p>
 <p>One of those files, the setup.py file, uses Python&rsquo;s distutils facility to compile and install the Python MathLink bindings extension to our Python environment&rsquo;s site-packages directory. Edit the file to reflect your mathematica version (this might not be strictly necessary):</p>
-<p>{% highlight python %}
-{% raw %}
-mathematicaversion = &ldquo;10.0&rdquo;
-{% endraw %}
-{% endhighlight %}</p>
-<p>Now find your platform in the <code>if-elif</code> block (in my case &ldquo;darwin&rdquo;) and edit <code>include_dirs</code> and <code>library_dirs</code> to be the location of the mathlink.h header file and the library file libMLi3.a respectively. Here&rsquo;s what that piece of code now looks like for my system:</p>
-<p>{% highlight python %}
-{% raw %}
-elif(re.search(r&rsquo;darwin&rsquo;, sys.platform)):
-setup(name=&ldquo;mathlink&rdquo;, version=pythonlinkversion,
-ext_modules=[
-Extension(
-&ldquo;mathlink&rdquo;,
-[&ldquo;mathlink.c&rdquo;],
-include_dirs = [&quot;/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions/AlternativeLibraries&quot;],
-library_dirs = [&quot;/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions/AlternativeLibraries&quot;],
-libraries = [&ldquo;MLi3&rdquo;],
-)
-]
-)
-{% endraw %}
-{% endhighlight %}</p>
-<p>The Python extention is mathlink.c. We need to make a minor adjustment to mathlink.c by defining <code>MLINTERFACE</code> to be 3 <em>before</em> we include the mathlink.h header file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>mathematicaversion <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10.0&#34;</span>
+</span></span></code></pre></div><p>Now find your platform in the <code>if-elif</code> block (in my case &ldquo;darwin&rdquo;) and edit <code>include_dirs</code> and <code>library_dirs</code> to be the location of the mathlink.h header file and the library file libMLi3.a respectively. Here&rsquo;s what that piece of code now looks like for my system:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">elif</span>(re<span style="color:#f92672">.</span>search(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;darwin&#39;</span>, sys<span style="color:#f92672">.</span>platform)):
+</span></span><span style="display:flex;"><span>  setup(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mathlink&#34;</span>, version<span style="color:#f92672">=</span>pythonlinkversion,
+</span></span><span style="display:flex;"><span>    ext_modules<span style="color:#f92672">=</span>[
+</span></span><span style="display:flex;"><span>      Extension(
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;mathlink&#34;</span>,
+</span></span><span style="display:flex;"><span>        [<span style="color:#e6db74">&#34;mathlink.c&#34;</span>],
+</span></span><span style="display:flex;"><span>        include_dirs <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions/AlternativeLibraries&#34;</span>],
+</span></span><span style="display:flex;"><span>        library_dirs <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;/Applications/Mathematica.app/SystemFiles/Links/MathLink/DeveloperKit/MacOSX-x86-64/CompilerAdditions/AlternativeLibraries&#34;</span>],
+</span></span><span style="display:flex;"><span>        libraries <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;MLi3&#34;</span>],
+</span></span><span style="display:flex;"><span>      )
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>  )
+</span></span></code></pre></div><p>The Python extention is mathlink.c. We need to make a minor adjustment to mathlink.c by defining <code>MLINTERFACE</code> to be 3 <em>before</em> we include the mathlink.h header file:</p>
 <p>{% highlight c%}
 {% raw %}
 #define MLINTERFACE 3
-#include &ldquo;mathlink.h&rdquo;
-{% endraw %}
-{% endhighlight %}</p>
-<p>That&rsquo;s it for the Python bindings! Let&rsquo;s compile and install:</p>
-<p>{% highlight bash %}
-{% raw %}
+#include &ldquo;mathlink.h&rdquo;</p>
+<pre tabindex="0"><code>
+That&#39;s it for the Python bindings! Let&#39;s compile and install:
+
+```bash
 $ python setup.py build
 $ sudo python setup.py install
-{% endraw %}
-{% endhighlight %}</p>
-<p>You should now be able to run the example script with the following command:</p>
-<p>{% highlight bash %}
-{% raw %}
-python textfrontend.py -linkname &ldquo;math -mathlink&rdquo;
-{% endraw %}
-{% endhighlight %}</p>
-<p>If you look inside textfrontend.py you&rsquo;ll find a strange attempt by the author to add the Mathematica bin directory to the path. Since the <code>math</code> command is already in my path, this line is unnecessary. The script sets up the mathlink connection using the -linkname argument. Consider these things as opportunities for improvement as you monkey with this example code.</p>
+</code></pre><p>You should now be able to run the example script with the following command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python textfrontend.py -linkname <span style="color:#e6db74">&#34;math -mathlink&#34;</span>
+</span></span></code></pre></div><p>If you look inside textfrontend.py you&rsquo;ll find a strange attempt by the author to add the Mathematica bin directory to the path. Since the <code>math</code> command is already in my path, this line is unnecessary. The script sets up the mathlink connection using the -linkname argument. Consider these things as opportunities for improvement as you monkey with this example code.</p>
 <p>Now go write some good Python code!</p><ul class="pa0">
   
    <li class="list di">
@@ -338,7 +313,7 @@ python textfrontend.py -linkname &ldquo;math -mathlink&rdquo;
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
   <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://www.RobertJacobson.dev/" >
-    &copy;  Robert Jacobson 2024 
+    &copy;  Robert Jacobson 2025 
   </a>
     <div>
 <div class="ananke-socials">
