@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
+<html lang="en"ZgotmplZ>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
     <title>After Math</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="">
-    <meta name="generator" content="Hugo 0.123.2">
+    <meta name="generator" content="Hugo 0.165.0">
     
     
     
@@ -35,17 +35,20 @@
     
 
     
-      <link rel="canonical" href="https://www.RobertJacobson.dev/posts/">
+      <link rel="canonical" href="http://localhost:1313/posts/">
     
 
-    <meta property="og:title" content="Posts" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.RobertJacobson.dev/posts/" />
+    <meta property="og:url" content="http://localhost:1313/posts/">
+	<meta property="og:site_name" content="After Math">
+	<meta property="og:title" content="Posts">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="website">
 
-<meta itemprop="name" content="Posts">
-<meta itemprop="description" content=""><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Posts"/>
-<meta name="twitter:description" content=""/>
+	<meta itemprop="name" content="Posts">
+	<meta itemprop="datePublished" content="2024-12-02T21:18:14-06:00">
+	<meta itemprop="dateModified" content="2024-12-02T21:18:14-06:00">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Posts">
 
 
     
@@ -57,7 +60,7 @@
     
 
   
-  <header class="cover bg-top" style="background-image: url('https://www.RobertJacobson.dev/imgs/blog-cover2.jpg');">
+  <header class="cover bg-top" style="background-image: url('http://localhost:1313/imgs/blog-cover2.jpg');">
     <div class="bg-black-60">
       <nav class="pv3 ph3 ph4-ns" role="navigation">
   <div class="flex-l justify-between items-center center">
@@ -176,7 +179,7 @@
           
         <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
           <a href="/posts/2024-12-02-edit-distance-optimizations/" class="db grow">
-            <img src="https://www.RobertJacobson.dev/imgs/posts/Levenshtein.jpg" class="img" alt="image from Common Optimizations for Levenshtein Edit Distance">
+            <img src="http://localhost:1313/imgs/posts/Levenshtein.jpg" class="img" alt="image from Common Optimizations for Levenshtein Edit Distance">
           </a>
         </div>
       
@@ -188,7 +191,7 @@
         </h1>
         <p class="f6 lh-copy mv0"><em>Robert Jacobson</em>&nbsp;&nbsp;|&nbsp;&nbsp;<em>2 Dec 2024</em></p>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          I have been studying algorithms to compute the Levenshtein edit distance between two strings, which is defined as the minimum number of &ldquo;edits&rdquo; required to transform one string into another string. This is useful for a variety of things, from DNA sequence alignment to spell correction to address validation. I am studying it to resolve misspelled and OCR&rsquo;ed scientific names of organisms to their real names, a famous problem in the field.
+          <p>I have been studying algorithms to compute the <a href="https://en.wikipedia.org/wiki/Levenshtein_distance">Levenshtein edit distance</a> between two strings, which is defined as the minimum number of &ldquo;edits&rdquo; required to transform one string into another string. This is useful for a variety of things, from DNA sequence alignment to spell correction to address validation. I am studying it to resolve misspelled and OCR&rsquo;ed scientific names of organisms to their real names, a famous problem in the field. The idea, of course, is to search a list of correct names for the given name and select the correct name that has the lowest distance to the given name. Sometimes this is called fuzzy matching.</p>
         </div>
           <a href="/posts/2024-12-02-edit-distance-optimizations/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
 
@@ -207,8 +210,49 @@
       
           
         <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
+          <a href="/posts/2024-02-24-making-a-pratt-parser-generator-part-2/" class="db grow">
+            <img src="http://localhost:1313/imgs/posts/Sentence.jpg" class="img" alt="image from Making a Pratt Parser Generator Part 2">
+          </a>
+        </div>
+      
+      <div class="blah w-100 w-60-ns pl3-ns">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="/posts/2024-02-24-making-a-pratt-parser-generator-part-2/" class="color-inherit dim link">
+            Making a Pratt Parser Generator Part 2
+            </a>
+        </h1>
+        <p class="f6 lh-copy mv0"><em>Robert Jacobson</em>&nbsp;&nbsp;|&nbsp;&nbsp;<em>24 Feb 2024</em></p>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          <h2 id="recap">Recap</h2>
+<p>In Part 1 I made the case against the standard object-oriented design for Pratt parsers in favor of a design in which
+generic algorithms are driven by a database of operator data read in at run time. I described the alternative design in
+broad strokes. In this article, I will dig into some actual code and highlight particular differences from the standard
+object oriented design along the way.</p>
+<h2 id="operator-database">Operator Database</h2>
+<p>Our language is a toy mathematical expression language. The operator database we use is similar to the one presented in
+Part 1 but with minor superficial changes that simplify the code. We will imagine that the parser is for an interpreter
+which has built-in methods for each operator, which is specified in the <code>METHOD</code> column.  Due to the genericity of the
+algorithm, the contents of the table is in some sense immaterial.  The operator database has the following form.</p>
+        </div>
+          <a href="/posts/2024-02-24-making-a-pratt-parser-generator-part-2/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+        </div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+          
+        <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
           <a href="/posts/2020-08-13-designing-a-pratt-parser-generator/" class="db grow">
-            <img src="https://www.RobertJacobson.dev/imgs/posts/Sentence.jpg" class="img" alt="image from Making a Pratt Parser Generator Part 1">
+            <img src="http://localhost:1313/imgs/posts/Sentence.jpg" class="img" alt="image from Making a Pratt Parser Generator Part 1">
           </a>
         </div>
       
@@ -220,7 +264,8 @@
         </h1>
         <p class="f6 lh-copy mv0"><em>Robert Jacobson</em>&nbsp;&nbsp;|&nbsp;&nbsp;<em>13 Aug 2020</em></p>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse.
+          <h2 id="a-brief-history-of-the-pratt-parsing-algorithm">A brief history of the Pratt parsing algorithm</h2>
+<p>The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> But computer programmers needed practical, efficient algorithms to parse computer programs for translation to machine code. Parsers of the 1950s relied on ad hoc logic rather than systematic algorithms (a feature which persists to this day, though to a much lesser degree). The 1960s was a golden age of parsing algorithm research when nearly all of the concepts and algorithms we use today were discovered and rigorously studied. By the early 1970s, parsing theory had evolved to the point that  Stephen C. Johnson, a computer scientist at Bell Labs / AT&amp;T, was able to start work on YACC (now &ldquo;Yacc&rdquo;), &ldquo;Yet Another Compiler Compiler.&rdquo;<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> YACC was first publically described in 1975 and shipped with Unix version 3<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>  and is still in use today.</p>
         </div>
           <a href="/posts/2020-08-13-designing-a-pratt-parser-generator/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
 
@@ -240,7 +285,7 @@
           
         <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
           <a href="/posts/2020-07-01-bayes-theorem/" class="db grow">
-            <img src="https://www.RobertJacobson.dev/imgs/posts/Covid19Testing/Scientist.jpg" class="img" alt="image from Bayes&#39; Theorem and the Deathly Hallows">
+            <img src="http://localhost:1313/imgs/posts/Covid19Testing/Scientist.jpg" class="img" alt="image from Bayes&#39; Theorem and the Deathly Hallows">
           </a>
         </div>
       
@@ -252,8 +297,15 @@
         </h1>
         <p class="f6 lh-copy mv0"><em>Robert Jacobson</em>&nbsp;&nbsp;|&nbsp;&nbsp;<em>1 Jul 2020</em></p>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          This article is an expanded version of the math part of an article I cowrote with marine biologist Dr. Andrew Rhyne about how many well-meaning public health professionals have misinterpreted the math behind test efficiency, Bayes’ Theorem. This misinterpretation has lead to dangerous public policy positions. Anyone with a math allergy is invited to read that article instead.
-I and Dr. Andrew Rhyne, marine biologist and my longtime collaborator in fighting wildlife crime, have spent a lot of time in the last several months working on how best to fight the COVID-19 pandemic, especially in college communities like our own Roger Williams University.
+          <p>This article is an expanded version of the math part of <a href="https://medium.com/@arhyne/covid-19-population-testing-vs-thoughts-and-prayers-454e64946dde">an article I
+cowrote with marine biologist Dr. Andrew Rhyne about how <strong>many well-meaning public health professionals have misinterpreted the math
+behind test
+efficiency, Bayes’ Theorem. This misinterpretation has lead to dangerous public policy positions.</strong></a> Anyone with a math allergy is invited to read that article instead.</p>
+<p>I and Dr. Andrew Rhyne, marine biologist and my
+<a href="http://natureintelligence.trade/">longtime collaborator in fighting wildlife crime</a>, have
+spent a lot of time in the last several months working on how best to fight the
+COVID-19 pandemic, especially in college communities like
+our own Roger Williams University.</p>
         </div>
           <a href="/posts/2020-07-01-bayes-theorem/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
 
@@ -272,8 +324,42 @@ I and Dr. Andrew Rhyne, marine biologist and my longtime collaborator in fightin
       
           
         <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
+          <a href="/posts/2018-10-10-what-is-the-ielr1-parsing-algorithm/" class="db grow">
+            <img src="http://localhost:1313/imgs/posts/MacMillanSlideRule.jpg" class="img" alt="image from What is the IELR(1) Parsing Algorithm?">
+          </a>
+        </div>
+      
+      <div class="blah w-100 w-60-ns pl3-ns">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="/posts/2018-10-10-what-is-the-ielr1-parsing-algorithm/" class="color-inherit dim link">
+            What is the IELR(1) Parsing Algorithm?
+            </a>
+        </h1>
+        <p class="f6 lh-copy mv0"><em>Robert Jacobson</em>&nbsp;&nbsp;|&nbsp;&nbsp;<em>10 Oct 2018</em></p>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          <p>This short article is for those students, programmers, and computer scientists who already have a basic idea of what a parser is and does but who want to know what that mysterious reference to &ldquo;IELR(1)&rdquo; means in the <a href="https://www.gnu.org/software/bison/">Bison parser generator manual</a>.</p>
+<h1 id="the-ielr1-parsing-algorithm">The IELR(1) Parsing Algorithm</h1>
+<p>The <a href="https://doi.org/10.1016/j.scico.2009.08.001">IELR(1) parsing algorithm was developed in 2008 by Joel E. Denny</a> as part of his Ph.D. research under the supervision of Brian A. Malloy at Clemson University. The IELR(1) algorithm is a variation of the so-called <a href="https://doi.org/10.1007/BF00290336">&ldquo;minimal&rdquo; LR(1) algorithm developed by David Pager in 1977</a>, which itself is a variation of the <a href="https://doi.org/10.1007/BF00290336">LR(k) parsing algorithm invented by Donald Knuth in 1965</a>. The IE in IELR(1) stands for inadequacy elimination (see last section).</p>
+        </div>
+          <a href="/posts/2018-10-10-what-is-the-ielr1-parsing-algorithm/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+
+      </div>
+    </div>
+  </div>
+</article>
+
+        </div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white">
+          
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+          
+        <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
           <a href="/posts/2018-09-04-defining-the-wolfram-language-part-2-operator-properties/" class="db grow">
-            <img src="https://www.RobertJacobson.dev/imgs/posts/NuclearOperator.jpg" class="img" alt="image from Defining the Wolfram Language Part 2: Operator Properties">
+            <img src="http://localhost:1313/imgs/posts/NuclearOperator.jpg" class="img" alt="image from Defining the Wolfram Language Part 2: Operator Properties">
           </a>
         </div>
       
@@ -305,7 +391,7 @@ I and Dr. Andrew Rhyne, marine biologist and my longtime collaborator in fightin
           
         <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
           <a href="/posts/2018-09-03-generalizing-pemdas-what-is-an-operator/" class="db grow">
-            <img src="https://www.RobertJacobson.dev/imgs/posts/NuclearOperators2.jpg" class="img" alt="image from Generalizing PEMDAS: What is an operator?">
+            <img src="http://localhost:1313/imgs/posts/NuclearOperators2.jpg" class="img" alt="image from Generalizing PEMDAS: What is an operator?">
           </a>
         </div>
       
@@ -317,8 +403,9 @@ I and Dr. Andrew Rhyne, marine biologist and my longtime collaborator in fightin
         </h1>
         <p class="f6 lh-copy mv0"><em>Robert Jacobson</em>&nbsp;&nbsp;|&nbsp;&nbsp;<em>3 Sep 2018</em></p>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          In programming languages, an operator is a symbol used to represent a specific operation such as subtraction of integers or dereferencing a pointer. The symbols +, *, and ! are commonly used as operators in many programming languages, for example. In this article we define some basic programming language terminology that allows us to categorize operators according to their different properties.
-Computation with Expressions Virtually all programming languages have expressions, like 2 + 4, which consist of operators (the + operator in 2 + 4) and their operands (or arguments; the 2 and the 4), that is, the things operators operate on.
+          <p>In programming languages, an <em>operator</em> is a symbol used to represent a specific operation such as subtraction of integers or dereferencing a pointer. The symbols <code>+</code>, <code>*</code>, and <code>!</code> are commonly used as operators in many programming languages, for example. In this article we define some basic programming language terminology that allows us to categorize operators according to their different properties.</p>
+<h2 id="computation-with-expressions">Computation with Expressions</h2>
+<p>Virtually all programming languages have <em>expressions</em>, like <code>2 + 4</code>, which consist of <em>operators</em> (the <code>+</code> operator in <code>2 + 4</code>) and their <em>operands</em> (or <em>arguments</em>; the <code>2</code> and the <code>4</code>), that is, the things operators operate on.  This language is barrowed from mathematics where, for example, $17/2 + \sin(\pi/2)$ is an expression that <em>evaluates</em> to the <em>value</em> $19/2$. Most programming languages also have other language constructs like statements and declarations that are not expressions. In some languages, like Wolfram Language, <a href="https://reference.wolfram.com/language/tutorial/EverythingIsAnExpression.html"><em>everything is an expression</em></a>. In these languages, an entire program itself is an expression, albeit possibly a very complex one, and executing a program is called <em>evaluation</em>.</p>
         </div>
           <a href="/posts/2018-09-03-generalizing-pemdas-what-is-an-operator/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
 
@@ -338,7 +425,7 @@ Computation with Expressions Virtually all programming languages have expression
           
         <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
           <a href="/posts/2018-08-16-defining-the-wolfram-language-part-1-finding-operators/" class="db grow">
-            <img src="https://www.RobertJacobson.dev/imgs/posts/TelephoneOperators.jpg" class="img" alt="image from Defining the Wolfram Language Part 1: Finding Operators">
+            <img src="http://localhost:1313/imgs/posts/TelephoneOperators.jpg" class="img" alt="image from Defining the Wolfram Language Part 1: Finding Operators">
           </a>
         </div>
       
@@ -371,7 +458,7 @@ Computation with Expressions Virtually all programming languages have expression
           
         <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
           <a href="/posts/2018-07-02-defining-the-wolfram-language-part-0-the-challenge/" class="db grow">
-            <img src="https://www.RobertJacobson.dev/imgs/posts/ArrivalLogogram.jpg" class="img" alt="image from Defining the Wolfram Language Part 0: The Challenge">
+            <img src="http://localhost:1313/imgs/posts/ArrivalLogogram.jpg" class="img" alt="image from Defining the Wolfram Language Part 0: The Challenge">
           </a>
         </div>
       
@@ -403,7 +490,7 @@ Computation with Expressions Virtually all programming languages have expression
           
         <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
           <a href="/posts/2015-01-28-the-grammar-of-mathematical-expressions/" class="db grow">
-            <img src="https://www.RobertJacobson.dev/imgs/posts/RosettaStone.jpg" class="img" alt="image from The grammar of mathematical expressions">
+            <img src="http://localhost:1313/imgs/posts/RosettaStone.jpg" class="img" alt="image from The grammar of mathematical expressions">
           </a>
         </div>
       
@@ -426,102 +513,36 @@ Computation with Expressions Virtually all programming languages have expression
 
         </div>
       
-        <div class="relative w-100 w-30-l mb4 bg-white">
-          
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-          
-        <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
-          <a href="/posts/2014-12-10-using-mathematica-from-python/" class="db grow">
-            <img src="https://www.RobertJacobson.dev/imgs/posts/Spikey10.jpg" class="img" alt="image from Using Mathematica From Python">
-          </a>
-        </div>
-      
-      <div class="blah w-100 w-60-ns pl3-ns">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/2014-12-10-using-mathematica-from-python/" class="color-inherit dim link">
-            Using Mathematica From Python
-            </a>
-        </h1>
-        <p class="f6 lh-copy mv0"><em>Robert Jacobson</em>&nbsp;&nbsp;|&nbsp;&nbsp;<em>10 Dec 2014</em></p>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          <p>In which I show you how to programmatically interface with a Mathematica kernel from Python.</p>
-        </div>
-          <a href="/posts/2014-12-10-using-mathematica-from-python/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-
-      </div>
-    </div>
-  </div>
-</article>
-
-        </div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white">
-          
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-          
-        <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
-          <a href="/posts/2014-07-25-platonic-solids-and-the-school-of-athens/" class="db grow">
-            <img src="https://www.RobertJacobson.dev/imgs/posts/TheSchoolOfAthens.jpg" class="img" alt="image from Platonic Solids and the School of Athens">
-          </a>
-        </div>
-      
-      <div class="blah w-100 w-60-ns pl3-ns">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/posts/2014-07-25-platonic-solids-and-the-school-of-athens/" class="color-inherit dim link">
-            Platonic Solids and the School of Athens
-            </a>
-        </h1>
-        <p class="f6 lh-copy mv0"><em>Robert Jacobson</em>&nbsp;&nbsp;|&nbsp;&nbsp;<em>25 Jul 2014</em></p>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          <h2 id="euclid-in-the-school-of-athens">Euclid in The School of Athens</h2>
-<p><img src="https://lh4.googleusercontent.com/-UC44EGZXUfQ/U9LVe6BOFeI/AAAAAAAATQ4/Z3iy0xM4NVc/w723-h542-no/IMG_0537+2.JPG" alt="Me in front of The School of Athens"></p>
-<p>This is a very special fresco painting by Italian Renaissance artist Raphael in the Vatican Museum called <a href="http://en.wikipedia.org/wiki/The_School_of_Athens">The School of Athens</a>. It depicts the great philosophers of ancient Greece, famously with Plato pointing up and Aristotle pointing down.</p>
-        </div>
-          <a href="/posts/2014-07-25-platonic-solids-and-the-school-of-athens/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-
-      </div>
-    </div>
-  </div>
-</article>
-
-        </div>
-      
     </section>
-    <ul class="pagination pagination-default">
-      <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="First" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;&laquo;</span></a>
-      </li>
-      <li class="page-item disabled">
-        <a aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;</span></a>
-      </li>
-      <li class="page-item active">
-        <a aria-current="page" aria-label="Page 1" class="page-link" role="button">1</a>
-      </li>
-      <li class="page-item">
-        <a href="/posts/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
-      </li>
-      <li class="page-item">
-        <a href="/posts/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
-      </li>
-      <li class="page-item">
-        <a href="/posts/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
-      </li>
-      <li class="page-item">
-        <a href="/posts/page/3/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
-      </li>
-    </ul></article>
+		<ul class="pagination pagination-default">
+			<li class="page-item disabled">
+				<a aria-disabled="true" aria-label="First" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;&laquo;</span></a>
+			</li>
+		<li class="page-item disabled">
+			<a aria-disabled="true" aria-label="Previous" class="page-link" role="button" tabindex="-1"><span aria-hidden="true">&laquo;</span></a>
+		</li>
+			<li class="page-item active">
+				<a aria-current="page" aria-label="Page 1" class="page-link" role="button">1</a>
+			</li>
+			<li class="page-item">
+				<a href="/posts/page/2/" aria-label="Page 2" class="page-link" role="button">2</a>
+			</li>
+			<li class="page-item">
+				<a href="/posts/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
+			</li>
+		<li class="page-item">
+			<a href="/posts/page/2/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+		</li>
+			<li class="page-item">
+				<a href="/posts/page/3/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+			</li>
+		</ul></article>
 
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://www.RobertJacobson.dev/" >
-    &copy;  Robert Jacobson 2025 
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Robert Jacobson 2026 
   </a>
     <div>
 <div class="ananke-socials">

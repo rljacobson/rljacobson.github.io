@@ -1,5 +1,6 @@
 baseURL = 'https://www.RobertJacobson.dev/'
-languageCode = 'en-us'
+defaultContentLanguage = 'en'
+defaultContentLanguageInSubdir = false
 title = 'After Math'
 copyright = 'Robert Jacobson'
 theme = 'ananke'

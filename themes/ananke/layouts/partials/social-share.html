@@ -2,8 +2,24 @@
 {{ $url := printf "%s" .Permalink | absLangURL }}
 
 {{ $facebook_href := printf "https://www.facebook.com/sharer.php?u=%s" $url }}
+{{ $twitter_username := "" }}
+{{ with site.Params.twitter }}
+  {{ $twitter_username = . }}
+{{ else }}
+  {{ with site.Params.social.twitter }}
+    {{ $twitter_username = . }}
+  {{ else }}
+    {{ with site.Params.ananke_socials }}
+      {{ range . }}
+        {{ if eq .name "twitter" }}
+          {{ $twitter_username = .url | replaceRE "^https?://(www\\.)?twitter\\.com/" "" | replaceRE "/.*$" "" }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
 {{ $twitter_href := printf "https://twitter.com/intent/tweet?url=%s&text=%s" $url $title }}
-{{ with site.Social.twitter }}
+{{ with $twitter_username }}
   {{ $twitter_href = printf "%s&via=%s" $twitter_href . }}
 {{ end }}
 {{ $linkedin_href := printf "https://www.linkedin.com/shareArticle?mini=true&url=%s&title=%s" $url $title }}

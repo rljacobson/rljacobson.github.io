@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Algorithms on After Math</title>
-    <link>https://www.RobertJacobson.dev/tags/algorithms/</link>
-    <description>Recent content in Algorithms on After Math</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>Robert Jacobson</copyright>
-    <lastBuildDate>Mon, 02 Dec 2024 21:18:14 -0600</lastBuildDate>
-    <atom:link href="https://www.RobertJacobson.dev/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Common Optimizations for Levenshtein Edit Distance</title>
-      <link>https://www.RobertJacobson.dev/posts/2024-12-02-edit-distance-optimizations/</link>
-      <pubDate>Mon, 02 Dec 2024 21:18:14 -0600</pubDate>
-      <guid>https://www.RobertJacobson.dev/posts/2024-12-02-edit-distance-optimizations/</guid>
-      <description>I have been studying algorithms to compute the Levenshtein edit distance between two strings, which is defined as the minimum number of &amp;ldquo;edits&amp;rdquo; required to transform one string into another string. This is useful for a variety of things, from DNA sequence alignment to spell correction to address validation. I am studying it to resolve misspelled and OCR&amp;rsquo;ed scientific names of organisms to their real names, a famous problem in the field.</description>
-    </item>
-  </channel>
+	<channel>
+		<title>Algorithms on After Math</title>
+		<link>http://localhost:1313/tags/algorithms/</link>
+		<description>Recent content in Algorithms on After Math</description>
+		<generator>Hugo</generator>
+		<language>en</language>
+		
+		
+		
+			<copyright>Robert Jacobson</copyright>
+		
+		
+			<lastBuildDate>Mon, 02 Dec 2024 21:18:14 -0600</lastBuildDate>
+		
+			<atom:link href="http://localhost:1313/tags/algorithms/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Common Optimizations for Levenshtein Edit Distance</title>
+				<link>http://localhost:1313/posts/2024-12-02-edit-distance-optimizations/</link>
+				<pubDate>Mon, 02 Dec 2024 21:18:14 -0600</pubDate>
+				<guid>http://localhost:1313/posts/2024-12-02-edit-distance-optimizations/</guid>
+				<description>&lt;p&gt;I have been studying algorithms to compute the &lt;a href=&#34;https://en.wikipedia.org/wiki/Levenshtein_distance&#34;&gt;Levenshtein edit distance&lt;/a&gt; between two strings, which is defined as the minimum number of &amp;ldquo;edits&amp;rdquo; required to transform one string into another string. This is useful for a variety of things, from DNA sequence alignment to spell correction to address validation. I am studying it to resolve misspelled and OCR&amp;rsquo;ed scientific names of organisms to their real names, a famous problem in the field. The idea, of course, is to search a list of correct names for the given name and select the correct name that has the lowest distance to the given name. Sometimes this is called fuzzy matching.&lt;/p&gt;</description>
+			</item>
+	</channel>
 </rss>

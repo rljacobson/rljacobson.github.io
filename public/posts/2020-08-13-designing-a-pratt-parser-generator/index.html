@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
+<html lang="en"ZgotmplZ>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
     <title>Making a Pratt Parser Generator Part 1 | After Math</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse.">
-    <meta name="generator" content="Hugo 0.123.2">
+    <meta name="description" content="A brief history of the Pratt parsing algorithm
+The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse.1 But computer programmers needed practical, efficient algorithms to parse computer programs for translation to machine code. Parsers of the 1950s relied on ad hoc logic rather than systematic algorithms (a feature which persists to this day, though to a much lesser degree). The 1960s was a golden age of parsing algorithm research when nearly all of the concepts and algorithms we use today were discovered and rigorously studied. By the early 1970s, parsing theory had evolved to the point that  Stephen C. Johnson, a computer scientist at Bell Labs / AT&amp;T, was able to start work on YACC (now &ldquo;Yacc&rdquo;), &ldquo;Yet Another Compiler Compiler.&rdquo;2 YACC was first publically described in 1975 and shipped with Unix version 33  and is still in use today.">
+    <meta name="generator" content="Hugo 0.165.0">
     
     
     
@@ -30,22 +31,31 @@
     
 
     
-      <link rel="canonical" href="https://www.RobertJacobson.dev/posts/2020-08-13-designing-a-pratt-parser-generator/">
+      <link rel="canonical" href="http://localhost:1313/posts/2020-08-13-designing-a-pratt-parser-generator/">
     
 
-    <meta property="og:title" content="Making a Pratt Parser Generator Part 1" />
-<meta property="og:description" content="A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.RobertJacobson.dev/posts/2020-08-13-designing-a-pratt-parser-generator/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-08-13T11:00:00-05:00" />
-<meta property="article:modified_time" content="2020-08-13T11:00:00-05:00" />
+    <meta property="og:url" content="http://localhost:1313/posts/2020-08-13-designing-a-pratt-parser-generator/">
+	<meta property="og:site_name" content="After Math">
+	<meta property="og:title" content="Making a Pratt Parser Generator Part 1">
+	<meta property="og:description" content="A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse.1 But computer programmers needed practical, efficient algorithms to parse computer programs for translation to machine code. Parsers of the 1950s relied on ad hoc logic rather than systematic algorithms (a feature which persists to this day, though to a much lesser degree). The 1960s was a golden age of parsing algorithm research when nearly all of the concepts and algorithms we use today were discovered and rigorously studied. By the early 1970s, parsing theory had evolved to the point that Stephen C. Johnson, a computer scientist at Bell Labs / AT&amp;T, was able to start work on YACC (now “Yacc”), “Yet Another Compiler Compiler.”2 YACC was first publically described in 1975 and shipped with Unix version 33 and is still in use today.">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="posts">
+		<meta property="article:published_time" content="2020-08-13T11:00:00-05:00">
+		<meta property="article:modified_time" content="2020-08-13T11:00:00-05:00">
+		<meta property="article:tag" content="Compilers">
+		<meta property="article:tag" content="Computer Science">
+		<meta property="article:tag" content="Software Engineering">
 
-<meta itemprop="name" content="Making a Pratt Parser Generator Part 1">
-<meta itemprop="description" content="A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse."><meta itemprop="datePublished" content="2020-08-13T11:00:00-05:00" />
-<meta itemprop="dateModified" content="2020-08-13T11:00:00-05:00" />
-<meta itemprop="wordCount" content="2160">
-<meta itemprop="keywords" content="Compilers,Computer Science,Software Engineering," /><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Making a Pratt Parser Generator Part 1"/>
-<meta name="twitter:description" content="A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse."/>
+	<meta itemprop="name" content="Making a Pratt Parser Generator Part 1">
+	<meta itemprop="description" content="A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse.1 But computer programmers needed practical, efficient algorithms to parse computer programs for translation to machine code. Parsers of the 1950s relied on ad hoc logic rather than systematic algorithms (a feature which persists to this day, though to a much lesser degree). The 1960s was a golden age of parsing algorithm research when nearly all of the concepts and algorithms we use today were discovered and rigorously studied. By the early 1970s, parsing theory had evolved to the point that Stephen C. Johnson, a computer scientist at Bell Labs / AT&amp;T, was able to start work on YACC (now “Yacc”), “Yet Another Compiler Compiler.”2 YACC was first publically described in 1975 and shipped with Unix version 33 and is still in use today.">
+	<meta itemprop="datePublished" content="2020-08-13T11:00:00-05:00">
+	<meta itemprop="dateModified" content="2020-08-13T11:00:00-05:00">
+	<meta itemprop="wordCount" content="2160">
+	<meta itemprop="keywords" content="Compilers,Computer Science,Software Engineering">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Making a Pratt Parser Generator Part 1">
+	<meta name="twitter:description" content="A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse.1 But computer programmers needed practical, efficient algorithms to parse computer programs for translation to machine code. Parsers of the 1950s relied on ad hoc logic rather than systematic algorithms (a feature which persists to this day, though to a much lesser degree). The 1960s was a golden age of parsing algorithm research when nearly all of the concepts and algorithms we use today were discovered and rigorously studied. By the early 1970s, parsing theory had evolved to the point that Stephen C. Johnson, a computer scientist at Bell Labs / AT&amp;T, was able to start work on YACC (now “Yacc”), “Yet Another Compiler Compiler.”2 YACC was first publically described in 1975 and shipped with Unix version 33 and is still in use today.">
 
 
     
@@ -62,7 +72,7 @@
   
 
   
-  <header class="cover bg-top" style="background-image: url('https://www.RobertJacobson.dev/imgs/posts/Sentence.jpg');">
+  <header class="cover bg-top" style="background-image: url('http://localhost:1313/imgs/posts/Sentence.jpg');">
     <div class="bg-black-60">
       <nav class="pv3 ph3 ph4-ns" role="navigation">
   <div class="flex-l justify-between items-center center">
@@ -181,6 +191,24 @@
 
 
 
+  
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+  
+
+
+
+  
+
 
 
 
@@ -189,7 +217,7 @@
   <div id="sharing" class="mt3 ananke-socials">
     
       
-      <a href="https://twitter.com/intent/tweet?url=https://www.RobertJacobson.dev/posts/2020-08-13-designing-a-pratt-parser-generator/&amp;text=Making%20a%20Pratt%20Parser%20Generator%20Part%201" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
+      <a href="https://twitter.com/intent/tweet?url=http://localhost:1313/posts/2020-08-13-designing-a-pratt-parser-generator/&amp;text=Making%20a%20Pratt%20Parser%20Generator%20Part%201&amp;via=rljacobson" class="ananke-social-link twitter no-underline" aria-label="share on Twitter">
         
         <span class="icon"> <svg style="enable-background:new 0 0 67 67;" version="1.1" viewBox="0 0 67 67"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M37.167,22.283c-2.619,0.953-4.274,3.411-4.086,6.101  l0.063,1.038l-1.048-0.127c-3.813-0.487-7.145-2.139-9.974-4.915l-1.383-1.377l-0.356,1.017c-0.754,2.267-0.272,4.661,1.299,6.271  c0.838,0.89,0.649,1.017-0.796,0.487c-0.503-0.169-0.943-0.296-0.985-0.233c-0.146,0.149,0.356,2.076,0.754,2.839  c0.545,1.06,1.655,2.097,2.871,2.712l1.027,0.487l-1.215,0.021c-1.173,0-1.215,0.021-1.089,0.467  c0.419,1.377,2.074,2.839,3.918,3.475l1.299,0.444l-1.131,0.678c-1.676,0.976-3.646,1.526-5.616,1.568  C19.775,43.256,19,43.341,19,43.405c0,0.211,2.557,1.397,4.044,1.864c4.463,1.377,9.765,0.783,13.746-1.568  c2.829-1.673,5.657-5,6.978-8.221c0.713-1.716,1.425-4.851,1.425-6.354c0-0.975,0.063-1.102,1.236-2.267  c0.692-0.678,1.341-1.419,1.467-1.631c0.21-0.403,0.188-0.403-0.88-0.043c-1.781,0.636-2.033,0.551-1.152-0.402  c0.649-0.678,1.425-1.907,1.425-2.267c0-0.063-0.314,0.042-0.671,0.233c-0.377,0.212-1.215,0.53-1.844,0.72l-1.131,0.361l-1.027-0.7  c-0.566-0.381-1.361-0.805-1.781-0.932C39.766,21.902,38.131,21.944,37.167,22.283z M33,64C16.432,64,3,50.569,3,34S16.432,4,33,4  s30,13.431,30,30S49.568,64,33,64z" style="fill-rule:evenodd;clip-rule:evenodd;"/></svg>
 </span>
@@ -197,7 +225,7 @@
       </a>
     
       
-      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https://www.RobertJacobson.dev/posts/2020-08-13-designing-a-pratt-parser-generator/&amp;title=Making%20a%20Pratt%20Parser%20Generator%20Part%201" class="ananke-social-link linkedin no-underline" aria-label="share on LinkedIn">
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://localhost:1313/posts/2020-08-13-designing-a-pratt-parser-generator/&amp;title=Making%20a%20Pratt%20Parser%20Generator%20Part%201" class="ananke-social-link linkedin no-underline" aria-label="share on LinkedIn">
         
         <span class="icon"> <svg style="enable-background:new 0 0 65 65;" version="1.1" viewBox="0 0 65 65"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <path d="M50.837,48.137V36.425c0-6.275-3.35-9.195-7.816-9.195  c-3.604,0-5.219,1.983-6.119,3.374V27.71h-6.79c0.09,1.917,0,20.427,0,20.427h6.79V36.729c0-0.609,0.044-1.219,0.224-1.655  c0.49-1.22,1.607-2.483,3.482-2.483c2.458,0,3.44,1.873,3.44,4.618v10.929H50.837z M22.959,24.922c2.367,0,3.842-1.57,3.842-3.531  c-0.044-2.003-1.475-3.528-3.797-3.528s-3.841,1.524-3.841,3.528c0,1.961,1.474,3.531,3.753,3.531H22.959z M34,64  C17.432,64,4,50.568,4,34C4,17.431,17.432,4,34,4s30,13.431,30,30C64,50.568,50.568,64,34,64z M26.354,48.137V27.71h-6.789v20.427  H26.354z" style="fill-rule:evenodd;clip-rule:evenodd;"/>
@@ -233,7 +261,7 @@
 <p>There are already many articles on the web describing the Pratt parsing algorithm. (I recommend <sup id="fnref1:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>.) If you are not familiar with the algorithm, go read up on it before returning here.</p>
 <p>A typical object oriented design is to have a node class for each kind of AST node, each class implementing their own &ldquo;parselet&rdquo; method, traditionally named <code>led</code>  for &ldquo;left denotation&rdquo; after Pratt&rsquo;s original article, that is called by a driver algorithm and is responsible for parsing the node instance&rsquo;s operands (children) by calling back into the driver before returning. Each class also keeps track of its associativity and precedence. The driver algorithm consumes a token, looks up the appropriate class in a table, creates an instance and calls its parselet method.</p>
 <p>We can be a little bit more efficient by having only a handful of superclasses corresponding to each required (affix, associativity) combination. In the typical object-oriented Pratt-parser design, every operator would need a subclass of the form (in pseudo-C++)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Multiply</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> InfixLeftAssoc{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Multiply</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> InfixLeftAssoc{
 </span></span><span style="display:flex;"><span>  Multiply(Parser parser, ASTNode left, Token <span style="color:#66d9ef">operator</span>)<span style="color:#f92672">:</span>
 </span></span><span style="display:flex;"><span>  	precedence(<span style="color:#ae81ff">40</span>){
 </span></span><span style="display:flex;"><span>		super(parser, left, <span style="color:#66d9ef">operator</span>);
@@ -242,7 +270,7 @@
 </span></span><span style="display:flex;"><span>  T <span style="color:#a6e22e">MultiplyMethodA</span>(U param1, V param2){...}
 </span></span><span style="display:flex;"><span>  W <span style="color:#a6e22e">MultiplyMethodB</span>(X param1, Y param2){...}
 </span></span><span style="display:flex;"><span>  <span style="color:#75715e">// etc.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>This class establishes the Multiply operator as an infix, left associative operator. We have also initialized our operator precedence to 40. Again, the <code>InfixLeftAssoc</code> superclass and other ancestor classes compute left and right binding power (LBP and RBP) from the value of precedence and associativity and implement the <code>led</code> method (&ldquo;left denotation&rdquo; parselet method) and any utility methods and members. This concrete subclass serves the following purposes:</p>
 <ol>
 <li>encodes the affix (by specifying its superclass)</li>
@@ -263,192 +291,192 @@
 <h3 id="operator-database">Operator Database</h3>
 <p>As a toy example, we might have an operator database as follows.</p>
 <table>
-<thead>
-<tr>
-<th>TokenID</th>
-<th>Operator</th>
-<th>NameString</th>
-<th>Precedence</th>
-<th>Associativity</th>
-<th>Affix</th>
-<th>Arity</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td><code>&quot;123&quot;</code></td>
-<td><code>&quot;Number&quot;</code></td>
-<td>0</td>
-<td>None</td>
-<td>Null</td>
-<td>Nullary</td>
-</tr>
-<tr>
-<td>2</td>
-<td><code>&quot;^&quot;</code></td>
-<td><code>&quot;Power&quot;</code></td>
-<td>10</td>
-<td>Right</td>
-<td>Infix</td>
-<td>Binary</td>
-</tr>
-<tr>
-<td>3</td>
-<td><code>&quot;*&quot;</code></td>
-<td><code>&quot;Times&quot;</code></td>
-<td>20</td>
-<td>Full</td>
-<td>Infix</td>
-<td>Binary</td>
-</tr>
-<tr>
-<td>4</td>
-<td><code>&quot;/&quot;</code></td>
-<td><code>&quot;Divide&quot;</code></td>
-<td>20</td>
-<td>Left</td>
-<td>Infix</td>
-<td>Binary</td>
-</tr>
-<tr>
-<td>5</td>
-<td><code>&quot;+&quot;</code></td>
-<td><code>&quot;Plus&quot;</code></td>
-<td>30</td>
-<td>Full</td>
-<td>Infix</td>
-<td>Binary</td>
-</tr>
-<tr>
-<td>6</td>
-<td><code>&quot;-&quot;</code></td>
-<td><code>&quot;Minus&quot;</code></td>
-<td>30</td>
-<td>Left</td>
-<td>Infix</td>
-<td>Binary</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>TokenID</th>
+					<th>Operator</th>
+					<th>NameString</th>
+					<th>Precedence</th>
+					<th>Associativity</th>
+					<th>Affix</th>
+					<th>Arity</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1</td>
+					<td><code>&quot;123&quot;</code></td>
+					<td><code>&quot;Number&quot;</code></td>
+					<td>0</td>
+					<td>None</td>
+					<td>Null</td>
+					<td>Nullary</td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td><code>&quot;^&quot;</code></td>
+					<td><code>&quot;Power&quot;</code></td>
+					<td>10</td>
+					<td>Right</td>
+					<td>Infix</td>
+					<td>Binary</td>
+			</tr>
+			<tr>
+					<td>3</td>
+					<td><code>&quot;*&quot;</code></td>
+					<td><code>&quot;Times&quot;</code></td>
+					<td>20</td>
+					<td>Full</td>
+					<td>Infix</td>
+					<td>Binary</td>
+			</tr>
+			<tr>
+					<td>4</td>
+					<td><code>&quot;/&quot;</code></td>
+					<td><code>&quot;Divide&quot;</code></td>
+					<td>20</td>
+					<td>Left</td>
+					<td>Infix</td>
+					<td>Binary</td>
+			</tr>
+			<tr>
+					<td>5</td>
+					<td><code>&quot;+&quot;</code></td>
+					<td><code>&quot;Plus&quot;</code></td>
+					<td>30</td>
+					<td>Full</td>
+					<td>Infix</td>
+					<td>Binary</td>
+			</tr>
+			<tr>
+					<td>6</td>
+					<td><code>&quot;-&quot;</code></td>
+					<td><code>&quot;Minus&quot;</code></td>
+					<td>30</td>
+					<td>Left</td>
+					<td>Infix</td>
+					<td>Binary</td>
+			</tr>
+	</tbody>
 </table>
 <p>The <code>TokenID</code> might be supplied by the lexer/scanner (many Pratt parsers are <a href="https://en.wikipedia.org/wiki/Scannerless_parsing">scanner-less</a>) and used as the identifier. <code>Operator</code> and <code>NameString</code> are only used for printing output. The remaining columns are required to compute the left and right binding powers of each operator. In this example language, every operator is either a terminal (number) or a binary infix operator.</p>
 <h3 id="more-sophisticated-operators">More Sophisticated Operators</h3>
 <p>Suppose we have ternary, mixfix, or matchfix operators. Then we need to modify the operator database to reflect how the operator tokens appear in an expression. A portion of our operator table might now look like this.</p>
 <table>
-<thead>
-<tr>
-<th>TokenID</th>
-<th>LToken</th>
-<th>NToken</th>
-<th>OToken</th>
-<th>NameString</th>
-<th>Precedence</th>
-<th>Associativity</th>
-<th>Affix</th>
-<th>Arity</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>10</td>
-<td><code>&quot;(&quot;</code></td>
-<td></td>
-<td><code>&quot;)&quot;</code></td>
-<td><code>&quot;Parentheses&quot;</code></td>
-<td>10</td>
-<td>Non</td>
-<td>Matchfix</td>
-<td>Unary</td>
-</tr>
-<tr>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-<td>⋮</td>
-</tr>
-<tr>
-<td>43</td>
-<td><code>&quot;[&quot;</code></td>
-<td></td>
-<td><code>&quot;]&quot;</code></td>
-<td><code>&quot;Index&quot;</code></td>
-<td>30</td>
-<td>Left</td>
-<td>Infix</td>
-<td>Binary</td>
-</tr>
-<tr>
-<td>44</td>
-<td></td>
-<td><code>&quot;!&quot;</code></td>
-<td></td>
-<td><code>&quot;Factorial&quot;</code></td>
-<td>40</td>
-<td>Left</td>
-<td>Postfix</td>
-<td>Unary</td>
-</tr>
-<tr>
-<td>46</td>
-<td></td>
-<td><code>&quot;-&quot;</code></td>
-<td></td>
-<td><code>&quot;UnaryMinus&quot;</code></td>
-<td>50</td>
-<td>Right</td>
-<td>Prefix</td>
-<td>Unary</td>
-</tr>
-<tr>
-<td>49</td>
-<td><code>&quot;/&quot;</code></td>
-<td></td>
-<td></td>
-<td><code>&quot;Divide&quot;</code></td>
-<td>60</td>
-<td>Left</td>
-<td>Infix</td>
-<td>Binary</td>
-</tr>
-<tr>
-<td>55</td>
-<td><code>&quot;?&quot;</code></td>
-<td></td>
-<td><code>&quot;:&quot;</code></td>
-<td><code>&quot;IfThenElse&quot;</code></td>
-<td>70</td>
-<td>Left</td>
-<td>Infix</td>
-<td>Ternary</td>
-</tr>
-<tr>
-<td>57</td>
-<td><code>&quot;+&quot;</code></td>
-<td></td>
-<td></td>
-<td><code>&quot;Plus&quot;</code></td>
-<td>80</td>
-<td>Full</td>
-<td>Infix</td>
-<td>Binary</td>
-</tr>
-<tr>
-<td>60</td>
-<td><code>&quot;-&quot;</code></td>
-<td></td>
-<td></td>
-<td><code>&quot;Minus&quot;</code></td>
-<td>90</td>
-<td>Left</td>
-<td>Infix</td>
-<td>Binary</td>
-</tr>
-</tbody>
+	<thead>
+			<tr>
+					<th>TokenID</th>
+					<th>LToken</th>
+					<th>NToken</th>
+					<th>OToken</th>
+					<th>NameString</th>
+					<th>Precedence</th>
+					<th>Associativity</th>
+					<th>Affix</th>
+					<th>Arity</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>10</td>
+					<td><code>&quot;(&quot;</code></td>
+					<td></td>
+					<td><code>&quot;)&quot;</code></td>
+					<td><code>&quot;Parentheses&quot;</code></td>
+					<td>10</td>
+					<td>Non</td>
+					<td>Matchfix</td>
+					<td>Unary</td>
+			</tr>
+			<tr>
+					<td>⋮</td>
+					<td>⋮</td>
+					<td>⋮</td>
+					<td>⋮</td>
+					<td>⋮</td>
+					<td>⋮</td>
+					<td>⋮</td>
+					<td>⋮</td>
+					<td>⋮</td>
+			</tr>
+			<tr>
+					<td>43</td>
+					<td><code>&quot;[&quot;</code></td>
+					<td></td>
+					<td><code>&quot;]&quot;</code></td>
+					<td><code>&quot;Index&quot;</code></td>
+					<td>30</td>
+					<td>Left</td>
+					<td>Infix</td>
+					<td>Binary</td>
+			</tr>
+			<tr>
+					<td>44</td>
+					<td></td>
+					<td><code>&quot;!&quot;</code></td>
+					<td></td>
+					<td><code>&quot;Factorial&quot;</code></td>
+					<td>40</td>
+					<td>Left</td>
+					<td>Postfix</td>
+					<td>Unary</td>
+			</tr>
+			<tr>
+					<td>46</td>
+					<td></td>
+					<td><code>&quot;-&quot;</code></td>
+					<td></td>
+					<td><code>&quot;UnaryMinus&quot;</code></td>
+					<td>50</td>
+					<td>Right</td>
+					<td>Prefix</td>
+					<td>Unary</td>
+			</tr>
+			<tr>
+					<td>49</td>
+					<td><code>&quot;/&quot;</code></td>
+					<td></td>
+					<td></td>
+					<td><code>&quot;Divide&quot;</code></td>
+					<td>60</td>
+					<td>Left</td>
+					<td>Infix</td>
+					<td>Binary</td>
+			</tr>
+			<tr>
+					<td>55</td>
+					<td><code>&quot;?&quot;</code></td>
+					<td></td>
+					<td><code>&quot;:&quot;</code></td>
+					<td><code>&quot;IfThenElse&quot;</code></td>
+					<td>70</td>
+					<td>Left</td>
+					<td>Infix</td>
+					<td>Ternary</td>
+			</tr>
+			<tr>
+					<td>57</td>
+					<td><code>&quot;+&quot;</code></td>
+					<td></td>
+					<td></td>
+					<td><code>&quot;Plus&quot;</code></td>
+					<td>80</td>
+					<td>Full</td>
+					<td>Infix</td>
+					<td>Binary</td>
+			</tr>
+			<tr>
+					<td>60</td>
+					<td><code>&quot;-&quot;</code></td>
+					<td></td>
+					<td></td>
+					<td><code>&quot;Minus&quot;</code></td>
+					<td>90</td>
+					<td>Left</td>
+					<td>Infix</td>
+					<td>Binary</td>
+			</tr>
+	</tbody>
 </table>
 <p>In this design, the database includes which tokens of the operator can take a left operand (<code>LToken</code>), can begin an expression (no left operand, <code>NToken</code>), or are included in some other position (<code>OToken</code>).</p>
 <blockquote>
@@ -536,8 +564,8 @@ Principles of programming languages</em> (POPL &lsquo;73). ACM, New York, NY, US
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://www.RobertJacobson.dev/" >
-    &copy;  Robert Jacobson 2025 
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Robert Jacobson 2026 
   </a>
     <div>
 <div class="ananke-socials">

@@ -7,11 +7,12 @@ menu:
     weight: 1
 ---
 
-
+<!--
 **Are you hiring mathematicians / computer scientists / software engineers?
 *[I'm looking for my next position!](https://github.com/rljacobson)***
 
 <hr>
+-->
 
 <style>
 .avatar {

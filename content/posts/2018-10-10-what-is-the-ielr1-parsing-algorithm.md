@@ -1,6 +1,6 @@
 ---
 title: "What is the IELR(1) Parsing Algorithm?"
-date: "2018-10-20T5:13-05:00"
+date: "2018-10-10T05:13:00-05:00"
 featured_image: "imgs/posts/MacMillanSlideRule.jpg"
 tags: [Computer science, compilers]
 author: "Robert Jacobson"

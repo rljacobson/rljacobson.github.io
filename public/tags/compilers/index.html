@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
+<html lang="en"ZgotmplZ>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
     <title>After Math</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="">
-    <meta name="generator" content="Hugo 0.123.2">
+    <meta name="generator" content="Hugo 0.165.0">
     
     
     
@@ -35,17 +35,20 @@
     
 
     
-      <link rel="canonical" href="https://www.RobertJacobson.dev/tags/compilers/">
+      <link rel="canonical" href="http://localhost:1313/tags/compilers/">
     
 
-    <meta property="og:title" content="Compilers" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.RobertJacobson.dev/tags/compilers/" />
+    <meta property="og:url" content="http://localhost:1313/tags/compilers/">
+	<meta property="og:site_name" content="After Math">
+	<meta property="og:title" content="Compilers">
+	<meta property="og:locale" content="en">
+	<meta property="og:type" content="website">
 
-<meta itemprop="name" content="Compilers">
-<meta itemprop="description" content=""><meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Compilers"/>
-<meta name="twitter:description" content=""/>
+	<meta itemprop="name" content="Compilers">
+	<meta itemprop="datePublished" content="2024-02-24T11:00:00-05:00">
+	<meta itemprop="dateModified" content="2024-02-24T11:00:00-05:00">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Compilers">
 
 
     
@@ -57,7 +60,7 @@
     
 
   
-  <header class="cover bg-top" style="background-image: url('https://www.RobertJacobson.dev/imgs/blog-cover2.jpg');">
+  <header class="cover bg-top" style="background-image: url('http://localhost:1313/imgs/blog-cover2.jpg');">
     <div class="bg-black-60">
       <nav class="pv3 ph3 ph4-ns" role="navigation">
   <div class="flex-l justify-between items-center center">
@@ -172,14 +175,62 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
+      <a href="/posts/2024-02-24-making-a-pratt-parser-generator-part-2/" class="link black dim">
+        Making a Pratt Parser Generator Part 2
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <h2 id="recap">Recap</h2>
+<p>In Part 1 I made the case against the standard object-oriented design for Pratt parsers in favor of a design in which
+generic algorithms are driven by a database of operator data read in at run time. I described the alternative design in
+broad strokes. In this article, I will dig into some actual code and highlight particular differences from the standard
+object oriented design along the way.</p>
+<h2 id="operator-database">Operator Database</h2>
+<p>Our language is a toy mathematical expression language. The operator database we use is similar to the one presented in
+Part 1 but with minor superficial changes that simplify the code. We will imagine that the parser is for an interpreter
+which has built-in methods for each operator, which is specified in the <code>METHOD</code> column.  Due to the genericity of the
+algorithm, the contents of the table is in some sense immaterial.  The operator database has the following form.</p>
+    </div>
+    <a href="/posts/2024-02-24-making-a-pratt-parser-generator-part-2/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="relative w-100  mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
       <a href="/posts/2020-08-13-designing-a-pratt-parser-generator/" class="link black dim">
         Making a Pratt Parser Generator Part 1
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      A brief history of the Pratt parsing algorithm The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse.
+      <h2 id="a-brief-history-of-the-pratt-parsing-algorithm">A brief history of the Pratt parsing algorithm</h2>
+<p>The history of programming language parsers is dominated by the thorny challenge of parsing expressions, mathematical expressions in particular, taking into account the precedence of operators in the expressions. Modern formal language theory began with the work of Noam Chomsky in the 1950s, in which Chomsky lays out a mathematical framework for linguistics. Under this mathematical framework, languages exist within a hierarchy of languages defined according to how difficult the language is to parse.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> But computer programmers needed practical, efficient algorithms to parse computer programs for translation to machine code. Parsers of the 1950s relied on ad hoc logic rather than systematic algorithms (a feature which persists to this day, though to a much lesser degree). The 1960s was a golden age of parsing algorithm research when nearly all of the concepts and algorithms we use today were discovered and rigorously studied. By the early 1970s, parsing theory had evolved to the point that  Stephen C. Johnson, a computer scientist at Bell Labs / AT&amp;T, was able to start work on YACC (now &ldquo;Yacc&rdquo;), &ldquo;Yet Another Compiler Compiler.&rdquo;<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> YACC was first publically described in 1975 and shipped with Unix version 3<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>  and is still in use today.</p>
     </div>
     <a href="/posts/2020-08-13-designing-a-pratt-parser-generator/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+  </div>
+</div>
+
+        </div>
+      
+        <div class="relative w-100  mb4 bg-white">
+          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/posts/2018-10-10-what-is-the-ielr1-parsing-algorithm/" class="link black dim">
+        What is the IELR(1) Parsing Algorithm?
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      <p>This short article is for those students, programmers, and computer scientists who already have a basic idea of what a parser is and does but who want to know what that mysterious reference to &ldquo;IELR(1)&rdquo; means in the <a href="https://www.gnu.org/software/bison/">Bison parser generator manual</a>.</p>
+<h1 id="the-ielr1-parsing-algorithm">The IELR(1) Parsing Algorithm</h1>
+<p>The <a href="https://doi.org/10.1016/j.scico.2009.08.001">IELR(1) parsing algorithm was developed in 2008 by Joel E. Denny</a> as part of his Ph.D. research under the supervision of Brian A. Malloy at Clemson University. The IELR(1) algorithm is a variation of the so-called <a href="https://doi.org/10.1007/BF00290336">&ldquo;minimal&rdquo; LR(1) algorithm developed by David Pager in 1977</a>, which itself is a variation of the <a href="https://doi.org/10.1007/BF00290336">LR(k) parsing algorithm invented by Donald Knuth in 1965</a>. The IE in IELR(1) stands for inadequacy elimination (see last section).</p>
+    </div>
+    <a href="/posts/2018-10-10-what-is-the-ielr1-parsing-algorithm/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
   </div>
 </div>
 
@@ -213,8 +264,9 @@
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      In programming languages, an operator is a symbol used to represent a specific operation such as subtraction of integers or dereferencing a pointer. The symbols +, *, and ! are commonly used as operators in many programming languages, for example. In this article we define some basic programming language terminology that allows us to categorize operators according to their different properties.
-Computation with Expressions Virtually all programming languages have expressions, like 2 + 4, which consist of operators (the + operator in 2 + 4) and their operands (or arguments; the 2 and the 4), that is, the things operators operate on.
+      <p>In programming languages, an <em>operator</em> is a symbol used to represent a specific operation such as subtraction of integers or dereferencing a pointer. The symbols <code>+</code>, <code>*</code>, and <code>!</code> are commonly used as operators in many programming languages, for example. In this article we define some basic programming language terminology that allows us to categorize operators according to their different properties.</p>
+<h2 id="computation-with-expressions">Computation with Expressions</h2>
+<p>Virtually all programming languages have <em>expressions</em>, like <code>2 + 4</code>, which consist of <em>operators</em> (the <code>+</code> operator in <code>2 + 4</code>) and their <em>operands</em> (or <em>arguments</em>; the <code>2</code> and the <code>4</code>), that is, the things operators operate on.  This language is barrowed from mathematics where, for example, $17/2 + \sin(\pi/2)$ is an expression that <em>evaluates</em> to the <em>value</em> $19/2$. Most programming languages also have other language constructs like statements and declarations that are not expressions. In some languages, like Wolfram Language, <a href="https://reference.wolfram.com/language/tutorial/EverythingIsAnExpression.html"><em>everything is an expression</em></a>. In these languages, an entire program itself is an expression, albeit possibly a very complex one, and executing a program is called <em>evaluation</em>.</p>
     </div>
     <a href="/posts/2018-09-03-generalizing-pemdas-what-is-an-operator/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
   </div>
@@ -277,33 +329,14 @@ Computation with Expressions Virtually all programming languages have expression
 
         </div>
       
-        <div class="relative w-100  mb4 bg-white">
-          <div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/posts/2018-10-10-what-is-the-ielr1-parsing-algorithm/" class="link black dim">
-        What is the IELR(1) Parsing Algorithm?
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      This short article is for those students, programmers, and computer scientists who already have a basic idea of what a parser is and does but who want to know what that mysterious reference to &ldquo;IELR(1)&rdquo; means in the Bison parser generator manual.
-The IELR(1) Parsing Algorithm The IELR(1) parsing algorithm was developed in 2008 by Joel E. Denny as part of his Ph.D. research under the supervision of Brian A. Malloy at Clemson University.
-    </div>
-    <a href="/posts/2018-10-10-what-is-the-ielr1-parsing-algorithm/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-  </div>
-</div>
-
-        </div>
-      
     </section>
   </div>
 
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
   <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://www.RobertJacobson.dev/" >
-    &copy;  Robert Jacobson 2025 
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  Robert Jacobson 2026 
   </a>
     <div>
 <div class="ananke-socials">
